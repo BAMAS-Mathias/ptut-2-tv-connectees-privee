@@ -24,7 +24,7 @@ meteoRequest.onload = function () {
         weather.id = "weather";
         var imgTemp = document.createElement("IMG");
         imgTemp.id = "icon";
-        imgTemp.src = "/wp-content/plugins/plugin-ecran-connecte/public/img/" + getIcon(json) + ".png";
+        imgTemp.src = "/wp-content/plugins/plugin-ecran-connecte/public/img/01.png" + getIcon(json) + ".png";
         imgTemp.alt = getAlt(json);
         weather.appendChild(imgTemp);
         var wind = document.createElement("DIV");
@@ -39,38 +39,6 @@ meteoRequest.onload = function () {
         setTimeout(refreshWeather, 900000);
     }
 };
-
-/** Getter **/
-function getAlt(json) {
-    return json["weather"][0]["description"];
-}
-
-function getIcon(json) {
-    return cutIcon(json["weather"][0]["icon"]);
-}
-
-function cutIcon(str) {
-    return str.substr(0, str.length - 1);
-}
-
-function getTemp(json) {
-    return kelvinToC(json["main"]["temp"]);
-}
-
-function kelvinToC(kelvin) {
-    return kelvin - 273.15;
-}
-
-function getWind(json) {
-    return msToKmh(json["wind"]["speed"]);
-}
-
-function msToKmh(speed) {
-    return speed * 3.6;
-}
-/**
- * Get the date in french format
- */
 function dateFr() {
     // les noms de jours / mois
     let jours = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
@@ -104,5 +72,34 @@ function heure() {
 
 setInterval(dateFr, 1000);
 setInterval(heure, 1000);
+/** Getter **/
+function getAlt(json) {
+    return json["weather"][0]["description"];
+}
+
+function getIcon(json) {
+    return cutIcon(json["weather"][0]["icon"]);
+}
+
+function cutIcon(str) {
+    return str.substr(0, str.length - 1);
+}
+
+function getTemp(json) {
+    return kelvinToC(json["main"]["temp"]);
+}
+
+function kelvinToC(kelvin) {
+    return kelvin - 273.15;
+}
+
+function getWind(json) {
+    return msToKmh(json["wind"]["speed"]);
+}
+
+function msToKmh(speed) {
+    return speed * 3.6;
+}
+
 
 refreshWeather();
