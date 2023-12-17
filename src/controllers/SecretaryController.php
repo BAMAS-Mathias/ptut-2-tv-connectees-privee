@@ -186,4 +186,8 @@ class SecretaryController extends UserController
         $user = $this->model->get($id);
         $user->delete();
     }
+
+    public function displayComputerRoomsAvailable(){
+        return $this->view->displayComputerRoomsAvailable();
+    }
 }

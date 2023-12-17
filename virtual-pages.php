@@ -256,7 +256,7 @@ add_action('ec_virtual_pages', function ($controller) {
      *  Page: /secretary/welcome
      */
     $controller->addPage(new \EC\VirtualPages\Page("/secretary/welcome"))
-        ->setTitle('Accueil page secrétaires')
+        ->setTitle('secretary-welcome')
         ->setContent('
     <!-- wp:tvconnecteeamu/secretary-welcome -->
     test
@@ -268,7 +268,7 @@ add_action('ec_virtual_pages', function ($controller) {
      *  Page: /secretary/computer-rooms
      */
     $controller->addPage(new \EC\VirtualPages\Page("/secretary/computer-rooms"))
-        ->setTitle('Salles machines')
+        ->setTitle('available-computer-rooms')
         ->setContent('
     <!-- wp:tvconnecteeamu/computer-rooms -->
     test
@@ -359,7 +359,7 @@ add_action('ec_virtual_pages', function ($controller) {
      *  Page: /secretary/teacher-search-schedule
      */
     $controller->addPage(new \EC\VirtualPages\Page("/secretary/teacher-search-schedule"))
-        ->setTitle('Chercher votre emplois du temps')
+        ->setTitle('teacher-search-schedule')
         ->setContent('
     <!-- wp:tvconnecteeamu/teacher-search-schedule -->
     test

@@ -88,4 +88,12 @@ class TeacherController extends UserController implements Schedule
         $users = $this->model->getMyCodes($users);
         return $this->view->displayTableTeachers($users);
     }
+
+    /**
+     * Display the schedule search page for teachers
+     * @return void
+     */
+    public function displayTeacherSearchSchedule() : string{
+        return $this->view->displayTeacherSearchSchedule();
+    }
 }
