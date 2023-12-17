@@ -78,7 +78,17 @@ class TeacherView extends UserView
         return $this->displayTable('Teacher', $title, $header, $row, 'teacher', '<a type="submit" class="btn btn-primary" role="button" aria-disabled="true" href="' . home_url('/creer-utilisateur') . '">Créer</a>');
     }
 
-    public function displayTeacherSearchSchedule(){
-
+    public function displayTeacherSearchSchedule() : string{
+        return '
+        <section id="search-container">
+            <img id="profil-picture" alt="profil image" src="https://cdn-icons-png.flaticon.com/512/9706/9706640.png">
+            <h2>Recherchez votre emploi du temps</h2>
+            <div id="search-bar">
+                <input type="text" placeholder="Nom...">
+                <button id="search-btn" type="submit">
+                    <img id="loupe" src="https://cdn-icons-png.flaticon.com/512/694/694985.png" alt="loupe">
+                </button>
+            </div>
+        </section>';
     }
 }

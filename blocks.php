@@ -899,7 +899,7 @@ function teacher_search_schedule_render_callback()
 {
     if(is_page()) {
         $user = new TeacherController();
-        return $user->displayt();
+        return $user->displayTeacherSearchSchedule();
     }
 }
 

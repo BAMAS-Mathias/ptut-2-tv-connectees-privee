@@ -359,7 +359,7 @@ add_action('ec_virtual_pages', function ($controller) {
      *  Page: /secretary/teacher-search-schedule
      */
     $controller->addPage(new \EC\VirtualPages\Page("/secretary/teacher-search-schedule"))
-        ->setTitle('Chercher votre emplois du temps')
+        ->setTitle('teacher-search-schedule')
         ->setContent('
     <!-- wp:tvconnecteeamu/teacher-search-schedule -->
     test
