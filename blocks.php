@@ -731,7 +731,7 @@ function secretary_computer_rooms_render_callback()
 {
     if(is_page()) {
         $user = new SecretaryController();
-        return $user->displayWelcomePage();
+        return $user->displayComputerRoomsAvailable();
     }
 }
 

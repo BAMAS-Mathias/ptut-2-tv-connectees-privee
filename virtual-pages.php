@@ -268,7 +268,7 @@ add_action('ec_virtual_pages', function ($controller) {
      *  Page: /secretary/computer-rooms
      */
     $controller->addPage(new \EC\VirtualPages\Page("/secretary/computer-rooms"))
-        ->setTitle('Salles machines')
+        ->setTitle('available-computer-rooms')
         ->setContent('
     <!-- wp:tvconnecteeamu/computer-rooms -->
     test

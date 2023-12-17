@@ -83,6 +83,12 @@ function loadScriptsEcran()
         wp_enqueue_style('teacher_search_schedule', TV_PLUG_PATH . 'public/css/teacherSearchSchedule.css', array(), VERSION);
     }
 
+    if(is_page('available-computer-rooms')){
+        wp_enqueue_style('teacher_search_schedule', TV_PLUG_PATH . 'public/css/availableComputerRooms.css', array(), VERSION);
+        wp_enqueue_script('computer_switch_script', TV_PLUG_PATH . 'public/js/tablet-view/toggleComputerRoom.js', array(), VERSION, true);
+    }
+
+
     if (is_page('tv-mode')) {
         /* STYLESHEETS */
         wp_enqueue_style('alert_ecran', TV_PLUG_PATH . 'public/css/alert.css', array(), VERSION);
