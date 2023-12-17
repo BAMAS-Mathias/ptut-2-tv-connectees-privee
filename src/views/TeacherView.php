@@ -77,4 +77,8 @@ class TeacherView extends UserView
 
         return $this->displayTable('Teacher', $title, $header, $row, 'teacher', '<a type="submit" class="btn btn-primary" role="button" aria-disabled="true" href="' . home_url('/creer-utilisateur') . '">Créer</a>');
     }
+
+    public function displayTeacherSearchSchedule(){
+
+    }
 }

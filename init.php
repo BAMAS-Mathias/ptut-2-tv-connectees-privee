@@ -74,7 +74,11 @@ function loadScriptsEcran()
      if (!is_admin()) wp_deregister_script('jquery');
      
      wp_enqueue_style('style_ecran', TV_PLUG_PATH . 'public/css/style.css', array(), VERSION);
-    
+
+    if(is_page('secretary-welcome')){
+        wp_enqueue_style('welcome_secretary', TV_PLUG_PATH . 'public/css/secretaryAccueil.css', array(), VERSION);
+    }
+
     if (is_page('tv-mode')) {
         /* STYLESHEETS */
         wp_enqueue_style('alert_ecran', TV_PLUG_PATH . 'public/css/alert.css', array(), VERSION);

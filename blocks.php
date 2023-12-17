@@ -898,8 +898,8 @@ add_action( 'init', 'block_all_years_schedule' );
 function teacher_search_schedule_render_callback()
 {
     if(is_page()) {
-        $user = new SecretaryController();
-        return $user->displayWelcomePage();
+        $user = new TeacherController();
+        return $user->displayt();
     }
 }
 

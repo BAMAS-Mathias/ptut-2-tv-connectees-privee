@@ -256,7 +256,7 @@ add_action('ec_virtual_pages', function ($controller) {
      *  Page: /secretary/welcome
      */
     $controller->addPage(new \EC\VirtualPages\Page("/secretary/welcome"))
-        ->setTitle('Accueil page secrétaires')
+        ->setTitle('secretary-welcome')
         ->setContent('
     <!-- wp:tvconnecteeamu/secretary-welcome -->
     test

@@ -197,12 +197,14 @@ class SecretaryView extends UserView
     }
 
     public function displaySecretaryWelcome() : string{
-        return
-            '<a class="btn" href="' . home_url('/secretary/year-student-schedule') . '">BUT 1</a>
-            <input type="submit" name="BUT2" value="BUT 2" />
-            <input type="submit" name="BUT3" value="BUT 3" />
-            <a class="btn" href="' . home_url('/secretary/teacher-search-schedule') . '">ENSEIGNANTS</a>
-            <a class="btn" href="' . home_url('/secretary/computer-rooms') . '">SALLES MACHINE</a>
-            <a class="btn" href="' . home_url('/secretary/room-schedule') . '">SALLES DISPONIBLES</a>';
+        return'
+        <div class="btn-container">
+            <a href="' . home_url('/secretary/year-student-schedule') . '" class="boutons-etudiants secretary-button blue-btn">BUT1</a> 
+            <a class="boutons-etudiants secretary-button blue-btn">BUT2</a>
+            <a class="boutons-etudiants secretary-button blue-btn">BUT3</a> 
+            <a href="' . home_url('/secretary/teacher-search-schedule') . '" class="boutons-autres secretary-button orange-btn">ENSEIGNANTS</a> 
+            <a href="' . home_url('/secretary/computer-rooms') . '"class="boutons-autres secretary-button orange-btn">SALLES MACHINES</a>
+            <a href="' . home_url('/secretary/room-schedule') . '" class="boutons-autres secretary-button orange-btn">SALLES DISPONIBLES</a>
+        </div>';
     }
 }
