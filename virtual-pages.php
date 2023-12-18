@@ -388,6 +388,13 @@ add_action('ec_virtual_pages', function ($controller) {
     <!-- /wp:tvconnecteeamu/enseignant-view -->
     ')
         ->setTemplate('page.php');
-
+    $controller->addPage(new \EC\VirtualPages\Page("secretary/salles_disponibles"))
+        ->setTitle('Salles Disponibles')
+        ->setContent('
+         <!-- wp:tvconnecteeamu/salles_disponibles -->
+    test
+    <!-- /wp:tvconnecteeamu/salles_disponibles -->
+    ')
+        ->setTemplate('page.php');
 
 });

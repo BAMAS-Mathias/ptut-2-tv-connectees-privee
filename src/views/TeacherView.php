@@ -140,8 +140,71 @@ class TeacherView extends UserView
                     <h1 id="text-matiere">ANNI Samuele</h1>
                     <h1 id="text-matiere">A-002</h1>
             </div>
-        </body>
+        </body> 
         </html>';}
 
-
+    public function displaySallesDisponibles(): string
+    {
+        return '
+        <!DOCTYPE html>
+        <html lang="fr">
+        <head>
+            <meta charset="UTF-8">
+            <link rel="stylesheet" type="text/css" href="../css/salles_disponibles.css" />
+            <title>Salles disponibles</title>
+        </head>
+        <header>
+            <div class="header-bg">
+                <div class="header">
+                    <img src="../images/logo_iut.png" alt="logo-iut" id="image-iut">
+                    <h1 id="titre">SALLES DISPONIBLES</h1>
+                    <div> </div>
+                </div>
+            </div>
+        </header>
+        <body>
+            <div class="menu-dropdown">
+                <select>
+                    <option value="I-002">I-002</option>
+                       <option value="I-004">I-004</option>
+                       <option value="I-009">I-009</option>
+                       <option value="I-010">I-010</option>
+                       <option value="I-102">I-102</option>
+                       <option value="I-104">I-104</option>
+                       <option value="I-106">I-106</option>
+                       <option value="I-214">I-214</option>
+                </select>
+            </div>
+            <div class="container-body">
+                <div class="container-horaire1">
+                    <h1 id="text-horaire">8h15 - 10h15</h1>
+                </div>
+                <div class="container-matiere1">
+                    <h1 id="text-matiere">R3.02 - JAVA</h1>
+                    <h1 id="text-matiere">SLEZAK Eileen</h1>
+                    <h1 id="text-matiere">I-110</h1>
+                </div>
+                <div class="container-horaire2">
+                    <h1 id="text-horaire">10h35 - 12h15</h1>
+                </div>
+                <div class="container-matiere2">
+                    <h1 id="text-matiere">R3.01 - ANGLAIS</h1>
+                    <h1 id="text-matiere">SLEZAK Eileen</h1>
+                    <h1 id="text-matiere">A-002</h1>
+                </div>
+                <div class="container-horaire3">
+                    <h1 id="text-horaire">13h30 - 15h15</h1>
+                </div>
+                <div class="container-horaire4">
+                    <h1 id="text-horaire">15h45 - 17h30</h1>
+                </div>
+                <div class="container-matiere4">
+                    <h1 id="text-matiere">R3.04 - SQL</h1>
+                    <h1 id="text-matiere">ANNI Samuele</h1>
+                    <h1 id="text-matiere">A-002</h1>
+                </div>
+            </div>
+        </body>
+        </html>';
+    }
 }

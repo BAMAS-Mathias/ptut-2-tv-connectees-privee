@@ -90,6 +90,9 @@ function loadScriptsEcran()
     if (is_page('enseignant-view')) {
         wp_enqueue_style('enseignant_view', TV_PLUG_PATH . 'public/css/enseignantview.css', array(), VERSION);
     }
+    if (is_page('salles_disponibles')) {
+        wp_enqueue_style('salles_disponibles', TV_PLUG_PATH . 'public/css/salles_disponibles.css', array(), VERSION);
+    }
 
 
     if (is_page('tv-mode')) {

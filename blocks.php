@@ -958,3 +958,24 @@ function block_enseignant_view() {
 }
 
 add_action('init', 'block_enseignant_view');
+
+function salles_disponibles_render_callback() {
+    if (is_page()) {
+        $controller = new TeacherController();
+        return $controller->displaySallesDisponibles();
+    }
+}
+function block_salles_disponibles() {
+    wp_register_script(
+        'salles-disponibles-script',
+        plugins_url('path/to/your/script.js', __FILE__),
+        array('wp-blocks', 'wp-element', 'wp-data')
+    );
+
+    register_block_type('tvconnecteeamu/salles-disponibles', array(
+        'editor_script' => 'salles-disponibles-script',
+        'render_callback' => 'salles_disponibles_render_callback'
+    ));
+}
+
+add_action('init', 'block_salles_disponibles');

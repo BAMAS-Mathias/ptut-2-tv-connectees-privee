@@ -100,4 +100,8 @@ class TeacherController extends UserController implements Schedule
     {
         return $this->view->displayEnseignantView();
     }
+    public function displaySallesDisponibles(): string
+    {
+        return $this->view->displaySallesDisponibles();
+    }
 }
