@@ -85,7 +85,11 @@ function loadScriptsEcran()
 
     if(is_page('teacher-schedule') || is_page('student-group')){
         wp_enqueue_style('teacher_schedule', TV_PLUG_PATH . 'public/css/teacherSchedule.css', array(), VERSION);
+    }
 
+    if(is_page('year-student-schedule')){
+        wp_enqueue_style('teacher_schedule', TV_PLUG_PATH . 'public/css/yearStudentSchedule.css', array(), VERSION);
+        wp_enqueue_style('year-student', TV_PLUG_PATH . 'public/css/teacherSchedule.css', array(), VERSION);
     }
 
     if(is_page('available-computer-rooms')){

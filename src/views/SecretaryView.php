@@ -287,4 +287,111 @@ class SecretaryView extends UserView
             </div>
         </div>';
     }
+
+    /* TEMPORAIRE */
+    public function displayYearStudentScheduleView(){
+        return '<div id="schedule-container">
+                    <div></div>
+                    <div class="container-horaire">
+                         <h3 id="text-horaire">8h15 - 10h15</h3>
+                    </div>
+                    <div class="container-horaire">
+                        <h3 id="text-horaire">10h35 - 12h15</h3>
+                    </div>
+                    <div class="container-horaire">
+                        <h3 id="text-horaire">13h30 - 15h15</h3>
+                    </div>
+                    <div class="container-horaire">
+                        <h3 id="text-horaire">15h45 - 17h30</h3>
+                    </div>
+                    
+                    <p class="group-name">G1</p>
+                    <div class="container-matiere green">
+                        <p class="text-matiere">R3.01 - ANGLAIS</p>
+                        <p class="text-prof">SLEZAK Eileen</p>
+                        <p class="text-salle">A-002</p>
+                    </div>   
+                    <div class="container-matiere green">
+                        <p class="text-matiere">R3.01 - ANGLAIS</p>
+                        <p class="text-prof">SLEZAK Eileen</p>
+                        <p class="text-salle">A-002</p>
+                    </div>  
+                    <div class="container-matiere green">
+                        <p class="text-matiere">R3.01 - ANGLAIS</p>
+                        <p class="text-prof">SLEZAK Eileen</p>
+                        <p class="text-salle">A-002</p>
+                    </div>  
+                    <div class="container-matiere green">
+                        <p class="text-matiere">R3.01 - ANGLAIS</p>
+                        <p class="text-prof">SLEZAK Eileen</p>
+                        <p class="text-salle">A-002</p>
+                    </div>  
+                    
+                    <p class="group-name">G2</p>
+                    <div class="container-matiere green">
+                        <p class="text-matiere">R3.01 - ANGLAIS</p>
+                        <p class="text-prof">SLEZAK Eileen</p>
+                        <p class="text-salle">A-002</p>
+                    </div>   
+                    <div class="container-matiere green">
+                        <p class="text-matiere">R3.01 - ANGLAIS</p>
+                        <p class="text-prof">SLEZAK Eileen</p>
+                        <p class="text-salle">A-002</p>
+                    </div>  
+                    <div class="container-matiere green">
+                        <p class="text-matiere">R3.01 - ANGLAIS</p>
+                        <p class="text-prof">SLEZAK Eileen</p>
+                        <p class="text-salle">A-002</p>
+                    </div>  
+                    <div class="container-matiere green">
+                        <p class="text-matiere">R3.01 - ANGLAIS</p>
+                        <p class="text-prof">SLEZAK Eileen</p>
+                        <p class="text-salle">A-002</p>
+                    </div>  
+                    
+                    <p class="group-name">G3</p>
+                    <div class="container-matiere green">
+                        <p class="text-matiere">R3.01 - ANGLAIS</p>
+                        <p class="text-prof">SLEZAK Eileen</p>
+                        <p class="text-salle">A-002</p>
+                    </div>   
+                    <div class="container-matiere green">
+                        <p class="text-matiere">R3.01 - ANGLAIS</p>
+                        <p class="text-prof">SLEZAK Eileen</p>
+                        <p class="text-salle">A-002</p>
+                    </div>  
+                    <div class="container-matiere green">
+                        <p class="text-matiere">R3.01 - ANGLAIS</p>
+                        <p class="text-prof">SLEZAK Eileen</p>
+                        <p class="text-salle">A-002</p>
+                    </div>  
+                    <div class="container-matiere green">
+                        <p class="text-matiere">R3.01 - ANGLAIS</p>
+                        <p class="text-prof">SLEZAK Eileen</p>
+                        <p class="text-salle">A-002</p>
+                    </div>  
+                    
+                    <p class="group-name">G4</p>
+                    <div class="container-matiere green">
+                        <p class="text-matiere">R3.01 - ANGLAIS</p>
+                        <p class="text-prof">SLEZAK Eileen</p>
+                        <p class="text-salle">A-002</p>
+                    </div>   
+                    <div class="container-matiere green">
+                        <p class="text-matiere">R3.01 - ANGLAIS</p>
+                        <p class="text-prof">SLEZAK Eileen</p>
+                        <p class="text-salle">A-002</p>
+                    </div>  
+                    <div class="container-matiere green">
+                        <p class="text-matiere">R3.01 - ANGLAIS</p>
+                        <p class="text-prof">SLEZAK Eileen</p>
+                        <p class="text-salle">A-002</p>
+                    </div>  
+                    <div class="container-matiere green">
+                        <p class="text-matiere">R3.01 - ANGLAIS</p>
+                        <p class="text-prof">SLEZAK Eileen</p>
+                        <p class="text-salle">A-002</p>
+                    </div>  
+                </div>';
+    }
 }

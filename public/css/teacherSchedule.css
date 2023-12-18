@@ -75,6 +75,7 @@
 .text-matiere{
     padding-top: 7px;
 }
+
 .text-prof, .text-matiere{
     font-size: 32px;
     height: fit-content;

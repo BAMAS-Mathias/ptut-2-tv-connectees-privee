@@ -827,7 +827,7 @@ function year_student_schedule_render_callback()
 {
     if(is_page()) {
         $user = new SecretaryController();
-        return $user->displayWelcomePage();
+        return $user->displayYearStudentSchedule();
     }
 }
 

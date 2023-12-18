@@ -320,7 +320,7 @@ add_action('ec_virtual_pages', function ($controller) {
      *  Page: /secretary/year-student-schedule
      */
     $controller->addPage(new \EC\VirtualPages\Page("/secretary/year-student-schedule"))
-        ->setTitle('Emplois du temps des X années')
+        ->setTitle('year-student-schedule')
         ->setContent('
     <!-- wp:tvconnecteeamu/year-student-schedule -->
     test
