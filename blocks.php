@@ -923,7 +923,7 @@ function weekly_computer_room_schedule_render_callback()
 {
     if(is_page()) {
         $user = new SecretaryController();
-        return $user->displayWelcomePage();
+        return $user->displayComputerRoomSchedule();
     }
 }
 

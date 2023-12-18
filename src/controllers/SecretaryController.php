@@ -198,4 +198,8 @@ class SecretaryController extends UserController
     public function displayYearStudentSchedule(){
         return $this->view->displayYearStudentScheduleView();
     }
+
+    public function displayComputerRoomSchedule(){
+        return $this->view->displayComputerRoomSchedule();
+    }
 }

@@ -97,6 +97,10 @@ function loadScriptsEcran()
         wp_enqueue_script('computer_switch_script', TV_PLUG_PATH . 'public/js/tablet-view/toggleComputerRoom.js', array(), VERSION, true);
     }
 
+    if(is_page('computer-room-schedule')){
+        wp_enqueue_style('computer_room_schedule', TV_PLUG_PATH . 'public/css/computerRoomSchedule.css', array(), VERSION);
+    }
+
 
     if (is_page('tv-mode')) {
         /* STYLESHEETS */

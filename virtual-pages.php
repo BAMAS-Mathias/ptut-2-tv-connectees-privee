@@ -372,7 +372,7 @@ add_action('ec_virtual_pages', function ($controller) {
      *  Page: /secretary/weekly-computer-room-schedule
      */
     $controller->addPage(new \EC\VirtualPages\Page("/secretary/weekly-computer-room-schedule"))
-        ->setTitle('Emplois du temps de la salle')
+        ->setTitle('computer-room-schedule')
         ->setContent('
     <!-- wp:tvconnecteeamu/weekly-computer-room-schedule -->
     test

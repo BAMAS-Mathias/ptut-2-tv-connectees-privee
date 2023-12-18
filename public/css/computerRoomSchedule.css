@@ -1,0 +1,12 @@
+#schedule-container{
+    width: 100vw;
+    height: 80vh;
+    margin: 10vh 0;
+    display: grid;
+    grid-template-columns: 200px repeat(5,0.15fr);
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+    grid-template-rows: 50px repeat(4,125px);
+    align-items: center;
+    justify-content: center;
+}
