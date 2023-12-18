@@ -937,45 +937,45 @@ function block_weekly_computer_room_schedule() {
 }
 add_action( 'init', 'block_weekly_computer_room_schedule' );
 
-function enseignant_view_render_callback() {
+function teacher_view_render_callback() {
     if (is_page()) {
-        $controller = new TeacherController();
-        return $controller->displayEnseignantView();
+        $user = new TeacherController();
+        return $user->displayTeacherView();
     }
 }
 
-function block_enseignant_view() {
+function block_teacher_view() {
     wp_register_script(
-        'enseignant-view-script',
+        'teacher-view-script',
         plugins_url('path/to/your/script.js', __FILE__),
         array('wp-blocks', 'wp-element', 'wp-data')
     );
 
-    register_block_type('tvconnecteeamu/enseignant-view', array(
-        'editor_script' => 'enseignant-view-script',
-        'render_callback' => 'enseignant_view_render_callback'
+    register_block_type('tvconnecteeamu/teacher-view', array(
+        'editor_script' => 'teacher-view-script',
+        'render_callback' => 'teacher_view_render_callback'
     ));
 }
 
-add_action('init', 'block_enseignant_view');
+add_action('init', 'block_teacher_view');
 
-function salles_disponibles_render_callback() {
+function rooms_available_render_callback() {
     if (is_page()) {
-        $controller = new TeacherController();
-        return $controller->displaySallesDisponibles();
+        $user = new SecretaryController();
+        return $user->displayRoomsAvailable();
     }
 }
-function block_salles_disponibles() {
+function block_rooms_available() {
     wp_register_script(
-        'salles-disponibles-script',
+        'rooms_available-script',
         plugins_url('path/to/your/script.js', __FILE__),
         array('wp-blocks', 'wp-element', 'wp-data')
     );
 
-    register_block_type('tvconnecteeamu/salles-disponibles', array(
-        'editor_script' => 'salles-disponibles-script',
-        'render_callback' => 'salles_disponibles_render_callback'
+    register_block_type('tvconnecteeamu/rooms-available', array(
+        'editor_script' => 'rooms_available-script',
+        'render_callback' => 'rooms_available_render_callback'
     ));
 }
 
-add_action('init', 'block_salles_disponibles');
+add_action('init', 'block_rooms_available');

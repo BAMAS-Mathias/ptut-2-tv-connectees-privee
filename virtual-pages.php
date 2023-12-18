@@ -380,20 +380,20 @@ add_action('ec_virtual_pages', function ($controller) {
     ')
         ->setTemplate('page.php');
 
-    $controller->addPage(new \EC\VirtualPages\Page("secretary/enseignant-view"))
-        ->setTitle('Enseignant View')
+    $controller->addPage(new \EC\VirtualPages\Page("secretary/teacher-view"))
+        ->setTitle('Teacher View')
         ->setContent('
-         <!-- wp:tvconnecteeamu/enseignant-view -->
+         <!-- wp:tvconnecteeamu/teacher-view -->
     test
-    <!-- /wp:tvconnecteeamu/enseignant-view -->
+    <!-- /wp:tvconnecteeamu/teacher-view -->
     ')
         ->setTemplate('page.php');
-    $controller->addPage(new \EC\VirtualPages\Page("secretary/salles_disponibles"))
-        ->setTitle('Salles Disponibles')
+    $controller->addPage(new \EC\VirtualPages\Page("secretary/rooms-available"))
+        ->setTitle('rooms-available')
         ->setContent('
-         <!-- wp:tvconnecteeamu/salles_disponibles -->
+         <!-- wp:tvconnecteeamu/rooms-available -->
     test
-    <!-- /wp:tvconnecteeamu/salles_disponibles -->
+    <!-- /wp:tvconnecteeamu/rooms-available -->
     ')
         ->setTemplate('page.php');
 
