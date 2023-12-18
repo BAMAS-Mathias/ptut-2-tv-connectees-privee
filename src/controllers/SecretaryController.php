@@ -190,4 +190,8 @@ class SecretaryController extends UserController
     public function displayComputerRoomsAvailable(){
         return $this->view->displayComputerRoomsAvailable();
     }
+    public function displayRoomsAvailable(): string
+    {
+        return $this->view->displayRoomsAvailable();
+    }
 }
