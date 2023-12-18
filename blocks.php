@@ -979,3 +979,24 @@ function block_rooms_available() {
 }
 
 add_action('init', 'block_rooms_available');
+
+function homepage_render_callback() {
+    if (is_page()) {
+        $user = new SecretaryController();
+        return $user->displayHomePage();
+    }
+}
+function block_homepage() {
+    wp_register_script(
+        'homepage-script',
+        plugins_url('path/to/your/script.js', __FILE__),
+        array('wp-blocks', 'wp-element', 'wp-data')
+    );
+
+    register_block_type('tvconnecteeamu/homepage', array(
+        'editor_script' => 'homepage-script',
+        'render_callback' => 'homepage_render_callback'
+    ));
+}
+
+add_action('init', 'block_homepage');

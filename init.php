@@ -106,6 +106,9 @@ function loadScriptsEcran()
     if(is_page('computer-room-schedule')){
         wp_enqueue_style('computer_room_schedule', TV_PLUG_PATH . 'public/css/computerRoomSchedule.css', array(), VERSION);
     }
+    if (is_page('homepage')) {
+        wp_enqueue_style('homepage', TV_PLUG_PATH . 'public/css/homepage.css', array(), VERSION);
+    }
 
 
     if (is_page('tv-mode')) {

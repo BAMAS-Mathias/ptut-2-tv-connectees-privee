@@ -123,7 +123,7 @@ class SecretaryView extends UserView
      *
      * @return string
      */
-    public function displayUserCreationForm() : string
+    public function displayUserCreationForm(): string
     {
         return '<div class="container col-xxl-10">
         <h2 class="display-6">Créer un utilisateur</h2>
@@ -174,7 +174,8 @@ class SecretaryView extends UserView
       </div>';
     }
 
-    public function displayUserCreationFormExcel() : string {
+    public function displayUserCreationFormExcel(): string
+    {
         return '<div class="container col-xxl-10">
         <h2 class="display-6">Créer un utilisateur</h2>
         <p class="lead">
@@ -196,8 +197,9 @@ class SecretaryView extends UserView
       </div>';
     }
 
-    public function displaySecretaryWelcome() : string{
-        return'
+    public function displaySecretaryWelcome(): string
+    {
+        return '
         <div class="btn-container">
             <a href="' . home_url('/secretary/year-student-schedule') . '" class="boutons-etudiants secretary-button blue-btn">BUT1</a> 
             <a class="boutons-etudiants secretary-button blue-btn">BUT2</a>
@@ -255,6 +257,7 @@ class SecretaryView extends UserView
       </div>
         ';
     }
+
     public function displayRoomsAvailable(): string
     {
         return '
@@ -309,7 +312,8 @@ class SecretaryView extends UserView
 </html>';
     }
 
-    public function displayStudentGroupView(){
+    public function displayStudentGroupView()
+    {
         return '
         <div class="container-body">
             <div class="container-horaire">
@@ -343,7 +347,8 @@ class SecretaryView extends UserView
     }
 
     /* TEMPORAIRE */
-    public function displayYearStudentScheduleView(){
+    public function displayYearStudentScheduleView()
+    {
         return '<div id="schedule-container">
                     <div></div>
                     <div class="container-horaire">
@@ -449,7 +454,8 @@ class SecretaryView extends UserView
                 </div>';
     }
 
-    public function displayComputerRoomSchedule(){
+    public function displayComputerRoomSchedule()
+    {
         return '<div id="schedule-container">
                     <div></div>
                     <div class="container-horaire">
@@ -576,5 +582,27 @@ class SecretaryView extends UserView
                         <p class="text-salle">A-002</p>
                     </div> 
                 </div>';
+    }
+
+    public function displayHomePage()
+    {
+        return '
+    <body>
+        <div class="container">
+            <h1 id="bienvenue">
+                BIENVENUE AU BUT <br>
+                INFORMATIQUE <br>
+                D\'AIX-MARSEILLE
+            </h1>
+        </div>
+    </body>
+
+    <footer>
+        <h2>
+            . <!-- Ne pas enlever -->
+        </h2>
+    </footer>
+
+    </html>';
     }
 }

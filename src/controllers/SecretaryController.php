@@ -206,4 +206,7 @@ class SecretaryController extends UserController
     public function displayComputerRoomSchedule(){
         return $this->view->displayComputerRoomSchedule();
     }
+    public function displayHomePage(){
+        return $this->view->displayHomePage();
+    }
 }

@@ -95,22 +95,7 @@ class TeacherView extends UserView
     public function displayTeacherView(): string
     {
         return '
-        <!DOCTYPE html>
-        <html lang="fr" dir="ltr">
-        <head>
-            <meta charset="utf-8">
-            <link rel="stylesheet" type="text/css" href="../css/teacherview.css" />
-            <title>Enseignant</title>
-        </head>
-        <header>
-            <div class="header-bg">
-                <div class="header">
-                    <img src="https://www.univ-amu.fr/system/files/2021-02/DIRCOM-Logo-IUT.png" alt="logo-iut">
-                    <h1 id="titre">ENSEIGNANT</h1>
-                    <div> </div>
-                </div>
-            </div>
-        </header>
+          
         <body>
             <div class="container-body">
                 <div class="container-horaire1">
@@ -178,6 +163,5 @@ class TeacherView extends UserView
             </div>
         </div>';
     }
-}
 
 }
