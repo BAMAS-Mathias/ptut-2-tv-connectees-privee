@@ -197,12 +197,330 @@ class SecretaryView extends UserView
     }
 
     public function displaySecretaryWelcome() : string{
-        return
-            '<a class="btn" href="' . home_url('/secretary/year-student-schedule') . '">BUT 1</a>
-            <input type="submit" name="BUT2" value="BUT 2" />
-            <input type="submit" name="BUT3" value="BUT 3" />
-            <a class="btn" href="' . home_url('/secretary/teacher-search-schedule') . '">ENSEIGNANTS</a>
-            <a class="btn" href="' . home_url('/secretary/computer-rooms') . '">SALLES MACHINE</a>
-            <a class="btn" href="' . home_url('/secretary/room-schedule') . '">SALLES DISPONIBLES</a>';
+        return'
+        <div class="btn-container">
+            <a href="' . home_url('/secretary/year-student-schedule') . '" class="boutons-etudiants secretary-button blue-btn">BUT1</a> 
+            <a class="boutons-etudiants secretary-button blue-btn">BUT2</a>
+            <a class="boutons-etudiants secretary-button blue-btn">BUT3</a> 
+            <a href="' . home_url('/secretary/teacher-search-schedule') . '" class="boutons-autres secretary-button orange-btn">ENSEIGNANTS</a> 
+            <a href="' . home_url('/secretary/computer-rooms') . '"class="boutons-autres secretary-button orange-btn">SALLES MACHINES</a>
+            <a href="' . home_url('/secretary/room-schedule') . '" class="boutons-autres secretary-button orange-btn">SALLES DISPONIBLES</a>
+        </div>';
+    }
+
+    public function displayComputerRoomsAvailable(){
+        return '
+        <div id="main-container">
+            <div class="room available" onclick="toggleRoom(this)">
+                <img src="'. TV_PLUG_PATH . 'public/img/lock-open.png' .'">
+                <img src="'. TV_PLUG_PATH . 'public/img/computer-icon.png' .'">
+                <h1 class="label-salle">I 002</h1>
+            </div>
+            <div class="room available" onclick="toggleRoom(this)">
+                <img src="'. TV_PLUG_PATH . 'public/img/lock-open.png' .'">
+                <img src="'. TV_PLUG_PATH . 'public/img/computer-icon.png' .'">
+                <h1 class="label-salle">I 004</h1>
+            </div>
+            <div class="room not-available" onclick="toggleRoom(this)">
+                <img src="'. TV_PLUG_PATH . 'public/img/lock-close.png' .'">
+                <img src="'. TV_PLUG_PATH . 'public/img/computer-icon.png' .'">
+                <h1 class="label-salle">I 009</h1>
+            </div>
+            <div class="room not-available" onclick="toggleRoom(this)">
+                <img src="'. TV_PLUG_PATH . 'public/img/lock-close.png' .'">
+                <img src="'. TV_PLUG_PATH . 'public/img/computer-icon.png' .'">
+                <h1 class="label-salle">I 010</h1>
+            </div>
+            <div class="room not-available" onclick="toggleRoom(this)">
+                <img src="'. TV_PLUG_PATH . 'public/img/lock-close.png' .'">
+                <img src="'. TV_PLUG_PATH . 'public/img/computer-icon.png' .'">
+                <h1 class="label-salle">I 102</h1>
+            </div>
+            <div class="room available" onclick="toggleRoom(this)">
+                <img src="'. TV_PLUG_PATH . 'public/img/lock-open.png' .'">
+                <img src="'. TV_PLUG_PATH . 'public/img/computer-icon.png' .'">
+                <h1 class="label-salle">I 104</h1>
+            </div>
+            <div class="room available" onclick="toggleRoom(this)">
+                <img src="'. TV_PLUG_PATH . 'public/img/lock-open.png' .'">
+                <img src="'. TV_PLUG_PATH . 'public/img/computer-icon.png' .'">
+                <h1 class="label-salle">I 106</h1>
+            </div>
+            <div class="room not-available" onclick="toggleRoom(this)">
+                <img src="'. TV_PLUG_PATH . 'public/img/lock-close.png' .'">
+                <img src="'. TV_PLUG_PATH . 'public/img/computer-icon.png' .'">
+                <h1 class="label-salle">I 214</h1>
+            </div>
+      </div>
+        ';
+    }
+
+    public function displayStudentGroupView(){
+        return '
+        <div class="container-body">
+            <div class="container-horaire">
+                <h3 id="text-horaire">8h15 - 10h15</h3>
+            </div>
+            <div class="container-horaire">
+                <h3 id="text-horaire">10h35 - 12h15</h3>
+            </div>
+            <div class="container-horaire">
+                <h3 id="text-horaire">13h30 - 15h15</h3>
+            </div>
+            <div class="container-horaire">
+                <h3 id="text-horaire">15h45 - 17h30</h3>
+            </div>
+            <div class="container-matiere orange">
+                <p class="text-matiere">R3.02 - JAVA</p>
+                <p class="text-prof">SLEZAK Eileen</p>
+                <p class="text-salle">I-110</p>
+            </div>
+            <div class="container-matiere green">
+                <p class="text-matiere">R3.01 - ANGLAIS</p>
+                <p class="text-prof">SLEZAK Eileen</p>
+                <p class="text-salle">A-002</p>
+            </div>      
+            <div class="container-matiere yellow">
+                <p class="text-matiere">R3.04 - SQL</p>
+                <p class="text-prof">ANNI Samuele</p>
+                <p class="text-salle">A-002</p>
+            </div>
+        </div>';
+    }
+
+    /* TEMPORAIRE */
+    public function displayYearStudentScheduleView(){
+        return '<div id="schedule-container">
+                    <div></div>
+                    <div class="container-horaire">
+                         <h3 id="text-horaire">8h15 - 10h15</h3>
+                    </div>
+                    <div class="container-horaire">
+                        <h3 id="text-horaire">10h35 - 12h15</h3>
+                    </div>
+                    <div class="container-horaire">
+                        <h3 id="text-horaire">13h30 - 15h15</h3>
+                    </div>
+                    <div class="container-horaire">
+                        <h3 id="text-horaire">15h45 - 17h30</h3>
+                    </div>
+                    
+                    <p class="group-name">G1</p>
+                    <div class="container-matiere green">
+                        <p class="text-matiere">R3.01 - ANGLAIS</p>
+                        <p class="text-prof">SLEZAK Eileen</p>
+                        <p class="text-salle">A-002</p>
+                    </div>   
+                    <div class="container-matiere green">
+                        <p class="text-matiere">R3.01 - ANGLAIS</p>
+                        <p class="text-prof">SLEZAK Eileen</p>
+                        <p class="text-salle">A-002</p>
+                    </div>  
+                    <div class="container-matiere green">
+                        <p class="text-matiere">R3.01 - ANGLAIS</p>
+                        <p class="text-prof">SLEZAK Eileen</p>
+                        <p class="text-salle">A-002</p>
+                    </div>  
+                    <div class="container-matiere green">
+                        <p class="text-matiere">R3.01 - ANGLAIS</p>
+                        <p class="text-prof">SLEZAK Eileen</p>
+                        <p class="text-salle">A-002</p>
+                    </div>  
+                    
+                    <p class="group-name">G2</p>
+                    <div class="container-matiere green">
+                        <p class="text-matiere">R3.01 - ANGLAIS</p>
+                        <p class="text-prof">SLEZAK Eileen</p>
+                        <p class="text-salle">A-002</p>
+                    </div>   
+                    <div class="container-matiere green">
+                        <p class="text-matiere">R3.01 - ANGLAIS</p>
+                        <p class="text-prof">SLEZAK Eileen</p>
+                        <p class="text-salle">A-002</p>
+                    </div>  
+                    <div class="container-matiere green">
+                        <p class="text-matiere">R3.01 - ANGLAIS</p>
+                        <p class="text-prof">SLEZAK Eileen</p>
+                        <p class="text-salle">A-002</p>
+                    </div>  
+                    <div class="container-matiere green">
+                        <p class="text-matiere">R3.01 - ANGLAIS</p>
+                        <p class="text-prof">SLEZAK Eileen</p>
+                        <p class="text-salle">A-002</p>
+                    </div>  
+                    
+                    <p class="group-name">G3</p>
+                    <div class="container-matiere green">
+                        <p class="text-matiere">R3.01 - ANGLAIS</p>
+                        <p class="text-prof">SLEZAK Eileen</p>
+                        <p class="text-salle">A-002</p>
+                    </div>   
+                    <div class="container-matiere green">
+                        <p class="text-matiere">R3.01 - ANGLAIS</p>
+                        <p class="text-prof">SLEZAK Eileen</p>
+                        <p class="text-salle">A-002</p>
+                    </div>  
+                    <div class="container-matiere green">
+                        <p class="text-matiere">R3.01 - ANGLAIS</p>
+                        <p class="text-prof">SLEZAK Eileen</p>
+                        <p class="text-salle">A-002</p>
+                    </div>  
+                    <div class="container-matiere green">
+                        <p class="text-matiere">R3.01 - ANGLAIS</p>
+                        <p class="text-prof">SLEZAK Eileen</p>
+                        <p class="text-salle">A-002</p>
+                    </div>  
+                    
+                    <p class="group-name">G4</p>
+                    <div class="container-matiere green">
+                        <p class="text-matiere">R3.01 - ANGLAIS</p>
+                        <p class="text-prof">SLEZAK Eileen</p>
+                        <p class="text-salle">A-002</p>
+                    </div>   
+                    <div class="container-matiere green">
+                        <p class="text-matiere">R3.01 - ANGLAIS</p>
+                        <p class="text-prof">SLEZAK Eileen</p>
+                        <p class="text-salle">A-002</p>
+                    </div>  
+                    <div class="container-matiere green">
+                        <p class="text-matiere">R3.01 - ANGLAIS</p>
+                        <p class="text-prof">SLEZAK Eileen</p>
+                        <p class="text-salle">A-002</p>
+                    </div>  
+                    <div class="container-matiere green">
+                        <p class="text-matiere">R3.01 - ANGLAIS</p>
+                        <p class="text-prof">SLEZAK Eileen</p>
+                        <p class="text-salle">A-002</p>
+                    </div>  
+                </div>';
+    }
+
+    public function displayComputerRoomSchedule(){
+        return '<div id="schedule-container">
+                    <div></div>
+                    <div class="container-horaire">
+                         <h3 id="text-horaire">LUNDI</h3>
+                    </div>
+                    <div class="container-horaire">
+                        <h3 id="text-horaire">MARDI</h3>
+                    </div>
+                    <div class="container-horaire">
+                        <h3 id="text-horaire">MERCREDI</h3>
+                    </div>
+                    <div class="container-horaire">
+                        <h3 id="text-horaire">JEUDI</h3>
+                    </div>
+                    <div class="container-horaire">
+                        <h3 id="text-horaire">VENDREDI</h3>
+                    </div>
+                    
+                    <p class="group-name">8h15 - 10h15</p>
+                    <div class="container-matiere green">
+                        <p class="text-matiere">R3.01 - ANGLAIS</p>
+                        <p class="text-prof">SLEZAK Eileen</p>
+                        <p class="text-salle">A-002</p>
+                    </div>   
+                    <div class="container-matiere green">
+                        <p class="text-matiere">R3.01 - ANGLAIS</p>
+                        <p class="text-prof">SLEZAK Eileen</p>
+                        <p class="text-salle">A-002</p>
+                    </div>  
+                    <div class="container-matiere green">
+                        <p class="text-matiere">R3.01 - ANGLAIS</p>
+                        <p class="text-prof">SLEZAK Eileen</p>
+                        <p class="text-salle">A-002</p>
+                    </div>  
+                    <div class="container-matiere green">
+                        <p class="text-matiere">R3.01 - ANGLAIS</p>
+                        <p class="text-prof">SLEZAK Eileen</p>
+                        <p class="text-salle">A-002</p>
+                    </div>  
+                    <div class="container-matiere green">
+                        <p class="text-matiere">R3.01 - ANGLAIS</p>
+                        <p class="text-prof">SLEZAK Eileen</p>
+                        <p class="text-salle">A-002</p>
+                    </div> 
+                    
+                    <p class="group-name">10h35 - 12h15</p>
+                    <div class="container-matiere green">
+                        <p class="text-matiere">R3.01 - ANGLAIS</p>
+                        <p class="text-prof">SLEZAK Eileen</p>
+                        <p class="text-salle">A-002</p>
+                    </div>   
+                    <div class="container-matiere green">
+                        <p class="text-matiere">R3.01 - ANGLAIS</p>
+                        <p class="text-prof">SLEZAK Eileen</p>
+                        <p class="text-salle">A-002</p>
+                    </div>  
+                    <div class="container-matiere green">
+                        <p class="text-matiere">R3.01 - ANGLAIS</p>
+                        <p class="text-prof">SLEZAK Eileen</p>
+                        <p class="text-salle">A-002</p>
+                    </div>  
+                    <div class="container-matiere green">
+                        <p class="text-matiere">R3.01 - ANGLAIS</p>
+                        <p class="text-prof">SLEZAK Eileen</p>
+                        <p class="text-salle">A-002</p>
+                    </div>  
+                    <div class="container-matiere green">
+                        <p class="text-matiere">R3.01 - ANGLAIS</p>
+                        <p class="text-prof">SLEZAK Eileen</p>
+                        <p class="text-salle">A-002</p>
+                    </div> 
+                    
+                    <p class="group-name">13h30 - 15h15</p>
+                    <div class="container-matiere green">
+                        <p class="text-matiere">R3.01 - ANGLAIS</p>
+                        <p class="text-prof">SLEZAK Eileen</p>
+                        <p class="text-salle">A-002</p>
+                    </div>   
+                    <div class="container-matiere green">
+                        <p class="text-matiere">R3.01 - ANGLAIS</p>
+                        <p class="text-prof">SLEZAK Eileen</p>
+                        <p class="text-salle">A-002</p>
+                    </div>  
+                    <div class="container-matiere green">
+                        <p class="text-matiere">R3.01 - ANGLAIS</p>
+                        <p class="text-prof">SLEZAK Eileen</p>
+                        <p class="text-salle">A-002</p>
+                    </div>  
+                    <div class="container-matiere green">
+                        <p class="text-matiere">R3.01 - ANGLAIS</p>
+                        <p class="text-prof">SLEZAK Eileen</p>
+                        <p class="text-salle">A-002</p>
+                    </div>  
+                    <div class="container-matiere green">
+                        <p class="text-matiere">R3.01 - ANGLAIS</p>
+                        <p class="text-prof">SLEZAK Eileen</p>
+                        <p class="text-salle">A-002</p>
+                    </div> 
+                    
+                    <p class="group-name">15h45 - 17h30</p>
+                    <div class="container-matiere green">
+                        <p class="text-matiere">R3.01 - ANGLAIS</p>
+                        <p class="text-prof">SLEZAK Eileen</p>
+                        <p class="text-salle">A-002</p>
+                    </div>   
+                    <div class="container-matiere green">
+                        <p class="text-matiere">R3.01 - ANGLAIS</p>
+                        <p class="text-prof">SLEZAK Eileen</p>
+                        <p class="text-salle">A-002</p>
+                    </div>  
+                    <div class="container-matiere green">
+                        <p class="text-matiere">R3.01 - ANGLAIS</p>
+                        <p class="text-prof">SLEZAK Eileen</p>
+                        <p class="text-salle">A-002</p>
+                    </div>  
+                    <div class="container-matiere green">
+                        <p class="text-matiere">R3.01 - ANGLAIS</p>
+                        <p class="text-prof">SLEZAK Eileen</p>
+                        <p class="text-salle">A-002</p>
+                    </div>  
+                    <div class="container-matiere green">
+                        <p class="text-matiere">R3.01 - ANGLAIS</p>
+                        <p class="text-prof">SLEZAK Eileen</p>
+                        <p class="text-salle">A-002</p>
+                    </div> 
+                </div>';
     }
 }

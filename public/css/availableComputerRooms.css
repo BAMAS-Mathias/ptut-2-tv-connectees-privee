@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@700&display=swap');
+
+* {
+    margin: 0;
+}
+
+.label-salle {
+    font-family: 'Titillium Web', sans-serif;
+    font-weight: bold;
+    padding-top: 10px;
+}
+
+.room img:nth-child(1){
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    right: -30px;
+    top: -30px;
+    background-color: #F2EFF2;
+    padding-bottom: 7px;
+}
+
+.room img:nth-child(2){
+    width: 90px;
+    height: 90px;
+}
+
+#main-container {
+    display: grid;
+    grid-template-columns: repeat(4, 0.1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 100px;
+    width: 100vw;
+    align-items: center;
+    justify-content: center;
+    margin: 10vh 0;
+    height: 60vh;
+}
+
+.room {
+    width: 200px;
+    height: 200px;
+    margin: 10px;
+    border: 6px solid #000;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    padding: 1vh;
+    flex-direction: column;
+    box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.3);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.room:hover{
+    transform: scale(1.1);
+}
+
+.available {
+    border-color: #6CD088;
+}
+
+.not-available {
+    opacity: 0.5;
+}

@@ -74,7 +74,34 @@ function loadScriptsEcran()
      if (!is_admin()) wp_deregister_script('jquery');
      
      wp_enqueue_style('style_ecran', TV_PLUG_PATH . 'public/css/style.css', array(), VERSION);
-    
+
+    if(is_page('secretary-welcome')){
+        wp_enqueue_style('welcome_secretary', TV_PLUG_PATH . 'public/css/secretaryAccueil.css', array(), VERSION);
+    }
+
+    if(is_page('teacher-search-schedule')){
+        wp_enqueue_style('teacher_search_schedule', TV_PLUG_PATH . 'public/css/teacherSearchSchedule.css', array(), VERSION);
+    }
+
+    if(is_page('teacher-schedule') || is_page('student-group')){
+        wp_enqueue_style('teacher_schedule', TV_PLUG_PATH . 'public/css/teacherSchedule.css', array(), VERSION);
+    }
+
+    if(is_page('year-student-schedule')){
+        wp_enqueue_style('teacher_schedule', TV_PLUG_PATH . 'public/css/yearStudentSchedule.css', array(), VERSION);
+        wp_enqueue_style('year-student', TV_PLUG_PATH . 'public/css/teacherSchedule.css', array(), VERSION);
+    }
+
+    if(is_page('available-computer-rooms')){
+        wp_enqueue_style('teacher_search_schedule', TV_PLUG_PATH . 'public/css/availableComputerRooms.css', array(), VERSION);
+        wp_enqueue_script('computer_switch_script', TV_PLUG_PATH . 'public/js/tablet-view/toggleComputerRoom.js', array(), VERSION, true);
+    }
+
+    if(is_page('computer-room-schedule')){
+        wp_enqueue_style('computer_room_schedule', TV_PLUG_PATH . 'public/css/computerRoomSchedule.css', array(), VERSION);
+    }
+
+
     if (is_page('tv-mode')) {
         /* STYLESHEETS */
         wp_enqueue_style('alert_ecran', TV_PLUG_PATH . 'public/css/alert.css', array(), VERSION);

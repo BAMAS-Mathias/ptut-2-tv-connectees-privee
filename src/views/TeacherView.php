@@ -77,4 +77,53 @@ class TeacherView extends UserView
 
         return $this->displayTable('Teacher', $title, $header, $row, 'teacher', '<a type="submit" class="btn btn-primary" role="button" aria-disabled="true" href="' . home_url('/creer-utilisateur') . '">Créer</a>');
     }
+
+    public function displayTeacherSearchSchedule() : string{
+        return '
+        <section id="search-container">
+            <img id="profil-picture" alt="profil image" src="https://cdn-icons-png.flaticon.com/512/9706/9706640.png">
+            <h2>Recherchez votre emploi du temps</h2>
+            <div id="search-bar">
+                <input type="text" placeholder="Nom...">
+                <button id="search-btn" type="submit">
+                    <img id="loupe" src="https://cdn-icons-png.flaticon.com/512/694/694985.png" alt="loupe">
+                </button>
+            </div>
+        </section>';
+    }
+
+
+    public function displayTeacherDailySchedule(){
+        return '
+        <div class="container-body">
+            <div class="container-horaire">
+                <h3 id="text-horaire">8h15 - 10h15</h3>
+            </div>
+            <div class="container-horaire">
+                <h3 id="text-horaire">10h35 - 12h15</h3>
+            </div>
+            <div class="container-horaire">
+                <h3 id="text-horaire">13h30 - 15h15</h3>
+            </div>
+            <div class="container-horaire">
+                <h3 id="text-horaire">15h45 - 17h30</h3>
+            </div>
+            <div class="container-matiere blue">
+                <p class="text-matiere">R3.02 - JAVA</p>
+                <p class="text-prof">SLEZAK Eileen</p>
+                <p class="text-salle">I-110</p>
+            </div>
+            <div class="container-matiere pink">
+                <p class="text-matiere">R3.01 - ANGLAIS</p>
+                <p class="text-prof">SLEZAK Eileen</p>
+                <p class="text-salle">A-002</p>
+            </div>
+            <div></div>
+            <div class="container-matiere red">
+                <p class="text-matiere">R3.04 - SQL</p>
+                <p class="text-prof">ANNI Samuele</p>
+                <p class="text-salle">A-002</p>
+            </div>
+        </div>';
+    }
 }

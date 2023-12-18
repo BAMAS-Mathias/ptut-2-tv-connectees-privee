@@ -256,7 +256,7 @@ add_action('ec_virtual_pages', function ($controller) {
      *  Page: /secretary/welcome
      */
     $controller->addPage(new \EC\VirtualPages\Page("/secretary/welcome"))
-        ->setTitle('Accueil page secrétaires')
+        ->setTitle('secretary-welcome')
         ->setContent('
     <!-- wp:tvconnecteeamu/secretary-welcome -->
     test
@@ -268,7 +268,7 @@ add_action('ec_virtual_pages', function ($controller) {
      *  Page: /secretary/computer-rooms
      */
     $controller->addPage(new \EC\VirtualPages\Page("/secretary/computer-rooms"))
-        ->setTitle('Salles machines')
+        ->setTitle('available-computer-rooms')
         ->setContent('
     <!-- wp:tvconnecteeamu/computer-rooms -->
     test
@@ -281,7 +281,7 @@ add_action('ec_virtual_pages', function ($controller) {
      *  Page: /secretary/teacher-schedule
      */
     $controller->addPage(new \EC\VirtualPages\Page("/secretary/teacher-schedule"))
-        ->setTitle('Emplois du temps professeur')
+        ->setTitle('teacher-schedule')
         ->setContent('
     <!-- wp:tvconnecteeamu/teacher-schedule -->
     test
@@ -320,7 +320,7 @@ add_action('ec_virtual_pages', function ($controller) {
      *  Page: /secretary/year-student-schedule
      */
     $controller->addPage(new \EC\VirtualPages\Page("/secretary/year-student-schedule"))
-        ->setTitle('Emplois du temps des X années')
+        ->setTitle('year-student-schedule')
         ->setContent('
     <!-- wp:tvconnecteeamu/year-student-schedule -->
     test
@@ -333,7 +333,7 @@ add_action('ec_virtual_pages', function ($controller) {
      *  Page: /secretary/group-student-schedule
      */
     $controller->addPage(new \EC\VirtualPages\Page("/secretary/group-student-schedule"))
-        ->setTitle('Emplois du temps du groupe : ')
+        ->setTitle('student-group')
         ->setContent('
     <!-- wp:tvconnecteeamu/group-student-schedule -->
     test
@@ -359,7 +359,7 @@ add_action('ec_virtual_pages', function ($controller) {
      *  Page: /secretary/teacher-search-schedule
      */
     $controller->addPage(new \EC\VirtualPages\Page("/secretary/teacher-search-schedule"))
-        ->setTitle('Chercher votre emplois du temps')
+        ->setTitle('teacher-search-schedule')
         ->setContent('
     <!-- wp:tvconnecteeamu/teacher-search-schedule -->
     test
@@ -372,7 +372,7 @@ add_action('ec_virtual_pages', function ($controller) {
      *  Page: /secretary/weekly-computer-room-schedule
      */
     $controller->addPage(new \EC\VirtualPages\Page("/secretary/weekly-computer-room-schedule"))
-        ->setTitle('Emplois du temps de la salle')
+        ->setTitle('computer-room-schedule')
         ->setContent('
     <!-- wp:tvconnecteeamu/weekly-computer-room-schedule -->
     test

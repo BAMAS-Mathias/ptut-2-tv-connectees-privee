@@ -731,7 +731,7 @@ function secretary_computer_rooms_render_callback()
 {
     if(is_page()) {
         $user = new SecretaryController();
-        return $user->displayWelcomePage();
+        return $user->displayComputerRoomsAvailable();
     }
 }
 
@@ -754,8 +754,8 @@ add_action( 'init', 'block_secretary_computer_rooms' );
 function secretary_teacher_schedule_render_callback()
 {
     if(is_page()) {
-        $user = new SecretaryController();
-        return $user->displayWelcomePage();
+        $user = new TeacherController();
+        return $user->displayTeacherDailySchedule();
     }
 }
 
@@ -827,7 +827,7 @@ function year_student_schedule_render_callback()
 {
     if(is_page()) {
         $user = new SecretaryController();
-        return $user->displayWelcomePage();
+        return $user->displayYearStudentSchedule();
     }
 }
 
@@ -851,7 +851,7 @@ function group_student_schedule_render_callback()
 {
     if(is_page()) {
         $user = new SecretaryController();
-        return $user->displayWelcomePage();
+        return $user->displayStudentGroupView();
     }
 }
 
@@ -898,8 +898,8 @@ add_action( 'init', 'block_all_years_schedule' );
 function teacher_search_schedule_render_callback()
 {
     if(is_page()) {
-        $user = new SecretaryController();
-        return $user->displayWelcomePage();
+        $user = new TeacherController();
+        return $user->displayTeacherSearchSchedule();
     }
 }
 
@@ -923,7 +923,7 @@ function weekly_computer_room_schedule_render_callback()
 {
     if(is_page()) {
         $user = new SecretaryController();
-        return $user->displayWelcomePage();
+        return $user->displayComputerRoomSchedule();
     }
 }
 

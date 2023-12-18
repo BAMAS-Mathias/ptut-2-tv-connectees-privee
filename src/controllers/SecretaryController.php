@@ -186,4 +186,20 @@ class SecretaryController extends UserController
         $user = $this->model->get($id);
         $user->delete();
     }
+
+    public function displayComputerRoomsAvailable(){
+        return $this->view->displayComputerRoomsAvailable();
+    }
+
+    public function displayStudentGroupView(){
+        return $this->view->displayStudentGroupView();
+    }
+
+    public function displayYearStudentSchedule(){
+        return $this->view->displayYearStudentScheduleView();
+    }
+
+    public function displayComputerRoomSchedule(){
+        return $this->view->displayComputerRoomSchedule();
+    }
 }
