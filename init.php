@@ -87,6 +87,9 @@ function loadScriptsEcran()
         wp_enqueue_style('teacher_search_schedule', TV_PLUG_PATH . 'public/css/availableComputerRooms.css', array(), VERSION);
         wp_enqueue_script('computer_switch_script', TV_PLUG_PATH . 'public/js/tablet-view/toggleComputerRoom.js', array(), VERSION, true);
     }
+    if (is_page('enseignant-view')) {
+        wp_enqueue_style('enseignant_view', TV_PLUG_PATH . 'public/css/enseignantview.css', array(), VERSION);
+    }
 
 
     if (is_page('tv-mode')) {

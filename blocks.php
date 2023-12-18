@@ -936,3 +936,25 @@ function block_weekly_computer_room_schedule() {
     ));
 }
 add_action( 'init', 'block_weekly_computer_room_schedule' );
+
+function enseignant_view_render_callback() {
+    if (is_page()) {
+        $controller = new TeacherController();
+        return $controller->displayEnseignantView();
+    }
+}
+
+function block_enseignant_view() {
+    wp_register_script(
+        'enseignant-view-script',
+        plugins_url('path/to/your/script.js', __FILE__),
+        array('wp-blocks', 'wp-element', 'wp-data')
+    );
+
+    register_block_type('tvconnecteeamu/enseignant-view', array(
+        'editor_script' => 'enseignant-view-script',
+        'render_callback' => 'enseignant_view_render_callback'
+    ));
+}
+
+add_action('init', 'block_enseignant_view');

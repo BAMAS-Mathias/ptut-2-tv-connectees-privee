@@ -380,6 +380,14 @@ add_action('ec_virtual_pages', function ($controller) {
     ')
         ->setTemplate('page.php');
 
+    $controller->addPage(new \EC\VirtualPages\Page("secretary/enseignant-view"))
+        ->setTitle('Enseignant View')
+        ->setContent('
+         <!-- wp:tvconnecteeamu/enseignant-view -->
+    test
+    <!-- /wp:tvconnecteeamu/enseignant-view -->
+    ')
+        ->setTemplate('page.php');
 
 
 });

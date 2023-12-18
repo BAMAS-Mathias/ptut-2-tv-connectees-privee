@@ -91,4 +91,57 @@ class TeacherView extends UserView
             </div>
         </section>';
     }
+
+    public function displayEnseignantView(): string
+    {
+        return '
+        <!DOCTYPE html>
+        <html lang="fr" dir="ltr">
+        <head>
+            <meta charset="utf-8">
+            <link rel="stylesheet" type="text/css" href="../css/enseignantview.css" />
+            <title>Enseignant</title>
+        </head>
+        <header>
+            <div class="header-bg">
+                <div class="header">
+                    <img src="https://www.univ-amu.fr/system/files/2021-02/DIRCOM-Logo-IUT.png" alt="logo-iut">
+                    <h1 id="titre">ENSEIGNANT</h1>
+                    <div> </div>
+                </div>
+            </div>
+        </header>
+        <body>
+            <div class="container-body">
+                <div class="container-horaire1">
+                    <h1 id="text-horaire">8h15 - 10h15</h1>
+                </div>
+                <div class="container-matiere1">
+                    <h1 id="text-matiere">R3.02 - JAVA</h1>
+                    <h1 id="text-matiere">SLEZAK Eileen</h1>
+                    <h1 id="text-matiere">I-110</h1>
+                </div>
+                <div class="container-horaire2">
+                    <h1 id="text-horaire">10h35 - 12h15</h1>
+                </div>
+                <div class="container-matiere2">
+                    <h1 id="text-matiere">R3.01 - ANGLAIS</h1>
+                    <h1 id="text-matiere">SLEZAK Eileen</h1>
+                    <h1 id="text-matiere">A-002</h1>
+                </div>
+                <div class="container-horaire3">
+                    <h1 id="text-horaire">13h30 - 15h15</h1>
+                </div>
+                <div class="container-horaire4">
+                    <h1 id="text-horaire">15h45 - 17h30</h1>
+                </div>
+                <div class="container-matiere4">
+                    <h1 id="text-matiere">R3.04 - SQL</h1>
+                    <h1 id="text-matiere">ANNI Samuele</h1>
+                    <h1 id="text-matiere">A-002</h1>
+            </div>
+        </body>
+        </html>';}
+
+
 }
