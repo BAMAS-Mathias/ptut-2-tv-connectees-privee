@@ -96,9 +96,11 @@ class TeacherController extends UserController implements Schedule
     public function displayTeacherSearchSchedule() : string{
         return $this->view->displayTeacherSearchSchedule();
     }
-    public function displayTeacherView()
-    {
-        return $this->view->displayTeacherView();
-    }
 
+    /**
+     * @return void
+     */
+    public function displayTeacherDailySchedule() : string{
+        return $this->view->displayTeacherDailySchedule();
+    }
 }
