@@ -9,11 +9,13 @@ class DailySchedule{
      */
     private array $courseList;
     private string $date;
+    private string $group;
 
-    public function __construct($date)
+    public function __construct($date,$group)
     {
         $this->date = date('Ymd',$date);
         $this->courseList = array();
+        $this->group = $group;
     }
 
 
@@ -40,7 +42,7 @@ class DailySchedule{
             $location = $event['location'];
         }
 
-        $this->courseList[] = new Course($label, $professeur, $location, $duration,$group);
+        $this->courseList[] = new Course($label, $professeur, $location, $duration, $group);
     }
 
     /**

@@ -299,7 +299,9 @@ class SecretaryView extends UserView
 
     /* TEMPORAIRE */
     public function displayYearStudentScheduleView(){
-        return '<div id="schedule-container">
+        $weeklySchedule = new WeeklySchedule('8383');
+        $listeHorraire = ["8h15","9h15","10h20","11h05","13h30","14h15","15h20","16h25"];
+        $view = '<div id="schedule-container">
                     <div></div>
                     <div class="container-horaire">
                          <h3 id="text-horaire">8h15 - 10h15</h3>
@@ -313,95 +315,36 @@ class SecretaryView extends UserView
                     <div class="container-horaire">
                         <h3 id="text-horaire">15h45 - 17h30</h3>
                     </div>
-                    
                     <p class="group-name">G1</p>
-                    <div class="container-matiere green">
-                        <p class="text-matiere">R3.01 - ANGLAIS</p>
-                        <p class="text-prof">SLEZAK Eileen</p>
-                        <p class="text-salle">A-002</p>
-                    </div>   
-                    <div class="container-matiere green">
-                        <p class="text-matiere">R3.01 - ANGLAIS</p>
-                        <p class="text-prof">SLEZAK Eileen</p>
-                        <p class="text-salle">A-002</p>
-                    </div>  
-                    <div class="container-matiere green">
-                        <p class="text-matiere">R3.01 - ANGLAIS</p>
-                        <p class="text-prof">SLEZAK Eileen</p>
-                        <p class="text-salle">A-002</p>
-                    </div>  
-                    <div class="container-matiere green">
-                        <p class="text-matiere">R3.01 - ANGLAIS</p>
-                        <p class="text-prof">SLEZAK Eileen</p>
-                        <p class="text-salle">A-002</p>
-                    </div>  
-                    
-                    <p class="group-name">G2</p>
-                    <div class="container-matiere green">
-                        <p class="text-matiere">R3.01 - ANGLAIS</p>
-                        <p class="text-prof">SLEZAK Eileen</p>
-                        <p class="text-salle">A-002</p>
-                    </div>   
-                    <div class="container-matiere green">
-                        <p class="text-matiere">R3.01 - ANGLAIS</p>
-                        <p class="text-prof">SLEZAK Eileen</p>
-                        <p class="text-salle">A-002</p>
-                    </div>  
-                    <div class="container-matiere green">
-                        <p class="text-matiere">R3.01 - ANGLAIS</p>
-                        <p class="text-prof">SLEZAK Eileen</p>
-                        <p class="text-salle">A-002</p>
-                    </div>  
-                    <div class="container-matiere green">
-                        <p class="text-matiere">R3.01 - ANGLAIS</p>
-                        <p class="text-prof">SLEZAK Eileen</p>
-                        <p class="text-salle">A-002</p>
-                    </div>  
-                    
-                    <p class="group-name">G3</p>
-                    <div class="container-matiere green">
-                        <p class="text-matiere">R3.01 - ANGLAIS</p>
-                        <p class="text-prof">SLEZAK Eileen</p>
-                        <p class="text-salle">A-002</p>
-                    </div>   
-                    <div class="container-matiere green">
-                        <p class="text-matiere">R3.01 - ANGLAIS</p>
-                        <p class="text-prof">SLEZAK Eileen</p>
-                        <p class="text-salle">A-002</p>
-                    </div>  
-                    <div class="container-matiere green">
-                        <p class="text-matiere">R3.01 - ANGLAIS</p>
-                        <p class="text-prof">SLEZAK Eileen</p>
-                        <p class="text-salle">A-002</p>
-                    </div>  
-                    <div class="container-matiere green">
-                        <p class="text-matiere">R3.01 - ANGLAIS</p>
-                        <p class="text-prof">SLEZAK Eileen</p>
-                        <p class="text-salle">A-002</p>
-                    </div>  
-                    
-                    <p class="group-name">G4</p>
-                    <div class="container-matiere green">
-                        <p class="text-matiere">R3.01 - ANGLAIS</p>
-                        <p class="text-prof">SLEZAK Eileen</p>
-                        <p class="text-salle">A-002</p>
-                    </div>   
-                    <div class="container-matiere green">
-                        <p class="text-matiere">R3.01 - ANGLAIS</p>
-                        <p class="text-prof">SLEZAK Eileen</p>
-                        <p class="text-salle">A-002</p>
-                    </div>  
-                    <div class="container-matiere green">
-                        <p class="text-matiere">R3.01 - ANGLAIS</p>
-                        <p class="text-prof">SLEZAK Eileen</p>
-                        <p class="text-salle">A-002</p>
-                    </div>  
-                    <div class="container-matiere green">
-                        <p class="text-matiere">R3.01 - ANGLAIS</p>
-                        <p class="text-prof">SLEZAK Eileen</p>
-                        <p class="text-salle">A-002</p>
-                    </div>  
-                </div>';
+                    ';
+
+
+        foreach($weeklySchedule->getDailySchedules() as $dailySchedule){
+            if($dailySchedule->getDate() != date('Ymd')) continue;
+            $courseList = $dailySchedule->getCourseList();
+            $indexCourse = 0;
+            $indexHorraire = 0;
+            while($indexCourse < sizeof($courseList) && $indexHorraire < sizeof($listeHorraire)){
+                $course = $courseList[$indexCourse];
+                if(strtotime($course->getHeureDeb()) >= strtotime($listeHorraire[$indexHorraire]) && strtotime($course->getHeureFin()) >= strtotime($listeHorraire[$indexHorraire])){
+                        $view .= '<div class="container-matiere green">
+                        <p class="text-matiere">' . $course->getSubject() . '</p>
+                        <p class="text-prof">' . $course->getTeacher() . '</p>
+                        <p class="text-salle">' . $listeHorraire[$indexHorraire] . '</p>
+                    </div>';
+
+                }else{
+                    $indexCourse++;
+                    $view .= '<div></div>';
+                }
+                $indexHorraire++;
+            }
+        }
+
+        $view .= '</div>';
+
+        return $view;
+
     }
 
     public function displayComputerRoomSchedule(){

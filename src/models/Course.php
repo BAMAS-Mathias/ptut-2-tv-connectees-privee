@@ -7,7 +7,8 @@ class Course
     private string $subject;
     private string $teacher;
     private string $location;
-    private string $duration;
+    private string $heureDeb;
+    private string $heureFin;
     private string $group;
 
     public function __construct($subject = "", $teacher = " ", $location = "", $duration = "", $group = "")
@@ -15,7 +16,9 @@ class Course
         $this->subject = $subject;
         $this->teacher = $teacher;
         $this->location = $location;
-        $this->duration = $duration;
+        $duration = preg_split("/ - /",$duration);
+        $this->heureDeb = $duration[0];
+        $this->heureFin = $duration[1];
         $this->group = $group;
     }
 
@@ -46,10 +49,19 @@ class Course
     /**
      * @return string
      */
-    public function getDuration(): string
+    public function getHeureDeb(): string
     {
-        return $this->duration;
+        return $this->heureDeb;
     }
+
+    /**
+     * @return string
+     */
+    public function getHeureFin(): string
+    {
+        return $this->heureFin;
+    }
+
 
     /**
      * @return string

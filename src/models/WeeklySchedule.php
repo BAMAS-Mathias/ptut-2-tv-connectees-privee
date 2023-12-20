@@ -19,7 +19,7 @@ class WeeklySchedule
     private function init_schedule($code)
     {
         for ($i = 0; $i < 5; $i++) {
-            $this->dailySchedules[] = new DailySchedule(strtotime("monday this week +" . $i . " day"));
+            $this->dailySchedules[] = new DailySchedule(strtotime("monday this week +" . $i . " day"), $code);
         }
 
         global $R34ICS;
