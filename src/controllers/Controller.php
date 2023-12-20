@@ -51,8 +51,8 @@ class Controller
      * @return string
      */
     public function getUrl($code) {
-        $str = strtotime("now");
-        $str2 = strtotime(date("Y-m-d", strtotime('now')) . " +6 day");
+        $str = strtotime("monday this week");
+        $str2 = strtotime("sunday this week");
         $start = date('Y-m-d', $str);
         $end = date('Y-m-d', $str2);
         $url = 'https://ade-web-consult.univ-amu.fr/jsp/custom/modules/plannings/anonymous_cal.jsp?projectId=8&resources=' . $code . '&calType=ical&firstDate=' . $start . '&lastDate=' . $end;
