@@ -314,7 +314,11 @@ class SecretaryView extends UserView
 
     public function displayStudentGroupView()
     {
-        return '
+        new WeeklySchedule('8395');
+        public
+        function displayStudentGroupView()
+        {
+            return '
         <div class="container-body">
             <div class="container-horaire">
                 <h3 id="text-horaire">8h15 - 10h15</h3>
@@ -344,12 +348,13 @@ class SecretaryView extends UserView
                 <p class="text-salle">A-002</p>
             </div>
         </div>';
-    }
+        }
 
-    /* TEMPORAIRE */
-    public function displayYearStudentScheduleView()
-    {
-        return '<div id="schedule-container">
+        /* TEMPORAIRE */
+        public
+        function displayYearStudentScheduleView()
+        {
+            return '<div id="schedule-container">
                     <div></div>
                     <div class="container-horaire">
                          <h3 id="text-horaire">8h15 - 10h15</h3>
@@ -452,29 +457,30 @@ class SecretaryView extends UserView
                         <p class="text-salle">A-002</p>
                     </div>  
                 </div>';
-    }
+        }
 
-    public function displayComputerRoomSchedule()
-    {
-        return '<div id="schedule-container">
+        public
+        function displayComputerRoomSchedule()
+        {
+            return '<div id="schedule-container">
                     <div></div>
                     <div class="container-horaire">
-                         <h3 id="text-horaire">LUNDI</h3>
+                         <h3 class="text-horaire">LUNDI</h3>
                     </div>
                     <div class="container-horaire">
-                        <h3 id="text-horaire">MARDI</h3>
+                        <h3 class="text-horaire">MARDI</h3>
                     </div>
                     <div class="container-horaire">
-                        <h3 id="text-horaire">MERCREDI</h3>
+                        <h3 class="text-horaire">MERCREDI</h3>
                     </div>
                     <div class="container-horaire">
-                        <h3 id="text-horaire">JEUDI</h3>
+                        <h3 class="text-horaire">JEUDI</h3>
                     </div>
                     <div class="container-horaire">
-                        <h3 id="text-horaire">VENDREDI</h3>
+                        <h3 class="text-horaire">VENDREDI</h3>
                     </div>
                     
-                    <p class="group-name">8h15 - 10h15</p>
+                    <p class="hour-text">8h15 - 10h15</p>
                     <div class="container-matiere green">
                         <p class="text-matiere">R3.01 - ANGLAIS</p>
                         <p class="text-prof">SLEZAK Eileen</p>
@@ -495,68 +501,59 @@ class SecretaryView extends UserView
                         <p class="text-prof">SLEZAK Eileen</p>
                         <p class="text-salle">A-002</p>
                     </div>  
-                    <div class="container-matiere green">
-                        <p class="text-matiere">R3.01 - ANGLAIS</p>
-                        <p class="text-prof">SLEZAK Eileen</p>
-                        <p class="text-salle">A-002</p>
+                    <div>
                     </div> 
                     
-                    <p class="group-name">10h35 - 12h15</p>
-                    <div class="container-matiere green">
+                    <p class="hour-text">10h35 - 12h15</p>
+                    <div class="container-matiere red">
                         <p class="text-matiere">R3.01 - ANGLAIS</p>
                         <p class="text-prof">SLEZAK Eileen</p>
                         <p class="text-salle">A-002</p>
                     </div>   
-                    <div class="container-matiere green">
+                    <div class="container-matiere pink">
                         <p class="text-matiere">R3.01 - ANGLAIS</p>
                         <p class="text-prof">SLEZAK Eileen</p>
                         <p class="text-salle">A-002</p>
                     </div>  
-                    <div class="container-matiere green">
+                    <div class="container-matiere yellow">
                         <p class="text-matiere">R3.01 - ANGLAIS</p>
                         <p class="text-prof">SLEZAK Eileen</p>
                         <p class="text-salle">A-002</p>
                     </div>  
-                    <div class="container-matiere green">
+                    <div class="container-matiere yellow">
                         <p class="text-matiere">R3.01 - ANGLAIS</p>
                         <p class="text-prof">SLEZAK Eileen</p>
                         <p class="text-salle">A-002</p>
                     </div>  
-                    <div class="container-matiere green">
+                    <div class="container-matiere blue">
                         <p class="text-matiere">R3.01 - ANGLAIS</p>
                         <p class="text-prof">SLEZAK Eileen</p>
                         <p class="text-salle">A-002</p>
                     </div> 
                     
-                    <p class="group-name">13h30 - 15h15</p>
-                    <div class="container-matiere green">
+                    <p class="hour-text">13h30 - 15h15</p>
+                    <div class="container-matiere blue">
                         <p class="text-matiere">R3.01 - ANGLAIS</p>
                         <p class="text-prof">SLEZAK Eileen</p>
                         <p class="text-salle">A-002</p>
                     </div>   
-                    <div class="container-matiere green">
+                    <div>
+                    </div>  
+                    <div>
+                    </div>  
+                    <div class="container-matiere pink">
                         <p class="text-matiere">R3.01 - ANGLAIS</p>
                         <p class="text-prof">SLEZAK Eileen</p>
                         <p class="text-salle">A-002</p>
                     </div>  
-                    <div class="container-matiere green">
-                        <p class="text-matiere">R3.01 - ANGLAIS</p>
-                        <p class="text-prof">SLEZAK Eileen</p>
-                        <p class="text-salle">A-002</p>
-                    </div>  
-                    <div class="container-matiere green">
-                        <p class="text-matiere">R3.01 - ANGLAIS</p>
-                        <p class="text-prof">SLEZAK Eileen</p>
-                        <p class="text-salle">A-002</p>
-                    </div>  
-                    <div class="container-matiere green">
+                    <div class="container-matiere yellow">
                         <p class="text-matiere">R3.01 - ANGLAIS</p>
                         <p class="text-prof">SLEZAK Eileen</p>
                         <p class="text-salle">A-002</p>
                     </div> 
                     
-                    <p class="group-name">15h45 - 17h30</p>
-                    <div class="container-matiere green">
+                    <p class="hour-text">15h45 - 17h30</p>
+                    <div class="container-matiere red">
                         <p class="text-matiere">R3.01 - ANGLAIS</p>
                         <p class="text-prof">SLEZAK Eileen</p>
                         <p class="text-salle">A-002</p>
@@ -582,11 +579,12 @@ class SecretaryView extends UserView
                         <p class="text-salle">A-002</p>
                     </div> 
                 </div>';
-    }
+        }
 
-    public function displayHomePage()
-    {
-        return '
+        public
+        function displayHomePage()
+        {
+            return '
     <body>
         <div class="container">
             <h1 id="bienvenue">
@@ -604,5 +602,6 @@ class SecretaryView extends UserView
     </footer>
 
     </html>';
+        }
     }
 }
