@@ -260,37 +260,41 @@ class SecretaryView extends UserView
     }
 
     public function displayStudentGroupView(){
-        new WeeklySchedule('8395');
-        return '
-        <div class="container-body">
-            <div class="container-horaire">
-                <h3 id="text-horaire">8h15 - 10h15</h3>
-            </div>
-            <div class="container-horaire">
-                <h3 id="text-horaire">10h35 - 12h15</h3>
-            </div>
-            <div class="container-horaire">
-                <h3 id="text-horaire">13h30 - 15h15</h3>
-            </div>
-            <div class="container-horaire">
-                <h3 id="text-horaire">15h45 - 17h30</h3>
-            </div>
-            <div class="container-matiere orange">
-                <p class="text-matiere">R3.02 - JAVA</p>
-                <p class="text-prof">SLEZAK Eileen</p>
-                <p class="text-salle">I-110</p>
-            </div>
-            <div class="container-matiere green">
-                <p class="text-matiere">R3.01 - ANGLAIS</p>
-                <p class="text-prof">SLEZAK Eileen</p>
-                <p class="text-salle">A-002</p>
-            </div>      
-            <div class="container-matiere yellow">
-                <p class="text-matiere">R3.04 - SQL</p>
-                <p class="text-prof">ANNI Samuele</p>
-                <p class="text-salle">A-002</p>
-            </div>
-        </div>';
+        $schedule = new WeeklySchedule('8396');
+        $view = '<div class="container-body">
+                    <div class="container-horaire">
+                        <h3 id="text-horaire">8h15 - 10h15</h3>
+                    </div>
+                    <div class="container-horaire">
+                        <h3 id="text-horaire">10h35 - 12h15</h3>
+                    </div>
+                    <div class="container-horaire">
+                        <h3 id="text-horaire">13h30 - 15h15</h3>
+                    </div>
+                    <div class="container-horaire">
+                        <h3 id="text-horaire">15h45 - 17h30</h3>
+                    </div>';
+
+        foreach($schedule->getDailySchedules() as $dailySchedule){
+            if($dailySchedule->getDate() != date('Ymd')) continue;
+            $previousCourseDuration = null;
+            foreach ($dailySchedule->getCourseList() as $course){
+                $courseDuration = preg_split('/ - /', $course->getDuration());
+                if($courseDuration == $previousCourseDuration) continue;
+                $previousCourseDuration = $courseDuration;
+
+
+                if($course->getGroup())
+                $view .= '<div class="container-matiere orange">
+                            <p class="text-matiere">' . $course->getSubject() . '</p>
+                            <p class="text-prof">' . $course->getTeacher() . '</p>
+                            <p class="text-salle">' . $course->getLocation() . '</p>
+                          </div>';
+            }
+        }
+
+        $view .= '</div>';
+        return $view;
     }
 
     /* TEMPORAIRE */

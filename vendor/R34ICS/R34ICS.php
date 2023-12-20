@@ -289,7 +289,7 @@ class R34ICS extends Controller
             if(isset($ics_data['events'])) {
                 // Sort events and remove out-of-range dates
                 foreach (array_keys((array)$ics_data['events']) as $date) {
-                    $first_date = date_i18n('Ymd');
+                    $first_date = date_i18n('Ymd', strtotime('monday this week'));
                     $limit_date = date_i18n('Ymd', mktime(0, 0, 0, date_i18n('n'), date_i18n('j') + $this->limit_days, date_i18n('Y')));
                     if ($date < $first_date || $date > $limit_date) {
                         unset($ics_data['events'][$date]);

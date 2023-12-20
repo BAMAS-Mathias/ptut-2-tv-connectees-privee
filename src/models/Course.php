@@ -7,12 +7,16 @@ class Course
     private string $subject;
     private string $teacher;
     private string $location;
+    private string $duration;
+    private string $group;
 
-    public function __construct($subject = "", $teacher = " ", $location = "")
+    public function __construct($subject = "", $teacher = " ", $location = "", $duration = "", $group = "")
     {
         $this->subject = $subject;
         $this->teacher = $teacher;
         $this->location = $location;
+        $this->duration = $duration;
+        $this->group = $group;
     }
 
     /**
@@ -38,6 +42,26 @@ class Course
     {
         return $this->location;
     }
+
+    /**
+     * @return string
+     */
+    public function getDuration(): string
+    {
+        return $this->duration;
+    }
+
+    /**
+     * @return string
+     */
+    public function getGroup(): string
+    {
+        return $this->group;
+    }
+
+
+
+
 
 
 

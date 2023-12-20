@@ -19,7 +19,7 @@ class WeeklySchedule
     private function init_schedule($code)
     {
         for ($i = 0; $i < 5; $i++) {
-            $this->dailySchedules[] = new DailySchedule();
+            $this->dailySchedules[] = new DailySchedule(strtotime("monday this week +" . $i . " day"));
         }
 
         global $R34ICS;
@@ -47,9 +47,15 @@ class WeeklySchedule
                 }
             }
         }
-
-        foreach ($this->dailySchedules[2]->getCourseList() as $course){
-            echo $course->getTeacher() . "<br>";
-        }
     }
+
+    /**
+     * @return array
+     */
+    public function getDailySchedules(): array
+    {
+        return $this->dailySchedules;
+    }
+
+
 }
