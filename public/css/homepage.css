@@ -9,9 +9,11 @@ header {
 }
 
 body{
-    background-image: url("../img/iut_accueil.png");
-    background-size: cover;
+    background-image: url("../img/iut_accueil.jpeg");
     border-color: #007bff;
+    background-size: 1690px 770px;
+    background-repeat: no-repeat;
+    background-position: 50% -4%;
 }
 
 body::before,

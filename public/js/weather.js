@@ -14,26 +14,36 @@ function refreshWeather() {
 
 meteoRequest.onload = function () {
     var json = JSON.parse(this.responseText);
+    console.log(json); // Pour déboguer et voir la réponse de l'API
+
     var temp = Math.round(getTemp(json));
     var vent = getWind(json).toFixed(0);
+
     if (document.getElementById('Weather') !== null) {
         var div = document.getElementById('Weather');
         div.innerHTML = "";
+
         var weather = document.createElement("DIV");
-        weather.innerHTML = temp + "<span class=\"degree\">°K</span>";
+        weather.innerHTML = temp + "<span class=\"degree\">°C</span>";
         weather.id = "weather";
+
         var imgTemp = document.createElement("IMG");
         imgTemp.id = "icon";
-        imgTemp.src = "/wp-content/plugins/plugin-ecran-connecte-master/public/img/01.png" + getIcon(json) + ".png";
+        var iconPath = getIcon(json);
+        console.log(iconPath);
+        imgTemp.src = "/wp-content/plugins/ptut-2-tv-connectees-master/public/img/01.png";
         imgTemp.alt = getAlt(json);
         weather.appendChild(imgTemp);
+
         var wind = document.createElement("DIV");
         wind.innerHTML = vent + "<span class=\"kmh\">km/h</span>";
         wind.id = "wind";
+
         var imgVent = document.createElement("IMG");
-        imgVent.src = "/wp-content/plugins/plugin-ecran-connecte-master/public/img/wind.png";
-        imgVent.alt = "Img du vent";
+        imgVent.src = "/wp-content/plugins/ptut-2-tv-connectees-master/public/img/wind.png";
+        imgVent.alt = "Image du vent";
         wind.appendChild(imgVent);
+
         div.appendChild(weather);
         div.appendChild(wind);
         setTimeout(refreshWeather, 900000);
