@@ -26,8 +26,6 @@ class DailySchedule{
         $group = '';
         $label = str_replace(array(' (INFO)', ' G1', ' G2', ' G3', ' G4', ' 4h', ' 2h', '*'), '', $event['label']);
 
-
-
         if(isset($event['description'])){
             $professeur = substr($event['description'], 0, -30);
             $professeur = preg_split('/(Groupe [1-9].?)|G[1-9].? |.?[0-9](ère|ème) (A|a)nnée.?|an[1-3]|[A-B].?-[1-3]/',$professeur);
@@ -50,7 +48,24 @@ class DailySchedule{
      */
     public function getCourseList()
     {
-        return $this->courseList;
+        if(sizeof($this->courseList) == 0) return [];
+        $courseList = $this->courseList;
+        $dailyScheduleWithPause = [];
+        $listeHorraireDebut = ["8:15","9:15","10:40","11:15","13:30","14:35","15:40","16:25"];
+        $indexHorraire = 0;
+        $indexCourse = 0;
+        while($indexHorraire < sizeof($listeHorraireDebut) && $indexCourse < sizeof($this->courseList)){
+            $heureDebutCours = strtotime(str_replace('h',':',$courseList[$indexCourse]->getHeureDeb()));
+            if($heureDebutCours <= strtotime($listeHorraireDebut[$indexHorraire])){
+                $dailyScheduleWithPause[] = $courseList[$indexCourse];
+                $indexHorraire += $courseList[$indexCourse]->getDuration();
+                $indexCourse++;
+            }else{
+                $dailyScheduleWithPause[] = null;
+                $indexHorraire++;
+            }
+        }
+        return $dailyScheduleWithPause;
     }
 
     /**

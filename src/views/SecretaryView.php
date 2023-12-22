@@ -260,7 +260,7 @@ class SecretaryView extends UserView
     }
 
     public function displayStudentGroupView(){
-        $schedule = new WeeklySchedule('8396');
+        $schedule = new WeeklySchedule('8383');
         $view = '<div class="container-body">
                     <div class="container-horaire">
                         <h3 id="text-horaire">8h15 - 10h15</h3>
@@ -299,8 +299,7 @@ class SecretaryView extends UserView
 
     /* TEMPORAIRE */
     public function displayYearStudentScheduleView(){
-        $weeklySchedule = new WeeklySchedule('8383');
-        $listeHorraire = ["8h15","9h15","10h20","11h05","13h30","14h15","15h20","16h25"];
+        $weeklySchedule = new WeeklySchedule('42523');
         $view = '<div id="schedule-container">
                     <div></div>
                     <div class="container-horaire">
@@ -320,28 +319,20 @@ class SecretaryView extends UserView
 
 
         foreach($weeklySchedule->getDailySchedules() as $dailySchedule){
-            if($dailySchedule->getDate() != date('Ymd')) continue;
+            if($dailySchedule->getDate() != date('Ymd', strtotime('wednesday this week'))) continue;
             $courseList = $dailySchedule->getCourseList();
-            $indexCourse = 0;
-            $indexHorraire = 0;
-            while($indexCourse < sizeof($courseList) && $indexHorraire < sizeof($listeHorraire)){
-                $course = $courseList[$indexCourse];
-                if(strtotime($course->getHeureDeb()) >= strtotime($listeHorraire[$indexHorraire]) && strtotime($course->getHeureFin()) >= strtotime($listeHorraire[$indexHorraire])){
-                        $view .= '<div class="container-matiere green">
+            foreach ($courseList as $course) {
+                if ($course != null) {
+                    $view .= '<div class="container-matiere green" style="grid-column: span ' . $course->getDuration() . '">
                         <p class="text-matiere">' . $course->getSubject() . '</p>
                         <p class="text-prof">' . $course->getTeacher() . '</p>
-                        <p class="text-salle">' . $listeHorraire[$indexHorraire] . '</p>
+                        <p class="text-salle">' . $course->getLocation() . '</p>
                     </div>';
-
                 }else{
-                    $indexCourse++;
                     $view .= '<div></div>';
                 }
-                $indexHorraire++;
             }
         }
-
-        $view .= '</div>';
 
         return $view;
 
