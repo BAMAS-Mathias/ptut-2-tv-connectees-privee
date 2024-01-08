@@ -4,6 +4,7 @@ namespace Controllers;
 
 use Models\Information;
 
+use Views\ICSView;
 use WP_Error;
 use WP_REST_Controller;
 use WP_REST_Request;
@@ -109,8 +110,9 @@ class ScheduleRestController extends WP_REST_Controller
         $args = array(
             'disable_sorting' => true
         );
-
-        return $R34ICS->display_calendar($url, $code, $allDay, $args, true);
+        $datas = $R34ICS->display_calendar($url, $code, $allDay, $args, true);
+        $icsView = new ICSView();
+        return $icsView->displaySchedule($datas[0], $datas[1], $datas[2]);
     }
 
     /**

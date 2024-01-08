@@ -85,7 +85,7 @@ class R34ICS extends Controller
      * @param $ics_url      string url du fichier ICS
      * @param $code         int Code ADE relié à l'url
      * @param array $args Array d'option
-     * @return string
+     * @return array
      */
     public function display_calendar($ics_url, $code, $allDay, $args = array(), $ics = false) {
         $force_reload = true;
@@ -109,6 +109,7 @@ class R34ICS extends Controller
                 }
             }
         }
+
         // No transient; retrieve data
         if (isset($ics_contents)) {
             // Parse ICS contents
@@ -288,7 +289,7 @@ class R34ICS extends Controller
             if(isset($ics_data['events'])) {
                 // Sort events and remove out-of-range dates
                 foreach (array_keys((array)$ics_data['events']) as $date) {
-                    $first_date = date_i18n('Ymd');
+                    $first_date = date_i18n('Ymd', strtotime('monday this week'));
                     $limit_date = date_i18n('Ymd', mktime(0, 0, 0, date_i18n('n'), date_i18n('j') + $this->limit_days, date_i18n('Y')));
                     if ($date < $first_date || $date > $limit_date) {
                         unset($ics_data['events'][$date]);
@@ -330,8 +331,9 @@ class R34ICS extends Controller
 
         $model = new CodeAde();
         $title = $model->getByCode($code)->getTitle();
+        return array($ics_data, $title, $all_day);
 
-        return $this->view->displaySchedule($ics_data, $title, $allDay);
+        //return $this->view->displaySchedule($ics_data, $title, $allDay);
     }
 
     public function first_dow($date = null)

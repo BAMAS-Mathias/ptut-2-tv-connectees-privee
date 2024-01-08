@@ -7,6 +7,7 @@ use Models\CodeAde;
 use Models\Information;
 use Models\User;
 
+use Views\ICSView;
 use Views\UserView;
 
 use R34ICS;
@@ -130,7 +131,9 @@ class UserController extends Controller
             'title' => null,
             'view' => 'list',
         );
-        return $R34ICS->display_calendar($url, $code, $allDay, $args);
+        $datas = $R34ICS->display_calendar($url, $code, $allDay, $args, true);
+        $icsView = new ICSView();
+        return $icsView->displaySchedule($datas[0], $datas[1], $datas[2]);
     }
 
     /**

@@ -2,7 +2,11 @@
 
 namespace Views;
 
+use Controllers\UserController;
+use Models\CodeAde;
+use Models\Model;
 use Models\User;
+use Models\WeeklySchedule;
 
 /**
  * Class SecretaryView
@@ -199,9 +203,9 @@ class SecretaryView extends UserView
     public function displaySecretaryWelcome() : string{
         return'
         <div class="btn-container">
-            <a href="' . home_url('/secretary/year-student-schedule') . '" class="boutons-etudiants secretary-button blue-btn">BUT1</a> 
-            <a class="boutons-etudiants secretary-button blue-btn">BUT2</a>
-            <a class="boutons-etudiants secretary-button blue-btn">BUT3</a> 
+            <a href="' . home_url('/secretary/year-student-schedule?year=1') . '" class="boutons-etudiants secretary-button blue-btn">BUT1</a> 
+            <a href="' . home_url('/secretary/year-student-schedule?year=2') . '" class="boutons-etudiants secretary-button blue-btn">BUT2</a> 
+            <a href="' . home_url('/secretary/year-student-schedule?year=3') . '" class="boutons-etudiants secretary-button blue-btn">BUT3</a> 
             <a href="' . home_url('/secretary/teacher-search-schedule') . '" class="boutons-autres secretary-button orange-btn">ENSEIGNANTS</a> 
             <a href="' . home_url('/secretary/computer-rooms') . '"class="boutons-autres secretary-button orange-btn">SALLES MACHINES</a>
             <a href="' . home_url('/secretary/room-schedule') . '" class="boutons-autres secretary-button orange-btn">SALLES DISPONIBLES</a>
@@ -256,41 +260,71 @@ class SecretaryView extends UserView
     }
 
     public function displayStudentGroupView(){
-        return '
-        <div class="container-body">
-            <div class="container-horaire">
-                <h3 id="text-horaire">8h15 - 10h15</h3>
-            </div>
-            <div class="container-horaire">
-                <h3 id="text-horaire">10h35 - 12h15</h3>
-            </div>
-            <div class="container-horaire">
-                <h3 id="text-horaire">13h30 - 15h15</h3>
-            </div>
-            <div class="container-horaire">
-                <h3 id="text-horaire">15h45 - 17h30</h3>
-            </div>
-            <div class="container-matiere orange">
-                <p class="text-matiere">R3.02 - JAVA</p>
-                <p class="text-prof">SLEZAK Eileen</p>
-                <p class="text-salle">I-110</p>
-            </div>
-            <div class="container-matiere green">
-                <p class="text-matiere">R3.01 - ANGLAIS</p>
-                <p class="text-prof">SLEZAK Eileen</p>
-                <p class="text-salle">A-002</p>
-            </div>      
-            <div class="container-matiere yellow">
-                <p class="text-matiere">R3.04 - SQL</p>
-                <p class="text-prof">ANNI Samuele</p>
-                <p class="text-salle">A-002</p>
-            </div>
-        </div>';
+        $schedule = new WeeklySchedule('42525');
+        $view = '<div class="container-body">
+                    <div class="container-horaire">
+                        <h3 id="text-horaire">8h15 - 10h15</h3>
+                    </div>
+                    <div class="container-horaire">
+                        <h3 id="text-horaire">10h35 - 12h15</h3>
+                    </div>
+                    <div class="container-horaire">
+                        <h3 id="text-horaire">13h30 - 15h15</h3>
+                    </div>
+                    <div class="container-horaire">
+                        <h3 id="text-horaire">15h45 - 17h30</h3>
+                    </div>';
+
+        foreach($schedule->getDailySchedules() as $dailySchedule){
+            if($dailySchedule->getDate() != date('Ymd')) continue;
+            $previousCourseDuration = null;
+            foreach ($dailySchedule->getCourseList() as $course){
+                $courseDuration = preg_split('/ - /', $course->getDuration());
+                if($courseDuration == $previousCourseDuration) continue;
+                $previousCourseDuration = $courseDuration;
+
+
+                if($course->getGroup())
+                $view .= '<div class="container-matiere orange">
+                            <p class="text-matiere">' . $course->getSubject() . '</p>
+                            <p class="text-prof">' . $course->getTeacher() . '</p>
+                            <p class="text-salle">' . $course->getLocation() . '</p>
+                          </div>';
+            }
+        }
+
+        $view .= '</div>';
+        return $view;
     }
 
+    public function displayYearGroupRow($weeklySchedule){
+        $view = '';
+        foreach($weeklySchedule->getDailySchedules() as $dailySchedule){
+            if($dailySchedule->getDate() != date('Ymd')) continue;
+            $courseList = $dailySchedule->getCourseList();
+            if($courseList == []){
+                for($i = 0; $i<8; $i++){
+                    $view .= '<div></div>';
+                }
+            }
+            foreach ($courseList as $course) {
+                if ($course != null) {
+                    $view .= '<div class="container-matiere green" style="grid-column: span ' . $course->getDuration() . '">
+                        <p class="text-matiere">' . $course->getSubject() . '</p>
+                        <p class="text-prof">' . $course->getTeacher() . '</p>
+                        <p class="text-salle">' . $course->getLocation() . '</p>
+                    </div>';
+                }else{
+                    $view .= '<div></div>';
+                }
+            }
+        }
+
+        return $view;
+    }
     /* TEMPORAIRE */
-    public function displayYearStudentScheduleView(){
-        return '<div id="schedule-container">
+    public function displayYearStudentScheduleView($groupCodeNumbers){
+        $view = '<div id="schedule-container">
                     <div></div>
                     <div class="container-horaire">
                          <h3 id="text-horaire">8h15 - 10h15</h3>
@@ -304,117 +338,41 @@ class SecretaryView extends UserView
                     <div class="container-horaire">
                         <h3 id="text-horaire">15h45 - 17h30</h3>
                     </div>
-                    
-                    <p class="group-name">G1</p>
-                    <div class="container-matiere green">
-                        <p class="text-matiere">R3.01 - ANGLAIS</p>
-                        <p class="text-prof">SLEZAK Eileen</p>
-                        <p class="text-salle">A-002</p>
-                    </div>   
-                    <div class="container-matiere green">
-                        <p class="text-matiere">R3.01 - ANGLAIS</p>
-                        <p class="text-prof">SLEZAK Eileen</p>
-                        <p class="text-salle">A-002</p>
-                    </div>  
-                    <div class="container-matiere green">
-                        <p class="text-matiere">R3.01 - ANGLAIS</p>
-                        <p class="text-prof">SLEZAK Eileen</p>
-                        <p class="text-salle">A-002</p>
-                    </div>  
-                    <div class="container-matiere green">
-                        <p class="text-matiere">R3.01 - ANGLAIS</p>
-                        <p class="text-prof">SLEZAK Eileen</p>
-                        <p class="text-salle">A-002</p>
-                    </div>  
-                    
-                    <p class="group-name">G2</p>
-                    <div class="container-matiere green">
-                        <p class="text-matiere">R3.01 - ANGLAIS</p>
-                        <p class="text-prof">SLEZAK Eileen</p>
-                        <p class="text-salle">A-002</p>
-                    </div>   
-                    <div class="container-matiere green">
-                        <p class="text-matiere">R3.01 - ANGLAIS</p>
-                        <p class="text-prof">SLEZAK Eileen</p>
-                        <p class="text-salle">A-002</p>
-                    </div>  
-                    <div class="container-matiere green">
-                        <p class="text-matiere">R3.01 - ANGLAIS</p>
-                        <p class="text-prof">SLEZAK Eileen</p>
-                        <p class="text-salle">A-002</p>
-                    </div>  
-                    <div class="container-matiere green">
-                        <p class="text-matiere">R3.01 - ANGLAIS</p>
-                        <p class="text-prof">SLEZAK Eileen</p>
-                        <p class="text-salle">A-002</p>
-                    </div>  
-                    
-                    <p class="group-name">G3</p>
-                    <div class="container-matiere green">
-                        <p class="text-matiere">R3.01 - ANGLAIS</p>
-                        <p class="text-prof">SLEZAK Eileen</p>
-                        <p class="text-salle">A-002</p>
-                    </div>   
-                    <div class="container-matiere green">
-                        <p class="text-matiere">R3.01 - ANGLAIS</p>
-                        <p class="text-prof">SLEZAK Eileen</p>
-                        <p class="text-salle">A-002</p>
-                    </div>  
-                    <div class="container-matiere green">
-                        <p class="text-matiere">R3.01 - ANGLAIS</p>
-                        <p class="text-prof">SLEZAK Eileen</p>
-                        <p class="text-salle">A-002</p>
-                    </div>  
-                    <div class="container-matiere green">
-                        <p class="text-matiere">R3.01 - ANGLAIS</p>
-                        <p class="text-prof">SLEZAK Eileen</p>
-                        <p class="text-salle">A-002</p>
-                    </div>  
-                    
-                    <p class="group-name">G4</p>
-                    <div class="container-matiere green">
-                        <p class="text-matiere">R3.01 - ANGLAIS</p>
-                        <p class="text-prof">SLEZAK Eileen</p>
-                        <p class="text-salle">A-002</p>
-                    </div>   
-                    <div class="container-matiere green">
-                        <p class="text-matiere">R3.01 - ANGLAIS</p>
-                        <p class="text-prof">SLEZAK Eileen</p>
-                        <p class="text-salle">A-002</p>
-                    </div>  
-                    <div class="container-matiere green">
-                        <p class="text-matiere">R3.01 - ANGLAIS</p>
-                        <p class="text-prof">SLEZAK Eileen</p>
-                        <p class="text-salle">A-002</p>
-                    </div>  
-                    <div class="container-matiere green">
-                        <p class="text-matiere">R3.01 - ANGLAIS</p>
-                        <p class="text-prof">SLEZAK Eileen</p>
-                        <p class="text-salle">A-002</p>
-                    </div>  
-                </div>';
+                    ';
+
+        $groupIndex = 1;
+
+        foreach ($groupCodeNumbers as $groupCodeNumber){
+            $view .= '<p class="group-name">G' . $groupIndex . '</p>';
+            $groupIndex++;
+
+            $weeklySchedule = new WeeklySchedule($groupCodeNumber);
+            $view .= $this->displayYearGroupRow($weeklySchedule);
+        }
+
+        return $view;
     }
 
     public function displayComputerRoomSchedule(){
         return '<div id="schedule-container">
                     <div></div>
                     <div class="container-horaire">
-                         <h3 id="text-horaire">LUNDI</h3>
+                         <h3 class="text-horaire">LUNDI</h3>
                     </div>
                     <div class="container-horaire">
-                        <h3 id="text-horaire">MARDI</h3>
+                        <h3 class="text-horaire">MARDI</h3>
                     </div>
                     <div class="container-horaire">
-                        <h3 id="text-horaire">MERCREDI</h3>
+                        <h3 class="text-horaire">MERCREDI</h3>
                     </div>
                     <div class="container-horaire">
-                        <h3 id="text-horaire">JEUDI</h3>
+                        <h3 class="text-horaire">JEUDI</h3>
                     </div>
                     <div class="container-horaire">
-                        <h3 id="text-horaire">VENDREDI</h3>
+                        <h3 class="text-horaire">VENDREDI</h3>
                     </div>
                     
-                    <p class="group-name">8h15 - 10h15</p>
+                    <p class="hour-text">8h15 - 10h15</p>
                     <div class="container-matiere green">
                         <p class="text-matiere">R3.01 - ANGLAIS</p>
                         <p class="text-prof">SLEZAK Eileen</p>
@@ -430,88 +388,73 @@ class SecretaryView extends UserView
                         <p class="text-prof">SLEZAK Eileen</p>
                         <p class="text-salle">A-002</p>
                     </div>  
-                    <div class="container-matiere green">
+                    <div>
+                    </div>  
+                    <div>
+                    </div> 
+                    
+                    <p class="hour-text">10h35 - 12h15</p>
+                    <div class="container-matiere red">
+                        <p class="text-matiere">R3.01 - ANGLAIS</p>
+                        <p class="text-prof">SLEZAK Eileen</p>
+                        <p class="text-salle">A-002</p>
+                    </div>   
+                    <div class="container-matiere pink">
                         <p class="text-matiere">R3.01 - ANGLAIS</p>
                         <p class="text-prof">SLEZAK Eileen</p>
                         <p class="text-salle">A-002</p>
                     </div>  
-                    <div class="container-matiere green">
+                    <div class="container-matiere yellow">
+                        <p class="text-matiere">R3.01 - ANGLAIS</p>
+                        <p class="text-prof">SLEZAK Eileen</p>
+                        <p class="text-salle">A-002</p>
+                    </div>  
+                    <div class="container-matiere yellow">
+                        <p class="text-matiere">R3.01 - ANGLAIS</p>
+                        <p class="text-prof">SLEZAK Eileen</p>
+                        <p class="text-salle">A-002</p>
+                    </div>  
+                    <div class="container-matiere blue">
                         <p class="text-matiere">R3.01 - ANGLAIS</p>
                         <p class="text-prof">SLEZAK Eileen</p>
                         <p class="text-salle">A-002</p>
                     </div> 
                     
-                    <p class="group-name">10h35 - 12h15</p>
-                    <div class="container-matiere green">
+                    <p class="hour-text">13h30 - 15h15</p>
+                    <div class="container-matiere blue">
                         <p class="text-matiere">R3.01 - ANGLAIS</p>
                         <p class="text-prof">SLEZAK Eileen</p>
                         <p class="text-salle">A-002</p>
                     </div>   
-                    <div class="container-matiere green">
+                    <div>
+                    </div>  
+                    <div>
+                    </div>  
+                    <div class="container-matiere pink">
                         <p class="text-matiere">R3.01 - ANGLAIS</p>
                         <p class="text-prof">SLEZAK Eileen</p>
                         <p class="text-salle">A-002</p>
                     </div>  
-                    <div class="container-matiere green">
-                        <p class="text-matiere">R3.01 - ANGLAIS</p>
-                        <p class="text-prof">SLEZAK Eileen</p>
-                        <p class="text-salle">A-002</p>
-                    </div>  
-                    <div class="container-matiere green">
-                        <p class="text-matiere">R3.01 - ANGLAIS</p>
-                        <p class="text-prof">SLEZAK Eileen</p>
-                        <p class="text-salle">A-002</p>
-                    </div>  
-                    <div class="container-matiere green">
+                    <div class="container-matiere yellow">
                         <p class="text-matiere">R3.01 - ANGLAIS</p>
                         <p class="text-prof">SLEZAK Eileen</p>
                         <p class="text-salle">A-002</p>
                     </div> 
                     
-                    <p class="group-name">13h30 - 15h15</p>
-                    <div class="container-matiere green">
+                    <p class="hour-text">15h45 - 17h30</p>
+                    <div class="container-matiere red">
                         <p class="text-matiere">R3.01 - ANGLAIS</p>
                         <p class="text-prof">SLEZAK Eileen</p>
                         <p class="text-salle">A-002</p>
                     </div>   
-                    <div class="container-matiere green">
-                        <p class="text-matiere">R3.01 - ANGLAIS</p>
-                        <p class="text-prof">SLEZAK Eileen</p>
-                        <p class="text-salle">A-002</p>
+                    <div>                  
                     </div>  
                     <div class="container-matiere green">
                         <p class="text-matiere">R3.01 - ANGLAIS</p>
                         <p class="text-prof">SLEZAK Eileen</p>
                         <p class="text-salle">A-002</p>
                     </div>  
-                    <div class="container-matiere green">
-                        <p class="text-matiere">R3.01 - ANGLAIS</p>
-                        <p class="text-prof">SLEZAK Eileen</p>
-                        <p class="text-salle">A-002</p>
-                    </div>  
-                    <div class="container-matiere green">
-                        <p class="text-matiere">R3.01 - ANGLAIS</p>
-                        <p class="text-prof">SLEZAK Eileen</p>
-                        <p class="text-salle">A-002</p>
-                    </div> 
-                    
-                    <p class="group-name">15h45 - 17h30</p>
-                    <div class="container-matiere green">
-                        <p class="text-matiere">R3.01 - ANGLAIS</p>
-                        <p class="text-prof">SLEZAK Eileen</p>
-                        <p class="text-salle">A-002</p>
-                    </div>   
-                    <div class="container-matiere green">
-                        <p class="text-matiere">R3.01 - ANGLAIS</p>
-                        <p class="text-prof">SLEZAK Eileen</p>
-                        <p class="text-salle">A-002</p>
-                    </div>  
-                    <div class="container-matiere green">
-                        <p class="text-matiere">R3.01 - ANGLAIS</p>
-                        <p class="text-prof">SLEZAK Eileen</p>
-                        <p class="text-salle">A-002</p>
-                    </div>  
-                    <div class="container-matiere green">
+                    <div class="container-matiere blue">
                         <p class="text-matiere">R3.01 - ANGLAIS</p>
                         <p class="text-prof">SLEZAK Eileen</p>
                         <p class="text-salle">A-002</p>
