@@ -3,6 +3,7 @@
 namespace Views;
 
 
+use Models\Teacher;
 use Models\User;
 
 /**
@@ -79,17 +80,26 @@ class TeacherView extends UserView
     }
 
     public function displayTeacherSearchSchedule() : string{
-        return '
+        $model = new Teacher();
+        $str = '
         <section id="search-container">
             <img id="profil-picture" alt="profil image" src="https://cdn-icons-png.flaticon.com/512/9706/9706640.png">
             <h2>Recherchez votre emploi du temps</h2>
             <div id="search-bar">
-                <input type="text" placeholder="Nom...">
-                <button id="search-btn" type="submit">
-                    <img id="loupe" src="https://cdn-icons-png.flaticon.com/512/694/694985.png" alt="loupe">
-                </button>
+                <input type="text" placeholder="Nom..." list="teacher-name">
+                <datalist id="teacher-name">';
+
+        foreach ($model->getTeacherList() as $teacherName){
+            $str .= '<option>' . $teacherName . '</option>';
+        }
+
+        $str .= '</datalist>        
+                 <button id="search-btn" type="submit">
+                     <img id="loupe" src="https://cdn-icons-png.flaticon.com/512/694/694985.png" alt="loupe">
+                 </button>
             </div>
         </section>';
+        return $str;
     }
 
     public function displayTeacherView(): string

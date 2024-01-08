@@ -9,11 +9,13 @@ class DailySchedule{
      */
     private array $courseList;
     private string $date;
+    private string $group;
 
-    public function __construct($date)
+    public function __construct($date,$group)
     {
         $this->date = date('Ymd',$date);
         $this->courseList = array();
+        $this->group = $group;
     }
 
 
@@ -23,8 +25,6 @@ class DailySchedule{
         $duration = str_replace(':', 'h', date("H:i", strtotime($event['deb']))) . ' - ' . str_replace(':', 'h', date("H:i", strtotime($event['fin'])));
         $group = '';
         $label = str_replace(array(' (INFO)', ' G1', ' G2', ' G3', ' G4', ' 4h', ' 2h', '*'), '', $event['label']);
-
-
 
         if(isset($event['description'])){
             $professeur = substr($event['description'], 0, -30);
@@ -40,7 +40,7 @@ class DailySchedule{
             $location = $event['location'];
         }
 
-        $this->courseList[] = new Course($label, $professeur, $location, $duration,$group);
+        $this->courseList[] = new Course($label, $professeur, $location, $duration, $group);
     }
 
     /**
@@ -48,7 +48,29 @@ class DailySchedule{
      */
     public function getCourseList()
     {
-        return $this->courseList;
+        if(sizeof($this->courseList) == 0) return [];
+        $courseList = $this->courseList;
+        $dailyScheduleWithPause = [];
+        $listeHorraireDebut = ["8:15","9:15","10:40","11:10","13:30","14:35","15:40","16:25"];
+        $indexHorraire = 0;
+        $indexCourse = 0;
+        while($indexHorraire < sizeof($listeHorraireDebut) && $indexHorraire < 8){
+            if($indexCourse >= sizeof($courseList)){
+                $dailyScheduleWithPause[] = null;
+                $indexHorraire++;
+                continue;
+            }
+            $heureDebutCours = strtotime(str_replace('h',':',$courseList[$indexCourse]->getHeureDeb()));
+            if($heureDebutCours <= strtotime($listeHorraireDebut[$indexHorraire])){
+                $dailyScheduleWithPause[] = $courseList[$indexCourse];
+                $indexHorraire += $courseList[$indexCourse]->getDuration();
+                $indexCourse++;
+            }else{
+                $dailyScheduleWithPause[] = null;
+                $indexHorraire++;
+            }
+        }
+        return $dailyScheduleWithPause;
     }
 
     /**

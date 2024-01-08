@@ -65,6 +65,8 @@ function downloadFileICS_func()
         $controllerAde->addFile($codeAde->getCode());
     }
 
+    updateTeacherRoomDB();
+
 	/*
     $information = new InformationController();
     $information->registerNewInformation();
@@ -72,6 +74,25 @@ function downloadFileICS_func()
     $alert = new AlertController();
     $alert->registerNewAlert();
 	*/
+}
+
+function updateTeacherRoomDB(){
+    $codeAde = ['8382','8380','8383','8381','8396','8397','8398','42523','42524','42525'];
+    $model = new \Models\Teacher();
+    foreach ($codeAde as $code){
+        $schedule = new \Models\WeeklySchedule($code);
+        foreach ($schedule->getDailySchedules() as $dailySchedule){
+            foreach ($dailySchedule->getCourseList() as $course){
+                if($course == null) continue;
+                $teacherName = preg_split('/\n/', $course->getTeacher())[1];
+                if(!$model->exist($teacherName)){
+                    if(strlen($teacherName) > 6){
+                        $model->add($teacherName);
+                    }
+                }
+            }
+        }
+    }
 }
 
 add_action('downloadFileICS', 'downloadFileICS_func');

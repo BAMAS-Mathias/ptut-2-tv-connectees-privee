@@ -7,16 +7,42 @@ class Course
     private string $subject;
     private string $teacher;
     private string $location;
-    private string $duration;
+    private string $heureDeb;
+    private string $heureFin;
     private string $group;
+    private int $duration;
 
     public function __construct($subject = "", $teacher = " ", $location = "", $duration = "", $group = "")
     {
         $this->subject = $subject;
         $this->teacher = $teacher;
         $this->location = $location;
-        $this->duration = $duration;
+        $duration = preg_split("/ - /",$duration);
+        $this->heureDeb = $duration[0];
+        $this->heureFin = $duration[1];
         $this->group = $group;
+        $this->duration = $this->calcDuration();
+    }
+
+    private function calcDuration(){
+        $listeHorraireDebut = ["8:15","9:15","10:40","11:15","13:30","14:35","15:40","16:25"];
+        $listeHorraireFin = ["9:15","10:15","11:00","12:15","14:25","15:20","16:35","17:30"];
+        $indexHorraire = 0;
+        $duration = 0;
+
+        while($indexHorraire < sizeof($listeHorraireDebut)){
+            $heureFinCours = strtotime(str_replace('h',':',$this->getHeureFin()));
+            $heureDebutCours = strtotime(str_replace('h',':',$this->getHeureDeb()));
+
+            if($heureDebutCours <= strtotime($listeHorraireDebut[$indexHorraire])){
+                if($heureFinCours >= strtotime($listeHorraireFin[$indexHorraire])) {
+                    $duration++;
+                }
+            }
+            $indexHorraire++;
+        }
+        return $duration;
+
     }
 
     /**
@@ -46,10 +72,19 @@ class Course
     /**
      * @return string
      */
-    public function getDuration(): string
+    public function getHeureDeb(): string
     {
-        return $this->duration;
+        return $this->heureDeb;
     }
+
+    /**
+     * @return string
+     */
+    public function getHeureFin(): string
+    {
+        return $this->heureFin;
+    }
+
 
     /**
      * @return string
@@ -58,6 +93,13 @@ class Course
     {
         return $this->group;
     }
+
+    public function getDuration(): int
+    {
+        return $this->duration;
+    }
+
+
 
 
 

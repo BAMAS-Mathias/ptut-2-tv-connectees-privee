@@ -19,7 +19,7 @@ class WeeklySchedule
     private function init_schedule($code)
     {
         for ($i = 0; $i < 5; $i++) {
-            $this->dailySchedules[] = new DailySchedule(strtotime("monday this week +" . $i . " day"));
+            $this->dailySchedules[] = new DailySchedule(strtotime("monday this week +" . $i . " day"), $code);
         }
 
         global $R34ICS;
@@ -36,10 +36,20 @@ class WeeklySchedule
                     $month = $m < 10 ? '0' . $m : '' . $m;
                     if (array_key_exists($month, (array)$ics_data['events'][$year])) {
                         foreach ((array)$ics_data['events'][$year][$month] as $day => $day_events) {
-                            $dayOfTheWeek++;
+                            $findDay = false;
+                            while(!$findDay && $dayOfTheWeek < 5){
+                                if(date("d",strtotime("monday this week +" . $dayOfTheWeek . 'day')) != $day){
+                                    $dayOfTheWeek++;
+                                }else{
+                                    $findDay = true;
+                                }
+                            }
                             foreach ($day_events as $day_event => $events) {
                                 foreach ($events as $event) {
-                                    $this->dailySchedules[$dayOfTheWeek-1]->addCourse($event);
+                                    if($this->dailySchedules[$dayOfTheWeek] == null){
+                                        continue; // SAMEDI (A implémenter)
+                                    }
+                                    $this->dailySchedules[$dayOfTheWeek]->addCourse($event);
                                 }
                             }
                         }
