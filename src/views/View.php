@@ -285,7 +285,7 @@ class View
                     ' . $content . '
                 </div>
                 <div class="modal-footer">';
-        // Utilisation de data-bs-dismiss pour fermer la modal
+
         $modal .= '<button type="button" class="btn btn-primary" data-bs-dismiss="modal">Fermer</button>';
         $modal .= '</div>
             </div>
