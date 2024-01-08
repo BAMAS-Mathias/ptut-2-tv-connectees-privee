@@ -44,6 +44,7 @@
 #search-container #search-btn{
     position: absolute;
     right: 0;
+    top: 0;
     height: 100%;
     width: 90px;
     border-radius: 20px;
