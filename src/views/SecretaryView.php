@@ -466,4 +466,23 @@ class SecretaryView extends UserView
                     </div> 
                 </div>';
     }
+    public function displayHomePage()
+    {
+        return '
+    <body>
+        <div class="container">
+            <h1 id="bienvenue">
+                BIENVENUE AU BUT <br>
+                INFORMATIQUE <br>
+                D\'AIX-MARSEILLE
+            </h1>
+        </div>
+    </body>
+    <footer>
+        <h2>
+            . <!-- Ne pas enlever -->
+        </h2>
+    </footer>
+    </html>';
+    }
 }

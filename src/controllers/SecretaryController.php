@@ -190,6 +190,10 @@ class SecretaryController extends UserController
     public function displayComputerRoomsAvailable(){
         return $this->view->displayComputerRoomsAvailable();
     }
+    public function displayRoomsAvailable(): string
+    {
+        return $this->view->displayRoomsAvailable();
+    }
 
     public function displayStudentGroupView(){
         return $this->view->displayStudentGroupView();
@@ -211,5 +215,8 @@ class SecretaryController extends UserController
 
     public function displayComputerRoomSchedule(){
         return $this->view->displayComputerRoomSchedule();
+    }
+    public function displayHomePage(){
+        return $this->view->displayHomePage();
     }
 }

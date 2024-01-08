@@ -102,6 +102,43 @@ class TeacherView extends UserView
         return $str;
     }
 
+    public function displayTeacherView(): string
+    {
+        return '
+          
+        <body>
+            <div class="container-body">
+                <div class="container-horaire1">
+                    <h1 id="text-horaire">8h15 - 10h15</h1>
+                </div>
+                <div class="container-matiere1">
+                    <h1 id="text-matiere">R3.02 - JAVA</h1>
+                    <h1 id="text-matiere">SLEZAK Eileen</h1>
+                    <h1 id="text-matiere">I-110</h1>
+                </div>
+                <div class="container-horaire2">
+                    <h1 id="text-horaire">10h35 - 12h15</h1>
+                </div>
+                <div class="container-matiere2">
+                    <h1 id="text-matiere">R3.01 - ANGLAIS</h1>
+                    <h1 id="text-matiere">SLEZAK Eileen</h1>
+                    <h1 id="text-matiere">A-002</h1>
+                </div>
+                <div class="container-horaire3">
+                    <h1 id="text-horaire">13h30 - 15h15</h1>
+                </div>
+                <div class="container-horaire4">
+                    <h1 id="text-horaire">15h45 - 17h30</h1>
+                </div>
+                <div class="container-matiere4">
+                    <h1 id="text-matiere">R3.04 - SQL</h1>
+                    <h1 id="text-matiere">ANNI Samuele</h1>
+                    <h1 id="text-matiere">A-002</h1>
+            </div>
+        </body> 
+        </html>';}
+
+
 
     public function displayTeacherDailySchedule(){
         return '
@@ -136,4 +173,5 @@ class TeacherView extends UserView
             </div>
         </div>';
     }
+
 }
