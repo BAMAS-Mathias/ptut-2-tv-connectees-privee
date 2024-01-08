@@ -46,6 +46,9 @@ class WeeklySchedule
                             }
                             foreach ($day_events as $day_event => $events) {
                                 foreach ($events as $event) {
+                                    if($this->dailySchedules[$dayOfTheWeek] == null){
+                                        continue; // SAMEDI (A implémenter)
+                                    }
                                     $this->dailySchedules[$dayOfTheWeek]->addCourse($event);
                                 }
                             }

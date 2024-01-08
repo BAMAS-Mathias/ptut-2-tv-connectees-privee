@@ -51,10 +51,15 @@ class DailySchedule{
         if(sizeof($this->courseList) == 0) return [];
         $courseList = $this->courseList;
         $dailyScheduleWithPause = [];
-        $listeHorraireDebut = ["8:15","9:15","10:40","11:15","13:30","14:35","15:40","16:25"];
+        $listeHorraireDebut = ["8:15","9:15","10:40","11:10","13:30","14:35","15:40","16:25"];
         $indexHorraire = 0;
         $indexCourse = 0;
-        while($indexHorraire < sizeof($listeHorraireDebut) && $indexCourse < sizeof($this->courseList)){
+        while($indexHorraire < sizeof($listeHorraireDebut) && $indexHorraire < 8){
+            if($indexCourse >= sizeof($courseList)){
+                $dailyScheduleWithPause[] = null;
+                $indexHorraire++;
+                continue;
+            }
             $heureDebutCours = strtotime(str_replace('h',':',$courseList[$indexCourse]->getHeureDeb()));
             if($heureDebutCours <= strtotime($listeHorraireDebut[$indexHorraire])){
                 $dailyScheduleWithPause[] = $courseList[$indexCourse];

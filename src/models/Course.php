@@ -26,7 +26,7 @@ class Course
 
     private function calcDuration(){
         $listeHorraireDebut = ["8:15","9:15","10:40","11:15","13:30","14:35","15:40","16:25"];
-        $listeHorraireFin = ["9:15","10:15","11:15","12:15","14:25","15:20","16:35","17:30"];
+        $listeHorraireFin = ["9:15","10:15","11:00","12:15","14:25","15:20","16:35","17:30"];
         $indexHorraire = 0;
         $duration = 0;
 

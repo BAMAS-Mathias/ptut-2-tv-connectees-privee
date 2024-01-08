@@ -196,7 +196,17 @@ class SecretaryController extends UserController
     }
 
     public function displayYearStudentSchedule(){
-        return $this->view->displayYearStudentScheduleView();
+        $year = $_GET['year'];
+        switch ($year){
+            case '1':
+                return $this->view->displayYearStudentScheduleView(['8382','8380','8383','8381']);
+            case '2':
+                return $this->view->displayYearStudentScheduleView(['8396','8397','8398']);
+            case '3':
+                return $this->view->displayYearStudentScheduleView(['42523','42524','42525']);
+            default:
+                return $this->view->displayYearStudentScheduleView([]);
+        }
     }
 
     public function displayComputerRoomSchedule(){
