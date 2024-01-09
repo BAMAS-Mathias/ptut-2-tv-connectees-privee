@@ -40,7 +40,7 @@ class Controller
         $time = date("D, d M Y H:i:s");
         $time = "[" . $time . "] ";
         $event = $time . $event . "\n";
-        file_put_contents(ABSPATH . TV_PLUG_PATH . "fichier.log", $event, FILE_APPEND);
+        file_put_contents(TV_PLUG_PATH . "fichier.log", $event, FILE_APPEND);
     }
 
     /**

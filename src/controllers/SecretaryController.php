@@ -2,6 +2,7 @@
 
 namespace Controllers;
 
+use Models\RoomRepository;
 use Models\User;
 use Views\SecretaryView;
 
@@ -188,7 +189,9 @@ class SecretaryController extends UserController
     }
 
     public function displayComputerRoomsAvailable(){
-        return $this->view->displayComputerRoomsAvailable();
+        $model = new RoomRepository();
+        $roomList = $model->getAllComputerRooms();
+        return $this->view->displayComputerRoomsAvailable($roomList);
     }
     public function displayRoomsAvailable(): string
     {

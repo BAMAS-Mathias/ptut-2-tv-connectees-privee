@@ -212,51 +212,23 @@ class SecretaryView extends UserView
         </div>';
     }
 
-    public function displayComputerRoomsAvailable(){
-        return '
-        <div id="main-container">
-            <div class="room available" onclick="toggleRoom(this)">
-                <img src="'. TV_PLUG_PATH . 'public/img/lock-open.png' .'">
-                <img src="'. TV_PLUG_PATH . 'public/img/computer-icon.png' .'">
-                <h1 class="label-salle">I 002</h1>
-            </div>
-            <div class="room available" onclick="toggleRoom(this)">
-                <img src="'. TV_PLUG_PATH . 'public/img/lock-open.png' .'">
-                <img src="'. TV_PLUG_PATH . 'public/img/computer-icon.png' .'">
-                <h1 class="label-salle">I 004</h1>
-            </div>
-            <div class="room not-available" onclick="toggleRoom(this)">
-                <img src="'. TV_PLUG_PATH . 'public/img/lock-close.png' .'">
-                <img src="'. TV_PLUG_PATH . 'public/img/computer-icon.png' .'">
-                <h1 class="label-salle">I 009</h1>
-            </div>
-            <div class="room not-available" onclick="toggleRoom(this)">
-                <img src="'. TV_PLUG_PATH . 'public/img/lock-close.png' .'">
-                <img src="'. TV_PLUG_PATH . 'public/img/computer-icon.png' .'">
-                <h1 class="label-salle">I 010</h1>
-            </div>
-            <div class="room not-available" onclick="toggleRoom(this)">
-                <img src="'. TV_PLUG_PATH . 'public/img/lock-close.png' .'">
-                <img src="'. TV_PLUG_PATH . 'public/img/computer-icon.png' .'">
-                <h1 class="label-salle">I 102</h1>
-            </div>
-            <div class="room available" onclick="toggleRoom(this)">
-                <img src="'. TV_PLUG_PATH . 'public/img/lock-open.png' .'">
-                <img src="'. TV_PLUG_PATH . 'public/img/computer-icon.png' .'">
-                <h1 class="label-salle">I 104</h1>
-            </div>
-            <div class="room available" onclick="toggleRoom(this)">
-                <img src="'. TV_PLUG_PATH . 'public/img/lock-open.png' .'">
-                <img src="'. TV_PLUG_PATH . 'public/img/computer-icon.png' .'">
-                <h1 class="label-salle">I 106</h1>
-            </div>
-            <div class="room not-available" onclick="toggleRoom(this)">
-                <img src="'. TV_PLUG_PATH . 'public/img/lock-close.png' .'">
-                <img src="'. TV_PLUG_PATH . 'public/img/computer-icon.png' .'">
-                <h1 class="label-salle">I 214</h1>
-            </div>
-      </div>
-        ';
+    public function displayComputerRoomsAvailable($computerRoomList){
+        $view =
+            '<div id="main-container">';
+
+        foreach($computerRoomList as $room){
+            $view .= '<div class="room ';
+            if(!$room->isAvailable()){
+                $view .= 'not-';
+            }
+            $view .= 'available" onclick="toggleRoom(this)">
+                            <img src="'. TV_PLUG_PATH . 'public/img/lock-open.png' .'">
+                            <img src="'. TV_PLUG_PATH . 'public/img/computer-icon.png' .'">
+                            <h1 class="label-salle">' . $room->getName() . '</h1>
+                       </div>';
+        }
+
+        return $view . '</div>';
     }
 
     public function displayStudentGroupView(){

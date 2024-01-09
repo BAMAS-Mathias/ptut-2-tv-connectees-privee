@@ -104,8 +104,7 @@ class TeacherView extends UserView
 
     public function displayTeacherView(): string
     {
-        return '
-          
+        return '    
         <body>
             <div class="container-body">
                 <div class="container-horaire1">

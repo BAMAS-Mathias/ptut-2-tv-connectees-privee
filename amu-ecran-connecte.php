@@ -21,7 +21,7 @@ if (!defined('ABSPATH')) {
 	exit(1);
 }
 
-define('TV_PLUG_PATH', '/wp-content/plugins/ptut-2-tv-connectees-master/');
+define('TV_PLUG_PATH', '/wp-content/plugins/ptut-2-tv-connectees/');
 define('TV_UPLOAD_PATH', '/wp-content/uploads/media/');
 define('TV_ICSFILE_PATH', '/wp-content/uploads/fileICS/');
 
@@ -78,16 +78,24 @@ function downloadFileICS_func()
 
 function updateTeacherRoomDB(){
     $codeAde = ['8382','8380','8383','8381','8396','8397','8398','42523','42524','42525'];
-    $model = new \Models\Teacher();
+    $teacherModel = new \Models\Teacher();
+    $roomModel = new \Models\RoomRepository();
     foreach ($codeAde as $code){
         $schedule = new \Models\WeeklySchedule($code);
         foreach ($schedule->getDailySchedules() as $dailySchedule){
             foreach ($dailySchedule->getCourseList() as $course){
                 if($course == null) continue;
                 $teacherName = preg_split('/\n/', $course->getTeacher())[1];
-                if(!$model->exist($teacherName)){
+
+                if(!$roomModel->exist($course->getLocation())){
+                    if(strlen($course->getLocation()) < 10){
+                        $roomModel->add($course->getLocation());
+                    }
+                }
+
+                if(!$teacherModel->exist($teacherName)){
                     if(strlen($teacherName) > 6){
-                        $model->add($teacherName);
+                        $teacherModel->add($teacherName);
                     }
                 }
             }
