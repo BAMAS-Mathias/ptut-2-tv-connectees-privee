@@ -298,7 +298,7 @@ class SecretaryView extends UserView
     }
 
     public function displayHalfGroupCourse($firstGroupCourse, $secondGroupCourse) : string{
-        $view = '<div style="grid-column: span ' . $firstGroupCourse->getDuration() . '">';
+        $view = '<div style="grid-column: span ' . $firstGroupCourse->getDuration() . ';display: grid; row-gap: 10px">';
         $view .= $this->displayGroupCourse($firstGroupCourse, true);
         $view .= $this->displayGroupCourse($secondGroupCourse, true);
         $view .= '</div>';
