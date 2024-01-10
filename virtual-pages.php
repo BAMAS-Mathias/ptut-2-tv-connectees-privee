@@ -274,7 +274,7 @@ add_action('ec_virtual_pages', function ($controller) {
     test
     <!-- /wp:tvconnecteeamu/computer-rooms -->
     ')
-        ->setTemplate('header-blue.php');
+        ->setTemplate('header-orange.php');
 
 
     /**
