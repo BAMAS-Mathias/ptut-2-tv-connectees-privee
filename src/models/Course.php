@@ -11,6 +11,7 @@ class Course
     private string $heureFin;
     private string $group;
     private int $duration;
+    private bool $isDemiGroupe;
 
     public function __construct($subject = "", $teacher = " ", $location = "", $duration = "", $group = "")
     {
@@ -22,11 +23,12 @@ class Course
         $this->heureFin = $duration[1];
         $this->group = $group;
         $this->duration = $this->calcDuration();
+        $this->isDemiGroupe = false;
     }
 
     private function calcDuration(){
         $listeHorraireDebut = ["8:15","9:15","10:40","11:15","13:30","14:35","15:40","16:25"];
-        $listeHorraireFin = ["9:15","10:15","11:00","12:15","14:25","15:20","16:35","17:30"];
+        $listeHorraireFin = ["9:15","10:15","11:15","12:15","14:25","15:20","16:35","17:30"];
         $indexHorraire = 0;
         $duration = 0;
 
@@ -98,6 +100,24 @@ class Course
     {
         return $this->duration;
     }
+
+    /**
+     * @return bool
+     */
+    public function isDemiGroupe(): bool
+    {
+        return $this->isDemiGroupe;
+    }
+
+    /**
+     * @param bool $isDemiGroupe
+     */
+    public function setIsDemiGroupe(bool $isDemiGroupe): void
+    {
+        $this->isDemiGroupe = $isDemiGroupe;
+    }
+
+
 
 
 

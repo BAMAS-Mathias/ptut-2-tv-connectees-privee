@@ -279,13 +279,15 @@ class SecretaryView extends UserView
                     $view .= '<div></div>';
                 }
             }
-            foreach ($courseList as $course) {
+            for ($i = 0; $i < sizeof($courseList); $i++) {
+                $course = $courseList[$i];
                 if ($course != null) {
-                    $view .= '<div class="container-matiere green" style="grid-column: span ' . $course->getDuration() . '">
-                        <p class="text-matiere">' . $course->getSubject() . '</p>
-                        <p class="text-prof">' . $course->getTeacher() . '</p>
-                        <p class="text-salle">' . $course->getLocation() . '</p>
-                    </div>';
+                    if($course->isDemiGroupe() && $courseList[$i + 1]->isDemiGroupe()){
+                        $view .= $this->displayHalfGroupCourse($course, $courseList[$i + 1]);
+                        $i++;
+                    }else{
+                        $view .= $this->displayGroupCourse($course);
+                    }
                 }else{
                     $view .= '<div></div>';
                 }
@@ -294,6 +296,28 @@ class SecretaryView extends UserView
 
         return $view;
     }
+
+    public function displayHalfGroupCourse($firstGroupCourse, $secondGroupCourse) : string{
+        $view = '<div style="grid-column: span ' . $firstGroupCourse->getDuration() . '">';
+        $view .= $this->displayGroupCourse($firstGroupCourse, true);
+        $view .= $this->displayGroupCourse($secondGroupCourse, true);
+        $view .= '</div>';
+        return $view;
+    }
+
+    public function displayGroupCourse($course, $halfsize = false) : string{
+        $view = '<div class="container-matiere green ';
+        if($halfsize){
+            $view .= 'demi-groupe';
+        }
+        $view .= '" style="grid-column: span ' . $course->getDuration() . '">
+                        <p class="text-matiere">' . $course->getSubject() . '</p>
+                        <p class="text-prof">' . $course->getTeacher() . '</p>
+                        <p class="text-salle">' . $course->getLocation() . '</p>
+                    </div>';
+        return $view;
+    }
+
     /* TEMPORAIRE */
     public function displayYearStudentScheduleView($groupCodeNumbers){
         $view = '<div id="schedule-container">

@@ -1,12 +1,12 @@
 #schedule-container{
     width: 100vw;
-    height: 80vh;
+    height: fit-content;
     margin: 10vh 0;
     display: grid;
     grid-template-columns: repeat(9,0.1fr);
     grid-column-gap: 20px;
-    grid-row-gap: 20px;
-    grid-template-rows: repeat(9,125px);
+    grid-row-gap: 10px;
+    grid-template-rows: repeat(9,150px);
     align-items: center;
     justify-content: center;
 }
@@ -50,8 +50,11 @@
     bottom: 0;
 }
 
-.container-horaire{
-    grid-column: span 2;
+.demi-groupe{
+    height: 75px !important;
 }
+
+
+
 
 

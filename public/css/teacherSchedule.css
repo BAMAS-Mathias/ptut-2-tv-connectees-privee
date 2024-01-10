@@ -31,10 +31,10 @@
     display: grid;
     align-items: center;
     justify-content: center;
-    grid-template-columns: repeat(4, 0.6fr);
-    grid-template-rows: repeat(1, 0.2fr 0.4fr);
-    grid-row-gap: 30px;
-    grid-column-gap: 30px;
+    grid-template-columns: repeat(8,0.1fr);
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+    grid-template-rows: repeat(8,125px);
 }
 
 .container-matiere{
@@ -71,6 +71,7 @@
     flex-direction: column;
     justify-content: center;
     font-weight: bold;
+    grid-column: span 2;
 }
 
 .text-matiere{

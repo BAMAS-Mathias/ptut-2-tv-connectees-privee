@@ -2,6 +2,8 @@
 
 namespace Models;
 
+use ICal\Event;
+
 class DailySchedule{
 
     /**
@@ -11,13 +13,18 @@ class DailySchedule{
     private string $date;
     private string $group;
 
-    public function __construct($date,$group)
+    public function __construct($date,$group = '')
     {
         $this->date = date('Ymd',$date);
         $this->courseList = array();
         $this->group = $group;
     }
 
+
+
+    public function addExistingCourse($course){
+        $this->courseList[] = $course;
+    }
 
     public function addCourse($event){
         $professeur = '';
@@ -51,25 +58,39 @@ class DailySchedule{
         if(sizeof($this->courseList) == 0) return [];
         $courseList = $this->courseList;
         $dailyScheduleWithPause = [];
-        $listeHorraireDebut = ["8:15","9:15","10:40","11:10","13:30","14:35","15:40","16:25"];
+        $listeHorraireDebut = ["8:15","9:15","10:40","11:10","13:30","14:35","15:30","16:25"];
         $indexHorraire = 0;
         $indexCourse = 0;
         while($indexHorraire < sizeof($listeHorraireDebut) && $indexHorraire < 8){
             if($indexCourse >= sizeof($courseList)){
-                $dailyScheduleWithPause[] = null;
+                //$dailyScheduleWithPause[] = null;
                 $indexHorraire++;
                 continue;
             }
             $heureDebutCours = strtotime(str_replace('h',':',$courseList[$indexCourse]->getHeureDeb()));
             if($heureDebutCours <= strtotime($listeHorraireDebut[$indexHorraire])){
+                if($indexCourse != sizeof($courseList) - 1 ){
+                    /* Verification si le cours est en demi groupe */
+                    if($courseList[$indexCourse]->getHeureDeb() == $courseList[$indexCourse + 1]->getHeureDeb()){
+                        $courseList[$indexCourse]->setIsDemiGroupe(true);
+                        $courseList[$indexCourse + 1]->setIsDemiGroupe(true);
+                    }
+                }
+                if($courseList[$indexCourse] != null && $courseList[$indexCourse + 1]  != null && $courseList[$indexCourse]->getHeureDeb() != $courseList[$indexCourse + 1]->getHeureDeb()){
+                    $indexHorraire += $courseList[$indexCourse]->getDuration();
+                }
+
                 $dailyScheduleWithPause[] = $courseList[$indexCourse];
-                $indexHorraire += $courseList[$indexCourse]->getDuration();
                 $indexCourse++;
+
+
             }else{
                 $dailyScheduleWithPause[] = null;
                 $indexHorraire++;
             }
         }
+
+
         return $dailyScheduleWithPause;
     }
 
@@ -79,6 +100,10 @@ class DailySchedule{
     public function getDate(): string
     {
         return $this->date;
+    }
+
+    public function getTest(){
+        return $this->courseList;
     }
 
 

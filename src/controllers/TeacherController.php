@@ -2,6 +2,7 @@
 
 namespace Controllers;
 
+use Models\Teacher;
 use Models\User;
 use Views\TeacherView;
 
@@ -32,7 +33,7 @@ class TeacherController extends UserController implements Schedule
      */
     public function __construct() {
         parent::__construct();
-        $this->model = new User();
+        $this->model = new Teacher();
         $this->view = new TeacherView();
     }
 
@@ -101,7 +102,9 @@ class TeacherController extends UserController implements Schedule
      * @return void
      */
     public function displayTeacherDailySchedule() : string{
-        return $this->view->displayTeacherDailySchedule();
+        $teacherName = $_POST['teacherName'];
+        $dailySchedule = $this->model->getTeacherSchedule($teacherName);
+        return $this->view->displayTeacherDailySchedule($dailySchedule);
     }
     public function displayTeacherView() : string{
         return $this->view->displayTeacherView();
