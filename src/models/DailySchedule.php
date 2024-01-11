@@ -63,7 +63,7 @@ class DailySchedule{
         $indexCourse = 0;
         while($indexHorraire < sizeof($listeHorraireDebut) && $indexHorraire < 8){
             if($indexCourse >= sizeof($courseList)){
-                //$dailyScheduleWithPause[] = null;
+                $dailyScheduleWithPause[] = null;
                 $indexHorraire++;
                 continue;
             }
@@ -76,13 +76,15 @@ class DailySchedule{
                         $courseList[$indexCourse + 1]->setIsDemiGroupe(true);
                     }
                 }
-                if($courseList[$indexCourse] != null && $courseList[$indexCourse + 1]  != null && $courseList[$indexCourse]->getHeureDeb() != $courseList[$indexCourse + 1]->getHeureDeb()){
+                if(!$courseList[$indexCourse]->isDemiGroupe() || $courseList[$indexCourse + 1] == null){
+                    $indexHorraire += $courseList[$indexCourse]->getDuration();
+                }
+                else if($courseList[$indexCourse] != null && $courseList[$indexCourse + 1]  != null && $courseList[$indexCourse]->getHeureDeb() != $courseList[$indexCourse + 1]->getHeureDeb()){
                     $indexHorraire += $courseList[$indexCourse]->getDuration();
                 }
 
                 $dailyScheduleWithPause[] = $courseList[$indexCourse];
                 $indexCourse++;
-
 
             }else{
                 $dailyScheduleWithPause[] = null;
