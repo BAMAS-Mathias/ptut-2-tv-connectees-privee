@@ -31,7 +31,7 @@ meteoRequest.onload = function () {
         imgTemp.id = "icon";
         var iconPath = getIcon(json);
         console.log(iconPath);
-        imgTemp.src = "/wp-content/plugins/ptut-2-tv-connectees-master/public/img/01.png";
+        imgTemp.src = "/wp-content/plugins/ptut-2-tv-connectees/public/img/01.png";
         imgTemp.alt = getAlt(json);
         weather.appendChild(imgTemp);
 
@@ -40,7 +40,7 @@ meteoRequest.onload = function () {
         wind.id = "wind";
 
         var imgVent = document.createElement("IMG");
-        imgVent.src = "/wp-content/plugins/ptut-2-tv-connectees-master/public/img/wind.png";
+        imgVent.src = "/wp-content/plugins/ptut-2-tv-connectees/public/img/wind.png";
         imgVent.alt = "Image du vent";
         wind.appendChild(imgVent);
 
