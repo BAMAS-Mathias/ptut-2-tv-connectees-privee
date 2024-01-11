@@ -268,7 +268,7 @@ add_action('ec_virtual_pages', function ($controller) {
      *  Page: /secretary/computer-rooms
      */
     $controller->addPage(new \EC\VirtualPages\Page("/secretary/computer-rooms"))
-        ->setTitle('available-computer-rooms')
+        ->setTitle('computer-rooms')
         ->setContent('
     <!-- wp:tvconnecteeamu/computer-rooms -->
     test
@@ -294,7 +294,7 @@ add_action('ec_virtual_pages', function ($controller) {
      *  Page: /secretary/main-menu
      */
     $controller->addPage(new \EC\VirtualPages\Page("/secretary/main-menu"))
-        ->setTitle('Menu secretaire')
+        ->setTitle('main-menu')
         ->setContent('
     <!-- wp:tvconnecteeamu/main-menu -->
     test
@@ -307,7 +307,7 @@ add_action('ec_virtual_pages', function ($controller) {
      *  Page: /secretary/room-schedule
      */
     $controller->addPage(new \EC\VirtualPages\Page("/secretary/room-schedule"))
-        ->setTitle('Emplois du temps de la salle :')
+        ->setTitle('room-schedule')
         ->setContent('
     <!-- wp:tvconnecteeamu/room-schedule -->
     test
@@ -346,7 +346,7 @@ add_action('ec_virtual_pages', function ($controller) {
      *  Page: /secretary/all-years-schedule
      */
     $controller->addPage(new \EC\VirtualPages\Page("/secretary/all-years-schedule"))
-        ->setTitle('Emplois du temps')
+        ->setTitle('all-years-schedule')
         ->setContent('
     <!-- wp:tvconnecteeamu/all-years-schedule -->
     test
@@ -371,7 +371,7 @@ add_action('ec_virtual_pages', function ($controller) {
     /**
      *  Page: /secretary/weekly-computer-room-schedule
      */
-    $controller->addPage(new \EC\VirtualPages\Page("/secretary/weekly-computer-room-schedule"))
+        $controller->addPage(new \EC\VirtualPages\Page("/secretary/weekly-computer-room-schedule"))
         ->setTitle('computer-room-schedule')
         ->setContent('
     <!-- wp:tvconnecteeamu/weekly-computer-room-schedule -->
@@ -403,6 +403,9 @@ add_action('ec_virtual_pages', function ($controller) {
          <!-- wp:tvconnecteeamu/homepage -->
     test
     <!-- /wp:tvconnecteeamu/homepage -->
-    ')
-        ->setTemplate('header-blue.php');
+    ');
+
+
+
 });
+

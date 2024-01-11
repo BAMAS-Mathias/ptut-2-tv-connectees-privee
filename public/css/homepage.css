@@ -5,7 +5,7 @@ header {
     top: 0;
     left: 0;
     right: 0;
-    background: linear-gradient(to right, #ffa500 50%, #007bff 50%);
+    background: linear-gradient(to right, #ffa500 50%, #007bff 60%);
 }
 
 body{
@@ -27,12 +27,12 @@ body::after {
 
 body::before {
     left: 0;
-    background: linear-gradient(to bottom, #ffa500 50%, #007bff 50%);
+    background: linear-gradient(to bottom, #ffa500 50%, #007bff 60%);
 }
 
 body::after {
     right: 0;
-    background: linear-gradient(to bottom, #007bff 50%, #ffa500 50%);
+    background: linear-gradient(to bottom, #007bff 50%, #ffa500 60%);
 }
 
 #logo {
@@ -61,5 +61,5 @@ footer {
     left: 0;
     right: 0;
     color: #007bff;
-    background: linear-gradient(to right, #007bff 50%, #ffa500 50%);
+    background: linear-gradient(to right, #007bff 50%, #ffa500 60%);
 }
