@@ -378,7 +378,7 @@ add_action('ec_virtual_pages', function ($controller) {
     test
     <!-- /wp:tvconnecteeamu/weekly-computer-room-schedule -->
     ')
-        ->setTemplate('header-blue.php');
+        ->setTemplate('header-orange.php');
 
     $controller->addPage(new \EC\VirtualPages\Page("secretary/teacher-view"))
         ->setTitle('Teacher View')
@@ -405,4 +405,14 @@ add_action('ec_virtual_pages', function ($controller) {
     <!-- /wp:tvconnecteeamu/homepage -->
     ')
         ->setTemplate('header-blue.php');
+
+    $controller->addPage(new \EC\VirtualPages\Page("secretary/config-schedule"))
+        ->setTitle('config-schedule')
+        ->setContent('
+         <!-- wp:tvconnecteeamu/config-schedule -->
+    test
+    <!-- /wp:tvconnecteeamu/config-schedule -->
+    ')
+        ->setTemplate('header-blue.php');
+
 });

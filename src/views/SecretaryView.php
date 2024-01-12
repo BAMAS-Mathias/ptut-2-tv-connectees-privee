@@ -349,6 +349,17 @@ class SecretaryView extends UserView
         return $view;
     }
 
+    public function displayScheduleConfig($courseList) : string{
+        $view = '';
+        foreach($courseList as $course){
+            $view .= '<form style="display: flex">
+                            <p>' . $course->getSubject() . '</p>
+                            <input type="color" value="' . $course->getColor() .'">
+                      </form>';
+        }
+        return $view;
+    }
+
     public function displayComputerRoomSchedule(){
         return '<div id="schedule-container">
                     <div></div>
