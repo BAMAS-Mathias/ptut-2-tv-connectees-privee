@@ -229,8 +229,6 @@ class ICal
      */
     public function __construct($files = false, array $options = array())
     {
-        ini_set('auto_detect_line_endings', '1');
-
         foreach ($options as $option => $value) {
             if (in_array($option, self::$configurableOptions)) {
                 $this->{$option} = $value;
@@ -256,6 +254,7 @@ class ICal
             }
         }
     }
+
 
     /**
      * Initialises lines from a string
@@ -332,20 +331,25 @@ class ICal
                 }
 
                 $add = $this->keyValueFromString($line);
-                                
-                $keyword = $add[0];
-                $values  = $add[1]; // May be an array containing multiple values
-                
-                if (!is_array($values)) {
-                    if (!empty($values)) {
-                        $values = array($values); // Make an array as not already
-                        $blankArray = array(); // Empty placeholder array
-                        array_push($values, $blankArray);
-                    } else {
+
+                if (is_array($add)) {
+                    $keyword = $add[0];
+                    $values = $add[1]; // Peut être un tableau contenant plusieurs valeurs
+                    if (!is_array($values)) {
+                        if (!empty($values)) {
+                            $values = array($values); // Make an array as not already
+                            $blankArray = array(); // Empty placeholder array
+                            array_push($values, $blankArray);
+                        } else {
+                            $values = array(); // Use blank array to ignore this line
+                        }
+                    } elseif (empty($values[0])) {
                         $values = array(); // Use blank array to ignore this line
                     }
-                } elseif (empty($values[0])) {
-                    $values = array(); // Use blank array to ignore this line
+                } else {
+                    $keyword = '';
+                    $values = array();
+                    error_log("Erreur: La fonction keyValueFromString n'a pas retourné un tableau comme attendu.");
                 }
 
                 // Reverse so that our array of properties is processed first

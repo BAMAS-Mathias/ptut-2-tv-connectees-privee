@@ -19,6 +19,7 @@ class WeeklySchedule
     private function init_schedule($code)
     {
         for ($i = 0; $i < 5; $i++) {
+            // Ajoutez la date et le code en tant qu'arguments pour le constructeur
             $this->dailySchedules[] = new DailySchedule(strtotime("monday this week +" . $i . " day"), $code);
         }
 
@@ -45,19 +46,28 @@ class WeeklySchedule
                                 }
                             }
                             foreach ($day_events as $day_event => $events) {
-                                foreach ($events as $event) {
-                                    if($this->dailySchedules[$dayOfTheWeek] == null){
-                                        continue; // SAMEDI (A implémenter)
+                                if (isset($this->dailySchedules[$dayOfTheWeek]) && $this->dailySchedules[$dayOfTheWeek] instanceof DailySchedule) {
+                                    foreach ($events as $event) {
+                                        $this->dailySchedules[$dayOfTheWeek]->addCourse($event);
                                     }
-                                    $this->dailySchedules[$dayOfTheWeek]->addCourse($event);
+                                } else {
+                                    // Initialisez la valeur manquante avec une nouvelle instance de DailySchedule
+                                    $this->dailySchedules[$dayOfTheWeek] = new DailySchedule(strtotime("monday this week +" . $dayOfTheWeek . " day"), $code);
+
+                                    // Ajoutez ensuite les cours
+                                    foreach ($events as $event) {
+                                        $this->dailySchedules[$dayOfTheWeek]->addCourse($event);
+                                    }
                                 }
                             }
+
                         }
                     }
                 }
             }
         }
     }
+
 
     /**
      * @return array
