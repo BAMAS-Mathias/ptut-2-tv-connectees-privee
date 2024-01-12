@@ -803,7 +803,7 @@ function secretary_room_schedule_render_callback()
 {
     if(is_page()) {
         $user = new SecretaryController();
-        return $user->displayWelcomePage();
+        return $user->displayRoomSchedule();
     }
 }
 
@@ -922,8 +922,8 @@ add_action( 'init', 'block_teacher_search_schedule' );
 function weekly_computer_room_schedule_render_callback()
 {
     if(is_page()) {
-        $user = new SecretaryController();
-        return $user->displayComputerRoomSchedule();
+        $user = new \Controllers\RoomController();
+        return $user->displayRoomWeeklySchedule();
     }
 }
 

@@ -50,11 +50,17 @@ class DailySchedule{
         $this->courseList[] = new Course($label, $professeur, $location, $duration, $group);
     }
 
+    public function orderCourse(){
+        usort($this->courseList, fn($a,$b) =>  strtotime(str_replace('h',':',$a->getHeureDeb())) >
+                                                      strtotime(str_replace('h',':',$b->getHeureDeb())));
+    }
+
     /**
      * @return mixed
      */
     public function getCourseList()
     {
+        $this->orderCourse();
         if(sizeof($this->courseList) == 0) return [];
         $courseList = $this->courseList;
         $dailyScheduleWithPause = [];
@@ -63,7 +69,7 @@ class DailySchedule{
         $indexCourse = 0;
         while($indexHorraire < sizeof($listeHorraireDebut) && $indexHorraire < 8){
             if($indexCourse >= sizeof($courseList)){
-                //$dailyScheduleWithPause[] = null;
+                $dailyScheduleWithPause[] = null;
                 $indexHorraire++;
                 continue;
             }
@@ -76,13 +82,15 @@ class DailySchedule{
                         $courseList[$indexCourse + 1]->setIsDemiGroupe(true);
                     }
                 }
-                if($courseList[$indexCourse] != null && $courseList[$indexCourse + 1]  != null && $courseList[$indexCourse]->getHeureDeb() != $courseList[$indexCourse + 1]->getHeureDeb()){
+                if(!$courseList[$indexCourse]->isDemiGroupe() || $courseList[$indexCourse + 1] == null){
+                    $indexHorraire += $courseList[$indexCourse]->getDuration();
+                }
+                else if($courseList[$indexCourse] != null && $courseList[$indexCourse + 1]  != null && $courseList[$indexCourse]->getHeureDeb() != $courseList[$indexCourse + 1]->getHeureDeb()){
                     $indexHorraire += $courseList[$indexCourse]->getDuration();
                 }
 
                 $dailyScheduleWithPause[] = $courseList[$indexCourse];
                 $indexCourse++;
-
 
             }else{
                 $dailyScheduleWithPause[] = null;

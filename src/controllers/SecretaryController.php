@@ -133,6 +133,9 @@ class SecretaryController extends UserController
     function displayWelcomePage(){
         return $this->view->displaySecretaryWelcome();
     }
+    function displayRoomSchedule(){
+        return $this->view->displayRoomSchedule();
+    }
 
     /**
      * Modify an user
