@@ -11,17 +11,23 @@ class Course
     private string $heureFin;
     private string $group;
     private int $duration;
+    private bool $isDemiGroupe;
+
+    private string $color;
 
     public function __construct($subject = "", $teacher = " ", $location = "", $duration = "", $group = "")
     {
         $this->subject = $subject;
         $this->teacher = $teacher;
         $this->location = $location;
-        $duration = preg_split("/ - /",$duration);
-        $this->heureDeb = $duration[0];
-        $this->heureFin = $duration[1];
+        if(!empty($duration)) {
+            $duration = preg_split("/ - /",$duration);
+            $this->heureDeb = $duration[0];
+            $this->heureFin = $duration[1];
+            $this->duration = $this->calcDuration();
+        }
         $this->group = $group;
-        $this->duration = $this->calcDuration();
+        $this->isDemiGroupe = false;
     }
 
     private function calcDuration(){
@@ -42,7 +48,6 @@ class Course
             $indexHorraire++;
         }
         return $duration;
-
     }
 
     /**
@@ -98,6 +103,44 @@ class Course
     {
         return $this->duration;
     }
+
+    /**
+     * @return bool
+     */
+    public function isDemiGroupe(): bool
+    {
+        return $this->isDemiGroupe;
+    }
+
+    /**
+     * @param bool $isDemiGroupe
+     */
+    public function setIsDemiGroupe(bool $isDemiGroupe): void
+    {
+        $this->isDemiGroupe = $isDemiGroupe;
+    }
+
+    /**
+     * @return string
+     */
+    public function getColor(): string
+    {
+        return $this->color;
+    }
+
+    /**
+     * @param string $color
+     */
+    public function setColor(string $color): void
+    {
+        $this->color = $color;
+    }
+
+
+
+
+
+
 
 
 

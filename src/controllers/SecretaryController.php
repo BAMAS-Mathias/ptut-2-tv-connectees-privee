@@ -2,6 +2,8 @@
 
 namespace Controllers;
 
+use Models\CourseRepository;
+use Models\RoomRepository;
 use Models\User;
 use Views\SecretaryView;
 
@@ -131,6 +133,9 @@ class SecretaryController extends UserController
     function displayWelcomePage(){
         return $this->view->displaySecretaryWelcome();
     }
+    function displayRoomSchedule(){
+        return $this->view->displayRoomSchedule();
+    }
 
     /**
      * Modify an user
@@ -188,7 +193,13 @@ class SecretaryController extends UserController
     }
 
     public function displayComputerRoomsAvailable(){
-        return $this->view->displayComputerRoomsAvailable();
+        $model = new RoomRepository();
+        $roomList = $model->getAllComputerRooms();
+        return $this->view->displayComputerRoomsAvailable($roomList);
+    }
+    public function displayRoomsAvailable(): string
+    {
+        return $this->view->displayRoomsAvailable();
     }
 
     public function displayStudentGroupView(){
@@ -211,5 +222,14 @@ class SecretaryController extends UserController
 
     public function displayComputerRoomSchedule(){
         return $this->view->displayComputerRoomSchedule();
+    }
+    public function displayHomePage(){
+        return $this->view->displayHomePage();
+    }
+
+    public function displayScheduleConfig(){
+        $model = new CourseRepository();
+        $courseList = $model->getCourseList();
+        return $this->view->displayScheduleConfig($courseList);
     }
 }

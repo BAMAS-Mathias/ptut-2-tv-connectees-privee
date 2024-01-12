@@ -4,6 +4,7 @@ namespace Views;
 
 use Controllers\UserController;
 use Models\CodeAde;
+use Models\Course;
 use Models\Model;
 use Models\User;
 use Models\WeeklySchedule;
@@ -212,51 +213,23 @@ class SecretaryView extends UserView
         </div>';
     }
 
-    public function displayComputerRoomsAvailable(){
-        return '
-        <div id="main-container">
-            <div class="room available" onclick="toggleRoom(this)">
-                <img src="'. TV_PLUG_PATH . 'public/img/lock-open.png' .'">
-                <img src="'. TV_PLUG_PATH . 'public/img/computer-icon.png' .'">
-                <h1 class="label-salle">I 002</h1>
-            </div>
-            <div class="room available" onclick="toggleRoom(this)">
-                <img src="'. TV_PLUG_PATH . 'public/img/lock-open.png' .'">
-                <img src="'. TV_PLUG_PATH . 'public/img/computer-icon.png' .'">
-                <h1 class="label-salle">I 004</h1>
-            </div>
-            <div class="room not-available" onclick="toggleRoom(this)">
-                <img src="'. TV_PLUG_PATH . 'public/img/lock-close.png' .'">
-                <img src="'. TV_PLUG_PATH . 'public/img/computer-icon.png' .'">
-                <h1 class="label-salle">I 009</h1>
-            </div>
-            <div class="room not-available" onclick="toggleRoom(this)">
-                <img src="'. TV_PLUG_PATH . 'public/img/lock-close.png' .'">
-                <img src="'. TV_PLUG_PATH . 'public/img/computer-icon.png' .'">
-                <h1 class="label-salle">I 010</h1>
-            </div>
-            <div class="room not-available" onclick="toggleRoom(this)">
-                <img src="'. TV_PLUG_PATH . 'public/img/lock-close.png' .'">
-                <img src="'. TV_PLUG_PATH . 'public/img/computer-icon.png' .'">
-                <h1 class="label-salle">I 102</h1>
-            </div>
-            <div class="room available" onclick="toggleRoom(this)">
-                <img src="'. TV_PLUG_PATH . 'public/img/lock-open.png' .'">
-                <img src="'. TV_PLUG_PATH . 'public/img/computer-icon.png' .'">
-                <h1 class="label-salle">I 104</h1>
-            </div>
-            <div class="room available" onclick="toggleRoom(this)">
-                <img src="'. TV_PLUG_PATH . 'public/img/lock-open.png' .'">
-                <img src="'. TV_PLUG_PATH . 'public/img/computer-icon.png' .'">
-                <h1 class="label-salle">I 106</h1>
-            </div>
-            <div class="room not-available" onclick="toggleRoom(this)">
-                <img src="'. TV_PLUG_PATH . 'public/img/lock-close.png' .'">
-                <img src="'. TV_PLUG_PATH . 'public/img/computer-icon.png' .'">
-                <h1 class="label-salle">I 214</h1>
-            </div>
-      </div>
-        ';
+    public function displayComputerRoomsAvailable($computerRoomList){
+        $view =
+            '<div id="main-container">';
+
+        foreach($computerRoomList as $room){
+            $view .= '<div class="room ';
+            if(!$room->isAvailable()){
+                $view .= 'not-';
+            }
+            $view .= 'available" onclick="toggleRoom(this)">
+                            <img src="'. TV_PLUG_PATH . 'public/img/lock-open.png' .'">
+                            <img src="'. TV_PLUG_PATH . 'public/img/computer-icon.png' .'">
+                            <h1 class="label-salle">' . $room->getName() . '</h1>
+                       </div>';
+        }
+
+        return $view . '</div>';
     }
 
     public function displayStudentGroupView(){
@@ -307,13 +280,15 @@ class SecretaryView extends UserView
                     $view .= '<div></div>';
                 }
             }
-            foreach ($courseList as $course) {
+            for ($i = 0; $i < sizeof($courseList); $i++) {
+                $course = $courseList[$i];
                 if ($course != null) {
-                    $view .= '<div class="container-matiere green" style="grid-column: span ' . $course->getDuration() . '">
-                        <p class="text-matiere">' . $course->getSubject() . '</p>
-                        <p class="text-prof">' . $course->getTeacher() . '</p>
-                        <p class="text-salle">' . $course->getLocation() . '</p>
-                    </div>';
+                    if($course->isDemiGroupe() && $courseList[$i + 1]->isDemiGroupe()){
+                        $view .= $this->displayHalfGroupCourse($course, $courseList[$i + 1]);
+                        $i++;
+                    }else{
+                        $view .= $this->displayGroupCourse($course);
+                    }
                 }else{
                     $view .= '<div></div>';
                 }
@@ -322,6 +297,28 @@ class SecretaryView extends UserView
 
         return $view;
     }
+
+    public function displayHalfGroupCourse($firstGroupCourse, $secondGroupCourse) : string{
+        $view = '<div style="grid-column: span ' . $firstGroupCourse->getDuration() . ';display: grid; row-gap: 10px">';
+        $view .= $this->displayGroupCourse($firstGroupCourse, true);
+        $view .= $this->displayGroupCourse($secondGroupCourse, true);
+        $view .= '</div>';
+        return $view;
+    }
+
+    public function displayGroupCourse($course, $halfsize = false) : string{
+        $view = '<div class="container-matiere green ';
+        if($halfsize){
+            $view .= 'demi-groupe';
+        }
+        $view .= '" style="grid-column: span ' . $course->getDuration() . '">
+                        <p class="text-matiere">' . $course->getSubject() . '</p>
+                        <p class="text-prof">' . $course->getTeacher() . '</p>
+                        <p class="text-salle">' . $course->getLocation() . '</p>
+                    </div>';
+        return $view;
+    }
+
     /* TEMPORAIRE */
     public function displayYearStudentScheduleView($groupCodeNumbers){
         $view = '<div id="schedule-container">
@@ -465,5 +462,39 @@ class SecretaryView extends UserView
                         <p class="text-salle">A-002</p>
                     </div> 
                 </div>';
+    }
+    public function displayHomePage()
+    {
+        return '
+    <body>
+        <div class="container">
+            <h1 id="bienvenue">
+                BIENVENUE AU BUT <br>
+                INFORMATIQUE <br>
+                D\'AIX-MARSEILLE
+            </h1>
+        </div>
+    </body>
+    <footer>
+        <h2>
+            . <!-- Ne pas enlever -->
+        </h2>
+    </footer>
+    </html>';
+    }
+
+    /**
+     * @param Course[] $courseList
+     * @return void
+     */
+    public function displayScheduleConfig($courseList) : string{
+        $view = '';
+        foreach ($courseList as $course){
+            $view .= '<form style="display:flex">
+                       <p>' . $course->getSubject() . '</div>
+                       <input type=color value=' . $course->getColor() . '>
+                   </form>';
+        }
+        return $view;
     }
 }

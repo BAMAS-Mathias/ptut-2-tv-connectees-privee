@@ -803,7 +803,7 @@ function secretary_room_schedule_render_callback()
 {
     if(is_page()) {
         $user = new SecretaryController();
-        return $user->displayWelcomePage();
+        return $user->displayRoomSchedule();
     }
 }
 
@@ -922,8 +922,8 @@ add_action( 'init', 'block_teacher_search_schedule' );
 function weekly_computer_room_schedule_render_callback()
 {
     if(is_page()) {
-        $user = new SecretaryController();
-        return $user->displayComputerRoomSchedule();
+        $user = new \Controllers\RoomController();
+        return $user->displayRoomWeeklySchedule();
     }
 }
 
@@ -936,3 +936,89 @@ function block_weekly_computer_room_schedule() {
     ));
 }
 add_action( 'init', 'block_weekly_computer_room_schedule' );
+
+function teacher_view_render_callback() {
+    if (is_page()) {
+        $user = new TeacherController();
+        return $user->displayTeacherView();
+    }
+}
+
+function block_teacher_view() {
+    wp_register_script(
+        'teacher-view-script',
+        plugins_url('path/to/your/script.js', __FILE__),
+        array('wp-blocks', 'wp-element', 'wp-data')
+    );
+
+    register_block_type('tvconnecteeamu/teacher-view', array(
+        'editor_script' => 'teacher-view-script',
+        'render_callback' => 'teacher_view_render_callback'
+    ));
+}
+
+add_action('init', 'block_teacher_view');
+
+function rooms_available_render_callback() {
+    if (is_page()) {
+        $user = new SecretaryController();
+        return $user->displayRoomsAvailable();
+    }
+}
+function block_rooms_available() {
+    wp_register_script(
+        'rooms_available-script',
+        plugins_url('path/to/your/script.js', __FILE__),
+        array('wp-blocks', 'wp-element', 'wp-data')
+    );
+
+    register_block_type('tvconnecteeamu/rooms-available', array(
+        'editor_script' => 'rooms_available-script',
+        'render_callback' => 'rooms_available_render_callback'
+    ));
+}
+
+add_action('init', 'block_rooms_available');
+
+function homepage_render_callback() {
+    if (is_page()) {
+        $user = new SecretaryController();
+        return $user->displayHomePage();
+    }
+}
+function block_homepage() {
+    wp_register_script(
+        'homepage-script',
+        plugins_url('path/to/your/script.js', __FILE__),
+        array('wp-blocks', 'wp-element', 'wp-data')
+    );
+
+    register_block_type('tvconnecteeamu/homepage', array(
+        'editor_script' => 'homepage-script',
+        'render_callback' => 'homepage_render_callback'
+    ));
+}
+
+add_action('init', 'block_homepage');
+
+
+function schedule_config_render_callback() {
+    if (is_page()) {
+        $user = new SecretaryController();
+        return $user->displayScheduleConfig();
+    }
+}
+function schedule_config_homepage() {
+    wp_register_script(
+        'homepage-script',
+        plugins_url('path/to/your/script.js', __FILE__),
+        array('wp-blocks', 'wp-element', 'wp-data')
+    );
+
+    register_block_type('tvconnecteeamu/config-schedule', array(
+        'editor_script' => 'homepage-script',
+        'render_callback' => 'schedule_config_render_callback'
+    ));
+}
+
+add_action('init', 'schedule_config_homepage');

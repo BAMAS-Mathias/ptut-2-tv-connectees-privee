@@ -29,9 +29,10 @@
 }
 
 .hour-text{
+    grid-row: span 2;
     background-color: #7ED7F7;
     text-align: center;
-    height: 100px;
+    height: 130px;
     width: 250px;
     border-radius:20px ;
     margin: 0;
@@ -43,15 +44,15 @@
 }
 
 #schedule-container{
-    width: 100vw;
-    height: 80vh;
-    margin: 10vh 0;
+    width: 80vw;
+    height: 70vh;
     display: grid;
-    grid-template-columns: 250px repeat(5,0.15fr);
+    grid-auto-flow: column;
+    margin-left: auto;
+    margin-right: auto;
     grid-column-gap: 20px;
-    grid-row-gap: 20px;
-    grid-template-rows: 50px repeat(4,100px);
-    align-items: center;
+    grid-row-gap: 10px;
+    grid-template-rows: repeat(9,60px);
     justify-content: center;
 }
 
@@ -61,13 +62,17 @@
     align-items: center;
     flex-direction: column;
     border-radius: 20px;
-    height: 100px;
     color: white;
+    width: 225px;
+    text-align: center;
 }
 
 
+
+
+
 .text-prof, .text-matiere{
-    font-size: 18px !important;
+    font-size: 15px !important;
     height: fit-content;
     margin: 0;
     font-weight: 600;
@@ -82,7 +87,7 @@
 
 .container-matiere::after{
     border-radius: 0 0 20px 20px !important;
-    height: 40%;
+    height: 40px;
     width: 100%;
     content: ' ';
     z-index: 0;

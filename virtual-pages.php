@@ -262,7 +262,7 @@ add_action('ec_virtual_pages', function ($controller) {
     test
     <!-- /wp:tvconnecteeamu/secretary-welcome -->
     ')
-        ->setTemplate('page.php');
+        ->setTemplate('header-blue.php');
 
     /**
      *  Page: /secretary/computer-rooms
@@ -274,7 +274,7 @@ add_action('ec_virtual_pages', function ($controller) {
     test
     <!-- /wp:tvconnecteeamu/computer-rooms -->
     ')
-        ->setTemplate('page.php');
+        ->setTemplate('header-orange.php');
 
 
     /**
@@ -287,7 +287,7 @@ add_action('ec_virtual_pages', function ($controller) {
     test
     <!-- /wp:tvconnecteeamu/teacher-schedule -->
     ')
-        ->setTemplate('page.php');
+        ->setTemplate('header-orange.php');
 
 
     /**
@@ -300,7 +300,7 @@ add_action('ec_virtual_pages', function ($controller) {
     test
     <!-- /wp:tvconnecteeamu/main-menu -->
     ')
-        ->setTemplate('page.php');
+        ->setTemplate('header-blue.php');
 
 
     /**
@@ -313,7 +313,7 @@ add_action('ec_virtual_pages', function ($controller) {
     test
     <!-- /wp:tvconnecteeamu/room-schedule -->
     ')
-        ->setTemplate('page.php');
+        ->setTemplate('header-orange.php');
 
 
     /**
@@ -326,7 +326,7 @@ add_action('ec_virtual_pages', function ($controller) {
     test
     <!-- /wp:tvconnecteeamu/year-student-schedule -->
     ')
-        ->setTemplate('page.php');
+        ->setTemplate('header-blue.php');
 
 
     /**
@@ -339,7 +339,7 @@ add_action('ec_virtual_pages', function ($controller) {
     test
     <!-- /wp:tvconnecteeamu/group-student-schedule -->
     ')
-        ->setTemplate('page.php');
+        ->setTemplate('header-blue.php');
 
 
     /**
@@ -352,7 +352,7 @@ add_action('ec_virtual_pages', function ($controller) {
     test
     <!-- /wp:tvconnecteeamu/all-years-schedule -->
     ')
-        ->setTemplate('page.php');
+        ->setTemplate('header-blue.php');
 
 
     /**
@@ -365,7 +365,7 @@ add_action('ec_virtual_pages', function ($controller) {
     test
     <!-- /wp:tvconnecteeamu/teacher-search-schedule -->
     ')
-        ->setTemplate('page.php');
+        ->setTemplate('header-orange.php');
 
 
     /**
@@ -378,8 +378,41 @@ add_action('ec_virtual_pages', function ($controller) {
     test
     <!-- /wp:tvconnecteeamu/weekly-computer-room-schedule -->
     ')
+        ->setTemplate('header-orange.php');
+
+    $controller->addPage(new \EC\VirtualPages\Page("secretary/teacher-view"))
+        ->setTitle('Teacher View')
+        ->setContent('
+         <!-- wp:tvconnecteeamu/teacher-view -->
+    test
+    <!-- /wp:tvconnecteeamu/teacher-view -->
+    ')
         ->setTemplate('page.php');
+    $controller->addPage(new \EC\VirtualPages\Page("secretary/rooms-available"))
+        ->setTitle('rooms-available')
+        ->setContent('
+         <!-- wp:tvconnecteeamu/rooms-available -->
+    test
+    <!-- /wp:tvconnecteeamu/rooms-available -->
+    ')
+        ->setTemplate('header-orange.php');
 
+    $controller->addPage(new \EC\VirtualPages\Page("secretary/homepage"))
+        ->setTitle('homepage')
+        ->setContent('
+         <!-- wp:tvconnecteeamu/homepage -->
+    test
+    <!-- /wp:tvconnecteeamu/homepage -->
+    ')
+        ->setTemplate('header-blue.php');
 
+    $controller->addPage(new \EC\VirtualPages\Page("secretary/config-schedule"))
+        ->setTitle('config-schedule')
+        ->setContent('
+         <!-- wp:tvconnecteeamu/config-schedule -->
+    test
+    <!-- /wp:tvconnecteeamu/config-schedule -->
+    ')
+        ->setTemplate('header-blue.php');
 
 });

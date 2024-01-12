@@ -78,17 +78,33 @@ function downloadFileICS_func()
 
 function updateTeacherRoomDB(){
     $codeAde = ['8382','8380','8383','8381','8396','8397','8398','42523','42524','42525'];
-    $model = new \Models\Teacher();
+    $teacherModel = new \Models\Teacher();
+    $roomModel = new \Models\RoomRepository();
+    $courseModel = new \Models\CourseRepository();
     foreach ($codeAde as $code){
         $schedule = new \Models\WeeklySchedule($code);
         foreach ($schedule->getDailySchedules() as $dailySchedule){
             foreach ($dailySchedule->getCourseList() as $course){
                 if($course == null) continue;
                 $teacherName = preg_split('/\n/', $course->getTeacher())[1];
-                if(!$model->exist($teacherName)){
-                    if(strlen($teacherName) > 6){
-                        $model->add($teacherName);
+
+                if(!$roomModel->exist($course->getLocation())){
+                    if(strlen($course->getLocation()) < 10){
+                        $roomModel->add($course->getLocation());
                     }
+                }
+
+                if(!$teacherModel->exist($teacherName)){
+                    if(strlen($teacherName) > 6){
+                        $teacherModel->add($teacherName);
+                    }
+                }
+
+                $course = preg_replace('/(TD)|(TP)|(G[0-9].?)|(\*)|(|(A$|B$)|)|(G..$)|(G.-.)|(G..-.$)|(G$)/','',$course->getSubject());
+                $course = str_replace("'"," ",$course);
+                $course = rtrim($course);
+                if(!$courseModel->exist($course)){
+                    $courseModel->add($course,'#666666');
                 }
             }
         }
