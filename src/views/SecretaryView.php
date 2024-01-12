@@ -129,7 +129,7 @@ class SecretaryView extends UserView
      *
      * @return string
      */
-    public function displayUserCreationForm() : string
+    public function displayUserCreationForm(): string
     {
         return '<div class="container col-xxl-10">
         <h2 class="display-6">Créer un utilisateur</h2>
@@ -180,7 +180,8 @@ class SecretaryView extends UserView
       </div>';
     }
 
-    public function displayUserCreationFormExcel() : string {
+    public function displayUserCreationFormExcel(): string
+    {
         return '<div class="container col-xxl-10">
         <h2 class="display-6">Créer un utilisateur</h2>
         <p class="lead">
@@ -202,8 +203,9 @@ class SecretaryView extends UserView
       </div>';
     }
 
-    public function displaySecretaryWelcome() : string{
-        return'
+    public function displaySecretaryWelcome(): string
+    {
+        return '
         <div class="btn-container">
             <a href="' . home_url('/secretary/year-student-schedule?year=1') . '" class="boutons-etudiants secretary-button blue-btn">BUT1</a> 
             <a href="' . home_url('/secretary/year-student-schedule?year=2') . '" class="boutons-etudiants secretary-button blue-btn">BUT2</a> 
@@ -214,19 +216,20 @@ class SecretaryView extends UserView
         </div>';
     }
 
-    public function displayComputerRoomsAvailable($computerRoomList){
+    public function displayComputerRoomsAvailable($computerRoomList)
+    {
         $view =
             '<div id="main-container">';
 
-        foreach($computerRoomList as $room){
+        foreach ($computerRoomList as $room) {
             $view .= '<div class="room ';
-            if(!$room->isAvailable()){
+            if (!$room->isAvailable()) {
                 $view .= 'not-';
             }
             $view .= 'available" onclick="toggleRoom(this)">
-                            <img class="lock-open" src="'. TV_PLUG_PATH . 'public/img/lock-open.png' .'">
-                            <img class="lock-close" src="'. TV_PLUG_PATH . 'public/img/lock-close.png' .'">
-                            <img src="'. TV_PLUG_PATH . 'public/img/computer-icon.png' .'">
+                            <img class="lock-open" src="' . TV_PLUG_PATH . 'public/img/lock-open.png' . '">
+                            <img class="lock-close" src="' . TV_PLUG_PATH . 'public/img/lock-close.png' . '">
+                            <img src="' . TV_PLUG_PATH . 'public/img/computer-icon.png' . '">
                             <h1 class="label-salle">' . $room->getName() . '</h1>
                        </div>';
         }
@@ -234,7 +237,8 @@ class SecretaryView extends UserView
         return $view . '</div>';
     }
 
-    public function displayStudentGroupView(){
+    public function displayStudentGroupView()
+    {
         $schedule = new WeeklySchedule('42525');
         $view = '<div class="container-body">
                     <div class="container-horaire">
@@ -250,17 +254,17 @@ class SecretaryView extends UserView
                         <h3 id="text-horaire">15h45 - 17h30</h3>
                     </div>';
 
-        foreach($schedule->getDailySchedules() as $dailySchedule){
-            if($dailySchedule->getDate() != date('Ymd')) continue;
+        foreach ($schedule->getDailySchedules() as $dailySchedule) {
+            if ($dailySchedule->getDate() != date('Ymd')) continue;
             $previousCourseDuration = null;
-            foreach ($dailySchedule->getCourseList() as $course){
+            foreach ($dailySchedule->getCourseList() as $course) {
                 $courseDuration = preg_split('/ - /', $course->getDuration());
-                if($courseDuration == $previousCourseDuration) continue;
+                if ($courseDuration == $previousCourseDuration) continue;
                 $previousCourseDuration = $courseDuration;
 
 
-                if($course->getGroup())
-                $view .= '<div class="container-matiere orange">
+                if ($course->getGroup())
+                    $view .= '<div class="container-matiere orange">
                             <p class="text-matiere">' . $course->getSubject() . '</p>
                             <p class="text-prof">' . $course->getTeacher() . '</p>
                             <p class="text-salle">' . $course->getLocation() . '</p>
@@ -272,26 +276,27 @@ class SecretaryView extends UserView
         return $view;
     }
 
-    public function displayYearGroupRow($weeklySchedule){
+    public function displayYearGroupRow($weeklySchedule)
+    {
         $view = '';
-        foreach($weeklySchedule->getDailySchedules() as $dailySchedule){
-            if($dailySchedule->getDate() != date('Ymd')) continue;
+        foreach ($weeklySchedule->getDailySchedules() as $dailySchedule) {
+            if ($dailySchedule->getDate() != date('Ymd')) continue;
             $courseList = $dailySchedule->getCourseList();
-            if($courseList == []){
-                for($i = 0; $i<8; $i++){
+            if ($courseList == []) {
+                for ($i = 0; $i < 8; $i++) {
                     $view .= '<div></div>';
                 }
             }
             for ($i = 0; $i < sizeof($courseList); $i++) {
                 $course = $courseList[$i];
                 if ($course != null) {
-                    if($course->isDemiGroupe() && $courseList[$i + 1]->isDemiGroupe()){
+                    if ($course->isDemiGroupe() && $courseList[$i + 1]->isDemiGroupe()) {
                         $view .= $this->displayHalfGroupCourse($course, $courseList[$i + 1]);
                         $i++;
-                    }else{
+                    } else {
                         $view .= $this->displayGroupCourse($course);
                     }
-                }else{
+                } else {
                     $view .= '<div></div>';
                 }
             }
@@ -300,7 +305,8 @@ class SecretaryView extends UserView
         return $view;
     }
 
-    public function displayHalfGroupCourse($firstGroupCourse, $secondGroupCourse) : string{
+    public function displayHalfGroupCourse($firstGroupCourse, $secondGroupCourse): string
+    {
         $view = '<div style="grid-column: span ' . $firstGroupCourse->getDuration() . ';display: grid; row-gap: 10px">';
         $view .= $this->displayGroupCourse($firstGroupCourse, true);
         $view .= $this->displayGroupCourse($secondGroupCourse, true);
@@ -308,9 +314,10 @@ class SecretaryView extends UserView
         return $view;
     }
 
-    public function displayGroupCourse($course, $halfsize = false) : string{
+    public function displayGroupCourse($course, $halfsize = false): string
+    {
         $view = '<div class="container-matiere green ';
-        if($halfsize){
+        if ($halfsize) {
             $view .= 'demi-groupe';
         }
         $view .= '" style="grid-column: span ' . $course->getDuration() . '">
@@ -322,7 +329,8 @@ class SecretaryView extends UserView
     }
 
     /* TEMPORAIRE */
-    public function displayYearStudentScheduleView($groupCodeNumbers){
+    public function displayYearStudentScheduleView($groupCodeNumbers)
+    {
         $view = '<div id="schedule-container">
                     <div></div>
                     <div class="container-horaire">
@@ -341,7 +349,7 @@ class SecretaryView extends UserView
 
         $groupIndex = 1;
 
-        foreach ($groupCodeNumbers as $groupCodeNumber){
+        foreach ($groupCodeNumbers as $groupCodeNumber) {
             $view .= '<p class="group-name">G' . $groupIndex . '</p>';
             $groupIndex++;
 
@@ -356,8 +364,9 @@ class SecretaryView extends UserView
      * @param DailySchedule[] $dailySchedulesList
      * @return string
      */
-    public function displayComputerRoomSchedule($dailySchedulesList){
-        $dayNameList = ['LUNDI','MARDI','MERCREDI','JEUDI','VENDREDI'];
+    public function displayComputerRoomSchedule($dailySchedulesList)
+    {
+        $dayNameList = ['LUNDI', 'MARDI', 'MERCREDI', 'JEUDI', 'VENDREDI'];
         $view = '<div id="schedule-container">
                      <div></div>
                      <p class="hour-text">8h15 - 10h15</p>
@@ -365,21 +374,21 @@ class SecretaryView extends UserView
                      <p class="hour-text">13h30 - 15h15</p>
                      <p class="hour-text">15h45 - 17h30</p>';
 
-        for($i = 0; $i < sizeof($dailySchedulesList); ++$i){
+        for ($i = 0; $i < sizeof($dailySchedulesList); ++$i) {
             $dailySchedule = $dailySchedulesList[$i];
             $view .= '<div class="container-horaire">
                            <h3 class="text-horaire">' . $dayNameList[$i] . '</h3>
                       </div>';
 
-            foreach ($dailySchedule->getCourseList() as $course){
-                if($course == null){
+            foreach ($dailySchedule->getCourseList() as $course) {
+                if ($course == null) {
                     $view .= '<div></div>';
                     continue;
                 }
 
-                $view .= '<div class="container-matiere green" style="grid-row: span ' . $course->getDuration().'">
-                             <p class="text-matiere">' . $course->getSubject() .'</p>
-                             <p class="text-prof">' . $course->getTeacher() .'</p>
+                $view .= '<div class="container-matiere green" style="grid-row: span ' . $course->getDuration() . '">
+                             <p class="text-matiere">' . $course->getSubject() . '</p>
+                             <p class="text-prof">' . $course->getTeacher() . '</p>
                              <p class="text-salle">' . $course->getLocation() . '</p>
                           </div>';
             }
@@ -387,6 +396,7 @@ class SecretaryView extends UserView
 
         return $view . '<div>';
     }
+
     public function displayHomePage()
     {
         return '
@@ -405,5 +415,56 @@ class SecretaryView extends UserView
         </h2>
     </footer>
     </html>';
+    }
+
+    public function displayRoomSchedule()
+    {
+        return '
+<body>
+<div id="menu-dropdown">
+  <select id="dropdown">
+    <option value="I-002">I-002</option>
+    <option value="I-004">I-004</option>
+    <option value="I-009">I-009</option>
+    <option value="I-010">I-010</option>
+    <option value="I-102">I-102</option>
+    <option value="I-104">I-104</option>
+    <option value="I-106">I-106</option>
+    <option value="I-214">I-214</option>
+  </select>
+</div>
+<div class="container-body">
+  <div class="container-horaire1">
+    <h1 id="text-horaire">8h15 - 10h15</h1>
+  </div>
+  <div class="container-matiere1">
+    <h1 id="text-matiere">R3.02 - JAVA</h1>
+    <h1 id="text-matiere">SLEZAK Eileen</h1>
+    <h1 id="text-matiere">I-110</h1>
+  </div>
+  <div class="container-horaire2">
+    <h1 id="text-horaire">10h35 - 12h15</h1>
+  </div>
+  <div class="container-matiere2">
+    <h1 id="text-matiere">R3.01 - ANGLAIS</h1>
+    <h1 id="text-matiere">SLEZAK Eileen</h1>
+    <h1 id="text-matiere">A-002</h1>
+  </div>
+  <div class="container-horaire3">
+    <h1 id="text-horaire">13h30 - 15h15</h1>
+  </div>
+  <div class="container-horaire4">
+    <h1 id="text-horaire">15h45 - 17h30</h1>
+  </div>
+  <div class="container-matiere4">
+    <h1 id="text-matiere">R3.04 - SQL</h1>
+    <h1 id="text-matiere">ANNI Samuele</h1>
+    <h1 id="text-matiere">A-002</h1>
+  </div>
+ 
+</div>
+</body>
+
+</html>';
     }
 }

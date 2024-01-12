@@ -803,7 +803,7 @@ function secretary_room_schedule_render_callback()
 {
     if(is_page()) {
         $user = new SecretaryController();
-        return $user->displayWelcomePage();
+        return $user->displayRoomSchedule();
     }
 }
 
