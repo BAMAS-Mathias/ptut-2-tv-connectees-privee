@@ -411,13 +411,13 @@ class SecretaryView extends UserView
      * @return void
      */
     public function displayScheduleConfig($courseList) : string{
-        $view = '';
+        $view = '<div class="course-config-container">';
         foreach ($courseList as $course){
-            $view .= '<form style="display:flex">
-                       <p>' . $course->getSubject() . '</div>
-                       <input type=color value=' . $course->getColor() . '>
+            $view .= '<form class="course-config">
+                       <p>' . $course->getSubject() . '</p>
+                       <input class="course-config-color-selector" type=color value='. $course->getColor() . '>
                    </form>';
         }
-        return $view;
+        return $view . '</div>';
     }
 }

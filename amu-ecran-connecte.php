@@ -101,9 +101,8 @@ function updateTeacherRoomDB(){
                 }
 
                 $course = preg_replace('/(TD)|(TP)|(G[0-9].?)|(\*)|(|(A$|B$)|)|(G..$)|(G.-.)|(G..-.$)|(G$)/','',$course->getSubject());
-                $course = str_replace("'"," ",$course);
                 $course = rtrim($course);
-                if(!$courseModel->exist($course)){
+                if(!$courseModel->exist(str_replace("'","''",$course))){
                     $courseModel->add($course,'#666666');
                 }
             }

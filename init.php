@@ -113,6 +113,12 @@ function loadScriptsEcran()
         wp_enqueue_style('room-schedule', TV_PLUG_PATH . 'public/css/room_schedule.css', array(), VERSION);
     }
 
+    if(is_page('config-schedule')){
+        wp_enqueue_style('room-schedule', TV_PLUG_PATH . 'public/css/secretaryConfig.css', array(), VERSION);
+        wp_enqueue_script('color_update_script', TV_PLUG_PATH . 'public/js/updateConfigCourseColor.js', array(), VERSION, true);
+
+    }
+
 
     if (is_page('tv-mode')) {
         /* STYLESHEETS */
