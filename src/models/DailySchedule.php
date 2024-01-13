@@ -50,11 +50,17 @@ class DailySchedule{
         $this->courseList[] = new Course($label, $professeur, $location, $duration, $group);
     }
 
+    public function orderCourse(){
+        usort($this->courseList, fn($a,$b) =>  strtotime(str_replace('h',':',$a->getHeureDeb())) >
+                                                      strtotime(str_replace('h',':',$b->getHeureDeb())));
+    }
+
     /**
      * @return mixed
      */
     public function getCourseList()
     {
+        $this->orderCourse();
         if(sizeof($this->courseList) == 0) return [];
         $courseList = $this->courseList;
         $dailyScheduleWithPause = [];

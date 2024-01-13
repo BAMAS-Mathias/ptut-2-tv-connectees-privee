@@ -80,6 +80,7 @@ function updateTeacherRoomDB(){
     $codeAde = ['8382','8380','8383','8381','8396','8397','8398','42523','42524','42525'];
     $teacherModel = new \Models\Teacher();
     $roomModel = new \Models\RoomRepository();
+    $courseModel = new \Models\CourseRepository();
     foreach ($codeAde as $code){
         $schedule = new \Models\WeeklySchedule($code);
         foreach ($schedule->getDailySchedules() as $dailySchedule){
@@ -97,6 +98,13 @@ function updateTeacherRoomDB(){
                     if(strlen($teacherName) > 6){
                         $teacherModel->add($teacherName);
                     }
+                }
+
+                $course = preg_replace('/(TD)|(TP)|(G[0-9].?)|(\*)|(|(A$|B$)|)|(G..$)|(G.-.)|(G..-.$)|(G$)/','',$course->getSubject());
+                $course = str_replace("'"," ",$course);
+                $course = rtrim($course);
+                if(!$courseModel->exist($course)){
+                    $courseModel->add($course,'#666666');
                 }
             }
         }

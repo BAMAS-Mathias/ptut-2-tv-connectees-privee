@@ -803,7 +803,7 @@ function secretary_room_schedule_render_callback()
 {
     if(is_page()) {
         $user = new SecretaryController();
-        return $user->displayWelcomePage();
+        return $user->displayRoomSchedule();
     }
 }
 
@@ -922,8 +922,8 @@ add_action( 'init', 'block_teacher_search_schedule' );
 function weekly_computer_room_schedule_render_callback()
 {
     if(is_page()) {
-        $user = new SecretaryController();
-        return $user->displayComputerRoomSchedule();
+        $user = new \Controllers\RoomController();
+        return $user->displayRoomWeeklySchedule();
     }
 }
 
@@ -1000,3 +1000,25 @@ function block_homepage() {
 }
 
 add_action('init', 'block_homepage');
+
+
+function schedule_config_render_callback() {
+    if (is_page()) {
+        $user = new SecretaryController();
+        return $user->displayScheduleConfig();
+    }
+}
+function schedule_config_homepage() {
+    wp_register_script(
+        'homepage-script',
+        plugins_url('path/to/your/script.js', __FILE__),
+        array('wp-blocks', 'wp-element', 'wp-data')
+    );
+
+    register_block_type('tvconnecteeamu/config-schedule', array(
+        'editor_script' => 'homepage-script',
+        'render_callback' => 'schedule_config_render_callback'
+    ));
+}
+
+add_action('init', 'schedule_config_homepage');

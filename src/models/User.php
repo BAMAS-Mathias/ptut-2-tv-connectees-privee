@@ -533,7 +533,6 @@ class User extends Model implements Entity, JsonSerializable
             foreach ($this->codes as $code) {
                 $codes[$code->getId()] = $code;
             }
-
             return $codes;
         }
         return $this->codes;

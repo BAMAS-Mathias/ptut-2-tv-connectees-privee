@@ -4,6 +4,8 @@ namespace Views;
 
 use Controllers\UserController;
 use Models\CodeAde;
+use Models\Course;
+use Models\DailySchedule;
 use Models\Model;
 use Models\User;
 use Models\WeeklySchedule;
@@ -349,118 +351,40 @@ class SecretaryView extends UserView
         return $view;
     }
 
-    public function displayComputerRoomSchedule(){
-        return '<div id="schedule-container">
-                    <div></div>
-                    <div class="container-horaire">
-                         <h3 class="text-horaire">LUNDI</h3>
-                    </div>
-                    <div class="container-horaire">
-                        <h3 class="text-horaire">MARDI</h3>
-                    </div>
-                    <div class="container-horaire">
-                        <h3 class="text-horaire">MERCREDI</h3>
-                    </div>
-                    <div class="container-horaire">
-                        <h3 class="text-horaire">JEUDI</h3>
-                    </div>
-                    <div class="container-horaire">
-                        <h3 class="text-horaire">VENDREDI</h3>
-                    </div>
-                    
-                    <p class="hour-text">8h15 - 10h15</p>
-                    <div class="container-matiere green">
-                        <p class="text-matiere">R3.01 - ANGLAIS</p>
-                        <p class="text-prof">SLEZAK Eileen</p>
-                        <p class="text-salle">A-002</p>
-                    </div>   
-                    <div class="container-matiere green">
-                        <p class="text-matiere">R3.01 - ANGLAIS</p>
-                        <p class="text-prof">SLEZAK Eileen</p>
-                        <p class="text-salle">A-002</p>
-                    </div>  
-                    <div class="container-matiere green">
-                        <p class="text-matiere">R3.01 - ANGLAIS</p>
-                        <p class="text-prof">SLEZAK Eileen</p>
-                        <p class="text-salle">A-002</p>
-                    </div>  
-                    <div>
-                    </div>  
-                    <div>
-                    </div> 
-                    
-                    <p class="hour-text">10h35 - 12h15</p>
-                    <div class="container-matiere red">
-                        <p class="text-matiere">R3.01 - ANGLAIS</p>
-                        <p class="text-prof">SLEZAK Eileen</p>
-                        <p class="text-salle">A-002</p>
-                    </div>   
-                    <div class="container-matiere pink">
-                        <p class="text-matiere">R3.01 - ANGLAIS</p>
-                        <p class="text-prof">SLEZAK Eileen</p>
-                        <p class="text-salle">A-002</p>
-                    </div>  
-                    <div class="container-matiere yellow">
-                        <p class="text-matiere">R3.01 - ANGLAIS</p>
-                        <p class="text-prof">SLEZAK Eileen</p>
-                        <p class="text-salle">A-002</p>
-                    </div>  
-                    <div class="container-matiere yellow">
-                        <p class="text-matiere">R3.01 - ANGLAIS</p>
-                        <p class="text-prof">SLEZAK Eileen</p>
-                        <p class="text-salle">A-002</p>
-                    </div>  
-                    <div class="container-matiere blue">
-                        <p class="text-matiere">R3.01 - ANGLAIS</p>
-                        <p class="text-prof">SLEZAK Eileen</p>
-                        <p class="text-salle">A-002</p>
-                    </div> 
-                    
-                    <p class="hour-text">13h30 - 15h15</p>
-                    <div class="container-matiere blue">
-                        <p class="text-matiere">R3.01 - ANGLAIS</p>
-                        <p class="text-prof">SLEZAK Eileen</p>
-                        <p class="text-salle">A-002</p>
-                    </div>   
-                    <div>
-                    </div>  
-                    <div>
-                    </div>  
-                    <div class="container-matiere pink">
-                        <p class="text-matiere">R3.01 - ANGLAIS</p>
-                        <p class="text-prof">SLEZAK Eileen</p>
-                        <p class="text-salle">A-002</p>
-                    </div>  
-                    <div class="container-matiere yellow">
-                        <p class="text-matiere">R3.01 - ANGLAIS</p>
-                        <p class="text-prof">SLEZAK Eileen</p>
-                        <p class="text-salle">A-002</p>
-                    </div> 
-                    
-                    <p class="hour-text">15h45 - 17h30</p>
-                    <div class="container-matiere red">
-                        <p class="text-matiere">R3.01 - ANGLAIS</p>
-                        <p class="text-prof">SLEZAK Eileen</p>
-                        <p class="text-salle">A-002</p>
-                    </div>   
-                    <div>                  
-                    </div>  
-                    <div class="container-matiere green">
-                        <p class="text-matiere">R3.01 - ANGLAIS</p>
-                        <p class="text-prof">SLEZAK Eileen</p>
-                        <p class="text-salle">A-002</p>
-                    </div>  
-                    <div class="container-matiere blue">
-                        <p class="text-matiere">R3.01 - ANGLAIS</p>
-                        <p class="text-prof">SLEZAK Eileen</p>
-                        <p class="text-salle">A-002</p>
-                    </div>  
-                    <div class="container-matiere green">
-                        <p class="text-matiere">R3.01 - ANGLAIS</p>
-                        <p class="text-prof">SLEZAK Eileen</p>
-                        <p class="text-salle">A-002</p>
-                    </div> 
-                </div>';
+    /**
+     * @param DailySchedule[] $dailySchedulesList
+     * @return string
+     */
+    public function displayComputerRoomSchedule($dailySchedulesList){
+        $dayNameList = ['LUNDI','MARDI','MERCREDI','JEUDI','VENDREDI'];
+        $view = '<div id="schedule-container">
+                     <div></div>
+                     <p class="hour-text">8h15 - 10h15</p>
+                     <p class="hour-text">10h35 - 12h15</p>
+                     <p class="hour-text">13h30 - 15h15</p>
+                     <p class="hour-text">15h45 - 17h30</p>';
+
+        for($i = 0; $i < sizeof($dailySchedulesList); ++$i){
+            $dailySchedule = $dailySchedulesList[$i];
+            $view .= '<div class="container-horaire">
+                           <h3 class="text-horaire">' . $dayNameList[$i] . '</h3>
+                      </div>';
+
+            foreach ($dailySchedule->getCourseList() as $course){
+                if($course == null){
+                    $view .= '<div></div>';
+                    continue;
+                }
+
+                $view .= '<div class="container-matiere green" style="grid-row: span ' . $course->getDuration().'">
+                             <p class="text-matiere">' . $course->getSubject() .'</p>
+                             <p class="text-prof">' . $course->getTeacher() .'</p>
+                             <p class="text-salle">' . $course->getLocation() . '</p>
+                          </div>';
+            }
+        }
+
+        return $view . '<div>';
     }
     public function displayHomePage()
     {
@@ -480,5 +404,20 @@ class SecretaryView extends UserView
         </h2>
     </footer>
     </html>';
+    }
+
+    /**
+     * @param Course[] $courseList
+     * @return void
+     */
+    public function displayScheduleConfig($courseList) : string{
+        $view = '';
+        foreach ($courseList as $course){
+            $view .= '<form style="display:flex">
+                       <p>' . $course->getSubject() . '</div>
+                       <input type=color value=' . $course->getColor() . '>
+                   </form>';
+        }
+        return $view;
     }
 }

@@ -109,6 +109,9 @@ function loadScriptsEcran()
     if (is_page('homepage')) {
         wp_enqueue_style('homepage', TV_PLUG_PATH . 'public/css/homepage.css', array(), VERSION);
     }
+    if (is_page('room-schedule')) {
+        wp_enqueue_style('room-schedule', TV_PLUG_PATH . 'public/css/room_schedule.css', array(), VERSION);
+    }
 
 
     if (is_page('tv-mode')) {
