@@ -379,7 +379,7 @@ class SecretaryView extends UserView
                 $view .= '<div class="container-matiere green" style="grid-row: span ' . $course->getDuration().'">
                              <p class="text-matiere">' . $course->getSubject() .'</p>
                              <p class="text-prof">' . $course->getTeacher() .'</p>
-                             <p class="text-salle">' . $course->getLocation() . '</p>
+                             <p class="text-salle">' . $course->getGroup() . '</p>
                           </div>';
             }
         }

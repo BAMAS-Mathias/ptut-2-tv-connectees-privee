@@ -26,8 +26,23 @@ class Course
             $this->heureFin = $duration[1];
             $this->duration = $this->calcDuration();
         }
-        $this->group = $group;
+        $this->initGroupName($group);
         $this->isDemiGroupe = false;
+    }
+
+    private function initGroupName($defaultGroupName){
+        if(preg_match("/(S[1-2])|(R[1-2])/", $this->getSubject())){
+            $this->group = 'Année 1 - ' . $defaultGroupName;
+        }
+        else if(preg_match("/(S[3-4])|(R[3-4])/", $this->getSubject())){
+            $this->group = 'Année 2 - ' . $defaultGroupName;
+        }
+        else if(preg_match("/(S[5-6])|(R[5-6])/", $this->getSubject())){
+            $this->group = 'Année 3 - ' . $defaultGroupName;
+        }
+        else{
+            $this->group = $defaultGroupName;
+        }
     }
 
     private function calcDuration(){
