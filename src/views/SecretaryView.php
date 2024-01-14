@@ -224,8 +224,8 @@ class SecretaryView extends UserView
                 $view .= 'not-';
             }
             $view .= 'available" onclick="toggleRoom(this)">
-                            <img src="'. TV_PLUG_PATH . 'public/img/lock-open.png' .'">
-                            <img src="'. TV_PLUG_PATH . 'public/img/computer-icon.png' .'">
+                            <img class="lock-open" src="'. TV_PLUG_PATH . 'public/img/lock-open.png' .'">
+                            <img class="lock-close" src="'. TV_PLUG_PATH . 'public/img/lock-close.png' .'">
                             <h1 class="label-salle">' . $room->getName() . '</h1>
                        </div>';
         }
@@ -376,7 +376,7 @@ class SecretaryView extends UserView
                     continue;
                 }
 
-                $view .= '<div class="container-matiere green" style="grid-row: span ' . $course->getDuration().'">
+                $view .= '<div class="container-matiere" style="grid-row: span ' . $course->getDuration().'; background-color: ' . $course->getColor() .'">
                              <p class="text-matiere">' . $course->getSubject() .'</p>
                              <p class="text-prof">' . $course->getTeacher() .'</p>
                              <p class="text-salle">' . $course->getGroup() . '</p>
@@ -411,13 +411,19 @@ class SecretaryView extends UserView
      * @return void
      */
     public function displayScheduleConfig($courseList) : string{
-        $view = '<div class="course-config-container">';
-        foreach ($courseList as $course){
-            $view .= '<form class="course-config">
-                       <p>' . $course->getSubject() . '</p>
-                       <input class="course-config-color-selector" type=color value='. $course->getColor() . '>
-                   </form>';
+        $view = '<form class="course-config-container" method="post" action="' . home_url('/blocks/course-color/modify') . '">';
+        $index = 0;
+
+        foreach ($courseList as $course) {
+            $view .= '<div class="course-config" style="background-color: ' . $course->getColor(). '">
+                   <p>' . $course->getSubject() . '</p>
+                   <input type="hidden" name="hidden[' . $index . ']" value="' . $course->getSubject() . '">
+                   <input name="color[' . $index . ']" class="course-config-color-selector" type="color" value="' . $course->getColor() . '">
+              </div>';
+            $index++;
         }
-        return $view . '</div>';
+
+        $view .= '<input type="submit" value="MODIFIER"></form>';
+        return $view;
     }
 }

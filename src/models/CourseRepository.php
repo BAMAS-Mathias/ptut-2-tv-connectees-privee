@@ -32,4 +32,20 @@ class CourseRepository extends Model{
         }
         return $courseList;
     }
+
+    public function modifyColor($courseName, $courseColor){
+        $sql = "UPDATE secretary_courses SET color=? WHERE name LIKE '%" . $courseName . "%'";
+        $stmt = self::getConnection()->prepare($sql);
+        $stmt->execute([$courseColor]);
+    }
+
+    public function getCourseColor($courseName) : string{
+        $sql = "SELECT * FROM secretary_courses WHERE name LIKE '%" . $courseName . "%'";
+        $stmt = self::getConnection()->prepare($sql);
+        $stmt->execute([$courseName]);
+        if($row = $stmt->fetch()){
+            return $row['color'];
+        }
+        return '#000000';
+    }
 }

@@ -368,6 +368,38 @@ function block_information_modify()
 }
 add_action( 'init', 'block_information_modify' );
 
+function course_color_modify_render_callback()
+{
+    if(is_page()) {
+        $courseController = new \Controllers\CourseController();
+        return $courseController->modifyColors();
+    }
+}
+
+/**
+ * Build a block
+ */
+function block_course_color_modify()
+{
+    register_block_type('tvconnecteeamu/modify-course-color', array(
+        'render_callback' => 'course_color_modify_render_callback'
+    ));
+}
+add_action( 'init', 'block_course_color_modify' );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
 * SCHEDULE BLOCKS
 */

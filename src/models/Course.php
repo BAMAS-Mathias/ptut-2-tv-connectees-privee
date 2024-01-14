@@ -140,7 +140,10 @@ class Course
      */
     public function getColor(): string
     {
-        return $this->color;
+        $course = preg_replace('/(TD)|(TP)|(G[0-9].?)|(\*)|(|(A$|B$)|)|(G..$)|(G.-.)|(G..-.$)|(G$)/','',$this->getSubject());
+        $course = str_replace("'","''",$course);
+        return (new CourseRepository())->getCourseColor(rtrim($course));
+
     }
 
     /**
