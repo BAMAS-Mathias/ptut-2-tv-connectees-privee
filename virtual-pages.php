@@ -268,7 +268,7 @@ add_action('ec_virtual_pages', function ($controller) {
      *  Page: /secretary/computer-rooms
      */
     $controller->addPage(new \EC\VirtualPages\Page("/secretary/computer-rooms"))
-        ->setTitle('available-computer-rooms')
+        ->setTitle('computer-rooms')
         ->setContent('
     <!-- wp:tvconnecteeamu/computer-rooms -->
     test
@@ -403,8 +403,7 @@ add_action('ec_virtual_pages', function ($controller) {
          <!-- wp:tvconnecteeamu/homepage -->
     test
     <!-- /wp:tvconnecteeamu/homepage -->
-    ')
-        ->setTemplate('header-blue.php');
+    ');
 
     $controller->addPage(new \EC\VirtualPages\Page("secretary/config-schedule"))
         ->setTitle('config-schedule')
