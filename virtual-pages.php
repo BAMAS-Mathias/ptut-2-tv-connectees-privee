@@ -388,6 +388,8 @@ add_action('ec_virtual_pages', function ($controller) {
     <!-- /wp:tvconnecteeamu/teacher-view -->
     ')
         ->setTemplate('page.php');
+
+    
     $controller->addPage(new \EC\VirtualPages\Page("secretary/rooms-available"))
         ->setTitle('rooms-available')
         ->setContent('
