@@ -92,7 +92,7 @@ function loadScriptsEcran()
         wp_enqueue_style('year-student', TV_PLUG_PATH . 'public/css/teacherSchedule.css', array(), VERSION);
     }
 
-    if(is_page('available-computer-rooms')){
+    if(is_page('computer-rooms')){
         wp_enqueue_style('teacher_search_schedule', TV_PLUG_PATH . 'public/css/availableComputerRooms.css', array(), VERSION);
         wp_enqueue_script('computer_switch_script', TV_PLUG_PATH . 'public/js/tablet-view/toggleComputerRoom.js', array(), VERSION, true);
     }
@@ -255,6 +255,34 @@ function installDatabaseEcran()
 		) $charset_collate;";
 
     dbDelta($sql);
+
+    $table_name = 'teacher';
+
+    $sql = "CREATE TABLE IF NOT EXIST $table_name (
+            id int(11) NOT NULL,
+            name varchar(50) NOT NULL";
+
+    dbDelta($sql);
+
+    $table_name = 'ecran_rooms';
+
+    $sql = "CREATE TABLE IF NOT EXIST $table_name (
+            ID int(11) NOT NULL,
+            name varchar(20) NOT NULL,
+            isComputerRoom tinyint(1) NOT NULL DEFAULT 0
+            )";
+
+    dbDelta($sql);
+
+    $table_name = "secretary_courses";
+
+    $sql = "CREATE TABLE IF NOT EXIST $table_name(
+            id int(11) NOT NULL,
+            name varchar(80) NOT NULL,
+            color varchar(7) NOT NULL)";
+
+    dbDelta($sql);
+
 }
 
 add_action('plugins_loaded', 'installDatabaseEcran');

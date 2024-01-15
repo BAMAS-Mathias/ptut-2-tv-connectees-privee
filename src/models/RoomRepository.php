@@ -36,5 +36,17 @@ class RoomRepository extends Model{
         return $roomList;
     }
 
+    public function getAllRoom(){
+        $sql = "SELECT * FROM ecran_rooms";
+        $stmt = self::getConnection()->prepare($sql);
+        $stmt->execute();
+        $roomList = [];
+
+        while($row = $stmt->fetch()){
+            $roomList[] = new Room($row['name']);
+        }
+        return $roomList;
+    }
+
 
 }

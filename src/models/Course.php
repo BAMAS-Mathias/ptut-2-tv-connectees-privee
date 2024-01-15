@@ -32,13 +32,13 @@ class Course
 
     private function initGroupName($defaultGroupName){
         if(preg_match("/(S[1-2])|(R[1-2])/", $this->getSubject())){
-            $this->group = 'Année 1 - ' . $defaultGroupName;
+            $this->group = 'BUT1 - ' . $defaultGroupName;
         }
         else if(preg_match("/(S[3-4])|(R[3-4])/", $this->getSubject())){
-            $this->group = 'Année 2 - ' . $defaultGroupName;
+            $this->group = 'BUT2 - ' . $defaultGroupName;
         }
         else if(preg_match("/(S[5-6])|(R[5-6])/", $this->getSubject())){
-            $this->group = 'Année 3 - ' . $defaultGroupName;
+            $this->group = 'BUT3 - ' . $defaultGroupName;
         }
         else{
             $this->group = $defaultGroupName;

@@ -998,14 +998,9 @@ function rooms_available_render_callback() {
     }
 }
 function block_rooms_available() {
-    wp_register_script(
-        'rooms_available-script',
-        plugins_url('path/to/your/script.js', __FILE__),
-        array('wp-blocks', 'wp-element', 'wp-data')
-    );
+
 
     register_block_type('tvconnecteeamu/rooms-available', array(
-        'editor_script' => 'rooms_available-script',
         'render_callback' => 'rooms_available_render_callback'
     ));
 }

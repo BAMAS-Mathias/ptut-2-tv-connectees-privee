@@ -53,6 +53,7 @@
     grid-column-gap: 20px;
     grid-row-gap: 10px;
     grid-template-rows: repeat(9,60px);
+    grid-template-columns: repeat(6,250px);
     justify-content: center;
 }
 
@@ -70,7 +71,6 @@
 
 
 
-
 .text-prof, .text-matiere{
     font-size: 15px !important;
     height: fit-content;
@@ -78,9 +78,20 @@
     font-weight: 600;
 }
 
-.text-salle{
+.text-matiere{
+
+    margin-top: 5%;
+}
+
+.text-prof{
+    font-size: 18px !important;
+}
+
+.text-group{
+    position: absolute;
+    bottom: -6%;
     padding-top: 5px;
-    font-size: 30px !important;
+    font-size: 22px !important;
     margin-bottom: 10px;
     font-weight: bold;
 }
