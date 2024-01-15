@@ -113,8 +113,12 @@ function loadScriptsEcran()
         wp_enqueue_style('room-schedule', TV_PLUG_PATH . 'public/css/room_schedule.css', array(), VERSION);
     }
 
+    if (is_page('secretary-config')) {
+        wp_enqueue_style('secretary-config', TV_PLUG_PATH . 'public/css/secretaryConfig.css', array(), VERSION);
+    }
+
     if(is_page('config-schedule')){
-        wp_enqueue_style('room-schedule', TV_PLUG_PATH . 'public/css/secretaryConfig.css', array(), VERSION);
+        wp_enqueue_style('room-schedule', TV_PLUG_PATH . 'public/css/secretaryConfigSchedule.css', array(), VERSION);
         wp_enqueue_script('color_update_script', TV_PLUG_PATH . 'public/js/updateConfigCourseColor.js', array(), VERSION, true);
 
     }

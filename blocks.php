@@ -389,6 +389,27 @@ add_action( 'init', 'block_course_color_modify' );
 
 
 
+function secretary_config_render_callback()
+{
+    if(is_page()) {
+        $secretaryController = new SecretaryController();
+        return $secretaryController->displayConfig();
+    }
+}
+
+/**
+ * Build a block
+ */
+function block_secretary_config()
+{
+    register_block_type('tvconnecteeamu/secretary-config', array(
+        'render_callback' => 'secretary_config_render_callback'
+    ));
+}
+add_action( 'init', 'block_secretary_config' );
+
+
+
 
 
 

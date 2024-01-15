@@ -425,5 +425,16 @@ add_action('ec_virtual_pages', function ($controller) {
     test
     <!-- /wp:tvconnecteeamu/modify-course-color -->
     ')
-        ->setTemplate('page.php');
+        ->setTemplate('header-blue.php');
+
+
+    $controller->addPage(new \EC\VirtualPages\Page("/secretary/config"))
+        ->setTitle('secretary-config')
+        ->setContent('
+
+    <!-- wp:tvconnecteeamu/secretary-config -->
+    test
+    <!-- /wp:tvconnecteeamu/secretary-config -->
+    ')
+        ->setTemplate('header-blue.php');
 });

@@ -229,4 +229,8 @@ class SecretaryController extends UserController
         $courseList = $model->getCourseList();
         return $this->view->displayScheduleConfig($courseList);
     }
+
+    public function displayConfig() : string{
+        return (new SecretaryView())->displaySecretaryConfig();
+    }
 }

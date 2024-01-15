@@ -226,6 +226,7 @@ class SecretaryView extends UserView
             $view .= 'available" onclick="toggleRoom(this)">
                             <img class="lock-open" src="'. TV_PLUG_PATH . 'public/img/lock-open.png' .'">
                             <img class="lock-close" src="'. TV_PLUG_PATH . 'public/img/lock-close.png' .'">
+                            <img class="computer-icon" src="'. TV_PLUG_PATH . 'public/img/computer-icon.png' .'">
                             <h1 class="label-salle">' . $room->getName() . '</h1>
                        </div>';
         }
@@ -441,4 +442,20 @@ class SecretaryView extends UserView
 
         return $view;
     }
+
+    public function displaySecretaryConfig(){
+        $view = '<div class=container>
+                    <a href="' . home_url('/secretary/config-schedule') . '">                   
+                        <img src="'. TV_PLUG_PATH . 'public/img/palette-icon.png' .'">    
+                        <p>COULEUR</p>                
+                    </a>
+                    <a href="' . home_url('/secretary/config-schedule') . '">
+                        <img src="'. TV_PLUG_PATH . 'public/img/group-icon.png' .'">
+                        <p>GROUPES</p>
+                    </a>
+                 </div>';
+
+        return $view;
+    }
+
 }
