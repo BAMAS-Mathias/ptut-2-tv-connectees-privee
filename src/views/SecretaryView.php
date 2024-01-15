@@ -67,7 +67,7 @@ class SecretaryView extends UserView
           <div class="h-100 p-5 text-white bg-danger border rounded-3">
             <h2 class="title-block">Interface secrétaires</h2>
             <p>Accédez au mode tablette.</p>
-            <a href="' . home_url('/tablet-view') . '" class="btn btn-dark" role="button">Voir</a>
+            <a href="' . home_url('/secretary/welcome') . '" class="btn btn-dark" role="button">Voir</a>
           </div>
         </div>
       </div>
@@ -77,7 +77,7 @@ class SecretaryView extends UserView
             <h2 class="title-block title-bold">👷 Personnel</h2>
             <p>Ajoutez des utilisateurs qui pourront à leur tour des informations, alertes, etc.</p>
             <a href="' . home_url('/creer-utilisateur') . '" class="btn btn-danger" role="button">Créer</a>
-            <a href="' . home_url('/liste-utilisateur') . '" class="btn btn-dark" role="button">Voir</a>
+            <a href="' . home_url('/users/list') . '" class="btn btn-dark" role="button">Voir</a>
           </div>
         </div>
         <div class="col-md-6">
