@@ -407,6 +407,7 @@ class SecretaryView extends UserView
             window.location.href = "https://ecran1.alwaysdata.net/secretary/welcome/"; 
         }
     </script>
+</head>
 <body onclick="redirectToNextPage()" style="cursor:pointer;">
     <div class="container">
         <h1 id="bienvenue">
