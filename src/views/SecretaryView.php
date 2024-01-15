@@ -67,7 +67,7 @@ class SecretaryView extends UserView
           <div class="h-100 p-5 text-white bg-danger border rounded-3">
             <h2 class="title-block">Interface secrétaires</h2>
             <p>Accédez au mode tablette.</p>
-            <a href="' . home_url('/secretary/welcome') . '" class="btn btn-dark" role="button">Voir</a>
+            <a href="' . home_url('/secretary/homepage') . '" class="btn btn-dark" role="button">Voir</a>
           </div>
         </div>
       </div>
