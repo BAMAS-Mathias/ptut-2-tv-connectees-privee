@@ -308,11 +308,11 @@ class SecretaryView extends UserView
     }
 
     public function displayGroupCourse($course, $halfsize = false) : string{
-        $view = '<div class="container-matiere green ';
+        $view = '<div class="container-matiere"';
         if($halfsize){
             $view .= 'demi-groupe';
         }
-        $view .= '" style="grid-column: span ' . $course->getDuration() . '">
+        $view .= '" style="grid-column: span ' . $course->getDuration() . ';background-color:' . $course->getColor() . ';">
                         <p class="text-matiere">' . $course->getSubject() . '</p>
                         <p class="text-prof">' . $course->getTeacher() . '</p>
                         <p class="text-salle">' . $course->getLocation() . '</p>
@@ -370,6 +370,9 @@ class SecretaryView extends UserView
                            <h3 class="text-horaire">' . $dayNameList[$i] . '</h3>
                       </div>';
 
+            if(empty($dailySchedule->getCourseList())){
+                $view .= '<div style="grid-row: span 8"></div>';
+            }
             foreach ($dailySchedule->getCourseList() as $course){
                 if($course == null){
                     $view .= '<div></div>';
@@ -424,6 +427,18 @@ class SecretaryView extends UserView
         }
 
         $view .= '<input type="submit" value="MODIFIER"></form>';
+        return $view;
+    }
+
+    public function displayRoomChoice($roomList) : string{
+        $view = '<form method="post" action="' . home_url("/secretary/weekly-computer-room-schedule"). '">
+                    <select name="roomName">';
+
+        foreach($roomList as $room){
+            $view .= '<option>'. $room->getName() . '</option>';
+        }
+        $view .='<input type="submit"></form>';
+
         return $view;
     }
 }

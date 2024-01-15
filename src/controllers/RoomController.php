@@ -3,13 +3,13 @@
 namespace Controllers;
 
 use Models\DailySchedule;
+use Models\RoomRepository;
 use Models\WeeklySchedule;
 use Views\SecretaryView;
 
 class RoomController{
 
     public function getRoomDailyScheduleList($roomName){
-        $roomName = 'I-010';
         $codeAde = ['8382','8380','8383','8381','8396','8397','8398','42523','42524','42525'];
         $roomDailyScheduleList = [];
         foreach($codeAde as $code){
@@ -35,12 +35,22 @@ class RoomController{
     }
 
     public function displayRoomWeeklySchedule(){
-        if(isset($_GET['roomName'])){
-            return (new SecretaryView())->displaySecretaryWelcome();
+        if(isset($_POST['roomName'])){
+            $roomName = $_POST['roomName'];
+            $_SESSION['roomName'] = $roomName;
         }
 
-        $roomName = $_GET['roomName'];
+        if(!isset($_SESSION['roomName'])){
+            return $this->displayRoomChoicePage();
+        }
+
+        $roomName = $_SESSION['roomName'];
         $dailyScheduleList = $this->getRoomDailyScheduleList($roomName);
         return (new SecretaryView())->displayComputerRoomSchedule($dailyScheduleList);
+    }
+
+    public function displayRoomChoicePage() : string{
+        $model = new RoomRepository();
+        return (new SecretaryView())->displayRoomChoice($model->getAllRoom());
     }
 }
