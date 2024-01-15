@@ -7,6 +7,7 @@ use Models\CodeAde;
 use Models\Course;
 use Models\DailySchedule;
 use Models\Model;
+use Models\Room;
 use Models\User;
 use Models\WeeklySchedule;
 
@@ -455,6 +456,59 @@ class SecretaryView extends UserView
                     </a>
                  </div>';
 
+        return $view;
+    }
+
+    public function displayRoomSchedule($dailySchedule){
+            $view =
+                '<div class="container-body">
+            <div class="container-horaire">
+                <h3 id="text-horaire">8h15 - 10h15</h3>
+            </div>
+            <div class="container-horaire">
+                <h3 id="text-horaire">10h35 - 12h15</h3>
+            </div>
+            <div class="container-horaire">
+                <h3 id="text-horaire">13h30 - 15h15</h3>
+            </div>
+            <div class="container-horaire">
+                <h3 id="text-horaire">15h45 - 17h30</h3>
+            </div>';
+
+            $courseList = $dailySchedule->getCourseList();
+            if($courseList == []){
+                $view .= '<h3 style="grid-column: span 8; justify-self: center; font-size: 32px"> Pas de cours aujourd\'hui</h2>';
+            }
+            foreach ($courseList as $course) {
+                if ($course != null) {
+                    $view .= '<div class="container-matiere green" style="grid-column: span ' . $course->getDuration() . '">
+                            <p class="text-matiere">' . $course->getSubject() . '</p>
+                            <p class="text-prof">' . $course->getTeacher() . '</p>
+                            <p class="text-salle">' . $course->getLocation() . '</p>
+                        </div>';
+                }else{
+                    $view .= '<div></div>';
+                }
+
+            }
+
+            $view .= '</div>';
+
+            return $view;
+    }
+
+    /**
+     * @param Room[] $roomList
+     * @return void
+     */
+    public function displayRoomSelection($roomList) : string{
+        $view = '<form method="post" action="' . home_url("/secretary/room-schedule") . '">
+                    <select name="roomName">';
+        foreach ($roomList as $room){
+            $view .= '<option>' . $room->getName() . '</option>';
+        }
+          $view .= '</select><input type="submit">
+                </form>';
         return $view;
     }
 

@@ -990,28 +990,6 @@ function block_weekly_computer_room_schedule() {
 }
 add_action( 'init', 'block_weekly_computer_room_schedule' );
 
-function teacher_view_render_callback() {
-    if (is_page()) {
-        $user = new TeacherController();
-        return $user->displayTeacherView();
-    }
-}
-
-function block_teacher_view() {
-    wp_register_script(
-        'teacher-view-script',
-        plugins_url('path/to/your/script.js', __FILE__),
-        array('wp-blocks', 'wp-element', 'wp-data')
-    );
-
-    register_block_type('tvconnecteeamu/teacher-view', array(
-        'editor_script' => 'teacher-view-script',
-        'render_callback' => 'teacher_view_render_callback'
-    ));
-}
-
-add_action('init', 'block_teacher_view');
-
 function rooms_available_render_callback() {
     if (is_page()) {
         $user = new SecretaryController();

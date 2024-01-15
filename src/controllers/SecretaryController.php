@@ -3,8 +3,10 @@
 namespace Controllers;
 
 use Models\CourseRepository;
+use Models\DailySchedule;
 use Models\RoomRepository;
 use Models\User;
+use Models\WeeklySchedule;
 use Views\SecretaryView;
 
 /**
@@ -133,8 +135,33 @@ class SecretaryController extends UserController
     function displayWelcomePage(){
         return $this->view->displaySecretaryWelcome();
     }
-    function displayRoomSchedule(){
-        return $this->view->displayRoomSchedule();
+
+    public function displayRoomsSelection() : string {
+        $model = new RoomRepository();
+        $roomList = $model->getAllRoom();
+        return (new SecretaryView())->displayRoomSelection($roomList);
+    }
+
+    public function displayRoomSchedule() : string{
+        if(!isset($_POST['roomName'])){
+            return $this->displayRoomsSelection();
+        }
+
+        $roomName = $_POST['roomName'];
+        $dailyScheduleRoom = new DailySchedule(date('Ymd'));
+        $codeAde = ['8382','8380','8383','8381','8396','8397','8398','42523','42524','42525'];
+        foreach ($codeAde as $code){
+            $weeklySchedule = new WeeklySchedule($code);
+            foreach ($weeklySchedule->getDailySchedules() as $dailySchedule){
+                if($dailySchedule->getDate() != date('Ymd')) continue;
+                foreach ($dailySchedule->getCourseList() as $course){
+                    if(strpos($course->getLocation(),$roomName) !== false){
+                        $dailyScheduleRoom->addExistingCourse($course);
+                    }
+                }
+            }
+        }
+        return $this->view->displayRoomSchedule($dailyScheduleRoom);
     }
 
     /**
