@@ -38,9 +38,11 @@ class DailySchedule{
             $professeur = preg_split('/(Groupe [1-9].?)|G[1-9].? |.?[0-9](ère|ème) (A|a)nnée.?|an[1-3]|[A-B].?-[1-3]/',$professeur);
             $professeur = $professeur[sizeof($professeur)-1];
 
+
             $group = preg_split('/' . $professeur . '/',$event['description']);
             $group = preg_replace(array('/G1/','/G2/','/G3/','/G4/'), array('Groupe 1', 'Groupe 2', 'Groupe 3', 'Groupe 4'),$group[0]);
             $group = str_replace(array('an1','an2','an3'),'',$group);
+            $group = $this->initGroupName($group);
         }
 
         if(isset($event['location'])){
@@ -48,6 +50,20 @@ class DailySchedule{
         }
 
         $this->courseList[] = new Course($label, $professeur, $location, $duration, $group);
+    }
+
+    public function initGroupName($profName) : string{
+        $description = preg_replace('/\s+/', ' ', $profName);
+        $descriptionSplit = explode(' ', $description);
+        $description = '';
+
+        /* Remove occasional number problem in the professor name */
+        foreach ($descriptionSplit as $descriptionPart){
+            if(is_numeric($descriptionPart) && intval($descriptionPart) > 1000) continue;
+            $description .= $descriptionPart . ' ';
+        }
+
+        return $description;
     }
 
     public function orderCourse(){
