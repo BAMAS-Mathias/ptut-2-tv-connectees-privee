@@ -357,7 +357,7 @@ class SecretaryView extends UserView
             $view .= $this->displayYearGroupRow($weeklySchedule);
         }
 
-        return $view;
+        return $view . '</div>';
     }
 
     /**
@@ -529,6 +529,16 @@ class SecretaryView extends UserView
                     </form>
                  </div>';
 
+        return $view;
+    }
+
+    public function displayAllYearSlider(){
+        $view = '<div class=all-year-container>';
+        $view .= $this->displayYearStudentScheduleView(['8382','8380','8383','8381']);
+        $view .= $this->displayYearStudentScheduleView(['8396','8397','8398']);
+        $view .= $this->displayYearStudentScheduleView(['42523','42524','42525']);
+        $view .= '</div>';
+        $view .= '<div id="animation-progress-bar"></div>';
         return $view;
     }
 

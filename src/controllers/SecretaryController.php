@@ -258,4 +258,8 @@ class SecretaryController extends UserController
     public function displayConfig() : string{
         return (new SecretaryView())->displaySecretaryConfig();
     }
+
+    public function displayAllYearSchedule(){
+        return (new SecretaryView())->displayAllYearSlider();
+    }
 }

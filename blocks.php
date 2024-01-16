@@ -1101,3 +1101,18 @@ function block_unlock_room() {
 }
 
 add_action('init', 'block_unlock_room');
+
+function all_year_schedule_callback() {
+    if (is_page()) {
+        return (new SecretaryController())->displayAllYearSchedule();
+    }
+}
+function block_all_year_schedule() {
+
+    register_block_type('tvconnecteeamu/all-years', array(
+        'editor_script' => 'homepage-script',
+        'render_callback' => 'all_year_schedule_callback'
+    ));
+}
+
+add_action('init', 'block_all_year_schedule');

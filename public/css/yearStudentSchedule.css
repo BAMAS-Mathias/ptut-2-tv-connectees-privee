@@ -73,6 +73,85 @@
     margin-top: 15px;
 }
 
+@keyframes slide {
+    0%{
+        transform: translate(0,0);
+    }
+
+    33%{
+        transform: translate(0,0);
+    }
+
+    34%{
+        transform: translate(calc(-100%/3));
+    }
+
+    63%{
+        transform: translate(calc(-100%/3));
+    }
+
+    64%{
+        transform: translate(calc(-200%/3));
+    }
+
+    99%{
+        transform: translate(calc(-200%/3));
+    }
+
+    100%{
+        transform: translate(calc(-200%/3));
+    }
+
+    100%{
+        transform: translate(calc(-300%/3));
+    }
+}
+
+main{
+    overflow: hidden;
+}
+
+.all-year-container{
+    display: flex;
+    width: 300vw;
+    animation: slide 30s ease-in infinite;
+}
+
+.all-year-container #schedule-container{
+    margin: 3vh;
+}
+
+@keyframes bar-animation {
+    from{
+        width: 0;
+    }
+    to{
+        width: 80vw;
+    }
+}
+
+#animation-progress-bar{
+    position: absolute;
+    border-radius: 10px;
+    bottom: 5vh;
+    left: 10vw;
+    width: 80vw;
+    height: 13px;
+    background-color: #3d3d3d;
+    z-index: 2;
+}
+
+#animation-progress-bar:before{
+    content: ' ';
+    position: absolute;
+    width: 80vw;
+    z-index: 1;
+    height: 100%;
+    background-color: #F0AB02;
+    animation: bar-animation 10s infinite;
+    border-radius: 10px;
+}
+
 
 
 

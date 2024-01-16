@@ -87,7 +87,7 @@ function loadScriptsEcran()
         wp_enqueue_style('teacher_schedule', TV_PLUG_PATH . 'public/css/teacherSchedule.css', array(), VERSION);
     }
 
-    if(is_page('year-student-schedule')){
+    if(is_page('year-student-schedule') || is_page('all-years')){
         wp_enqueue_style('teacher_schedule', TV_PLUG_PATH . 'public/css/yearStudentSchedule.css', array(), VERSION);
         wp_enqueue_style('year-student', TV_PLUG_PATH . 'public/css/teacherSchedule.css', array(), VERSION);
     }

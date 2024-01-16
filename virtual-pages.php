@@ -470,4 +470,14 @@ add_action('ec_virtual_pages', function ($controller) {
     <!-- /wp:tvconnecteeamu/room-unlock-action -->
     ')
         ->setTemplate('header-orange.php');
+
+    $controller->addPage(new \EC\VirtualPages\Page("/secretary/all-years"))
+        ->setTitle('all-years')
+        ->setContent('
+
+    <!-- wp:tvconnecteeamu/all-years -->
+    test
+    <!-- /wp:tvconnecteeamu/all-years -->
+    ')
+        ->setTemplate('secretary-tv.php');
 });
