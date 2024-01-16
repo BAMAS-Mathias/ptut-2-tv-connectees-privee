@@ -143,10 +143,8 @@ class SecretaryController extends UserController
     }
 
     public function displayRoomSchedule() : string{
-        if(!isset($_POST['roomName'])){
-            return $this->displayRoomsSelection();
-        }
-
+        $view = $this->displayRoomsSelection();
+        if(!isset($_POST['roomName'])) return $view;
         $roomName = $_POST['roomName'];
         $dailyScheduleRoom = new DailySchedule(date('Ymd'));
         $codeAde = ['8382','8380','8383','8381','8396','8397','8398','42523','42524','42525'];
@@ -155,13 +153,13 @@ class SecretaryController extends UserController
             foreach ($weeklySchedule->getDailySchedules() as $dailySchedule){
                 if($dailySchedule->getDate() != date('Ymd')) continue;
                 foreach ($dailySchedule->getCourseList() as $course){
-                    if(strpos($course->getLocation(),$roomName) !== false){
+                    if($course != null && strpos($course->getLocation(),$roomName) !== false){
                         $dailyScheduleRoom->addExistingCourse($course);
                     }
                 }
             }
         }
-        return $this->view->displayRoomSchedule($dailyScheduleRoom);
+        return $view . $this->view->displayRoomSchedule($dailyScheduleRoom);
     }
 
     /**

@@ -237,19 +237,12 @@ class SecretaryView extends UserView
 
     public function displayStudentGroupView(){
         $schedule = new WeeklySchedule('42525');
-        $view = '<div class="container-body">
-                    <div class="container-horaire">
-                        <h3 id="text-horaire">8h15 - 10h15</h3>
-                    </div>
-                    <div class="container-horaire">
-                        <h3 id="text-horaire">10h35 - 12h15</h3>
-                    </div>
-                    <div class="container-horaire">
-                        <h3 id="text-horaire">13h30 - 15h15</h3>
-                    </div>
-                    <div class="container-horaire">
-                        <h3 id="text-horaire">15h45 - 17h30</h3>
-                    </div>';
+        $view = '<div class="container-body">               
+                    <p id="text-horaire">8h15 - 10h15</p>        
+                    <p id="text-horaire">10h35 - 12h15</p>      
+                    <p id="text-horaire">13h30 - 15h15</p> 
+                    <p id="text-horaire">15h45 - 17h30</p>
+                    ';
 
         foreach($schedule->getDailySchedules() as $dailySchedule){
             if($dailySchedule->getDate() != date('Ymd')) continue;
@@ -325,19 +318,11 @@ class SecretaryView extends UserView
     /* TEMPORAIRE */
     public function displayYearStudentScheduleView($groupCodeNumbers){
         $view = '<div id="schedule-container">
-                    <div></div>
-                    <div class="container-horaire">
-                         <h3 id="text-horaire">8h15 - 10h15</h3>
-                    </div>
-                    <div class="container-horaire">
-                        <h3 id="text-horaire">10h35 - 12h15</h3>
-                    </div>
-                    <div class="container-horaire">
-                        <h3 id="text-horaire">13h30 - 15h15</h3>
-                    </div>
-                    <div class="container-horaire">
-                        <h3 id="text-horaire">15h45 - 17h30</h3>
-                    </div>
+                    <div></div>                  
+                        <p id="text-horaire">8h15 - 10h15</p>                  
+                        <p id="text-horaire">10h35 - 12h15</p>                                   
+                        <p id="text-horaire">13h30 - 15h15</h3>
+                        <p id="text-horaire">15h45 - 17h30</p>                    
                     ';
 
         $groupIndex = 1;
@@ -368,9 +353,7 @@ class SecretaryView extends UserView
 
         for($i = 0; $i < sizeof($dailySchedulesList); ++$i){
             $dailySchedule = $dailySchedulesList[$i];
-            $view .= '<div class="container-horaire">
-                           <h3 class="text-horaire">' . $dayNameList[$i] . '</h3>
-                      </div>';
+            $view .= '<p class="text-horaire">' . $dayNameList[$i] . '</p>';
 
             if(empty($dailySchedule->getCourseList())){
                 $view .= '<div style="grid-row: span 8"></div>';
@@ -461,19 +444,12 @@ class SecretaryView extends UserView
 
     public function displayRoomSchedule($dailySchedule){
             $view =
-                '<div class="container-body">
-            <div class="container-horaire">
-                <h3 id="text-horaire">8h15 - 10h15</h3>
-            </div>
-            <div class="container-horaire">
-                <h3 id="text-horaire">10h35 - 12h15</h3>
-            </div>
-            <div class="container-horaire">
-                <h3 id="text-horaire">13h30 - 15h15</h3>
-            </div>
-            <div class="container-horaire">
-                <h3 id="text-horaire">15h45 - 17h30</h3>
-            </div>';
+                '<div class="container-body">       
+                <p id="text-horaire">8h15 - 10h15</p>   
+                <p id="text-horaire">10h35 - 12h15</p>                    
+                <p id="text-horaire">13h30 - 15h15</p>          
+                <p id="text-horaire">15h45 - 17h30</p>
+            ';
 
             $courseList = $dailySchedule->getCourseList();
             if($courseList == []){
@@ -502,12 +478,16 @@ class SecretaryView extends UserView
      * @return void
      */
     public function displayRoomSelection($roomList) : string{
-        $view = '<form method="post" action="' . home_url("/secretary/room-schedule") . '">
-                    <select name="roomName">';
+        $view = '<form id="room-choice-form" method="post" action="' . home_url("/secretary/room-schedule") . '">
+                    <select name="roomName" >';
+        if(isset($_POST['roomName'])){
+            $view .= '<option value="" disabled selected hidden>' . $_POST['roomName'] . '</option>';
+        }
         foreach ($roomList as $room){
             $view .= '<option>' . $room->getName() . '</option>';
         }
-          $view .= '</select><input type="submit">
+          $view .= '</select>
+                        <input type=image  src="https://cdn-icons-png.flaticon.com/512/694/694985.png">
                 </form>';
         return $view;
     }
