@@ -1049,18 +1049,55 @@ function schedule_config_homepage() {
 
 add_action('init', 'schedule_config_homepage');
 
-function lock_room_callback() {
+function lock_room_visual_callback() {
     if (is_page()) {
         $user = new \Controllers\RoomController();
         return $user->displayRoomLockForm();
     }
 }
-function block_lock_room() {
+function block_lock_room_visual() {
 
     register_block_type('tvconnecteeamu/lock-room', array(
+        'editor_script' => 'homepage-script',
+        'render_callback' => 'lock_room_visual_callback'
+    ));
+}
+
+add_action('init', 'block_lock_room_visual');
+
+
+function lock_room_callback() {
+    if (is_page()) {
+        $user = new \Controllers\RoomController();
+        $user->lockRoom();
+        return (new \Views\SecretaryView())->displaySecretaryWelcome();
+    }
+}
+function block_lock_room() {
+
+    register_block_type('tvconnecteeamu/room-lock-action', array(
         'editor_script' => 'homepage-script',
         'render_callback' => 'lock_room_callback'
     ));
 }
 
 add_action('init', 'block_lock_room');
+
+
+
+function unlock_room_callback() {
+    if (is_page()) {
+        $user = new \Controllers\RoomController();
+        $user->unlockRoom();
+        return (new \Views\SecretaryView())->displaySecretaryWelcome();
+    }
+}
+function block_unlock_room() {
+
+    register_block_type('tvconnecteeamu/room-unlock-action', array(
+        'editor_script' => 'homepage-script',
+        'render_callback' => 'unlock_room_callback'
+    ));
+}
+
+add_action('init', 'block_unlock_room');

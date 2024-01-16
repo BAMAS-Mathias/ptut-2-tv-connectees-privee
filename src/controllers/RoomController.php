@@ -64,6 +64,18 @@ class RoomController{
     public function lockRoom(){
         if(!isset($_POST['roomName'])) return;
         $roomName = $_POST['roomName'];
+        $endDate = str_replace('T',' ',$_POST['endDate']);
+        $motif = $_POST['motif'];
+        $model = new RoomRepository();
 
+        $model->lockRoom($roomName, $motif, $endDate);
+        echo $endDate;
+    }
+
+    public function unlockRoom(){
+        if(!isset($_POST['roomName'])) return;
+        $roomName = $_POST['roomName'];
+        $model = new RoomRepository();
+        $model->unlockRoom($roomName);
     }
 }

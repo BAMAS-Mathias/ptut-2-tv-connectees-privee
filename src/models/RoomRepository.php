@@ -48,5 +48,38 @@ class RoomRepository extends Model{
         return $roomList;
     }
 
+    public function lockRoom($roomName, $motif, $endDate){
+        $sql = "INSERT INTO secretary_lock_room(roomName, motif, lockEndDate) VALUES (?,?,?)";
+        $stmt = self::getConnection()->prepare($sql);
+        $stmt->execute([$roomName,$motif, $endDate]);
+    }
+
+    public function isRoomLocked($roomName){
+        $date = date('Y-m-d H:i:s');
+        $sql = "SELECT * FROM secretary_lock_room WHERE roomName = ? AND lockEndDate > ?";
+        $stmt = self::getConnection()->prepare($sql);
+        $stmt->execute([$roomName,$date]);
+        if($stmt->fetch()){
+            return true;
+        }
+        return false;
+    }
+
+    public function getMotifLock($roomName){
+        $sql = "SELECT * FROM secretary_lock_room WHERE roomName = ?";
+        $stmt = self::getConnection()->prepare($sql);
+        $stmt->execute([$roomName]);
+        if($row = $stmt->fetch()){
+            return [$row['motif'],$row['lockEndDate']];
+        }
+        return null;
+    }
+
+    public function unlockRoom($roomName){
+        $sql = "DELETE FROM secretary_lock_room WHERE roomName = ?";
+        $stmt = self::getConnection()->prepare($sql);
+        $stmt->execute([$roomName]);
+    }
+
 
 }

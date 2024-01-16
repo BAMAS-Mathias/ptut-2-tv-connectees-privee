@@ -215,6 +215,10 @@ class SecretaryView extends UserView
         </div>';
     }
 
+    /**
+     * @param Room[] $computerRoomList
+     * @return string
+     */
     public function displayComputerRoomsAvailable($computerRoomList){
         $view =
             '<div id="main-container">';
@@ -222,7 +226,15 @@ class SecretaryView extends UserView
         foreach($computerRoomList as $room){
             $view .= '';
             if(!$room->isAvailable()){
-                $view .= '<form class="room not-available">';
+                $view .= '<div class="room not-available">';
+            }
+            if($room->isLocked()){
+                $view .= '<div class="room locked">
+                            <div class="lock-reasons">        
+                                <p>' . $room->getMotifLock() . '</p>' .
+                                '<p>' . date("d/m/Y \à h\hm",strtotime($room->getEndLockDate())) . '</p>' .
+                                '<form action="' . home_url("/secretary/room/unlock") . '" method="post"><input type="hidden" name="roomName" value="' . $room->getName() . '"><input type="submit" value="Deverouiller"></form>' .
+                            '</div>' ;
             }
             else{
                 $view .= '<form class="room available" method="post" action="' . home_url("/secretary/lock-room") . '">
@@ -233,8 +245,13 @@ class SecretaryView extends UserView
                             <img class="lock-open" src="'. TV_PLUG_PATH . 'public/img/lock-open.png' .'">
                             <img class="lock-close" src="'. TV_PLUG_PATH . 'public/img/lock-close.png' .'">
                             <img class="computer-icon" src="'. TV_PLUG_PATH . 'public/img/computer-icon.png' .'">
-                            <h1 class="label-salle">' . $room->getName() . '</h1>
-                       </form>';
+                            <h1 class="label-salle">' . $room->getName() . '</h1>';
+
+            if(!$room->isLocked() && $room->isAvailable()){
+                $view .= '</form>';
+            }else{
+                $view .= '</div>';
+            }
         }
 
         return $view . '</div>';
@@ -504,10 +521,10 @@ class SecretaryView extends UserView
     public function displayRoomLock($roomName){
         $view = '<div class="lock-room-form-container">
                     <h3>Verrouiller la salle ' . $roomName .  '</h3>
-                    <form>
+                    <form method="post" action="' . home_url("/secretary/room/lock") . '">
+                        <input type="hidden" name="roomName" value="' . $roomName . '">
                         <label>Motif</label><textarea name="motif"></textarea>
-                        <label>Date de fin</label><input type="date" required> 
-                        <label>Heure</label><input type="time" required>
+                        <label>Date de fin</label><input name="endDate" type="datetime-local" required> 
                         <input type="submit" value="Verrouiller">
                     </form>
                  </div>';

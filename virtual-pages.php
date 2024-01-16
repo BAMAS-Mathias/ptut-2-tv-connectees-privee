@@ -448,4 +448,26 @@ add_action('ec_virtual_pages', function ($controller) {
     <!-- /wp:tvconnecteeamu/lock-room -->
     ')
         ->setTemplate('header-orange.php');
+
+
+    $controller->addPage(new \EC\VirtualPages\Page("/secretary/room/lock"))
+        ->setTitle('room-lock-action')
+        ->setContent('
+
+    <!-- wp:tvconnecteeamu/room-lock-action -->
+    test
+    <!-- /wp:tvconnecteeamu/room-lock-action -->
+    ')
+        ->setTemplate('header-orange.php');
+
+
+    $controller->addPage(new \EC\VirtualPages\Page("/secretary/room/unlock"))
+        ->setTitle('room-unlock-action')
+        ->setContent('
+
+    <!-- wp:tvconnecteeamu/room-unlock-action -->
+    test
+    <!-- /wp:tvconnecteeamu/room-unlock-action -->
+    ')
+        ->setTemplate('header-orange.php');
 });
