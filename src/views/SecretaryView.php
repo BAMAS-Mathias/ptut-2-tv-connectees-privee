@@ -534,9 +534,9 @@ class SecretaryView extends UserView
 
     public function displayAllYearSlider(){
         $view = '<div class=all-year-container>';
-        $view .= $this->displayYearStudentScheduleView(['8382','8380','8383','8381']);
-        $view .= $this->displayYearStudentScheduleView(['8396','8397','8398']);
-        $view .= $this->displayYearStudentScheduleView(['42523','42524','42525']);
+        $view .= '<div class="year-container">' . '<h2>BUT 1</h2>' . $this->displayYearStudentScheduleView(['8382','8380','8383','8381']) . '</div>';
+        $view .= '<div class="year-container">' . '<h2>BUT 2</h2>' . $this->displayYearStudentScheduleView(['8396','8397','8398']) . '</div>';
+        $view .= '<div class="year-container">' . '<h2>BUT 3</h2>' . $this->displayYearStudentScheduleView(['42523','42524','42525']) . '</div>';
         $view .= '</div>';
         $view .= '<div id="animation-progress-bar"></div>';
         return $view;
