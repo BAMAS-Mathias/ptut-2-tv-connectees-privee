@@ -10,7 +10,7 @@
     padding-top: 10px;
 }
 
-.room img:nth-child(1), .room img:nth-child(2){
+.lock-open, .lock-close{
     width: 60px;
     height: 60px;
     position: absolute;
@@ -20,7 +20,7 @@
     padding-bottom: 7px;
 }
 
-.room img:nth-child(3){
+.computer-icon{
     width: 90px;
     height: 90px;
 }
@@ -80,4 +80,26 @@
 
 .not-available .lock-close{
     display: block;
+}
+
+.lock-room-form-container{
+    display: flex;
+    flex-direction: column;
+    margin: 10vh auto;
+}
+
+.lock-room-form-container label{
+    padding-top: 20px;
+}
+
+.lock-room-form-container form{
+    display: flex;
+    flex-direction: column;
+    width: 40vw;
+    max-width: 500px;
+}
+
+.lock-room-form-container input[type=submit]{
+    margin-top: 50px;
+    height: 60px;
 }

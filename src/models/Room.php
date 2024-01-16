@@ -18,7 +18,7 @@ class Room{
         return $this->name;
     }
 
-    public function isAvailable(){
+    public function isAvailableAt($time){
         $isAvailable = true;
         $codeAde = ['8382','8380','8383','8381','8396','8397','8398','42523','42524','42525'];
         foreach($codeAde as $code){
@@ -28,10 +28,9 @@ class Room{
                 foreach ($dailySchedule->getCourseList() as $course){
                     if($course == null) continue;
                     if(strpos($course->getLocation(), $this->getName()) !== false){
-                        $currentTime = strtotime(date('G:i'));
                         $heureDebutCours = strtotime(str_replace('h',':',$course->getHeureDeb()));
                         $heureFinCours = strtotime(str_replace('h',':',$course->getHeureFin()));
-                        if($heureDebutCours < $currentTime && $heureFinCours > $currentTime){
+                        if($heureDebutCours < $time && $heureFinCours > $time){
                             $isAvailable = false;
                         }
                     }
@@ -41,5 +40,12 @@ class Room{
         return $isAvailable;
     }
 
+    public function isAvailable(){
+        return $this->isAvailableAt(strtotime(date('G:i')));
+    }
+
+    public function getAllCourseBetween($startTime, $endTime){
+
+    }
 
 }

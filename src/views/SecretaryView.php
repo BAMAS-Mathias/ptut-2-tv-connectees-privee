@@ -220,16 +220,21 @@ class SecretaryView extends UserView
             '<div id="main-container">';
 
         foreach($computerRoomList as $room){
-            $view .= '<div class="room ';
+            $view .= '';
             if(!$room->isAvailable()){
-                $view .= 'not-';
+                $view .= '<form class="room not-available">';
             }
-            $view .= 'available" onclick="toggleRoom(this)">
+            else{
+                $view .= '<form class="room available" method="post" action="' . home_url("/secretary/lock-room") . '">
+                            <input type="hidden" name=roomName value="' . $room->getName() . '">
+                            <input type="submit" style="position:absolute; opacity: 0; width: 100%; height: 100%">';
+            }
+            $view .= '
                             <img class="lock-open" src="'. TV_PLUG_PATH . 'public/img/lock-open.png' .'">
                             <img class="lock-close" src="'. TV_PLUG_PATH . 'public/img/lock-close.png' .'">
                             <img class="computer-icon" src="'. TV_PLUG_PATH . 'public/img/computer-icon.png' .'">
                             <h1 class="label-salle">' . $room->getName() . '</h1>
-                       </div>';
+                       </form>';
         }
 
         return $view . '</div>';
@@ -489,6 +494,24 @@ class SecretaryView extends UserView
           $view .= '</select>
                         <input type=image  src="https://cdn-icons-png.flaticon.com/512/694/694985.png">
                 </form>';
+        return $view;
+    }
+
+    /**
+     * @param string $room
+     * @return void
+     */
+    public function displayRoomLock($roomName){
+        $view = '<div class="lock-room-form-container">
+                    <h3>Verrouiller la salle ' . $roomName .  '</h3>
+                    <form>
+                        <label>Motif</label><textarea name="motif"></textarea>
+                        <label>Date de fin</label><input type="date" required> 
+                        <label>Heure</label><input type="time" required>
+                        <input type="submit" value="Verrouiller">
+                    </form>
+                 </div>';
+
         return $view;
     }
 

@@ -437,4 +437,15 @@ add_action('ec_virtual_pages', function ($controller) {
     <!-- /wp:tvconnecteeamu/secretary-config -->
     ')
         ->setTemplate('header-blue.php');
+
+
+    $controller->addPage(new \EC\VirtualPages\Page("/secretary/lock-room"))
+        ->setTitle('lock-room')
+        ->setContent('
+
+    <!-- wp:tvconnecteeamu/lock-room -->
+    test
+    <!-- /wp:tvconnecteeamu/lock-room -->
+    ')
+        ->setTemplate('header-orange.php');
 });

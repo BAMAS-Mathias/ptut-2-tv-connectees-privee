@@ -92,9 +92,8 @@ function loadScriptsEcran()
         wp_enqueue_style('year-student', TV_PLUG_PATH . 'public/css/teacherSchedule.css', array(), VERSION);
     }
 
-    if(is_page('computer-rooms')){
+    if(is_page('computer-rooms') || is_page('lock-room')){
         wp_enqueue_style('teacher_search_schedule', TV_PLUG_PATH . 'public/css/availableComputerRooms.css', array(), VERSION);
-        wp_enqueue_script('computer_switch_script', TV_PLUG_PATH . 'public/js/tablet-view/toggleComputerRoom.js', array(), VERSION, true);
     }
     if (is_page('teacher-view')) {
         wp_enqueue_style('teacher_view', TV_PLUG_PATH . 'public/css/teacherview.css', array(), VERSION);

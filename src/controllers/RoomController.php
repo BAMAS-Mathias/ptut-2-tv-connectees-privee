@@ -53,4 +53,17 @@ class RoomController{
         $model = new RoomRepository();
         return (new SecretaryView())->displayRoomChoice($model->getAllRoom());
     }
+
+    public function displayRoomLockForm(){
+        if(!isset($_POST['roomName'])) return;
+        $roomName = $_POST['roomName'];
+        $view = new SecretaryView();
+        return $view->displayRoomLock($roomName);
+    }
+
+    public function lockRoom(){
+        if(!isset($_POST['roomName'])) return;
+        $roomName = $_POST['roomName'];
+
+    }
 }
