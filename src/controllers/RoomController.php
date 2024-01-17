@@ -84,9 +84,8 @@ class RoomController extends UserController {
         $endDate = str_replace('T',' ',$_POST['endDate']);
         $motif = $_POST['motif'];
         $model = new RoomRepository();
-
         $model->lockRoom($roomName, $motif, $endDate);
-        echo $endDate;
+        return "<script>location.href = '". home_url('/secretary/computer-rooms') . "'</script>";
     }
 
     public function unlockRoom(){
@@ -94,5 +93,6 @@ class RoomController extends UserController {
         $roomName = $_POST['roomName'];
         $model = new RoomRepository();
         $model->unlockRoom($roomName);
+        return "<script>location.href = '". home_url('/secretary/computer-rooms') . "'</script>";
     }
 }

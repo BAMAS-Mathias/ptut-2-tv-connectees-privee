@@ -1076,8 +1076,7 @@ add_action('init', 'block_lock_room_visual');
 function lock_room_callback() {
     if (is_page()) {
         $user = new \Controllers\RoomController();
-        $user->lockRoom();
-        return (new \Views\SecretaryView())->displaySecretaryWelcome();
+        return $user->lockRoom();
     }
 }
 function block_lock_room() {
@@ -1095,8 +1094,7 @@ add_action('init', 'block_lock_room');
 function unlock_room_callback() {
     if (is_page()) {
         $user = new \Controllers\RoomController();
-        $user->unlockRoom();
-        return (new \Views\SecretaryView())->displaySecretaryWelcome();
+        return $user->unlockRoom();
     }
 }
 function block_unlock_room() {
