@@ -392,13 +392,13 @@ class SecretaryView extends UserView
     {
         return '
     <body>
-        <div class="container">
+        <a class="container" href="' . home_url("secretary/welcome") . '">
             <h1 id="bienvenue">
                 BIENVENUE AU BUT <br>
                 INFORMATIQUE <br>
                 D\'AIX-MARSEILLE
             </h1>
-        </div>
+        </a>
     </body>
     
     </html>';
