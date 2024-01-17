@@ -293,6 +293,25 @@ function installDatabaseEcran()
 
     dbDelta($sql);
 
+    $table_name = "ecran_ade_years";
+
+    $sql = "CREATE TABLE $table_name (
+            code int(11) NOT NULL,
+            year int(11) NOT NULL)";
+
+    dbDelta($sql);
+
+    $table_name = "secretary_lock_room";
+
+    $sql = "CREATE TABLE $table_name (
+              roomName varchar(20) NOT NULL,
+              motif varchar(300) NOT NULL,
+              lockEndDate datetime NOT NULL)";
+
+    dbDelta($sql);
+
+
+
 }
 
 add_action('plugins_loaded', 'installDatabaseEcran');
