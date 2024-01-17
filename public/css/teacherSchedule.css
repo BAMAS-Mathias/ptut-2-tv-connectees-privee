@@ -37,13 +37,14 @@
 }
 
 .container-body {
+    margin: 0 2.5vw;
     width: 95vw;
     height: 60vh;
     display: grid;
     column-gap: 30px;
     align-items: center;
     justify-content: center;
-    grid-template-columns: repeat(8,150px);
+    grid-template-columns: repeat(8,10vw);
     grid-row-gap: 20px;
     grid-template-rows: repeat(8,125px);
 }

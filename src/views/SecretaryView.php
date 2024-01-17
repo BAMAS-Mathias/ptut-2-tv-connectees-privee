@@ -567,7 +567,7 @@ class SecretaryView extends UserView
                             }
               $view .= '</div>';
 
-        $view .= '<form method="post"><select name="codeAde">';
+        $view .= '<form method="post" class="add-ade-code-form"><select name="codeAde">';
         foreach($codeWithNoYearList as $code){
             $view .= '<option>' . $code . '</option>';
         }
