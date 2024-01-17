@@ -228,7 +228,7 @@ class SecretaryView extends UserView
             if(!$room->isAvailable()){
                 $view .= '<div class="room not-available">';
             }
-            if($room->isLocked()){
+            else if($room->isLocked()){
                 $view .= '<div class="room locked">
                             <div class="lock-reasons">        
                                 <p>' . $room->getMotifLock() . '</p>' .
