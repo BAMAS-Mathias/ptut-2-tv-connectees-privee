@@ -1,34 +1,39 @@
 <?php
-
 /**
- * Virtual Pages
+ * Ce code gère la création de pages virtuelles dans WordPress en utilisant le plugin EC Virtual Pages.
+ * Il initialise le contrôleur de page, configure les actions et les filtres nécessaires pour gérer les pages virtuelles,
+ * et ajoute des commentaires pour expliquer certaines parties du code.
  */
 
+// Importe les classes nécessaires depuis le namespace EC\VirtualPages.
 use EC\VirtualPages\PageControllerInterface;
 use EC\VirtualPages\PageController;
-
 use EC\VirtualPages\TemplateLoaderInterface;
 use EC\VirtualPages\TemplateLoader;
-
 use EC\VirtualPages\PageInterface;
 
+// Crée une instance du contrôleur de page en utilisant le TemplateLoader.
 $controller = new PageController(new TemplateLoader());
 
+// Initialise le contrôleur de page lors de l'initialisation de WordPress.
 add_action('init', array( $controller, 'init' ));
 
+// Filtre la demande de parse_request pour dispatcher les pages virtuelles.
 add_filter('do_parse_request', array( $controller, 'dispatch' ), PHP_INT_MAX, 2);
 
+// Ajoute une action pour réinitialiser la variable virtual_page après la fin de la boucle WordPress.
 add_action('loop_end', function (\WP_Query $query) {
     if (isset($query->virtual_page) && ! empty($query->virtual_page)) {
         $query->virtual_page = null;
     }
 });
 
+// Filtre la génération de permalien pour les pages virtuelles.
 add_filter('the_permalink', function ($plink) {
     global $post, $wp_query;
     if (
         $wp_query->is_page && isset($wp_query->virtual_page)
-        && $wp_query->virtual_page instanceof Page
+        && $wp_query->virtual_page instanceof PageInterface
         && isset($post->is_virtual) && $post->is_virtual
     ) {
         $plink = home_url($wp_query->virtual_page->getUrl());

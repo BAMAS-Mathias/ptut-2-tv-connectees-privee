@@ -1,5 +1,11 @@
 <?php
+/**
+ * Ce code semble être une partie d'un plugin ou d'un thème WordPress, où des contrôleurs, des vues et des fonctionnalités spécifiques pour une vue tablette sont définis.
+ * Il importe différentes classes de contrôleurs et de vues.
+ *
+ */
 
+// Importe les contrôleurs nécessaires.
 use Controllers\AlertController;
 use Controllers\CodeAdeController;
 use Controllers\InformationController;
@@ -11,37 +17,45 @@ use Controllers\TelevisionController;
 use Controllers\UserController;
 use Controllers\TabletModeController;
 
+// Importe les vues nécessaires.
 use Views\HelpMapView;
 use Views\TabletModeScheduleView;
 
+// Importe la vue UserView.
 use UserViews\UserView;
 
-/*
-* TABLET VIEW BLOCKS
-*/
 
-/* Schedule render function */
+/**
+ * Fonction de rappel pour le rendu de l'emploi du temps en mode tablette.
+ * Cette fonction semble être destinée à être utilisée comme rappel de rendu pour une page WordPress.
+ * Elle crée une instance de la vue TabletModeScheduleView et l'affiche.
+ *
+ * @return string Le contenu HTML de la vue TabletModeScheduleView.
+ */
 function tablet_schedule_render_callback()
 {
-  if(is_page()) {
-    $view = new TabletModeScheduleView();
-    return $view->display();
-  }
+    if (is_page()) {
+        $view = new TabletModeScheduleView();
+        return $view->display();
+    }
 }
 
-/* Schedule */
+/**
+ * Fonction pour enregistrer le bloc de l'emploi du temps en mode tablette.
+ * Elle enregistre un script JavaScript pour le bloc, spécifie le script de l'éditeur et définit la fonction de rappel de rendu.
+ */
 function block_tablet_schedule()
 {
-  wp_register_script(
-    'tablet-schedule-script',
-    plugins_url( 'blocks/tablet-mode/schedule/index.js', __FILE__ ),
-    array( 'wp-blocks', 'wp-element', 'wp-data' )
-  );
+    wp_register_script(
+        'tablet-schedule-script',
+        plugins_url('blocks/tablet-mode/schedule/index.js', __FILE__),
+        array('wp-blocks', 'wp-element', 'wp-data')
+    );
 
-  register_block_type('tvconnecteeamu/tablet-schedule', array(
-    'editor_script' => 'tablet-schedule-script',
-    'render_callback' => 'tablet_schedule_render_callback'
-  ));
+    register_block_type('tvconnecteeamu/tablet-schedule', array(
+        'editor_script' => 'tablet-schedule-script',
+        'render_callback' => 'tablet_schedule_render_callback'
+    ));
 }
 
 add_action('init', 'block_tablet_schedule');
