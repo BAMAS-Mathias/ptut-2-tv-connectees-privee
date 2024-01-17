@@ -438,8 +438,11 @@ function schedule_render_callback()
   else if(members_current_user_has_role("directeuretude")) {
     $controller = new StudyDirectorController();
   } else if (members_current_user_has_role("enseignant")) {
-    $controller = new TeacherController();
-  } else if (members_current_user_has_role("technicien")) {
+      $controller = new TeacherController();
+  } else if (members_current_user_has_role("computerroom")) {
+      $controller = new \Controllers\RoomController();
+  }
+  else if (members_current_user_has_role("technicien")) {
     $controller = new TechnicianController();
   } else if (members_current_user_has_role("administrator") || members_current_user_has_role("secretaire")) {
     $controller = new SecretaryController();

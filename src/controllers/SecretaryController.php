@@ -252,6 +252,11 @@ class SecretaryController extends UserController
     public function displayScheduleConfig(){
         $model = new CourseRepository();
         $courseList = $model->getCourseList();
+        if(isset($_POST['modif-color'])){
+            (new CourseController())->modifyColors();
+            (new NotificationController())->displaySuccessNotification('Couleurs modifiées avec succès');
+        }
+
         return $this->view->displayScheduleConfig($courseList);
     }
 

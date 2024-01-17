@@ -74,6 +74,7 @@ function loadScriptsEcran()
      if (!is_admin()) wp_deregister_script('jquery');
      
      wp_enqueue_style('style_ecran', TV_PLUG_PATH . 'public/css/style.css', array(), VERSION);
+     wp_enqueue_style('style_notif', TV_PLUG_PATH . 'public/css/secretary-notification.css', array(), VERSION);
 
     if(is_page('secretary-welcome')){
         wp_enqueue_style('welcome_secretary', TV_PLUG_PATH . 'public/css/secretaryAccueil.css', array(), VERSION);
@@ -354,6 +355,14 @@ $result = add_role(
 $result = add_role(
     'informationposter',
     __('informationPoster'),
+    array(
+        'read' => true,  // true allows this capability
+    )
+);
+
+$result = add_role(
+    'computerroom',
+    __('ComputerRoom'),
     array(
         'read' => true,  // true allows this capability
     )

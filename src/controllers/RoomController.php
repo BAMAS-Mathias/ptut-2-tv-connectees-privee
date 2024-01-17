@@ -4,10 +4,26 @@ namespace Controllers;
 
 use Models\DailySchedule;
 use Models\RoomRepository;
+use Models\User;
 use Models\WeeklySchedule;
 use Views\SecretaryView;
 
-class RoomController{
+class RoomController extends UserController {
+
+    private $view;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->view = new SecretaryView();
+    }
+
+    /**
+     * @return mixed|string
+     */
+    public function displayContent() {
+        return $this->displayRoomWeeklySchedule();
+    }
 
     public function getRoomDailyScheduleList($roomName){
         $codeAde = ['8382','8380','8383','8381','8396','8397','8398','42523','42524','42525'];

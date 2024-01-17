@@ -172,6 +172,7 @@ class SecretaryView extends UserView
               <option value="television">Télévision</option>
               <option value="technician">Technicien</option>
               <option value"studyDirector">Directeur d\'études</option>
+              <option value="computerroom">Salle informatique</option>
             </select>
           </div>
           
@@ -421,7 +422,7 @@ class SecretaryView extends UserView
      * @return void
      */
     public function displayScheduleConfig($courseList) : string{
-        $view = '<form class="course-config-container" method="post" action="' . home_url('/blocks/course-color/modify') . '">';
+        $view = '<form class="course-config-container" method="post">';
         $index = 0;
 
         foreach ($courseList as $course) {
@@ -433,7 +434,7 @@ class SecretaryView extends UserView
             $index++;
         }
 
-        $view .= '<input type="submit" value="MODIFIER"></form>';
+        $view .= '<input type="submit" name="modif-color" value="MODIFIER"></form>';
         return $view;
     }
 

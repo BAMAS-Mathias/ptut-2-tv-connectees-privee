@@ -15,7 +15,6 @@ class CourseController extends Controller{
                 $this->updateCourseColor($hiddenName, $colorValue);
             }
         }
-        (new SecretaryView())->displayScheduleConfig((new CourseRepository())->getCourseList());
     }
 
     public function updateCourseColor($courseName, $color){

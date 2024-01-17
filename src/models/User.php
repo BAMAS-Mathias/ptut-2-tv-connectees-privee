@@ -37,7 +37,7 @@ class User extends Model implements Entity, JsonSerializable
     private $email;
 
     /**
-     * @var string (Student | Teacher | Television | Secretary | Study Director | Technician)
+     * @var string (Student | Teacher | Television | Secretary | Study Director | Technician | Computer Room)
      */
     private $role;
 
