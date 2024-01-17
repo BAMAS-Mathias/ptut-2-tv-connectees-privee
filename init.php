@@ -268,7 +268,7 @@ function installDatabaseEcran()
 
     $table_name = 'teacher';
 
-    $sql = "CREATE TABLE IF NOT EXIST $table_name (
+    $sql = "CREATE TABLE IF NOT EXISTS $table_name (
             id int(11) NOT NULL,
             name varchar(50) NOT NULL";
 
@@ -276,7 +276,7 @@ function installDatabaseEcran()
 
     $table_name = 'ecran_rooms';
 
-    $sql = "CREATE TABLE IF NOT EXIST $table_name (
+    $sql = "CREATE TABLE IF NOT EXISTS $table_name (
             ID int(11) NOT NULL,
             name varchar(20) NOT NULL,
             isComputerRoom tinyint(1) NOT NULL DEFAULT 0
@@ -286,7 +286,7 @@ function installDatabaseEcran()
 
     $table_name = "secretary_courses";
 
-    $sql = "CREATE TABLE IF NOT EXIST $table_name(
+    $sql = "CREATE TABLE IF NOT EXISTS $table_name(
             id int(11) NOT NULL,
             name varchar(80) NOT NULL,
             color varchar(7) NOT NULL)";
@@ -295,7 +295,7 @@ function installDatabaseEcran()
 
     $table_name = "ecran_ade_years";
 
-    $sql = "CREATE TABLE $table_name (
+    $sql = "CREATE TABLE IF NOT EXISTS $table_name (
             code int(11) NOT NULL,
             year int(11) NOT NULL)";
 
@@ -303,7 +303,7 @@ function installDatabaseEcran()
 
     $table_name = "secretary_lock_room";
 
-    $sql = "CREATE TABLE $table_name (
+    $sql = "CREATE TABLE IF NOT EXISTS $table_name (
               roomName varchar(20) NOT NULL,
               motif varchar(300) NOT NULL,
               lockEndDate datetime NOT NULL)";
