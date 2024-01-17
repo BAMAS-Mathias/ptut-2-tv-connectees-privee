@@ -44,7 +44,7 @@ class Teacher extends User
             foreach ($weeklySchedule->getDailySchedules() as $dailySchedule){
                 if($dailySchedule->getDate() != date('Ymd')) continue;
                 foreach ($dailySchedule->getCourseList() as $course){
-                    if($course != null && strpos($course->getTeacher(), $teacherName) !== false){
+                    if($course != null && strpos($course->getTeacher(), $teacherName) !== false && !in_array($course,$teacherDailySchedule->getCourseList())){
                         $teacherDailySchedule->addExistingCourse($course);
                     }
                 }

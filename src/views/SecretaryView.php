@@ -343,10 +343,10 @@ class SecretaryView extends UserView
     public function displayYearStudentScheduleView($groupCodeNumbers){
         $view = '<div id="schedule-container">
                     <div></div>                  
-                        <p id="text-horaire">8h15 - 10h15</p>                  
-                        <p id="text-horaire">10h35 - 12h15</p>                                   
-                        <p id="text-horaire">13h30 - 15h15</h3>
-                        <p id="text-horaire">15h45 - 17h30</p>                    
+                        <div class="container-horaire"><p id="text-horaire">8h15 - 10h15</p></div>                  
+                        <div class="container-horaire"><p id="text-horaire">10h35 - 12h15</p></div>                                   
+                        <div class="container-horaire"><p id="text-horaire">13h30 - 15h15</h3></div>
+                        <div class="container-horaire"><p id="text-horaire">15h45 - 17h30</p></div>                    
                     ';
 
         $groupIndex = 1;
@@ -410,11 +410,7 @@ class SecretaryView extends UserView
             </h1>
         </div>
     </body>
-    <footer>
-        <h2>
-            . <!-- Ne pas enlever -->
-        </h2>
-    </footer>
+    
     </html>';
     }
 
@@ -435,7 +431,7 @@ class SecretaryView extends UserView
             $index++;
         }
 
-        $view .= '<input type="submit" name="modif-color" value="MODIFIER"></form>';
+        $view .= '<input id="submitBtn" type="submit" style="grid-column: 1/-1;" name="modif-color" value="MODIFIER"></form>';
         return $view;
     }
 
@@ -456,7 +452,11 @@ class SecretaryView extends UserView
         $view = '<div class=container>
                     <a href="' . home_url('/secretary/config-schedule') . '">                   
                         <img src="'. TV_PLUG_PATH . 'public/img/palette-icon.png' .'">    
-                        <p>COULEUR</p>                
+                        <p>COULEURS</p>                
+                    </a>
+                    <a href="' . home_url('/secretary/config-computer-room') . '">                   
+                        <img src="'. TV_PLUG_PATH . 'public/img/computer-icon.png' .'">    
+                        <p>SALLES MACHINES</p>                
                     </a>
                     <a href="' . home_url('/secretary/config-ade') . '">
                         <img src="'. TV_PLUG_PATH . 'public/img/group-icon.png' .'">
@@ -470,10 +470,10 @@ class SecretaryView extends UserView
     public function displayRoomSchedule($dailySchedule){
             $view =
                 '<div class="container-body">       
-                <p id="text-horaire">8h15 - 10h15</p>   
-                <p id="text-horaire">10h35 - 12h15</p>                    
-                <p id="text-horaire">13h30 - 15h15</p>          
-                <p id="text-horaire">15h45 - 17h30</p>
+                <div class="container-horaire"><p id="text-horaire">8h15 - 10h15</p></div>
+                <div class="container-horaire"><p id="text-horaire">10h35 - 12h15</p></div>                    
+                <div class="container-horaire"><p id="text-horaire">13h30 - 15h15</p></div>          
+                <div class="container-horaire"><p id="text-horaire">15h45 - 17h30</p></div>
             ';
 
             $courseList = $dailySchedule->getCourseList();
@@ -563,7 +563,7 @@ class SecretaryView extends UserView
         $view = '<div class="year-container">';
         $view .= '<div class="codeList">';
                             foreach ($model->getCodeOfAYear($year) as $code){
-                                $view .= '<form method="post"><p>' . $code . '</p><input type="hidden" name="code" value="' . $code . '"><input name="deleteAde" value="Supprimer" type="submit" src="https://cdn-icons-png.flaticon.com/512/860/860829.png"></form>';
+                                $view .= '<form method="post"><p>' . $code . '</p><input type="hidden" name="code" value="' . $code . '"><input class="delete-btn" name="deleteAde" value="Supprimer" type="submit" src="https://cdn-icons-png.flaticon.com/512/860/860829.png"></form>';
                             }
               $view .= '</div>';
 

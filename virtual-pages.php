@@ -495,4 +495,14 @@ add_action('ec_virtual_pages', function ($controller) {
     <!-- /wp:tvconnecteeamu/config-ade -->
     ')
         ->setTemplate('header-orange.php');
+
+    $controller->addPage(new \EC\VirtualPages\Page("/secretary/config-computer-room"))
+        ->setTitle('config-computer-room')
+        ->setContent('
+
+    <!-- wp:tvconnecteeamu/config-computer-room -->
+    
+    <!-- /wp:tvconnecteeamu/config-computer-room -->
+    ')
+        ->setTemplate('header-orange.php');
 });

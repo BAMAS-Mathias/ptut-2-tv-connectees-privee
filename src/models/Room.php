@@ -6,6 +6,7 @@ class Room{
     private string $name;
     private string $motifLock;
     private string $endLockDate;
+    private bool $isSalleMachine;
 
     /**
      * @param string $name
@@ -13,6 +14,7 @@ class Room{
     public function __construct(string $name)
     {
         $this->name = $name;
+        $this->isSalleMachine = false;
     }
 
     public function getName(): string
@@ -90,6 +92,12 @@ class Room{
     {
         $this->endLockDate = $endLockDate;
     }
+
+    public function isSalleMachine(): bool
+    {
+        return $this->isSalleMachine = in_array($this, (new RoomRepository())->getAllComputerRooms());
+    }
+
 
 
 

@@ -120,26 +120,45 @@ class TeacherView extends UserView
                 <h3 id="text-horaire">15h45 - 17h30</h3>
             </div>';
 
-            $courseList = $dailySchedule->getCourseList();
-            if($courseList == []){
-                $view .= '<h3 style="grid-column: span 8; justify-self: center; font-size: 32px"> Pas de cours aujourd\'hui</h2>';
-            }
-            foreach ($courseList as $course) {
-                if ($course != null) {
-                    $view .= '<div class="container-matiere green" style="grid-column: span ' . $course->getDuration() . '">
+        $courseList = $dailySchedule->getCourseList();
+        if($courseList == []){
+            $view .= '<h3 style="grid-column: span 8; justify-self: center; font-size: 32px"> Pas de cours aujourd\'hui</h2>';
+        }
+
+        foreach ($courseList as $course) {
+            if ($course != null) {
+                $view .= '<div class="container-matiere green" style="grid-column: span ' . $course->getDuration() . '">
                             <p class="text-matiere">' . $course->getSubject() . '</p>
                             <p class="text-prof">' . $course->getTeacher() . '</p>
                             <p class="text-salle">' . $course->getLocation() . '</p>
                         </div>';
-                }else{
-                    $view .= '<div></div>';
-                }
+            }else{
+                $view .= '<div></div>';
+            }
 
         }
 
         $view .= '</div>';
 
         return $view;
+    }
+
+    public function displaySalleMachineConfig($roomList) : string{
+        $view = '<form class=all-room-container method="post">';
+        $index = 0;
+        foreach ($roomList as $room){
+            $view .= '<div class="room-container">
+                        <p>' . $room->getName() . '</p>
+                        <input name="hidden[' . $index . ']' . '" type="hidden" value="' . $room->getName() . '"' . '</input>
+                        <input name="check[' . $index . ']' . '" type=checkbox ';
+            if($room->isSalleMachine()){
+                $view .= 'checked';
+            }
+            $view .= '      
+                    ></div>';
+            ++$index;
+        }
+        return $view . '<input type="submit"></form>';
     }
 
 }

@@ -1138,3 +1138,21 @@ function block_config_ade() {
 }
 
 add_action('init', 'block_config_ade');
+
+
+
+function config_computer_room_callback() {
+    if (is_page()) {
+        return (new \Controllers\RoomController())->displayComputerRoomConfig();
+    }
+}
+
+function block_config_computer_room() {
+
+    register_block_type('tvconnecteeamu/config-computer-room', array(
+        'editor_script' => 'homepage-script',
+        'render_callback' => 'config_computer_room_callback'
+    ));
+}
+
+add_action('init', 'block_config_computer_room');

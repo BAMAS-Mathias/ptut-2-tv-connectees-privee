@@ -8,6 +8,7 @@ use Models\RoomRepository;
 use Models\User;
 use Models\WeeklySchedule;
 use Views\SecretaryView;
+use Views\TeacherView;
 
 class RoomController extends UserController {
 
@@ -94,5 +95,24 @@ class RoomController extends UserController {
         $model = new RoomRepository();
         $model->unlockRoom($roomName);
         return "<script>location.href = '". home_url('/secretary/computer-rooms') . "'</script>";
+    }
+
+    public function displayComputerRoomConfig(){
+        if(isset($_POST['check'])){
+            $this->updateComputerRooms();
+        }
+        $roomList = (new RoomRepository())->getAllRoom();
+        return (new TeacherView())->displaySalleMachineConfig($roomList);
+    }
+
+    public function updateComputerRooms(){
+        $model = new RoomRepository();
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['check']) && is_array($_POST['check']) && isset($_POST['hidden']) && is_array($_POST['hidden'])) {
+            $model->resetComputerRoomCheck();
+            foreach ($_POST['check'] as $index => $checkValue) {
+                $hiddenName = isset($_POST['hidden'][$index]) ? $_POST['hidden'][$index] : '';
+                $model->updateComputerRoom($hiddenName, 1);
+            }
+        }
     }
 }

@@ -81,5 +81,16 @@ class RoomRepository extends Model{
         $stmt->execute([$roomName]);
     }
 
+    public function resetComputerRoomCheck(){
+        $sql = "UPDATE ecran_rooms SET isComputerRoom=0";
+        $stmt = self::getConnection()->prepare($sql);
+        $stmt->execute([]);
+    }
+    public function updateComputerRoom($roomName, $value){
+        $sql = "UPDATE ecran_rooms SET isComputerRoom=? WHERE name=?";
+        $stmt = self::getConnection()->prepare($sql);
+        $stmt->execute([$value,$roomName]);
+    }
+
 
 }

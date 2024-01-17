@@ -117,6 +117,9 @@ function loadScriptsEcran()
     if (is_page('config-ade')) {
         wp_enqueue_style('secretary-config', TV_PLUG_PATH . 'public/css/secretary-ade-config.css', array(), VERSION);
     }
+    if (is_page('config-computer-room')) {
+        wp_enqueue_style('secretary-room-config', TV_PLUG_PATH . 'public/css/computerRoomConfig.css', array(), VERSION);
+    }
 
     if(is_page('config-schedule')){
         wp_enqueue_style('room-schedule', TV_PLUG_PATH . 'public/css/secretaryConfigSchedule.css', array(), VERSION);
@@ -125,8 +128,8 @@ function loadScriptsEcran()
 
     if(is_page('all-years') || is_page('weekly-computer-room-schedule/')){
         wp_enqueue_script('refreshAuto', TV_PLUG_PATH . 'public/js/refreshAtAnHour.js', array(), VERSION);
-
     }
+
     if (is_page('tv-mode')) {
         /* STYLESHEETS */
         wp_enqueue_style('alert_ecran', TV_PLUG_PATH . 'public/css/alert.css', array(), VERSION);
