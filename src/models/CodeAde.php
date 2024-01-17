@@ -101,6 +101,16 @@ class CodeAde extends Model implements Entity, JsonSerializable
         $request->execute([$code]);
     }
 
+    public function getAllAdeCode(){
+        $codeList = [];
+        $request = $this->getDatabase()->prepare('SELECT code FROM ecran_ade_years');
+        $request->execute();
+        while($row = $request->fetch()){
+            $codeList[] .= $row['code'];
+        }
+        return $codeList;
+    }
+
     /**
      * @inheritDoc
      */
@@ -113,6 +123,7 @@ class CodeAde extends Model implements Entity, JsonSerializable
 
         return $request->rowCount();
     }
+
 
     /**
      * @inheritDoc

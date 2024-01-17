@@ -112,6 +112,7 @@ main{
 }
 
 .all-year-container{
+    margin-top: 30px;
     display: flex;
     width: 300vw;
     animation: slide 30s ease-in infinite;

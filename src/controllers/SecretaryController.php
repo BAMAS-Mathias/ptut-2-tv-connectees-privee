@@ -148,7 +148,7 @@ class SecretaryController extends UserController
         if(!isset($_POST['roomName'])) return $view;
         $roomName = $_POST['roomName'];
         $dailyScheduleRoom = new DailySchedule(date('Ymd'));
-        $codeAde = ['8382','8380','8383','8381','8396','8397','8398','42523','42524','42525'];
+        $codeAde = (new CodeAde())->getAllAdeCode();
         foreach ($codeAde as $code){
             $weeklySchedule = new WeeklySchedule($code);
             foreach ($weeklySchedule->getDailySchedules() as $dailySchedule){
@@ -234,13 +234,14 @@ class SecretaryController extends UserController
 
     public function displayYearStudentSchedule(){
         $year = $_GET['year'];
+        $model = new CodeAde();
         switch ($year){
             case '1':
-                return $this->view->displayYearStudentScheduleView(['8382','8380','8383','8381']);
+                return $this->view->displayYearStudentScheduleView($model->getCodeOfAYear(1));
             case '2':
-                return $this->view->displayYearStudentScheduleView(['8396','8397','8398']);
+                return $this->view->displayYearStudentScheduleView($model->getCodeOfAYear(2));
             case '3':
-                return $this->view->displayYearStudentScheduleView(['42523','42524','42525']);
+                return $this->view->displayYearStudentScheduleView($model->getCodeOfAYear(3));
             default:
                 return $this->view->displayYearStudentScheduleView([]);
         }
@@ -275,8 +276,6 @@ class SecretaryController extends UserController
         }
         if(isset($_POST['deleteAde'])){
             (new CodeAde())->deleteYearForCode($_POST['code']);
-        }else{
-            echo 'test';
         }
 
         return (new SecretaryView())->displayCodeAdeConfigPage();

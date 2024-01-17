@@ -173,6 +173,7 @@ class SecretaryView extends UserView
               <option value="technician">Technicien</option>
               <option value"studyDirector">Directeur d\'études</option>
               <option value="computerroom">Salle informatique</option>
+              <option value="secretarytv">Tele secretaire</option>
             </select>
           </div>
           
@@ -439,13 +440,14 @@ class SecretaryView extends UserView
     }
 
     public function displayRoomChoice($roomList) : string{
-        $view = '<form method="post" action="' . home_url("/secretary/weekly-computer-room-schedule"). '">
-                    <select name="roomName">';
+        $view = '<form style="width: 100vw; display:flex;flex-direction:column;align-items: center; gap:20px;padding: 38vh 0; justify-content:center;" method="post" action="' . home_url("/secretary/weekly-computer-room-schedule"). '">
+                    <h2 style="font-size: 40px; font-weight: bold">Selectionner une salle a afficher</h2>
+                    <select style="width: 400px; height: 60px; font-size: 20px; text-align: center" name="roomName">';
 
         foreach($roomList as $room){
             $view .= '<option>'. $room->getName() . '</option>';
         }
-        $view .='<input type="submit"></form>';
+        $view .='<input style="width: 400px; border:none; font-size: 25px; background-color: #F0AB02; height: 50px" type="submit" value="Afficher"></form>';
 
         return $view;
     }
@@ -456,7 +458,7 @@ class SecretaryView extends UserView
                         <img src="'. TV_PLUG_PATH . 'public/img/palette-icon.png' .'">    
                         <p>COULEUR</p>                
                     </a>
-                    <a href="' . home_url('/secretary/config-schedule') . '">
+                    <a href="' . home_url('/secretary/config-ade') . '">
                         <img src="'. TV_PLUG_PATH . 'public/img/group-icon.png' .'">
                         <p>GROUPES</p>
                     </a>
@@ -561,7 +563,7 @@ class SecretaryView extends UserView
         $view = '<div class="year-container">';
         $view .= '<div class="codeList">';
                             foreach ($model->getCodeOfAYear($year) as $code){
-                                $view .= '<form method="post"><p>' . $code . '</p><input type="hidden" name="code" value="' . $code . '"><input name="deleteAde" type="submit" src="https://cdn-icons-png.flaticon.com/512/860/860829.png"></form>';
+                                $view .= '<form method="post"><p>' . $code . '</p><input type="hidden" name="code" value="' . $code . '"><input name="deleteAde" value="Supprimer" type="submit" src="https://cdn-icons-png.flaticon.com/512/860/860829.png"></form>';
                             }
               $view .= '</div>';
 

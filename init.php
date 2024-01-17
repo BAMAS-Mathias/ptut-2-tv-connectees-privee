@@ -88,7 +88,7 @@ function loadScriptsEcran()
         wp_enqueue_style('teacher_schedule', TV_PLUG_PATH . 'public/css/teacherSchedule.css', array(), VERSION);
     }
 
-    if(is_page('year-student-schedule') || is_page('all-years')){
+    if(is_page('year-student-schedule') || is_page('all-years') || members_current_user_has_role("secretarytv") ){
         wp_enqueue_style('teacher_schedule', TV_PLUG_PATH . 'public/css/yearStudentSchedule.css', array(), VERSION);
         wp_enqueue_style('year-student', TV_PLUG_PATH . 'public/css/teacherSchedule.css', array(), VERSION);
     }
@@ -121,10 +121,12 @@ function loadScriptsEcran()
     if(is_page('config-schedule')){
         wp_enqueue_style('room-schedule', TV_PLUG_PATH . 'public/css/secretaryConfigSchedule.css', array(), VERSION);
         wp_enqueue_script('color_update_script', TV_PLUG_PATH . 'public/js/updateConfigCourseColor.js', array(), VERSION, true);
-
     }
 
+    if(is_page('all-years') || is_page('weekly-computer-room-schedule/')){
+        wp_enqueue_script('refreshAuto', TV_PLUG_PATH . 'public/js/refreshAtAnHour.js', array(), VERSION);
 
+    }
     if (is_page('tv-mode')) {
         /* STYLESHEETS */
         wp_enqueue_style('alert_ecran', TV_PLUG_PATH . 'public/css/alert.css', array(), VERSION);
@@ -367,6 +369,14 @@ $result = add_role(
 $result = add_role(
     'computerroom',
     __('ComputerRoom'),
+    array(
+        'read' => true,  // true allows this capability
+    )
+);
+
+$result = add_role(
+    'secretarytv',
+    __('secretaryTV'),
     array(
         'read' => true,  // true allows this capability
     )

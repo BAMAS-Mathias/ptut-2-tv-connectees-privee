@@ -2,6 +2,7 @@
 
 namespace Controllers;
 
+use Models\CodeAde;
 use Models\DailySchedule;
 use Models\RoomRepository;
 use Models\User;
@@ -26,7 +27,7 @@ class RoomController extends UserController {
     }
 
     public function getRoomDailyScheduleList($roomName){
-        $codeAde = ['8382','8380','8383','8381','8396','8397','8398','42523','42524','42525'];
+        $codeAde = (new CodeAde())->getAllAdeCode();
         $roomDailyScheduleList = [];
         foreach($codeAde as $code){
             $weeklySchedule = new WeeklySchedule($code);

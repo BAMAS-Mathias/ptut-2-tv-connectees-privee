@@ -423,18 +423,6 @@ function block_secretary_config()
 add_action( 'init', 'block_secretary_config' );
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 /*
 * SCHEDULE BLOCKS
 */
@@ -458,6 +446,8 @@ function schedule_render_callback()
   }
   else if (members_current_user_has_role("technicien")) {
     $controller = new TechnicianController();
+  } else if (members_current_user_has_role("secretarytv")) {
+    $controller = new \Controllers\SecretaryTvController();
   } else if (members_current_user_has_role("administrator") || members_current_user_has_role("secretaire")) {
     $controller = new SecretaryController();
   } else {
