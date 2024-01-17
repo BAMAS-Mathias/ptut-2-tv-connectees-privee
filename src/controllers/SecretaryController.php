@@ -2,6 +2,7 @@
 
 namespace Controllers;
 
+use Models\CodeAde;
 use Models\CourseRepository;
 use Models\DailySchedule;
 use Models\RoomRepository;
@@ -266,5 +267,18 @@ class SecretaryController extends UserController
 
     public function displayAllYearSchedule(){
         return (new SecretaryView())->displayAllYearSlider();
+    }
+
+    public function displayCodeAdeConfigPage(){
+        if(isset($_POST['addCode'])){
+            (new CodeAde())->addYearForCode($_POST['codeAde'],$_POST['year']);
+        }
+        if(isset($_POST['deleteAde'])){
+            (new CodeAde())->deleteYearForCode($_POST['code']);
+        }else{
+            echo 'test';
+        }
+
+        return (new SecretaryView())->displayCodeAdeConfigPage();
     }
 }

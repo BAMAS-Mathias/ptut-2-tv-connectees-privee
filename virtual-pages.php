@@ -479,4 +479,15 @@ add_action('ec_virtual_pages', function ($controller) {
     <!-- /wp:tvconnecteeamu/all-years -->
     ')
         ->setTemplate('secretary-tv.php');
+
+
+    $controller->addPage(new \EC\VirtualPages\Page("/secretary/config-ade"))
+        ->setTitle('config-ade')
+        ->setContent('
+
+    <!-- wp:tvconnecteeamu/config-ade -->
+    
+    <!-- /wp:tvconnecteeamu/config-ade -->
+    ')
+        ->setTemplate('header-orange.php');
 });

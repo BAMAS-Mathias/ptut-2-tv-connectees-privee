@@ -1119,3 +1119,20 @@ function block_all_year_schedule() {
 }
 
 add_action('init', 'block_all_year_schedule');
+
+
+
+function config_ade_callback() {
+    if (is_page()) {
+        return (new SecretaryController())->displayCodeAdeConfigPage();
+    }
+}
+function block_config_ade() {
+
+    register_block_type('tvconnecteeamu/config-ade', array(
+        'editor_script' => 'homepage-script',
+        'render_callback' => 'config_ade_callback'
+    ));
+}
+
+add_action('init', 'block_config_ade');

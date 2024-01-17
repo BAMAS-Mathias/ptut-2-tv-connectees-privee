@@ -543,4 +543,37 @@ class SecretaryView extends UserView
         return $view;
     }
 
+    public function displayCodeAdeConfigPage(){
+
+        $view = '<div class="all-year-container">';
+        $view .= $this->getYearViewPart(1);
+        $view .= $this->getYearViewPart(2);
+        $view .= $this->getYearViewPart(3);
+
+        $view .= '</div>';
+        return $view;
+    }
+
+    public function getYearViewPart($year){
+        $model = new CodeAde();
+        $codeWithNoYearList = $model->getCodeWithNoYearSet();
+
+        $view = '<div class="year-container">';
+        $view .= '<div class="codeList">';
+                            foreach ($model->getCodeOfAYear($year) as $code){
+                                $view .= '<form method="post"><p>' . $code . '</p><input type="hidden" name="code" value="' . $code . '"><input name="deleteAde" type="submit" src="https://cdn-icons-png.flaticon.com/512/860/860829.png"></form>';
+                            }
+              $view .= '</div>';
+
+        $view .= '<form method="post"><select name="codeAde">';
+        foreach($codeWithNoYearList as $code){
+            $view .= '<option>' . $code . '</option>';
+        }
+        $view .= '</select>
+                  <input type="hidden" name="year" value="' . $year . '">
+                  <input type="submit" name="addCode" value="Ajouter">
+                </form></div>';
+         return $view;
+    }
+
 }

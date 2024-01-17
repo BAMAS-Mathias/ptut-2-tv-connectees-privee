@@ -71,6 +71,36 @@ class CodeAde extends Model implements Entity, JsonSerializable
         return $request->rowCount();
     }
 
+    public function getCodeWithNoYearSet(){
+        $codeList = [];
+        $request = $this->getDatabase()->prepare('SELECT * FROM ecran_code_ade WHERE ecran_code_ade.code NOT IN (SELECT code FROM ecran_ade_years)');
+        $request->execute();
+        while($row = $request->fetch()){
+            $codeList[] = $row['code'];
+        }
+        return $codeList;
+    }
+
+    public function getCodeOfAYear($year){
+        $codeList = [];
+        $request = $this->getDatabase()->prepare('SELECT code FROM ecran_ade_years WHERE year = ?');
+        $request->execute([$year]);
+        while($row = $request->fetch()){
+            $codeList[] = $row['code'];
+        }
+        return $codeList;
+    }
+
+    public function addYearForCode($code, $year){
+        $request = $this->getDatabase()->prepare('INSERT INTO ecran_ade_years VALUES (?,?)');
+        $request->execute([$code,$year]);
+    }
+
+    public function deleteYearForCode($code){
+        $request = $this->getDatabase()->prepare('DELETE FROM ecran_ade_years WHERE code=?');
+        $request->execute([$code]);
+    }
+
     /**
      * @inheritDoc
      */
