@@ -154,7 +154,7 @@ class SecretaryController extends UserController
             foreach ($weeklySchedule->getDailySchedules() as $dailySchedule){
                 if($dailySchedule->getDate() != date('Ymd')) continue;
                 foreach ($dailySchedule->getCourseList() as $course){
-                    if($course != null && strpos($course->getLocation(),$roomName) !== false){
+                    if($course != null && strpos($course->getLocation(),$roomName) !== false && !in_array($course,$dailyScheduleRoom->getCourseList())){
                         $dailyScheduleRoom->addExistingCourse($course);
                     }
                 }

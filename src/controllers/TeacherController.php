@@ -104,7 +104,6 @@ class TeacherController extends UserController implements Schedule
     public function displayTeacherDailySchedule() : string{
         $teacherName = $_POST['teacherName'];
         $dailySchedule = $this->model->getTeacherSchedule($teacherName);
-        echo sizeof($dailySchedule->getCourseList());
         return $this->view->displayTeacherDailySchedule($dailySchedule);
     }
 
