@@ -30,6 +30,7 @@ class WeeklySchedule
         $ics_data = $datas[0];
         $dayOfTheWeek = 0;
 
+        /** Parcours le fichier ICS pour recuperer tous les events */
         if (isset($ics_data['events'])) {
             foreach (array_keys((array)$ics_data['events']) as $year) {
                 for ($m = 1; $m <= 12; $m++) {

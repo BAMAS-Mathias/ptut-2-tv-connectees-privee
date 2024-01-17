@@ -218,20 +218,26 @@ class SecretaryController extends UserController
         $user->delete();
     }
 
+    /** Affiche les salles info disponibles
+     * @return string
+     */
     public function displayComputerRoomsAvailable(){
         $model = new RoomRepository();
         $roomList = $model->getAllComputerRooms();
         return $this->view->displayComputerRoomsAvailable($roomList);
     }
+
+
     public function displayRoomsAvailable(): string
     {
         return $this->view->displayRoomsAvailable();
     }
 
-    public function displayStudentGroupView(){
-        return $this->view->displayStudentGroupView();
-    }
 
+    /** Affiche l'emploi du temps d'une année
+     * TODO gestion erreur
+     * @return string
+     */
     public function displayYearStudentSchedule(){
         $year = $_GET['year'];
         $model = new CodeAde();

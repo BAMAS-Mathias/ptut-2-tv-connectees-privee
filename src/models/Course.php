@@ -20,6 +20,7 @@ class Course
         $this->subject = $subject;
         $this->teacher = $teacher;
         $this->location = $location;
+
         if(!empty($duration)) {
             $duration = preg_split("/ - /",$duration);
             $this->heureDeb = $duration[0];
@@ -30,6 +31,10 @@ class Course
         $this->isDemiGroupe = false;
     }
 
+    /** Formate le nom des groupes
+     * @param $defaultGroupName
+     * @return void
+     */
     private function initGroupName($defaultGroupName){
         if(preg_match("/(S[1-2])|(R[1-2])/", $this->getSubject())){
             $this->group = 'BUT1 - ' . $defaultGroupName;
@@ -45,6 +50,9 @@ class Course
         }
     }
 
+    /** Calcule le nombre d'heure que dure un cours
+     * @return int
+     */
     private function calcDuration(){
         $listeHorraireDebut = ["8:15","9:15","10:40","11:15","13:30","14:35","15:40","16:25"];
         $listeHorraireFin = ["9:15","10:15","11:00","12:15","14:25","15:20","16:30","17:30"];
@@ -55,6 +63,7 @@ class Course
             $heureFinCours = strtotime(str_replace('h',':',$this->getHeureFin()));
             $heureDebutCours = strtotime(str_replace('h',':',$this->getHeureDeb()));
 
+            /** Si le cours est dans la tranche horaire */
             if($heureDebutCours <= strtotime($listeHorraireDebut[$indexHorraire])){
                 if($heureFinCours >= strtotime($listeHorraireFin[$indexHorraire])) {
                     $duration++;

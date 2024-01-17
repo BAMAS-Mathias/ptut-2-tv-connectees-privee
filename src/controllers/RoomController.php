@@ -27,9 +27,15 @@ class RoomController extends UserController {
         return $this->displayRoomWeeklySchedule();
     }
 
+    /** Renvois l'emploi du temps d'une salle
+     * @param $roomName
+     * @return array
+     */
     public function getRoomDailyScheduleList($roomName){
         $codeAde = (new CodeAde())->getAllAdeCode();
         $roomDailyScheduleList = [];
+
+        // Parcours tous les cours possibles
         foreach($codeAde as $code){
             $weeklySchedule = new WeeklySchedule($code);
             for($i = 0; $i < sizeof($weeklySchedule->getDailySchedules()); ++$i){
@@ -105,6 +111,9 @@ class RoomController extends UserController {
         return (new TeacherView())->displaySalleMachineConfig($roomList);
     }
 
+    /** Met a jours les salles machines
+     * @return void
+     */
     public function updateComputerRooms(){
         $model = new RoomRepository();
         if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['check']) && is_array($_POST['check']) && isset($_POST['hidden']) && is_array($_POST['hidden'])) {

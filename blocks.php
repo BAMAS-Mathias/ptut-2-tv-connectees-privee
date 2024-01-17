@@ -903,27 +903,6 @@ add_action( 'init', 'block_year_student_schedule' );
 
 
 /**
- * Function of the block
- *
- * @return string
- */
-function group_student_schedule_render_callback()
-{
-    if(is_page()) {
-        $user = new SecretaryController();
-        return $user->displayStudentGroupView();
-    }
-}
-
-/**
- * Build a block
- */
-function block_group_student_schedule() {
-    register_block_type('tvconnecteeamu/group-student-schedule', array(
-        'render_callback' => 'group_student_schedule_render_callback'
-    ));
-}
-add_action( 'init', 'block_group_student_schedule' );
 
 
 /**

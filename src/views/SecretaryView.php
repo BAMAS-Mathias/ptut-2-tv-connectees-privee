@@ -205,6 +205,9 @@ class SecretaryView extends UserView
       </div>';
     }
 
+    /** Affiche la page de bienvenue pour l'interface secretaire
+     * @return string
+     */
     public function displaySecretaryWelcome() : string{
         return'
         <div class="btn-container">
@@ -217,7 +220,7 @@ class SecretaryView extends UserView
         </div>';
     }
 
-    /**
+    /** Affiche les salles machines disponibles ou non
      * @param Room[] $computerRoomList
      * @return string
      */
@@ -227,10 +230,10 @@ class SecretaryView extends UserView
 
         foreach($computerRoomList as $room){
             $view .= '';
-            if(!$room->isAvailable()){
+            if(!$room->isAvailable()){ // La salle n'est pas disponible
                 $view .= '<div class="room not-available">';
             }
-            else if($room->isLocked()){
+            else if($room->isLocked()){ // La salle est bloqué
                 $view .= '<div class="room locked">
                             <div class="lock-reasons">        
                                 <p>' . $room->getMotifLock() . '</p>' .
@@ -238,7 +241,7 @@ class SecretaryView extends UserView
                                 '<form action="' . home_url("/secretary/room/unlock") . '" method="post"><input type="hidden" name="roomName" value="' . $room->getName() . '"><input type="submit" value="Deverouiller"></form>' .
                             '</div>' ;
             }
-            else{
+            else{ // La salle est disponible
                 $view .= '<form class="room available" method="post" action="' . home_url("/secretary/lock-room") . '">
                             <input type="hidden" name=roomName value="' . $room->getName() . '">
                             <input type="submit" style="position:absolute; opacity: 0; width: 100%; height: 100%">';
@@ -259,37 +262,10 @@ class SecretaryView extends UserView
         return $view . '</div>';
     }
 
-    public function displayStudentGroupView(){
-        $schedule = new WeeklySchedule('42525');
-        $view = '<div class="container-body">               
-                    <p id="text-horaire">8h15 - 10h15</p>        
-                    <p id="text-horaire">10h35 - 12h15</p>      
-                    <p id="text-horaire">13h30 - 15h15</p> 
-                    <p id="text-horaire">15h45 - 17h30</p>
-                    ';
-
-        foreach($schedule->getDailySchedules() as $dailySchedule){
-            if($dailySchedule->getDate() != date('Ymd')) continue;
-            $previousCourseDuration = null;
-            foreach ($dailySchedule->getCourseList() as $course){
-                $courseDuration = preg_split('/ - /', $course->getDuration());
-                if($courseDuration == $previousCourseDuration) continue;
-                $previousCourseDuration = $courseDuration;
-
-
-                if($course->getGroup())
-                $view .= '<div class="container-matiere orange">
-                            <p class="text-matiere">' . $course->getSubject() . '</p>
-                            <p class="text-prof">' . $course->getTeacher() . '</p>
-                            <p class="text-salle">' . $course->getLocation() . '</p>
-                          </div>';
-            }
-        }
-
-        $view .= '</div>';
-        return $view;
-    }
-
+    /** Renvoie la view d'une ligne sur l'emplois du temps des année
+     * @param WeeklySchedule $weeklySchedule
+     * @return string
+     */
     public function displayYearGroupRow($weeklySchedule){
         $view = '';
         foreach($weeklySchedule->getDailySchedules() as $dailySchedule){
@@ -318,6 +294,11 @@ class SecretaryView extends UserView
         return $view;
     }
 
+    /** Renvoie la vue d'un cours en demi groupe
+     * @param $firstGroupCourse
+     * @param $secondGroupCourse
+     * @return string
+     */
     public function displayHalfGroupCourse($firstGroupCourse, $secondGroupCourse) : string{
         $view = '<div style="grid-column: span ' . $firstGroupCourse->getDuration() . ';display: grid; row-gap: 10px">';
         $view .= $this->displayGroupCourse($firstGroupCourse, true);
@@ -326,6 +307,11 @@ class SecretaryView extends UserView
         return $view;
     }
 
+    /** Renvoie la vue d'un cours
+     * @param $course
+     * @param $halfsize
+     * @return string
+     */
     public function displayGroupCourse($course, $halfsize = false) : string{
         $view = '<div class="container-matiere"';
         if($halfsize){
@@ -339,7 +325,10 @@ class SecretaryView extends UserView
         return $view;
     }
 
-    /* TEMPORAIRE */
+    /** Affiche l'emplois du temps d'une année de BUT
+     * @param $groupCodeNumbers [1/2/3] Année a affiché
+     * @return string
+     */
     public function displayYearStudentScheduleView($groupCodeNumbers){
         $view = '<div id="schedule-container">
                     <div></div>                  
@@ -362,7 +351,7 @@ class SecretaryView extends UserView
         return $view . '</div>';
     }
 
-    /**
+    /** Affiche l'emplois hebdomadaire du temps d'une salle machine
      * @param DailySchedule[] $dailySchedulesList
      * @return string
      */
@@ -379,9 +368,10 @@ class SecretaryView extends UserView
             $dailySchedule = $dailySchedulesList[$i];
             $view .= '<p class="text-horaire">' . $dayNameList[$i] . '</p>';
 
-            if(empty($dailySchedule->getCourseList())){
-                $view .= '<div style="grid-row: span 8"></div>';
+            if(empty($dailySchedule->getCourseList())){ // Si l'emplois du temps du jour est vide
+                $view .= '<div style="grid-row: span 8"></div>'; // Bloc vide
             }
+
             foreach ($dailySchedule->getCourseList() as $course){
                 if($course == null){
                     $view .= '<div></div>';
@@ -414,7 +404,7 @@ class SecretaryView extends UserView
     </html>';
     }
 
-    /**
+    /** Affiche la page de configuration de la couleur des matières
      * @param Course[] $courseList
      * @return void
      */
@@ -435,6 +425,10 @@ class SecretaryView extends UserView
         return $view;
     }
 
+    /** Affiche la page pour choisir une salle a affiche pour les écrans esclave
+     * @param $roomList
+     * @return string
+     */
     public function displayRoomChoice($roomList) : string{
         $view = '<form style="width: 100vw; display:flex;flex-direction:column;align-items: center; gap:20px;padding: 38vh 0; justify-content:center;" method="post" action="' . home_url("/secretary/weekly-computer-room-schedule"). '">
                     <h2 style="font-size: 40px; font-weight: bold">Selectionner une salle a afficher</h2>
@@ -448,9 +442,12 @@ class SecretaryView extends UserView
         return $view;
     }
 
+    /** Affiche la page de configuration de la vue secretaire
+     * @return string
+     */
     public function displaySecretaryConfig(){
         $view = '<div class=container>
-                    <a href="' . home_url('/secretary/config-schedule') . '">                   
+                    <a href="' . home_url('/secretary/config-schedule') . '">        
                         <img src="'. TV_PLUG_PATH . 'public/img/palette-icon.png' .'">    
                         <p>COULEURS</p>                
                     </a>
@@ -467,6 +464,10 @@ class SecretaryView extends UserView
         return $view;
     }
 
+    /** Affiche l'emploi du temps d'une salle
+     * @param $dailySchedule L'emploi du temps de la salle
+     * @return string
+     */
     public function displayRoomSchedule($dailySchedule){
             $view =
                 '<div class="container-body">       
@@ -477,11 +478,11 @@ class SecretaryView extends UserView
             ';
 
             $courseList = $dailySchedule->getCourseList();
-            if($courseList == []){
+            if($courseList == []){ // Pas de cours
                 $view .= '<h3 style="grid-column: span 8; justify-self: center; font-size: 32px"> Pas de cours aujourd\'hui</h2>';
             }
             foreach ($courseList as $course) {
-                if ($course != null) {
+                if ($course != null) { // Cours null = pas de cours a cet horraire
                     $view .= '<div class="container-matiere green" style="grid-column: span ' . $course->getDuration() . '">
                             <p class="text-matiere">' . $course->getSubject() . '</p>
                             <p class="text-prof">' . $course->getTeacher() . '</p>
@@ -517,7 +518,7 @@ class SecretaryView extends UserView
         return $view;
     }
 
-    /**
+    /** Affiche le formulaire pour fermer une salle
      * @param string $room
      * @return void
      */
@@ -534,6 +535,7 @@ class SecretaryView extends UserView
 
         return $view;
     }
+
 
     public function displayAllYearSlider(){
         $view = '<div class=all-year-container>';
@@ -561,16 +563,19 @@ class SecretaryView extends UserView
         $codeWithNoYearList = $model->getCodeWithNoYearSet();
 
         $view = '<div class="year-container">';
-        $view .= '<div class="codeList">';
-                            foreach ($model->getCodeOfAYear($year) as $code){
-                                $view .= '<form method="post"><p>' . $code . '</p><input type="hidden" name="code" value="' . $code . '"><input class="delete-btn" name="deleteAde" value="Supprimer" type="submit" src="https://cdn-icons-png.flaticon.com/512/860/860829.png"></form>';
-                            }
-              $view .= '</div>';
+        $view .= '<div class="codeList">
+                      <h2>BUT ' . $year . '</h2>';
+                      foreach ($model->getCodeOfAYear($year) as $code){
+                          $view .= '<form method="post"><p>' . $code . '</p><input type="hidden" name="code" value="' . $code . '"><input class="delete-btn" name="deleteAde" value="Supprimer" type="submit" src="https://cdn-icons-png.flaticon.com/512/860/860829.png"></form>';
+                      }
+        $view .= '</div>';
 
         $view .= '<form method="post" class="add-ade-code-form"><select name="codeAde">';
+
         foreach($codeWithNoYearList as $code){
             $view .= '<option>' . $code . '</option>';
         }
+
         $view .= '</select>
                   <input type="hidden" name="year" value="' . $year . '">
                   <input type="submit" name="addCode" value="Ajouter">
