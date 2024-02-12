@@ -92,7 +92,12 @@ class DailySchedule{
             }
 
             $heureDebutCours = strtotime(str_replace('h',':',$courseList[$indexCourse]->getHeureDeb()));
+            $heureFinCours = strtotime(str_replace('h',':', $courseList[$indexCourse]->getHeureFin()));
 
+            if($heureDebutCours >= strtotime("12:15") && $heureFinCours <= strtotime("13:30")){
+                $indexCourse++;
+                continue;
+            }
             if($heureDebutCours <= strtotime($listeHorraireDebut[$indexHorraire])){ // Le cours commence a cet horaire
                 if($indexCourse != sizeof($courseList) - 1 ){
 
