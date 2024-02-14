@@ -16,9 +16,12 @@ class RoomController{
             $weeklySchedule = new WeeklySchedule($code);
             for($i = 0; $i < sizeof($weeklySchedule->getDailySchedules()); ++$i){
                 $dailySchedule = $weeklySchedule->getDailySchedules()[$i];
-                if($roomDailyScheduleList[$i] == null){
-                    $roomDailyScheduleList[] = new DailySchedule($dailySchedule->getDate());
+
+                // Assurez-vous que la position $i existe dans $roomDailyScheduleList avant de l'utiliser
+                if (!isset($roomDailyScheduleList[$i])) {
+                    $roomDailyScheduleList[$i] = new DailySchedule($dailySchedule->getDate());
                 }
+
                 foreach($dailySchedule->getCourseList() as $course){
                     if($course == null){
                         continue;
@@ -33,6 +36,7 @@ class RoomController{
         }
         return $roomDailyScheduleList;
     }
+
 
     public function displayRoomWeeklySchedule(){
         if(isset($_GET['roomName'])){
