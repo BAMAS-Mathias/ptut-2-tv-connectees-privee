@@ -1,20 +1,3 @@
-/* CSS WEATHER */
-
-* {
-  box-sizing: border-box
-}
-
-#Weather{
-  grid-template-columns: repeat(2, 100px);
-  grid-template-rows: repeat(4, 50px);
-}
-
-.Infos {
-  width: 100%;
-  box-sizing: border-box;
-  color: #FFF;
-  text-align: center;
-}
 
 .Infos .Weather {
   box-sizing: border-box;
@@ -29,61 +12,46 @@
   align-items: center;
 }
 
-.Infos .Weather #weather,
-.Infos .Weather #wind {
+.Infos {
+  width: 100%;
+  box-sizing: border-box;
+  color: #111111;
+  text-align: left;
+}
+
+#Weather {
   display: flex;
-  justify-content: center;
   align-items: center;
-  height: 100%;
-  width: 50%;
-  border-right: solid 1px #FFF;
+  justify-content: flex-start;
+  color: #111111;
+  padding: 20px;
+  font-family: 'Lato', sans-serif;
 }
 
-.Infos .Weather #weather {
-  border-right: solid 1px #FFF;
-}
-
-.Infos .Weather #wind {
-  border-right: none;
-}
-
-.Infos .Weather img {
-  display: inline-block;
-  height: 90%;
-  vertical-align: middle; /
-}
-
-.Infos .Time {
-  text-align: center;
-  font-size: 1.6vw;
-  font-weight: 600;
-  height: 5vh;
-  margin: -2px 0 -4px 0;
+.TemperatureData {
   display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.Infos .TypeMeteo {
-  font-size: 1.6vw;
-  height: 5vh;
-  margin-bottom: 0 !important;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-right: 50px;
 }
 
-.kmh, .degree {
-  font-size: 1.6vw;
+#temperature {
+  font-size: 3.3em;
 }
 
-@media only screen and (max-device-width: 1000px) {
-  .Infos {
-    height: 8.7vh;
-    width: 100%;
-  }
+.degree {
+  font-size: 1em;
+  vertical-align: super;
+}
 
-  .Infos .Time {
-    font-size: 2.4vh;
-  }
+#wind,
+#humidity,
+#SunsetTime {
+  font-size: 1.1em;
+}
 
-  .Infos .Date {
-    font-size: 1.6vh;
-  }
+.WeatherIcon img {
+  width: 80px;
+  height: 80px;
+  margin-right: 50px;
 }

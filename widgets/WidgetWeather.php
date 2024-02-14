@@ -38,18 +38,20 @@ class WidgetWeather extends WP_Widget
     {
         if (is_user_logged_in()) {
             echo '
-            <aside class="Infos">
-                <p class="Weather" id="Weather">
-                </p>
-                <p class="Time" id="Time">
-                </p>
-                <p class="TypeMeteo" id="PrevisionMeteo">
-                </p>
-                
-            </aside>';
-        }
+       <aside id="Weather" class="Infos">
+       <div class="WeatherIcon">
+    <img id="weatherIcon" src=/wp-content/plugins/ptut-2-tv-connectees/public/img/01.png" alt="Météo" />
+  <div id="TemperatureData">
+    <div id="temperature"></div>
+    <div id="wind"></div>
+    <div id="humidity"></div> 
+    <div id="sunsetTime"></div>
+  </div>
+</aside>';
 
+}
     }
+
 
     /**
      * @param array $instance
