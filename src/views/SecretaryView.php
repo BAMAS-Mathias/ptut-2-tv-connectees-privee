@@ -340,8 +340,8 @@ class SecretaryView extends UserView
 
         $groupIndex = 1;
 
-        foreach ($groupCodeNumbers as $groupCodeNumber){
-            $view .= '<p class="group-name">G' . $groupIndex . '</p>';
+        foreach ($groupCodeNumbers as $groupCodeNumber => $groupName){
+            $view .= '<p class="group-name">' . $groupName . '</p>';
             $groupIndex++;
 
             $weeklySchedule = new WeeklySchedule($groupCodeNumber);
@@ -409,7 +409,8 @@ class SecretaryView extends UserView
      * @return void
      */
     public function displayScheduleConfig($courseList) : string{
-        $view = '<form class="course-config-container" method="post">';
+        $view = '<input type="text" id="champ-recherche-cours" placeholder="Rechercher une matière"/>';
+        $view .= '<form class="course-config-container" method="post">';
         $index = 0;
 
         foreach ($courseList as $course) {
