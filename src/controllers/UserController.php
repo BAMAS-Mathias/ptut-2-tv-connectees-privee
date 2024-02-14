@@ -123,13 +123,13 @@ class UserController extends Controller
         $url = $this->getFilePath($code);
         $args = array(
             'count' => 10,
-            'description' => null,
+            'description' => 'full',
             'eventdesc' => null,
             'format' => null,
-            'hidetimes' => null,
-            'showendtimes' => null,
-            'title' => null,
-            'view' => 'list',
+            'hidetimes' => 'false',
+            'showendtimes' => 'true',
+            'title' => 'full',
+            'view' => 'calendar',
         );
         $datas = $R34ICS->display_calendar($url, $code, $allDay, $args, true);
         $icsView = new ICSView();
