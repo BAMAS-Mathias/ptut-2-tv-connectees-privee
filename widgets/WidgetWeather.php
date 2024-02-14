@@ -43,7 +43,7 @@ class WidgetWeather extends WP_Widget
                 </p>
                 <p class="Time" id="Time">
                 </p>
-                <p class="Date" id="Date">
+                <p class="TypeMeteo" id="PrevisionMeteo">
                 </p>
                 
             </aside>';

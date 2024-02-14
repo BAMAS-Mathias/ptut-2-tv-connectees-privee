@@ -5,7 +5,7 @@
 }
 
 #Weather{
-  grid-template-columns: repeat(2, 150px);
+  grid-template-columns: repeat(2, 100px);
   grid-template-rows: repeat(4, 50px);
 }
 
@@ -63,7 +63,7 @@
   justify-content: center;
   align-items: center;
 }
-.Infos .Date {
+.Infos .TypeMeteo {
   font-size: 1.6vw;
   height: 5vh;
   margin-bottom: 0 !important;

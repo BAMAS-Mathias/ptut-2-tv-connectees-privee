@@ -32,7 +32,7 @@ function scrollStep(schedules, i, margin = 145) {
     behavior: 'smooth'
   });
 
-  setTimeout(() => scrollStep(schedules, i + 1), 10000);
+  setTimeout(() => scrollStep(schedules, i + 1), 1000);
 }
 
 /**
