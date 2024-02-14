@@ -10,7 +10,7 @@
     padding-top: 10px;
 }
 
-.room img:nth-child(1), .room img:nth-child(2){
+.lock-open, .lock-close{
     width: 60px;
     height: 60px;
     position: absolute;
@@ -20,7 +20,7 @@
     padding-bottom: 7px;
 }
 
-.room img:nth-child(3){
+.computer-icon{
     width: 90px;
     height: 90px;
 }
@@ -38,8 +38,8 @@
 }
 
 .room {
-    width: 200px;
-    height: 200px;
+    width: 225px;
+    height: 225px;
     margin: 10px;
     border: 6px solid #000;
     position: relative;
@@ -62,6 +62,10 @@
     border-color: #6CD088;
 }
 
+.locked{
+    border-color: #fdb60a;
+}
+
 .available .lock-open{
     display: block;
 }
@@ -74,10 +78,57 @@
     opacity: 0.5;
 }
 
-.not-available .lock-open{
+.not-available .lock-open, .locked .lock-open{
     display: none;
 }
 
-.not-available .lock-close{
+.not-available .lock-close, .locked .lock-close{
     display: block;
+}
+
+
+
+.lock-room-form-container{
+    display: flex;
+    flex-direction: column;
+    margin: 10vh auto;
+}
+
+.lock-room-form-container label{
+    padding-top: 20px;
+}
+
+.lock-room-form-container form{
+    display: flex;
+    flex-direction: column;
+    width: 40vw;
+    max-width: 500px;
+}
+
+.lock-room-form-container input[type=submit]{
+    margin-top: 50px;
+    height: 60px;
+}
+
+.lock-reasons{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    background: white;
+    transition: all 0.3s;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    font-family: "Titillium Web", serif;
+    font-weight: 400;
+    font-size: 21px;
+    text-align: center;
+}
+
+.locked:hover .lock-reasons{
+    opacity: 1;
+    background: rgba(0,0,0,0.8);
 }

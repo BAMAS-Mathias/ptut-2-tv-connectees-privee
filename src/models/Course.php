@@ -20,19 +20,42 @@ class Course
         $this->subject = $subject;
         $this->teacher = $teacher;
         $this->location = $location;
+
         if(!empty($duration)) {
             $duration = preg_split("/ - /",$duration);
             $this->heureDeb = $duration[0];
             $this->heureFin = $duration[1];
             $this->duration = $this->calcDuration();
         }
-        $this->group = $group;
+        $this->initGroupName($group);
         $this->isDemiGroupe = false;
     }
 
+    /** Formate le nom des groupes
+     * @param $defaultGroupName
+     * @return void
+     */
+    private function initGroupName($defaultGroupName){
+        if(preg_match("/(S[1-2])|(R[1-2])/", $this->getSubject())){
+            $this->group = 'BUT1 - ' . $defaultGroupName;
+        }
+        else if(preg_match("/(S[3-4])|(R[3-4])/", $this->getSubject())){
+            $this->group = 'BUT2 - ' . $defaultGroupName;
+        }
+        else if(preg_match("/(S[5-6])|(R[5-6])/", $this->getSubject())){
+            $this->group = 'BUT3 - ' . $defaultGroupName;
+        }
+        else{
+            $this->group = $defaultGroupName;
+        }
+    }
+
+    /** Calcule le nombre d'heure que dure un cours
+     * @return int
+     */
     private function calcDuration(){
         $listeHorraireDebut = ["8:15","9:15","10:40","11:15","13:30","14:35","15:40","16:25"];
-        $listeHorraireFin = ["9:15","10:15","11:00","12:15","14:25","15:20","16:35","17:30"];
+        $listeHorraireFin = ["9:15","10:15","11:00","12:15","14:25","15:20","16:30","17:30"];
         $indexHorraire = 0;
         $duration = 0;
 
@@ -40,6 +63,7 @@ class Course
             $heureFinCours = strtotime(str_replace('h',':',$this->getHeureFin()));
             $heureDebutCours = strtotime(str_replace('h',':',$this->getHeureDeb()));
 
+            /** Si le cours est dans la tranche horaire */
             if($heureDebutCours <= strtotime($listeHorraireDebut[$indexHorraire])){
                 if($heureFinCours >= strtotime($listeHorraireFin[$indexHorraire])) {
                     $duration++;
@@ -125,7 +149,10 @@ class Course
      */
     public function getColor(): string
     {
-        return $this->color;
+        $course = preg_replace('/(TD)|(TP)|(G[0-9].?)|(\*)|(|(A$|B$)|)|(G..$)|(G.-.)|(G..-.$)|(G$)/','',$this->getSubject());
+        $course = str_replace("'","''",$course);
+        return (new CourseRepository())->getCourseColor(rtrim($course));
+
     }
 
     /**

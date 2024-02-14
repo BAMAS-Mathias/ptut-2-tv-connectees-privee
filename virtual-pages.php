@@ -1,34 +1,39 @@
 <?php
-
 /**
- * Virtual Pages
+ * Ce code gère la création de pages virtuelles dans WordPress en utilisant le plugin EC Virtual Pages.
+ * Il initialise le contrôleur de page, configure les actions et les filtres nécessaires pour gérer les pages virtuelles,
+ * et ajoute des commentaires pour expliquer certaines parties du code.
  */
 
+// Importe les classes nécessaires depuis le namespace EC\VirtualPages.
 use EC\VirtualPages\PageControllerInterface;
 use EC\VirtualPages\PageController;
-
 use EC\VirtualPages\TemplateLoaderInterface;
 use EC\VirtualPages\TemplateLoader;
-
 use EC\VirtualPages\PageInterface;
 
+// Crée une instance du contrôleur de page en utilisant le TemplateLoader.
 $controller = new PageController(new TemplateLoader());
 
+// Initialise le contrôleur de page lors de l'initialisation de WordPress.
 add_action('init', array( $controller, 'init' ));
 
+// Filtre la demande de parse_request pour dispatcher les pages virtuelles.
 add_filter('do_parse_request', array( $controller, 'dispatch' ), PHP_INT_MAX, 2);
 
+// Ajoute une action pour réinitialiser la variable virtual_page après la fin de la boucle WordPress.
 add_action('loop_end', function (\WP_Query $query) {
     if (isset($query->virtual_page) && ! empty($query->virtual_page)) {
         $query->virtual_page = null;
     }
 });
 
+// Filtre la génération de permalien pour les pages virtuelles.
 add_filter('the_permalink', function ($plink) {
     global $post, $wp_query;
     if (
         $wp_query->is_page && isset($wp_query->virtual_page)
-        && $wp_query->virtual_page instanceof Page
+        && $wp_query->virtual_page instanceof PageInterface
         && isset($post->is_virtual) && $post->is_virtual
     ) {
         $plink = home_url($wp_query->virtual_page->getUrl());
@@ -61,7 +66,7 @@ add_action('ec_virtual_pages', function ($controller) {
     /**
      *  Page: /creer-utilisateur
      */
-    $controller->addPage(new \EC\VirtualPages\Page("/users/create"))
+    $controller->addPage(new \EC\VirtualPages\Page("/creer-utilisateur"))
     ->setTitle('Créer un utilisateur')
     ->setContent('
     <!-- wp:tvconnecteeamu/creation-user -->
@@ -268,7 +273,7 @@ add_action('ec_virtual_pages', function ($controller) {
      *  Page: /secretary/computer-rooms
      */
     $controller->addPage(new \EC\VirtualPages\Page("/secretary/computer-rooms"))
-        ->setTitle('available-computer-rooms')
+        ->setTitle('computer-rooms')
         ->setContent('
     <!-- wp:tvconnecteeamu/computer-rooms -->
     test
@@ -307,7 +312,7 @@ add_action('ec_virtual_pages', function ($controller) {
      *  Page: /secretary/room-schedule
      */
     $controller->addPage(new \EC\VirtualPages\Page("/secretary/room-schedule"))
-        ->setTitle('Emplois du temps de la salle :')
+        ->setTitle('room-schedule')
         ->setContent('
     <!-- wp:tvconnecteeamu/room-schedule -->
     test
@@ -388,6 +393,8 @@ add_action('ec_virtual_pages', function ($controller) {
     <!-- /wp:tvconnecteeamu/teacher-view -->
     ')
         ->setTemplate('page.php');
+
+    
     $controller->addPage(new \EC\VirtualPages\Page("secretary/rooms-available"))
         ->setTitle('rooms-available')
         ->setContent('
@@ -403,8 +410,7 @@ add_action('ec_virtual_pages', function ($controller) {
          <!-- wp:tvconnecteeamu/homepage -->
     test
     <!-- /wp:tvconnecteeamu/homepage -->
-    ')
-        ->setTemplate('header-blue.php');
+    ');
 
     $controller->addPage(new \EC\VirtualPages\Page("secretary/config-schedule"))
         ->setTitle('config-schedule')
@@ -415,4 +421,88 @@ add_action('ec_virtual_pages', function ($controller) {
     ')
         ->setTemplate('header-blue.php');
 
+
+    $controller->addPage(new \EC\VirtualPages\Page("/blocks/course-color/modify"))
+        ->setTitle('modify-course-color')
+        ->setContent('
+
+    <!-- wp:tvconnecteeamu/modify-course-color -->
+    <!-- /wp:tvconnecteeamu/modify-course-color -->
+    ')
+        ;
+
+
+    $controller->addPage(new \EC\VirtualPages\Page("/secretary/config"))
+        ->setTitle('secretary-config')
+        ->setContent('
+
+    <!-- wp:tvconnecteeamu/secretary-config -->
+    test
+    <!-- /wp:tvconnecteeamu/secretary-config -->
+    ')
+        ->setTemplate('header-blue.php');
+
+
+    $controller->addPage(new \EC\VirtualPages\Page("/secretary/lock-room"))
+        ->setTitle('lock-room')
+        ->setContent('
+
+    <!-- wp:tvconnecteeamu/lock-room -->
+    test
+    <!-- /wp:tvconnecteeamu/lock-room -->
+    ')
+        ->setTemplate('header-orange.php');
+
+
+    $controller->addPage(new \EC\VirtualPages\Page("/secretary/room/lock"))
+        ->setTitle('room-lock-action')
+        ->setContent('
+
+    <!-- wp:tvconnecteeamu/room-lock-action -->
+    test
+    <!-- /wp:tvconnecteeamu/room-lock-action -->
+    ')
+        ->setTemplate('header-orange.php');
+
+
+    $controller->addPage(new \EC\VirtualPages\Page("/secretary/room/unlock"))
+        ->setTitle('room-unlock-action')
+        ->setContent('
+
+    <!-- wp:tvconnecteeamu/room-unlock-action -->
+    test
+    <!-- /wp:tvconnecteeamu/room-unlock-action -->
+    ')
+        ->setTemplate('header-orange.php');
+
+    $controller->addPage(new \EC\VirtualPages\Page("/secretary/all-years"))
+        ->setTitle('all-years')
+        ->setContent('
+
+    <!-- wp:tvconnecteeamu/all-years -->
+    test
+    <!-- /wp:tvconnecteeamu/all-years -->
+    ')
+        ->setTemplate('secretary-tv.php');
+
+
+    $controller->addPage(new \EC\VirtualPages\Page("/secretary/config-ade"))
+        ->setTitle('config-ade')
+        ->setContent('
+
+    <!-- wp:tvconnecteeamu/config-ade -->
+    
+    <!-- /wp:tvconnecteeamu/config-ade -->
+    ')
+        ->setTemplate('header-orange.php');
+
+    $controller->addPage(new \EC\VirtualPages\Page("/secretary/config-computer-room"))
+        ->setTitle('config-computer-room')
+        ->setContent('
+
+    <!-- wp:tvconnecteeamu/config-computer-room -->
+    
+    <!-- /wp:tvconnecteeamu/config-computer-room -->
+    ')
+        ->setTemplate('header-orange.php');
 });

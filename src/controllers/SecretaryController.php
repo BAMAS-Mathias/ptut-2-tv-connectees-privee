@@ -2,9 +2,12 @@
 
 namespace Controllers;
 
+use Models\CodeAde;
 use Models\CourseRepository;
+use Models\DailySchedule;
 use Models\RoomRepository;
 use Models\User;
+use Models\WeeklySchedule;
 use Views\SecretaryView;
 
 /**
@@ -133,8 +136,31 @@ class SecretaryController extends UserController
     function displayWelcomePage(){
         return $this->view->displaySecretaryWelcome();
     }
-    function displayRoomSchedule(){
-        return $this->view->displayRoomSchedule();
+
+    public function displayRoomsSelection() : string {
+        $model = new RoomRepository();
+        $roomList = $model->getAllRoom();
+        return (new SecretaryView())->displayRoomSelection($roomList);
+    }
+
+    public function displayRoomSchedule() : string{
+        $view = $this->displayRoomsSelection();
+        if(!isset($_POST['roomName'])) return $view;
+        $roomName = $_POST['roomName'];
+        $dailyScheduleRoom = new DailySchedule(date('Ymd'));
+        $codeAde = (new CodeAde())->getAllAdeCode();
+        foreach ($codeAde as $code){
+            $weeklySchedule = new WeeklySchedule($code);
+            foreach ($weeklySchedule->getDailySchedules() as $dailySchedule){
+                if($dailySchedule->getDate() != date('Ymd')) continue;
+                foreach ($dailySchedule->getCourseList() as $course){
+                    if($course != null && strpos($course->getLocation(),$roomName) !== false && !in_array($course,$dailyScheduleRoom->getCourseList())){
+                        $dailyScheduleRoom->addExistingCourse($course);
+                    }
+                }
+            }
+        }
+        return $view . $this->view->displayRoomSchedule($dailyScheduleRoom);
     }
 
     /**
@@ -192,37 +218,41 @@ class SecretaryController extends UserController
         $user->delete();
     }
 
+    /** Affiche les salles info disponibles
+     * @return string
+     */
     public function displayComputerRoomsAvailable(){
         $model = new RoomRepository();
         $roomList = $model->getAllComputerRooms();
         return $this->view->displayComputerRoomsAvailable($roomList);
     }
+
+
     public function displayRoomsAvailable(): string
     {
         return $this->view->displayRoomsAvailable();
     }
 
-    public function displayStudentGroupView(){
-        return $this->view->displayStudentGroupView();
-    }
 
+    /** Affiche l'emploi du temps d'une année
+     * TODO gestion erreur
+     * @return string
+     */
     public function displayYearStudentSchedule(){
         $year = $_GET['year'];
+        $model = new CodeAde();
         switch ($year){
             case '1':
-                return $this->view->displayYearStudentScheduleView(['8382','8380','8383','8381']);
+                return $this->view->displayYearStudentScheduleView($model->getCodeOfAYear(1));
             case '2':
-                return $this->view->displayYearStudentScheduleView(['8396','8397','8398']);
+                return $this->view->displayYearStudentScheduleView($model->getCodeOfAYear(2));
             case '3':
-                return $this->view->displayYearStudentScheduleView(['42523','42524','42525']);
+                return $this->view->displayYearStudentScheduleView($model->getCodeOfAYear(3));
             default:
                 return $this->view->displayYearStudentScheduleView([]);
         }
     }
 
-    public function displayComputerRoomSchedule(){
-        return $this->view->displayComputerRoomSchedule();
-    }
     public function displayHomePage(){
         return $this->view->displayHomePage();
     }
@@ -230,6 +260,30 @@ class SecretaryController extends UserController
     public function displayScheduleConfig(){
         $model = new CourseRepository();
         $courseList = $model->getCourseList();
+        if(isset($_POST['modif-color'])){
+            (new CourseController())->modifyColors();
+            (new NotificationController())->displaySuccessNotification('Couleurs modifiées avec succès');
+        }
+
         return $this->view->displayScheduleConfig($courseList);
+    }
+
+    public function displayConfig() : string{
+        return (new SecretaryView())->displaySecretaryConfig();
+    }
+
+    public function displayAllYearSchedule(){
+        return (new SecretaryView())->displayAllYearSlider();
+    }
+
+    public function displayCodeAdeConfigPage(){
+        if(isset($_POST['addCode'])){
+            (new CodeAde())->addYearForCode($_POST['codeAde'],$_POST['year']);
+        }
+        if(isset($_POST['deleteAde'])){
+            (new CodeAde())->deleteYearForCode($_POST['code']);
+        }
+
+        return (new SecretaryView())->displayCodeAdeConfigPage();
     }
 }

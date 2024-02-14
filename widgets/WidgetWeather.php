@@ -39,12 +39,13 @@ class WidgetWeather extends WP_Widget
         if (is_user_logged_in()) {
             echo '
             <aside class="Infos">
+                <p class="Weather" id="Weather">
+                </p>
                 <p class="Time" id="Time">
                 </p>
                 <p class="Date" id="Date">
                 </p>
-                <p class="Weather" id="Weather">
-                </p>
+                
             </aside>';
         }
 

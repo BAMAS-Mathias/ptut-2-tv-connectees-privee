@@ -104,43 +104,6 @@ class TeacherView extends UserView
         return $str;
     }
 
-    public function displayTeacherView(): string
-    {
-        return '    
-        <body>
-            <div class="container-body">
-                <div class="container-horaire1">
-                    <h1 id="text-horaire">8h15 - 10h15</h1>
-                </div>
-                <div class="container-matiere1">
-                    <h1 id="text-matiere">R3.02 - JAVA</h1>
-                    <h1 id="text-matiere">SLEZAK Eileen</h1>
-                    <h1 id="text-matiere">I-110</h1>
-                </div>
-                <div class="container-horaire2">
-                    <h1 id="text-horaire">10h35 - 12h15</h1>
-                </div>
-                <div class="container-matiere2">
-                    <h1 id="text-matiere">R3.01 - ANGLAIS</h1>
-                    <h1 id="text-matiere">SLEZAK Eileen</h1>
-                    <h1 id="text-matiere">A-002</h1>
-                </div>
-                <div class="container-horaire3">
-                    <h1 id="text-horaire">13h30 - 15h15</h1>
-                </div>
-                <div class="container-horaire4">
-                    <h1 id="text-horaire">15h45 - 17h30</h1>
-                </div>
-                <div class="container-matiere4">
-                    <h1 id="text-matiere">R3.04 - SQL</h1>
-                    <h1 id="text-matiere">ANNI Samuele</h1>
-                    <h1 id="text-matiere">A-002</h1>
-            </div>
-        </body> 
-        </html>';}
-
-
-
     public function displayTeacherDailySchedule($dailySchedule){
         $view =
         '<div class="container-body">
@@ -157,26 +120,45 @@ class TeacherView extends UserView
                 <h3 id="text-horaire">15h45 - 17h30</h3>
             </div>';
 
-            $courseList = $dailySchedule->getCourseList();
-            if($courseList == []){
-                $view .= '<h3 style="grid-column: span 8; justify-self: center; font-size: 32px"> Pas de cours aujourd\'hui</h2>';
-            }
-            foreach ($courseList as $course) {
-                if ($course != null) {
-                    $view .= '<div class="container-matiere green" style="grid-column: span ' . $course->getDuration() . '">
+        $courseList = $dailySchedule->getCourseList();
+        if($courseList == []){
+            $view .= '<h3 style="grid-column: span 8; justify-self: center; font-size: 32px"> Pas de cours aujourd\'hui</h2>';
+        }
+
+        foreach ($courseList as $course) {
+            if ($course != null) {
+                $view .= '<div class="container-matiere green" style="grid-column: span ' . $course->getDuration() . '">
                             <p class="text-matiere">' . $course->getSubject() . '</p>
                             <p class="text-prof">' . $course->getTeacher() . '</p>
                             <p class="text-salle">' . $course->getLocation() . '</p>
                         </div>';
-                }else{
-                    $view .= '<div></div>';
-                }
+            }else{
+                $view .= '<div></div>';
+            }
 
         }
 
         $view .= '</div>';
 
         return $view;
+    }
+
+    public function displaySalleMachineConfig($roomList) : string{
+        $view = '<form class=all-room-container method="post">';
+        $index = 0;
+        foreach ($roomList as $room){
+            $view .= '<div class="room-container">
+                        <p>' . $room->getName() . '</p>
+                        <input name="hidden[' . $index . ']' . '" type="hidden" value="' . $room->getName() . '"' . '</input>
+                        <input name="check[' . $index . ']' . '" type=checkbox ';
+            if($room->isSalleMachine()){
+                $view .= 'checked';
+            }
+            $view .= '      
+                    ></div>';
+            ++$index;
+        }
+        return $view . '<input type="submit"></form>';
     }
 
 }

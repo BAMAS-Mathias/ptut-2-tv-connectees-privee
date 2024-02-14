@@ -163,6 +163,8 @@ function dashboard_create_user() {
     }
 
     $id = wp_create_user( $login, $password, $email );
+    $user_id_role = new WP_User($id);
+    $user_id_role->set_role($role);
 
     if (is_wp_error($id)) {
         wp_redirect(
@@ -184,7 +186,7 @@ function dashboard_create_user() {
                 'message' => 'success',
                 'message_content' => 'User created successfully'
             ),
-            home_url('/users/create')
+            home_url('/creer-utilisateur')
         )
     );
 }

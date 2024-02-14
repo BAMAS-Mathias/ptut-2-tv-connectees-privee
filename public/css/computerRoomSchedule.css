@@ -50,9 +50,11 @@
     grid-auto-flow: column;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 7.5vh;
     grid-column-gap: 20px;
     grid-row-gap: 10px;
     grid-template-rows: repeat(9,60px);
+    grid-template-columns: repeat(6,250px);
     justify-content: center;
 }
 
@@ -70,7 +72,6 @@
 
 
 
-
 .text-prof, .text-matiere{
     font-size: 15px !important;
     height: fit-content;
@@ -78,16 +79,26 @@
     font-weight: 600;
 }
 
-.text-salle{
+.text-matiere{
+    margin-top: 2px;
+}
+
+.text-prof{
+    font-size: 18px !important;
+}
+
+.text-group{
+    position: absolute;
+    bottom: -7px;
     padding-top: 5px;
-    font-size: 30px !important;
+    font-size: 22px !important;
     margin-bottom: 10px;
     font-weight: bold;
 }
 
 .container-matiere::after{
     border-radius: 0 0 20px 20px !important;
-    height: 40px;
+    height: 35px;
     width: 100%;
     content: ' ';
     z-index: 0;

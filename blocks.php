@@ -1,5 +1,11 @@
 <?php
+/**
+ * Ce code semble être une partie d'un plugin ou d'un thème WordPress, où des contrôleurs, des vues et des fonctionnalités spécifiques pour une vue tablette sont définis.
+ * Il importe différentes classes de contrôleurs et de vues.
+ *
+ */
 
+// Importe les contrôleurs nécessaires.
 use Controllers\AlertController;
 use Controllers\CodeAdeController;
 use Controllers\InformationController;
@@ -11,37 +17,45 @@ use Controllers\TelevisionController;
 use Controllers\UserController;
 use Controllers\TabletModeController;
 
+// Importe les vues nécessaires.
 use Views\HelpMapView;
 use Views\TabletModeScheduleView;
 
+// Importe la vue UserView.
 use UserViews\UserView;
 
-/*
-* TABLET VIEW BLOCKS
-*/
 
-/* Schedule render function */
+/**
+ * Fonction de rappel pour le rendu de l'emploi du temps en mode tablette.
+ * Cette fonction semble être destinée à être utilisée comme rappel de rendu pour une page WordPress.
+ * Elle crée une instance de la vue TabletModeScheduleView et l'affiche.
+ *
+ * @return string Le contenu HTML de la vue TabletModeScheduleView.
+ */
 function tablet_schedule_render_callback()
 {
-  if(is_page()) {
-    $view = new TabletModeScheduleView();
-    return $view->display();
-  }
+    if (is_page()) {
+        $view = new TabletModeScheduleView();
+        return $view->display();
+    }
 }
 
-/* Schedule */
+/**
+ * Fonction pour enregistrer le bloc de l'emploi du temps en mode tablette.
+ * Elle enregistre un script JavaScript pour le bloc, spécifie le script de l'éditeur et définit la fonction de rappel de rendu.
+ */
 function block_tablet_schedule()
 {
-  wp_register_script(
-    'tablet-schedule-script',
-    plugins_url( 'blocks/tablet-mode/schedule/index.js', __FILE__ ),
-    array( 'wp-blocks', 'wp-element', 'wp-data' )
-  );
+    wp_register_script(
+        'tablet-schedule-script',
+        plugins_url('blocks/tablet-mode/schedule/index.js', __FILE__),
+        array('wp-blocks', 'wp-element', 'wp-data')
+    );
 
-  register_block_type('tvconnecteeamu/tablet-schedule', array(
-    'editor_script' => 'tablet-schedule-script',
-    'render_callback' => 'tablet_schedule_render_callback'
-  ));
+    register_block_type('tvconnecteeamu/tablet-schedule', array(
+        'editor_script' => 'tablet-schedule-script',
+        'render_callback' => 'tablet_schedule_render_callback'
+    ));
 }
 
 add_action('init', 'block_tablet_schedule');
@@ -368,6 +382,47 @@ function block_information_modify()
 }
 add_action( 'init', 'block_information_modify' );
 
+function course_color_modify_render_callback()
+{
+    if(is_page()) {
+        $courseController = new \Controllers\CourseController();
+        return $courseController->modifyColors();
+    }
+}
+
+/**
+ * Build a block
+ */
+function block_course_color_modify()
+{
+    register_block_type('tvconnecteeamu/modify-course-color', array(
+        'render_callback' => 'course_color_modify_render_callback'
+    ));
+}
+add_action( 'init', 'block_course_color_modify' );
+
+
+
+function secretary_config_render_callback()
+{
+    if(is_page()) {
+        $secretaryController = new SecretaryController();
+        return $secretaryController->displayConfig();
+    }
+}
+
+/**
+ * Build a block
+ */
+function block_secretary_config()
+{
+    register_block_type('tvconnecteeamu/secretary-config', array(
+        'render_callback' => 'secretary_config_render_callback'
+    ));
+}
+add_action( 'init', 'block_secretary_config' );
+
+
 /*
 * SCHEDULE BLOCKS
 */
@@ -385,9 +440,14 @@ function schedule_render_callback()
   else if(members_current_user_has_role("directeuretude")) {
     $controller = new StudyDirectorController();
   } else if (members_current_user_has_role("enseignant")) {
-    $controller = new TeacherController();
-  } else if (members_current_user_has_role("technicien")) {
+      $controller = new TeacherController();
+  } else if (members_current_user_has_role("computerroom")) {
+      $controller = new \Controllers\RoomController();
+  }
+  else if (members_current_user_has_role("technicien")) {
     $controller = new TechnicianController();
+  } else if (members_current_user_has_role("secretarytv")) {
+    $controller = new \Controllers\SecretaryTvController();
   } else if (members_current_user_has_role("administrator") || members_current_user_has_role("secretaire")) {
     $controller = new SecretaryController();
   } else {
@@ -843,27 +903,6 @@ add_action( 'init', 'block_year_student_schedule' );
 
 
 /**
- * Function of the block
- *
- * @return string
- */
-function group_student_schedule_render_callback()
-{
-    if(is_page()) {
-        $user = new SecretaryController();
-        return $user->displayStudentGroupView();
-    }
-}
-
-/**
- * Build a block
- */
-function block_group_student_schedule() {
-    register_block_type('tvconnecteeamu/group-student-schedule', array(
-        'render_callback' => 'group_student_schedule_render_callback'
-    ));
-}
-add_action( 'init', 'block_group_student_schedule' );
 
 
 /**
@@ -937,28 +976,6 @@ function block_weekly_computer_room_schedule() {
 }
 add_action( 'init', 'block_weekly_computer_room_schedule' );
 
-function teacher_view_render_callback() {
-    if (is_page()) {
-        $user = new TeacherController();
-        return $user->displayTeacherView();
-    }
-}
-
-function block_teacher_view() {
-    wp_register_script(
-        'teacher-view-script',
-        plugins_url('path/to/your/script.js', __FILE__),
-        array('wp-blocks', 'wp-element', 'wp-data')
-    );
-
-    register_block_type('tvconnecteeamu/teacher-view', array(
-        'editor_script' => 'teacher-view-script',
-        'render_callback' => 'teacher_view_render_callback'
-    ));
-}
-
-add_action('init', 'block_teacher_view');
-
 function rooms_available_render_callback() {
     if (is_page()) {
         $user = new SecretaryController();
@@ -966,14 +983,9 @@ function rooms_available_render_callback() {
     }
 }
 function block_rooms_available() {
-    wp_register_script(
-        'rooms_available-script',
-        plugins_url('path/to/your/script.js', __FILE__),
-        array('wp-blocks', 'wp-element', 'wp-data')
-    );
+
 
     register_block_type('tvconnecteeamu/rooms-available', array(
-        'editor_script' => 'rooms_available-script',
         'render_callback' => 'rooms_available_render_callback'
     ));
 }
@@ -1022,3 +1034,104 @@ function schedule_config_homepage() {
 }
 
 add_action('init', 'schedule_config_homepage');
+
+function lock_room_visual_callback() {
+    if (is_page()) {
+        $user = new \Controllers\RoomController();
+        return $user->displayRoomLockForm();
+    }
+}
+function block_lock_room_visual() {
+
+    register_block_type('tvconnecteeamu/lock-room', array(
+        'editor_script' => 'homepage-script',
+        'render_callback' => 'lock_room_visual_callback'
+    ));
+}
+
+add_action('init', 'block_lock_room_visual');
+
+
+function lock_room_callback() {
+    if (is_page()) {
+        $user = new \Controllers\RoomController();
+        return $user->lockRoom();
+    }
+}
+function block_lock_room() {
+
+    register_block_type('tvconnecteeamu/room-lock-action', array(
+        'editor_script' => 'homepage-script',
+        'render_callback' => 'lock_room_callback'
+    ));
+}
+
+add_action('init', 'block_lock_room');
+
+
+
+function unlock_room_callback() {
+    if (is_page()) {
+        $user = new \Controllers\RoomController();
+        return $user->unlockRoom();
+    }
+}
+function block_unlock_room() {
+
+    register_block_type('tvconnecteeamu/room-unlock-action', array(
+        'editor_script' => 'homepage-script',
+        'render_callback' => 'unlock_room_callback'
+    ));
+}
+
+add_action('init', 'block_unlock_room');
+
+function all_year_schedule_callback() {
+    if (is_page()) {
+        return (new SecretaryController())->displayAllYearSchedule();
+    }
+}
+function block_all_year_schedule() {
+
+    register_block_type('tvconnecteeamu/all-years', array(
+        'editor_script' => 'homepage-script',
+        'render_callback' => 'all_year_schedule_callback'
+    ));
+}
+
+add_action('init', 'block_all_year_schedule');
+
+
+
+function config_ade_callback() {
+    if (is_page()) {
+        return (new SecretaryController())->displayCodeAdeConfigPage();
+    }
+}
+function block_config_ade() {
+
+    register_block_type('tvconnecteeamu/config-ade', array(
+        'editor_script' => 'homepage-script',
+        'render_callback' => 'config_ade_callback'
+    ));
+}
+
+add_action('init', 'block_config_ade');
+
+
+
+function config_computer_room_callback() {
+    if (is_page()) {
+        return (new \Controllers\RoomController())->displayComputerRoomConfig();
+    }
+}
+
+function block_config_computer_room() {
+
+    register_block_type('tvconnecteeamu/config-computer-room', array(
+        'editor_script' => 'homepage-script',
+        'render_callback' => 'config_computer_room_callback'
+    ));
+}
+
+add_action('init', 'block_config_computer_room');

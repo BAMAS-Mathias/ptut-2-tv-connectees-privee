@@ -74,6 +74,7 @@ function loadScriptsEcran()
      if (!is_admin()) wp_deregister_script('jquery');
      
      wp_enqueue_style('style_ecran', TV_PLUG_PATH . 'public/css/style.css', array(), VERSION);
+     wp_enqueue_style('style_notif', TV_PLUG_PATH . 'public/css/secretary-notification.css', array(), VERSION);
 
     if(is_page('secretary-welcome')){
         wp_enqueue_style('welcome_secretary', TV_PLUG_PATH . 'public/css/secretaryAccueil.css', array(), VERSION);
@@ -83,18 +84,17 @@ function loadScriptsEcran()
         wp_enqueue_style('teacher_search_schedule', TV_PLUG_PATH . 'public/css/teacherSearchSchedule.css', array(), VERSION);
     }
 
-    if(is_page('teacher-schedule') || is_page('student-group')){
+    if(is_page('teacher-schedule') || is_page('student-group') || is_page('room-schedule')){
         wp_enqueue_style('teacher_schedule', TV_PLUG_PATH . 'public/css/teacherSchedule.css', array(), VERSION);
     }
 
-    if(is_page('year-student-schedule')){
+    if(is_page('year-student-schedule') || is_page('all-years') || members_current_user_has_role("secretarytv") ){
         wp_enqueue_style('teacher_schedule', TV_PLUG_PATH . 'public/css/yearStudentSchedule.css', array(), VERSION);
         wp_enqueue_style('year-student', TV_PLUG_PATH . 'public/css/teacherSchedule.css', array(), VERSION);
     }
 
-    if(is_page('available-computer-rooms')){
+    if(is_page('computer-rooms') || is_page('lock-room')){
         wp_enqueue_style('teacher_search_schedule', TV_PLUG_PATH . 'public/css/availableComputerRooms.css', array(), VERSION);
-        wp_enqueue_script('computer_switch_script', TV_PLUG_PATH . 'public/js/tablet-view/toggleComputerRoom.js', array(), VERSION, true);
     }
     if (is_page('teacher-view')) {
         wp_enqueue_style('teacher_view', TV_PLUG_PATH . 'public/css/teacherview.css', array(), VERSION);
@@ -109,10 +109,26 @@ function loadScriptsEcran()
     if (is_page('homepage')) {
         wp_enqueue_style('homepage', TV_PLUG_PATH . 'public/css/homepage.css', array(), VERSION);
     }
-    if (is_page('room-schedule')) {
-        wp_enqueue_style('room-schedule', TV_PLUG_PATH . 'public/css/room_schedule.css', array(), VERSION);
+
+    if (is_page('secretary-config')) {
+        wp_enqueue_style('secretary-config', TV_PLUG_PATH . 'public/css/secretaryConfig.css', array(), VERSION);
     }
 
+    if (is_page('config-ade')) {
+        wp_enqueue_style('secretary-config', TV_PLUG_PATH . 'public/css/secretary-ade-config.css', array(), VERSION);
+    }
+    if (is_page('config-computer-room')) {
+        wp_enqueue_style('secretary-room-config', TV_PLUG_PATH . 'public/css/computerRoomConfig.css', array(), VERSION);
+    }
+
+    if(is_page('config-schedule')){
+        wp_enqueue_style('room-schedule', TV_PLUG_PATH . 'public/css/secretaryConfigSchedule.css', array(), VERSION);
+        wp_enqueue_script('color_update_script', TV_PLUG_PATH . 'public/js/updateConfigCourseColor.js', array(), VERSION, true);
+    }
+
+    if(is_page('all-years') || is_page('weekly-computer-room-schedule/')){
+        wp_enqueue_script('refreshAuto', TV_PLUG_PATH . 'public/js/refreshAtAnHour.js', array(), VERSION);
+    }
 
     if (is_page('tv-mode')) {
         /* STYLESHEETS */
@@ -249,6 +265,53 @@ function installDatabaseEcran()
 		) $charset_collate;";
 
     dbDelta($sql);
+
+    $table_name = 'teacher';
+
+    $sql = "CREATE TABLE IF NOT EXISTS $table_name (
+            id int(11) NOT NULL,
+            name varchar(50) NOT NULL";
+
+    dbDelta($sql);
+
+    $table_name = 'ecran_rooms';
+
+    $sql = "CREATE TABLE IF NOT EXISTS $table_name (
+            ID int(11) NOT NULL,
+            name varchar(20) NOT NULL,
+            isComputerRoom tinyint(1) NOT NULL DEFAULT 0
+            )";
+
+    dbDelta($sql);
+
+    $table_name = "secretary_courses";
+
+    $sql = "CREATE TABLE IF NOT EXISTS $table_name(
+            id int(11) NOT NULL,
+            name varchar(80) NOT NULL,
+            color varchar(7) NOT NULL)";
+
+    dbDelta($sql);
+
+    $table_name = "ecran_ade_years";
+
+    $sql = "CREATE TABLE IF NOT EXISTS $table_name (
+            code int(11) NOT NULL,
+            year int(11) NOT NULL)";
+
+    dbDelta($sql);
+
+    $table_name = "secretary_lock_room";
+
+    $sql = "CREATE TABLE IF NOT EXISTS $table_name (
+              roomName varchar(20) NOT NULL,
+              motif varchar(300) NOT NULL,
+              lockEndDate datetime NOT NULL)";
+
+    dbDelta($sql);
+
+
+
 }
 
 add_action('plugins_loaded', 'installDatabaseEcran');
@@ -320,6 +383,22 @@ $result = add_role(
 $result = add_role(
     'informationposter',
     __('informationPoster'),
+    array(
+        'read' => true,  // true allows this capability
+    )
+);
+
+$result = add_role(
+    'computerroom',
+    __('ComputerRoom'),
+    array(
+        'read' => true,  // true allows this capability
+    )
+);
+
+$result = add_role(
+    'secretarytv',
+    __('secretaryTV'),
     array(
         'read' => true,  // true allows this capability
     )
