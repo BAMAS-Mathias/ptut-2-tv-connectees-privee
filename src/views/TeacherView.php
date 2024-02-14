@@ -111,13 +111,13 @@ class TeacherView extends UserView
                 <h3 id="text-horaire">8h15 - 10h15</h3>
             </div>
             <div class="container-horaire">
-                <h3 id="text-horaire">10h35 - 12h15</h3>
+                <h3 id="text-horaire">10h15 - 12h15</h3>
             </div>
             <div class="container-horaire">
                 <h3 id="text-horaire">13h30 - 15h15</h3>
             </div>
             <div class="container-horaire">
-                <h3 id="text-horaire">15h45 - 17h30</h3>
+                <h3 id="text-horaire">15h30 - 17h30</h3>
             </div>';
 
         $courseList = $dailySchedule->getCourseList();

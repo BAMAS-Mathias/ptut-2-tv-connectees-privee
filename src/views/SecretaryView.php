@@ -333,15 +333,15 @@ class SecretaryView extends UserView
         $view = '<div id="schedule-container">
                     <div></div>                  
                         <div class="container-horaire"><p id="text-horaire">8h15 - 10h15</p></div>                  
-                        <div class="container-horaire"><p id="text-horaire">10h35 - 12h15</p></div>                                   
+                        <div class="container-horaire"><p id="text-horaire">10h15 - 12h15</p></div>                                   
                         <div class="container-horaire"><p id="text-horaire">13h30 - 15h15</h3></div>
-                        <div class="container-horaire"><p id="text-horaire">15h45 - 17h30</p></div>                    
+                        <div class="container-horaire"><p id="text-horaire">15h30 - 17h30</p></div>                    
                     ';
 
         $groupIndex = 1;
 
-        foreach ($groupCodeNumbers as $groupCodeNumber){
-            $view .= '<p class="group-name">G' . $groupIndex . '</p>';
+        foreach ($groupCodeNumbers as $groupCodeNumber => $groupName){
+            $view .= '<p class="group-name">' . $groupName . '</p>';
             $groupIndex++;
 
             $weeklySchedule = new WeeklySchedule($groupCodeNumber);
@@ -360,9 +360,9 @@ class SecretaryView extends UserView
         $view = '<div id="schedule-container">
                      <div></div>
                      <p class="hour-text">8h15 - 10h15</p>
-                     <p class="hour-text">10h35 - 12h15</p>
+                     <p class="hour-text">10h15 - 12h15</p>
                      <p class="hour-text">13h30 - 15h15</p>
-                     <p class="hour-text">15h45 - 17h30</p>';
+                     <p class="hour-text">15h30 - 17h30</p>';
 
         for($i = 0; $i < sizeof($dailySchedulesList); ++$i){
             $dailySchedule = $dailySchedulesList[$i];
@@ -409,7 +409,8 @@ class SecretaryView extends UserView
      * @return void
      */
     public function displayScheduleConfig($courseList) : string{
-        $view = '<form class="course-config-container" method="post">';
+        $view = '<input type="text" id="champ-recherche-cours" placeholder="Rechercher une matière"/>';
+        $view .= '<form class="course-config-container" method="post">';
         $index = 0;
 
         foreach ($courseList as $course) {
@@ -472,9 +473,9 @@ class SecretaryView extends UserView
             $view =
                 '<div class="container-body">       
                 <div class="container-horaire"><p id="text-horaire">8h15 - 10h15</p></div>
-                <div class="container-horaire"><p id="text-horaire">10h35 - 12h15</p></div>                    
+                <div class="container-horaire"><p id="text-horaire">10h15 - 12h15</p></div>                    
                 <div class="container-horaire"><p id="text-horaire">13h30 - 15h15</p></div>          
-                <div class="container-horaire"><p id="text-horaire">15h45 - 17h30</p></div>
+                <div class="container-horaire"><p id="text-horaire">15h30 - 17h30</p></div>
             ';
 
             $courseList = $dailySchedule->getCourseList();
