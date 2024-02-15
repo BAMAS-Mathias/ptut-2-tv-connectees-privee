@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
 .Infos .Weather {
   box-sizing: border-box;
@@ -23,8 +24,9 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
+
   color: #111111;
-  padding: 20px;
+  height: 20%;
   font-family: 'Lato', sans-serif;
 }
 
@@ -32,11 +34,11 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-right: 50px;
 }
 
 #temperature {
-  font-size: 3.3em;
+  font-size: 4.3em;
+  font-weight: 500;
 }
 
 .degree {
@@ -47,11 +49,19 @@
 #wind,
 #humidity,
 #SunsetTime {
-  font-size: 1.1em;
+  font-size: 1em;
+  font-family: 'Inter', serif;
 }
 
 .WeatherIcon img {
-  width: 80px;
-  height: 80px;
-  margin-right: 50px;
+  width: 130px;
+  height: 130px;
+}
+
+.WeatherIcon{
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  width: 90%;
+  gap: 20px;
 }

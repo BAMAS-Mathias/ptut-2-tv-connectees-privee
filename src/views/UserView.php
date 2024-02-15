@@ -251,7 +251,7 @@ class UserView extends View
                 $user->get('display_name'),
                 $user->get('user_email'),
                 implode("'", $this->getRoles($user)),
-                $this->link(add_query_arg(['id' => $user->getId()], home_url('/users/edit')), 'Modifier'),
+                $this->link(add_query_arg(['id' => $user->getId()], home_url('/wp-admin/users.php')), 'Modifier'),
                 $this->link($delete_url, 'Supprimer')
             ];
         }
