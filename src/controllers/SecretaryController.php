@@ -256,7 +256,7 @@ class SecretaryController extends UserController
                 break;
         }
 
-        foreach ($codeList as $code){
+        foreach ($codeList as $code) {
             $codeListWithGroupName[$code] = $model->getCodeName($code);
         }
 

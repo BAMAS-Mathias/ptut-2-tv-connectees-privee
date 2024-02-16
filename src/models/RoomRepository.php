@@ -25,7 +25,7 @@ class RoomRepository extends Model{
      * @return Room[]
      */
     public function getAllComputerRooms(){
-        $sql = "SELECT * FROM ecran_rooms WHERE isComputerRoom=TRUE";
+        $sql = "SELECT DISTINCT name FROM ecran_rooms WHERE isComputerRoom=TRUE";
         $stmt = self::getConnection()->prepare($sql);
         $stmt->execute();
         $roomList = [];
@@ -37,7 +37,7 @@ class RoomRepository extends Model{
     }
 
     public function getAllRoom(){
-        $sql = "SELECT * FROM ecran_rooms";
+        $sql = "SELECT DISTINCT name FROM ecran_rooms";
         $stmt = self::getConnection()->prepare($sql);
         $stmt->execute();
         $roomList = [];
@@ -47,6 +47,7 @@ class RoomRepository extends Model{
         }
         return $roomList;
     }
+
 
     public function lockRoom($roomName, $motif, $endDate){
         $sql = "INSERT INTO secretary_lock_room(roomName, motif, lockEndDate) VALUES (?,?,?)";

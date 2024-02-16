@@ -108,6 +108,11 @@ class RoomController extends UserController {
             $this->updateComputerRooms();
         }
         $roomList = (new RoomRepository())->getAllRoom();
+
+        usort($roomList, function($a, $b) {
+            return strcmp($a->getName(), $b->getName());
+        });
+
         return (new TeacherView())->displaySalleMachineConfig($roomList);
     }
 
