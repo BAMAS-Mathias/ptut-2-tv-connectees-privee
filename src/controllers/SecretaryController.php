@@ -224,6 +224,11 @@ class SecretaryController extends UserController
     public function displayComputerRoomsAvailable(){
         $model = new RoomRepository();
         $roomList = $model->getAllComputerRooms();
+
+        usort($roomList, function($a, $b) {
+            return strcmp($a->getName(), $b->getName());
+        });
+
         return $this->view->displayComputerRoomsAvailable($roomList);
     }
 
