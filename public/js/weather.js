@@ -31,7 +31,7 @@ function getTemp(json) {
 }
 
 function getWind(json) {
-    return msToKmh(json.current.wind_kph);
+    return json.current.wind_kph;
 }
 
 
