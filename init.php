@@ -124,6 +124,7 @@ function loadScriptsEcran()
     if(is_page('config-schedule')){
         wp_enqueue_style('room-schedule', TV_PLUG_PATH . 'public/css/secretaryConfigSchedule.css', array(), VERSION);
         wp_enqueue_script('color_update_script', TV_PLUG_PATH . 'public/js/updateConfigCourseColor.js', array(), VERSION, true);
+        wp_enqueue_script('search_script', TV_PLUG_PATH . 'public/js/secretary/searchCourse.js', array(), VERSION, true);
     }
 
     if(is_page('all-years') || is_page('weekly-computer-room-schedule/')){
