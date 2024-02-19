@@ -426,4 +426,7 @@ add_action('rest_api_init', function () {
 
     $controller = new ScheduleRestController();
     $controller->register_routes();
+
+    $controller = new \Controllers\RoomRestController();
+    $controller->register_routes();
 });

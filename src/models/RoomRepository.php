@@ -76,6 +76,16 @@ class RoomRepository extends Model{
         return null;
     }
 
+    public function getRoom($roomName){
+        $sql = "SELECT * FROM ecran_rooms WHERE name = ?";
+        $stmt = self::getConnection()->prepare($sql);
+        $stmt->execute([$roomName]);
+        if($row = $stmt->fetch()){
+            return (new Room($row['name']));
+        }
+        return null;
+    }
+
     public function unlockRoom($roomName){
         $sql = "DELETE FROM secretary_lock_room WHERE roomName = ?";
         $stmt = self::getConnection()->prepare($sql);

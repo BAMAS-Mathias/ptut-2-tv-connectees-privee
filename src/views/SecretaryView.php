@@ -360,7 +360,7 @@ class SecretaryView extends UserView
         $groupIndex = 1;
 
         foreach ($groupCodeNumbers as $groupCodeNumber => $groupName){
-            $view .= '<p class="group-name">' . $groupName . '</p>';
+            $view .= '<p class="group-name">G' . $groupIndex . '</p>';
             $groupIndex++;
 
             $weeklySchedule = new WeeklySchedule($groupCodeNumber);
