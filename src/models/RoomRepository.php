@@ -25,13 +25,14 @@ class RoomRepository extends Model{
      * @return Room[]
      */
     public function getAllComputerRooms(){
-        $sql = "SELECT DISTINCT name FROM ecran_rooms WHERE isComputerRoom=TRUE";
+        $sql = "SELECT DISTINCT * FROM ecran_rooms WHERE isComputerRoom=TRUE";
         $stmt = self::getConnection()->prepare($sql);
         $stmt->execute();
         $roomList = [];
 
         while($row = $stmt->fetch()){
-            $roomList[] = new Room($row['name']);
+            $roomList[] = new Room($row['name'], $row['isComputerRoom'], $row['pc_available'], $row['place_available'],
+                                   $row['has_video_projector'],$row['cable_types']);
         }
         return $roomList;
     }
@@ -43,7 +44,8 @@ class RoomRepository extends Model{
         $roomList = [];
 
         while($row = $stmt->fetch()){
-            $roomList[] = new Room($row['name']);
+            $roomList[] = new Room($row['name'], $row['isComputerRoom'], $row['pc_available'], $row['place_available'],
+                                   $row['has_video_projector'],$row['cable_types']);
         }
         return $roomList;
     }

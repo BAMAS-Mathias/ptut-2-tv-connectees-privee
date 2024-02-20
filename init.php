@@ -276,11 +276,15 @@ function installDatabaseEcran()
 
     $table_name = 'ecran_rooms';
 
-    $sql = "CREATE TABLE IF NOT EXISTS $table_name (
-            ID int(11) NOT NULL,
-            name varchar(20) NOT NULL,
-            isComputerRoom tinyint(1) NOT NULL DEFAULT 0
-            )";
+    $sql = "CREATE TABLE IF NOT EXISTS $table_name(
+          ID int(11) NOT NULL,
+          name varchar(20) NOT NULL,
+          isComputerRoom tinyint(1) NOT NULL DEFAULT 0,
+          pc_available int(11) NOT NULL DEFAULT 0,
+          place_available int(11) DEFAULT 0,
+          has_video_projector tinyint(1) NOT NULL DEFAULT 0,
+          cable_types varchar(100) NOT NULL DEFAULT ''
+        )";
 
     dbDelta($sql);
 

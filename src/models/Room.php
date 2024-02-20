@@ -7,14 +7,22 @@ class Room{
     private string $motifLock;
     private string $endLockDate;
     private bool $isSalleMachine;
+    private int $pcAvailable;
+    private int $placeAvailable;
+    private bool $hasVideoProjector;
+    private string $cablesTypes;
 
     /**
      * @param string $name
      */
-    public function __construct(string $name)
+    public function __construct(string $name, $isSalleMachine, $pcAvailable, $placeAvailable, $hasVideoProjector, $cablesTypes)
     {
         $this->name = $name;
-        $this->isSalleMachine = false;
+        $this->isSalleMachine = $isSalleMachine;
+        $this->pcAvailable = $pcAvailable;
+        $this->placeAvailable = $placeAvailable;
+        $this->hasVideoProjector = $hasVideoProjector;
+        $this->cablesTypes = $cablesTypes;
     }
 
     public function getName(): string
