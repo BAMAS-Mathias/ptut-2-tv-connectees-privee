@@ -1,7 +1,7 @@
 <?php
 namespace Models;
 
-class Room{
+class Room extends Model implements \JsonSerializable {
 
     private string $name;
     private string $motifLock;
@@ -107,6 +107,8 @@ class Room{
     }
 
 
-
-
+    public function jsonSerialize()
+    {
+        return get_object_vars($this);
+    }
 }
