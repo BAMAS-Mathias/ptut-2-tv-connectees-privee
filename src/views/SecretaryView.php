@@ -501,6 +501,7 @@ class SecretaryView extends UserView
             if($courseList == []){ // Pas de cours
                 $view .= '<h3 style="grid-column: span 8; justify-self: center; font-size: 32px"> Pas de cours aujourd\'hui</h2>';
             }
+
             foreach ($courseList as $course) {
                 if ($course != null) { // Cours null = pas de cours a cet horraire
                     $view .= '<div class="container-matiere green" style="grid-column: span ' . $course->getDuration() . '">
@@ -511,10 +512,31 @@ class SecretaryView extends UserView
                 }else{
                     $view .= '<div></div>';
                 }
-
             }
 
             $view .= '</div>';
+
+            $view .= '
+                    <div id="room-schedule-side-infos" >
+                        <h2 id="room-info-name"></h2> 
+                        <div id="pc-nb-count-container" class="room-info">
+                            <img alt="pc-icon">
+                            <p></p>
+                        </div>                               
+                        <div id="has-projector-container" class="room-info">
+                            <img alt="projector-icon">
+                            <p></p>
+                        </div>                               
+                        <div id="place-nb-container" class="room-info">
+                            <img alt="chair-icon">
+                            <p></p>
+                        </div>                               
+                        <div id="cable-type-container" class="room-info">
+                            <p></p>
+                        </div>          
+                        <a>MODIFIER</a>                     
+                        <a>RESERVER</a>                     
+                        </div>';
 
             return $view;
     }
@@ -524,10 +546,6 @@ class SecretaryView extends UserView
      * @return void
      */
     public function displayRoomSelection($roomList) : string {
-        // Trier les salles par ordre alphabétique du nom
-        usort($roomList, function($a, $b) {
-            return strcmp($a->getName(), $b->getName());
-        }); 
 
         $view = '<form id="room-choice-form" method="post" action="' . home_url("/secretary/room-schedule") . '">
                 <select name="roomName">';

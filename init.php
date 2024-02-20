@@ -99,8 +99,9 @@ function loadScriptsEcran()
     if (is_page('teacher-view')) {
         wp_enqueue_style('teacher_view', TV_PLUG_PATH . 'public/css/teacherview.css', array(), VERSION);
     }
-    if (is_page('rooms-available')) {
-        wp_enqueue_style('rooms_available', TV_PLUG_PATH . 'public/css/rooms_available.css', array(), VERSION);
+    if (is_page('room-schedule')) {
+        wp_enqueue_style('room_schedule', TV_PLUG_PATH . 'public/css/room_schedule.css', array(), VERSION);
+        wp_enqueue_script('room_infos', TV_PLUG_PATH . 'public/js/secretary/room/loadInfos.js', array(), VERSION, true);
     }
 
     if(is_page('computer-room-schedule')){
