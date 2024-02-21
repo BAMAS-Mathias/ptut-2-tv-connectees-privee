@@ -1,16 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
 #room-schedule-side-infos{
-   width: 400px;
-    background-color: rgba(0,0,0,0.4);
+    width: 450px;
     position: absolute;
     height: 700px;
     margin-top: 20px;
     right: 0;
     display: grid;
-    grid-template-rows: 100px 150px 150px 30px 30px;
+    grid-template-rows: 100px 200px 200px 85px 50px;
     grid-template-columns: repeat(2, 1fr);
     row-gap: 10px;
     padding: 0 10px 10px 0px;
     box-sizing: border-box;
+    z-index: 2;
+    border: 2px solid rgba(160,160,160,0.8);
+    border-radius: 10px;
+    transition: all 0.2s;
+}
+
+.close{
+    transform: translate(450px,0);
+}
+
+#room-schedule-side-infos button{
+    position: absolute;
+    left: -20px;
+    top: 0;
+    transform: translate(-40px, calc(350px - 50%));
+    height: 200px;
+    width: 60px;
+    border-radius: 50px 0 0 50px;
+    border: 0;
+    background-color: #F0AB02;
+    font-size: 50px;
+}
+
+#room-schedule-side-infos:after{
+    background-color: rgba(160,160,160,0.6);
+    filter: blur(5px);
+    content: ' ';
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    position: absolute;
+    padding: 0 10px 10px 0px;
+
 }
 
 #room-schedule-side-infos a{
@@ -22,7 +58,13 @@
     width: 110%;
     background-color: #FFBC0F;
     grid-column: span 2;
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Inter', serif;
+    font-size: 45px;
+    font-weight: bold;
+    margin-right: 5px;
 }
 
 .room-info{
@@ -34,6 +76,7 @@
     align-items: center;
     flex-direction: column;
     position: relative;
+    justify-content: center;
 }
 
 .room-info p{
@@ -42,5 +85,40 @@
     height: 25%;
     position: absolute;
     bottom: 0;
+    font-family: 'Inter', serif;
+    font-weight: bolder;
+    font-size: 38px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: rgba(240,171,2,0.3);
+    border-radius: 10px;
 }
+
+.room-info img{
+    width: auto;
+    height: 50%;
+    margin-bottom: 20%;
+}
+
+#modif-button,
+#reserv-button{
+    width: 95%;
+    height: 50px;
+    border-radius: 20px;
+    font-family: 'Inter', serif;
+    font-size: 20px;
+    justify-content: center;
+    margin: 0 auto;
+    font-weight: bold;
+
+}
+
+#modif-button{
+    background-color: #F0AB02;
+}
+
+#reserv-button{
+    background-color: #5D7EF3;
+}
+

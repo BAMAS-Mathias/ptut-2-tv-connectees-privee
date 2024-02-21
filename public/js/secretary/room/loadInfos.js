@@ -5,9 +5,11 @@ let placeNb = document.querySelector("#place-nb-container p");
 let hasVideoProjector = document.querySelector("#has-projector-container p")
 let cableList = document.querySelector("#cable-type-container p");
 
-selector.addEventListener('change', () => {loadInfos(selector.value)})
+//selector.addEventListener('change', () => {loadInfos(selector.value)})
 
-window.onload = () => loadInfos();
+window.onload = () => {
+    console.log(selector)
+    loadInfos(selector.value)};
 
 function loadInfos(roomName){
 
