@@ -229,13 +229,26 @@ class SecretaryController extends UserController
     public function displayComputerRoomsAvailable(){
         $model = new RoomRepository();
         $roomList = $model->getAllComputerRooms();
+        
+        $mobileRooms = array_filter($roomList, function($room) {
+            return preg_match('/\/\s*Mobile\s*$/i', $room->getName());
+        });
 
-        usort($roomList, function($a, $b) {
+        $nonMobileRooms = array_filter($roomList, function($room) {
+            return !preg_match('/\/\s*Mobile\s*$/i', $room->getName());
+        });
+
+        usort($nonMobileRooms, function($a, $b) {
+            return strcmp($a->getName(), $b->getName());
+        });
+        usort($mobileRooms, function($a, $b) {
             return strcmp($a->getName(), $b->getName());
         });
 
-        return $this->view->displayComputerRoomsAvailable($roomList);
+        $sortedRoomList = array_merge($nonMobileRooms, $mobileRooms);
+        return $this->view->displayComputerRoomsAvailable($sortedRoomList);
     }
+
 
 
     public function displayRoomsAvailable(): string
