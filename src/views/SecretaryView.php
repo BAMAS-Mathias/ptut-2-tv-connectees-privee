@@ -517,25 +517,26 @@ class SecretaryView extends UserView
             $view .= '</div>';
 
             $view .= '
-                    <div id="room-schedule-side-infos" >
+                    <div id="room-schedule-side-infos" class="close">
                         <h2 id="room-info-name"></h2> 
                         <div id="pc-nb-count-container" class="room-info">
-                            <img alt="pc-icon">
+                            <img alt="pc-icon" src="' . TV_PLUG_PATH . 'public/img/icons/pc-icon.png' . '">
                             <p></p>
                         </div>                               
                         <div id="has-projector-container" class="room-info">
-                            <img alt="projector-icon">
+                            <img alt="projector-icon" src="' . TV_PLUG_PATH . 'public/img/icons/projector-icon.png' . '">
                             <p></p>
                         </div>                               
                         <div id="place-nb-container" class="room-info">
-                            <img alt="chair-icon">
+                            <img alt="chair-icon" src="' . TV_PLUG_PATH . 'public/img/icons/chair-icon.png' . '">
                             <p></p>
                         </div>                               
                         <div id="cable-type-container" class="room-info">
                             <p></p>
                         </div>          
-                        <a>MODIFIER</a>                     
-                        <a>RESERVER</a>                     
+                        <a id="modif-button">MODIFIER</a>                     
+                        <a id="reserv-button">RESERVER</a>
+                        <button id="open-close-button">←</button>                     
                         </div>';
 
             return $view;
@@ -552,7 +553,7 @@ class SecretaryView extends UserView
 
         // Pré-sélectionner la salle si elle a déjà été choisie
         if(isset($_POST['roomName'])){
-            $view .= '<option value="" disabled selected hidden>' . htmlspecialchars($_POST['roomName'], ENT_QUOTES, 'UTF-8') . '</option>';
+            $view .= '<option value="' . $_POST['roomName'] . '" disabled selected hidden>' . htmlspecialchars($_POST['roomName'], ENT_QUOTES, 'UTF-8') . '</option>';
         }
 
         foreach ($roomList as $room){

@@ -102,6 +102,7 @@ function loadScriptsEcran()
     if (is_page('room-schedule')) {
         wp_enqueue_style('room_schedule', TV_PLUG_PATH . 'public/css/room_schedule.css', array(), VERSION);
         wp_enqueue_script('room_infos', TV_PLUG_PATH . 'public/js/secretary/room/loadInfos.js', array(), VERSION, true);
+        wp_enqueue_script('open_menu', TV_PLUG_PATH . 'public/js/secretary/room/openRoomInfoMenu.js', array(), VERSION, true);
     }
 
     if(is_page('computer-room-schedule')){
