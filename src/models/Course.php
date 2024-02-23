@@ -54,7 +54,11 @@ class Course
      * @return int
      */
     private function calcDuration(){
-        $listeHorraireDebut = ["8:15","9:15","10:40","11:15","13:30","14:35","15:40","16:25"];
+        $hFin = strtotime(str_replace('h', ':', $this->getHeureFin()));
+        $hDeb = strtotime(str_replace('h', ':', $this->getHeureDeb()));
+        $duration = round(abs(($hDeb - $hFin) / 3600),2);
+
+        /*$listeHorraireDebut = ["8:15","9:15","10:40","11:15","13:30","14:35","15:25","16:25"];
         $listeHorraireFin = ["9:15","10:15","11:00","12:15","14:25","15:20","16:30","17:30"];
         $indexHorraire = 0;
         $duration = 0;
@@ -63,14 +67,14 @@ class Course
             $heureFinCours = strtotime(str_replace('h',':',$this->getHeureFin()));
             $heureDebutCours = strtotime(str_replace('h',':',$this->getHeureDeb()));
 
-            /** Si le cours est dans la tranche horaire */
+
             if($heureDebutCours <= strtotime($listeHorraireDebut[$indexHorraire])){
                 if($heureFinCours >= strtotime($listeHorraireFin[$indexHorraire])) {
                     $duration++;
                 }
             }
             $indexHorraire++;
-        }
+        }*/
         return $duration;
     }
 

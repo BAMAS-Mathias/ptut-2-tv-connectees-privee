@@ -98,6 +98,7 @@ class DailySchedule{
                 $indexCourse++;
                 continue;
             }
+
             if($heureDebutCours <= strtotime($listeHorraireDebut[$indexHorraire])){ // Le cours commence a cet horaire
                 if($indexCourse != sizeof($courseList) - 1 ){
 
@@ -124,7 +125,6 @@ class DailySchedule{
                 $indexHorraire++;
             }
         }
-
 
         return $dailyScheduleWithPause;
     }

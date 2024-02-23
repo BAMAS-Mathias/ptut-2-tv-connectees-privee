@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
 #schedule-container{
     width: 100vw;
     height: fit-content;
@@ -10,26 +12,28 @@
     justify-content: center;
 }
 
+.text-matiere{
+    font-weight: bold !important;
+
+}
 .text-prof, .text-matiere{
     font-size: 19px !important;
-    height: fit-content;
-    padding-top: 20px !important;
-    line-height: 17px;
     font-weight: 500;
+    font-family: 'Inter', serif;
+    text-wrap: balance ;
 }
 
 .text-prof{
-    margin-top: 10px !important;
-    font-size: 25px !important;
+    font-size: 23px !important;
+    font-weight: normal !important;
 }
 
 .text-salle{
     padding-top: 20%;
-    line-height: 0.75em !important;
 }
 
 .container-matiere{
-    height: 160px !important;
+    height: 150px !important;
 }
 
 .group-name{
@@ -56,21 +60,33 @@
 }
 
 .demi-groupe{
-    height: 75px !important;
+    height: 71.5px !important;
 }
 
 .demi-groupe .text-salle{
-    font-size: 20px;
+    font-size: 16px;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .demi-groupe .text-prof,
 .demi-groupe .text-matiere{
-    font-size: 17px !important;
+    font-size: 15px !important;
     height: fit-content;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.demi-groupe .text-matiere{
+    margin-top: 5px !important;
 }
 
 .demi-groupe .text-prof{
-    margin-top: 15px;
+    margin-bottom: 5px !important;
 }
 
 @keyframes slide {
@@ -180,6 +196,20 @@ main{
     font-size: 24px;
     font-weight: bold;
     padding: 10px 0;
+}
+
+.duration_1 .text-prof{
+    width: 100%;
+    font-size: 13px !important;
+}
+
+.duration_1 .text-matiere{
+    font-size: 12px !important;
+}
+
+
+.duration_1 .text-salle{
+    font-size: 15px !important;
 }
 
 

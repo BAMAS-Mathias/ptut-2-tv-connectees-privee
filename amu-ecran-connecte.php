@@ -89,7 +89,7 @@ function updateTeacherRoomDB(){
                 $teacherName = preg_split('/\n/', $course->getTeacher())[1];
 
                 if(!$roomModel->exist($course->getLocation())){
-                    if(strlen($course->getLocation()) < 10){
+                    if(strlen($course->getLocation()) < 10 && !preg_match('/Amphi/i', $course->getLocation())){
                         $roomModel->add($course->getLocation());
                     }
                 }

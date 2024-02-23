@@ -14,4 +14,4 @@ function refreshAt(hours, minutes, seconds) {
     setTimeout(function() { window.location.reload(true); }, timeout);
 }
 
-refreshAt(7,40,0);
+refreshAt(3,0,0);

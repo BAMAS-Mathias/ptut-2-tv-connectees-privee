@@ -311,7 +311,7 @@ class SecretaryView extends UserView
      * @return string
      */
     public function displayHalfGroupCourse($firstGroupCourse, $secondGroupCourse) : string{
-        $view = '<div style="grid-column: span ' . $firstGroupCourse->getDuration() . ';display: grid; row-gap: 10px">';
+        $view = '<div style="grid-column: span ' . $firstGroupCourse->getDuration() . ';display: grid; row-gap: 3px">';
         $view .= $this->displayGroupCourse($firstGroupCourse, true);
         $view .= $this->displayGroupCourse($secondGroupCourse, true);
         $view .= '</div>';
@@ -324,7 +324,7 @@ class SecretaryView extends UserView
      * @return string
      */
     public function displayGroupCourse($course, $halfsize = false) : string{
-        $view = '<div class="container-matiere"';
+        $view = '<div class="container-matiere duration_' . $course->getDuration() . ' ';
         if($halfsize){
             $view .= 'demi-groupe';
         }
@@ -504,7 +504,7 @@ class SecretaryView extends UserView
 
             foreach ($courseList as $course) {
                 if ($course != null) { // Cours null = pas de cours a cet horraire
-                    $view .= '<div class="container-matiere green" style="grid-column: span ' . $course->getDuration() . '">
+                    $view .= '<div class="container-matiere green duration_' . $course->getDuration() . '" style="grid-column: span ' . $course->getDuration() . '">
                             <p class="text-matiere">' . $course->getSubject() . '</p>
                             <p class="text-prof">' . $course->getTeacher() . '</p>
                             <p class="text-salle">' . $course->getLocation() . '</p>
