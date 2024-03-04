@@ -20,28 +20,33 @@ class RoomRestController extends \WP_REST_Controller {
                     'callback' => array($this, 'get_room'),
                     'args' => $this->get_collection_params(),
                 ),
+                array(
+                    'methods' => \WP_REST_Server::EDITABLE,
+                    'callback' => array($this, 'update_room'),
+                    'args' => array(
+                        'pcCount' => array(
+                            'type' => 'number',
+                            'description' => __('Number of pc available'),
+                        ),
+                        'projector' => array(
+                            'type' => 'string',
+                            'description' => __('Is there a projector'),
+                        ),
+                        'chairCount' => array(
+                            'type' => 'number',
+                            'description' => __('Number of place available'),
+                        ),
+                        'connection' => array(
+                            'type' => 'string',
+                            'description' => __('Connection type available'),
+                        ),
+                    ),
+                ),
                 'schema' => array($this, 'get_public_item_schema'),
+
             )
         );
 
-        register_rest_route(
-            $this->namespace,
-            '/' . $this->rest_base . '/(?P<id>[\w]+)',
-            array(
-                'args' => array(
-                    'id' => array(
-                        'description' => __('Unique identifier for the information'),
-                        'type' => 'integer',
-                    ),
-                ),
-                array(
-                    'methods' => \WP_REST_Server::READABLE,
-                    'callback' => array($this, 'get_room'),
-                    'args' => null,
-                ),
-                'schema' => array($this, 'get_public_item_schema'),
-            )
-        );
     }
 
     /**
@@ -58,6 +63,18 @@ class RoomRestController extends \WP_REST_Controller {
         }
 
         return new \WP_REST_Response(array($room), 200);
+    }
+
+
+    /**
+     * Update a room
+     *
+     * @param \WP_REST_Request $request Full data about the request.
+     * @return \WP_Error|\WP_REST_Response
+     */
+    public function update_room($request){
+
+        return new \WP_REST_Response(array("good"), 200);
     }
 
 }

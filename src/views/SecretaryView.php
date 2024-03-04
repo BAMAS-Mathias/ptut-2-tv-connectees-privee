@@ -305,6 +305,7 @@ class SecretaryView extends UserView
         return $view;
     }
 
+
     /** Renvoie la vue d'un cours en demi groupe
      * @param $firstGroupCourse
      * @param $secondGroupCourse
@@ -317,6 +318,7 @@ class SecretaryView extends UserView
         $view .= '</div>';
         return $view;
     }
+
 
     /** Renvoie la vue d'un cours
      * @param $course
@@ -335,6 +337,7 @@ class SecretaryView extends UserView
                     </div>';
         return $view;
     }
+
 
     /** Affiche l'emplois du temps d'une année de BUT
      * @param $groupCodeNumbers [1/2/3] Année a affiché
@@ -521,21 +524,23 @@ class SecretaryView extends UserView
                         <h2 id="room-info-name"></h2> 
                         <div id="pc-nb-count-container" class="room-info">
                             <img alt="pc-icon" src="' . TV_PLUG_PATH . 'public/img/icons/pc-icon.png' . '">
-                            <p></p>
+                            <input type="number" min="0"></input>
                         </div>                               
                         <div id="has-projector-container" class="room-info">
                             <img alt="projector-icon" src="' . TV_PLUG_PATH . 'public/img/icons/projector-icon.png' . '">
-                            <p></p>
+                            <input type="text"></input>
                         </div>                               
                         <div id="place-nb-container" class="room-info">
                             <img alt="chair-icon" src="' . TV_PLUG_PATH . 'public/img/icons/chair-icon.png' . '">
-                            <p></p>
+                            <input type="text"></input>
                         </div>                               
                         <div id="cable-type-container" class="room-info">
-                            <p></p>
+                            <input type="text"></input>
                         </div>          
-                        <a id="modif-button">MODIFIER</a>                     
-                        <a id="reserv-button">RESERVER</a>
+                        <button id="modif-button">MODIFIER</button>     
+                        <button id="confirm-button">CONFIRMER</button>                                         
+                        <button id="reserv-button">RESERVER</button>
+                        <button id="cancel-button">ANNULER</button>
                         <button id="open-close-button">←</button>                     
                         </div>';
 
