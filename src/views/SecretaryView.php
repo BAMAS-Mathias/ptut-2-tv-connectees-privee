@@ -528,13 +528,14 @@ class SecretaryView extends UserView
                         </div>                               
                         <div id="has-projector-container" class="room-info">
                             <img alt="projector-icon" src="' . TV_PLUG_PATH . 'public/img/icons/projector-icon.png' . '">
-                            <input type="text"></input>
+                            <input type="text" readonly></input>
                         </div>                               
                         <div id="place-nb-container" class="room-info">
                             <img alt="chair-icon" src="' . TV_PLUG_PATH . 'public/img/icons/chair-icon.png' . '">
-                            <input type="text"></input>
+                            <input type="number"></input>
                         </div>                               
                         <div id="cable-type-container" class="room-info">
+                            <img alt="cable-icon" src="' . TV_PLUG_PATH . 'public/img/icons/cable-icon.png' . '">
                             <input type="text"></input>
                         </div>          
                         <button id="modif-button">MODIFIER</button>     

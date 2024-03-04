@@ -18,7 +18,13 @@ confirmButton.onclick = () => {
     roomName = roomName.replace(' ','+')
     let pcCount = document.querySelector("#pc-nb-count-container input[type=number]").value
     let chairCount = document.querySelector("#place-nb-container input").value
-    modifyRoom(roomName, pcCount, 'test', 12, "Test");
+    let cableTypes = document.querySelector("#cable-type-container input").value;
+    let hasComputerBool;
+    let hasComputer = document.querySelector("#has-projector-container input");
+
+    if(hasComputer.value === '✓') hasComputerBool = true;
+    else{hasComputerBool = false}
+    modifyRoom(roomName, pcCount, hasComputerBool, chairCount, cableTypes);
     quitModification();
 }
 
@@ -56,7 +62,7 @@ function modifyRoom(roomName, pcCount, projector, chairCount, connection){
     })
         .then(function(response) {
             return response.json().then(function (O_json) {
-                displayInfos(O_json[0]);
+                console.log(O_json)
             })
         })
 }

@@ -9,6 +9,13 @@ let cableList = document.querySelector("#cable-type-container input");
 window.onload = () => {
     loadInfos(selector.value)};
 
+hasVideoProjector.onclick = () => {
+    if(hasVideoProjector.value === '✓') hasVideoProjector.value = '❌'
+    else{
+        hasVideoProjector.value = '✓';
+    }
+}
+
 function loadInfos(roomName){
 
     roomName = roomName.replace(' ','+')

@@ -1,6 +1,7 @@
 <?php
 
 namespace Controllers;
+use Models\Room;
 use Models\RoomRepository;
 
 class RoomRestController extends \WP_REST_Controller {
@@ -29,7 +30,7 @@ class RoomRestController extends \WP_REST_Controller {
                             'description' => __('Number of pc available'),
                         ),
                         'projector' => array(
-                            'type' => 'string',
+                            'type' => 'boolean',
                             'description' => __('Is there a projector'),
                         ),
                         'chairCount' => array(
@@ -73,8 +74,9 @@ class RoomRestController extends \WP_REST_Controller {
      * @return \WP_Error|\WP_REST_Response
      */
     public function update_room($request){
-
-        return new \WP_REST_Response(array("good"), 200);
+        $roomRepo = new RoomRepository();
+        $room = $roomRepo->updateRoom($request['id'], $request['pcCount'], $request['projector'], $request['chairCount'], $request['connection']);
+        return new \WP_REST_Response(array($room), 200);
     }
 
 }

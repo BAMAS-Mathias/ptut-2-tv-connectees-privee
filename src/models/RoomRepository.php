@@ -106,5 +106,12 @@ class RoomRepository extends Model{
         $stmt->execute([$value,$roomName]);
     }
 
+    public function updateRoom($roomName, $pcCount, $projector, $chairCount, $connection){
+        $sql = "UPDATE ecran_rooms SET pc_available=?,has_video_projector=?,place_available=?,cable_types=? WHERE name=?";
+        $stmt = self::getConnection()->prepare($sql);
+        $stmt->execute([$pcCount, $projector, $chairCount, $connection, $roomName]);
+        return $this->getRoom($roomName);
+    }
+
 
 }
