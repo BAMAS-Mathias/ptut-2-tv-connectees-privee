@@ -19,12 +19,14 @@ hasVideoProjector.onclick = () => {
 function loadInfos(roomName){
 
     roomName = roomName.replace(' ','+')
-    let url = "https://testserveur.alwaysdata.net/wp-json/amu-ecran-connectee/v1/room?id=" + roomName;
+    let url = "https://" + window.location.host + "/wp-json/amu-ecran-connectee/v1/room?id=" + roomName;
     fetch(url).then(function(response){
         return response.json().then(function(O_json){
             displayInfos(O_json[0]);
         })
     })
+
+    console.log(window.location.host)
 }
 
 function displayInfos(O_Json){

@@ -45,7 +45,7 @@ function quitModification(){
 
 function modifyRoom(roomName, pcCount, projector, chairCount, connection){
 
-    let url = "https://testserveur.alwaysdata.net/wp-json/amu-ecran-connectee/v1/room?id=" + roomName;
+    let url = "https://" + window.location.host + "/wp-json/amu-ecran-connectee/v1/room?id=" + roomName;
     let data = {
         pcCount: pcCount,
         projector: projector,
