@@ -29,18 +29,32 @@ confirmButton.onclick = () => {
 }
 
 function enterModication(){
-    modificationInputList.forEach((elem) => elem.style.pointerEvents = 'auto')
+    modificationInputList.forEach((elem) => {
+        elem.style.pointerEvents = 'auto'
+        elem.classList.add("editable")
+    })
     modifyButton.style.display = "none";
+    modifyButton.style.opacity = "0";
     reservButton.style.display = "none";
+    reservButton.style.opacity = "0";
     confirmButton.style.display = "block";
+    confirmButton.style.opacity = "1";
     cancelButton.style.display = "block";
+    cancelButton.style.opacity = "1";
 }
 
 function quitModification(){
+    modificationInputList.forEach((elem) => {
+        elem.classList.remove("editable")
+    })
     modifyButton.style.display = "block";
+    modifyButton.style.opacity = "1";
     reservButton.style.display = "block";
+    reservButton.style.opacity = "1";
     confirmButton.style.display = "none";
+    confirmButton.style.opacity = "0";
     cancelButton.style.display = "none";
+    cancelButton.style.opacity = "0";
 }
 
 function modifyRoom(roomName, pcCount, projector, chairCount, connection){
@@ -61,6 +75,9 @@ function modifyRoom(roomName, pcCount, projector, chairCount, connection){
         body: JSON.stringify(data)
     })
         .then(function(response) {
+            let validationScreen = document.querySelector("#validationScreen")
+            validationScreen.style.display = "block"
+
             return response.json().then(function (O_json) {
                 console.log(O_json)
             })

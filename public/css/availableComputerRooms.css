@@ -8,6 +8,7 @@
     font-family: 'Titillium Web', sans-serif;
     font-weight: bold;
     padding-top: 10px;
+    text-align: center;
 }
 
 .lock-open, .lock-close{

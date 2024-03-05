@@ -1,5 +1,55 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
+@keyframes appear {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
+@keyframes validationAnimation {
+    0% {
+        height: 0;
+    }
+    30% {
+        height: 100%;
+    }
+    70%{
+        height: 100%;
+    }
+    100%{
+        height: 0;
+        display: none;
+    }
+}
+
+@keyframes checkAnimation {
+    0%{
+    }
+    70%{
+        transform: scale(0.7);
+    }
+    90%{
+        transform: scale(1.2);
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+    }
+}
+
+@keyframes disapear {
+    0%{
+
+    }
+    100%{
+        display: none !important;
+    }
+}
+
+
 #room-schedule-side-infos{
     width: 450px;
     position: absolute;
@@ -118,7 +168,17 @@
     justify-content: center;
     margin: 0 auto;
     font-weight: bold;
+    animation: appear 0.3s ease-in;
+    transition: all 0.2s;
 }
+
+#modif-button:hover,
+#reserv-button:hover,
+#confirm-button:hover,
+#cancel-button:hover{
+    transform: scale(1.05);
+}
+
 
 #modif-button{
     background-color: #F0AB02;
@@ -151,3 +211,54 @@ input[type=number] {
 #has-projector-container input{
     cursor: pointer;
  }
+
+#cable-type-container input{
+    font-size: 16px;
+    width: 100%;
+    line-break: auto;
+}
+
+.editable{
+    transition: all 0.2s;
+    border-bottom: solid 5px #F0AB02 !important;
+}
+
+#validationScreen{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    animation: disapear 0.5s forwards;
+}
+
+#validationScreen:before{
+    animation: validationAnimation 1.75s forwards ease-in;
+    content: ' ';
+    width: 100%;
+    left: 0;
+    top: 0;
+    position: absolute;
+    background-color: #ececec;
+    z-index: 2;
+    border: 10px;
+}
+
+#check-gif{
+    left: 50%;
+    top: 30%;
+    width: 100px;
+    z-index: 2;
+    animation: checkAnimation 2s forwards ease-in;
+}
+
+#validationScreen p {
+    color: #6CD088;
+    font-size: 26px;
+    font-family: 'Inter', serif;
+    z-index: 2;
+    font-weight: bold;
+}

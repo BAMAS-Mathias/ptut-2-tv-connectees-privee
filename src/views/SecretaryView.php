@@ -542,7 +542,11 @@ class SecretaryView extends UserView
                         <button id="confirm-button">CONFIRMER</button>                                         
                         <button id="reserv-button">RESERVER</button>
                         <button id="cancel-button">ANNULER</button>
-                        <button id="open-close-button">←</button>                     
+                        <button id="open-close-button">←</button>   
+                        <div id="validationScreen">
+                             <img id="check-gif" alt="check icon" src="' . TV_PLUG_PATH . 'public/img/icons/checkmark-icon.png' . '">            
+                             <p>Salle Modifier avec succès</p>                                      
+                        </div>     
                         </div>';
 
             return $view;

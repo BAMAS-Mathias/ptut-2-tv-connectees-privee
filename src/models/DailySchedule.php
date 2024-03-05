@@ -81,7 +81,7 @@ class DailySchedule{
         if(sizeof($this->courseList) == 0) return [];
         $courseList = $this->courseList;
         $dailyScheduleWithPause = [];
-        $listeHorraireDebut = ["8:15","9:15","10:40","11:10","13:30","14:35","15:30","16:25"];
+        $listeHorraireDebut = ["8:15","9:30","10:40","11:10","13:30","14:35","15:30","16:25"];
         $indexHorraire = 0;
         $indexCourse = 0;
         while($indexHorraire < sizeof($listeHorraireDebut) && $indexHorraire < 8){ // Tant que l'edt n'est pas fini
@@ -90,6 +90,7 @@ class DailySchedule{
                 $indexHorraire++;
                 continue;
             }
+
 
             $heureDebutCours = strtotime(str_replace('h',':',$courseList[$indexCourse]->getHeureDeb()));
             $heureFinCours = strtotime(str_replace('h',':', $courseList[$indexCourse]->getHeureFin()));

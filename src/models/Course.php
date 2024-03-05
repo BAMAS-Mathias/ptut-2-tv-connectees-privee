@@ -56,7 +56,7 @@ class Course
     private function calcDuration(){
         $hFin = strtotime(str_replace('h', ':', $this->getHeureFin()));
         $hDeb = strtotime(str_replace('h', ':', $this->getHeureDeb()));
-        $duration = round(abs(($hDeb - $hFin) / 3600),2);
+        $duration = round(abs(($hDeb - $hFin) / 3600),0);
 
         /*$listeHorraireDebut = ["8:15","9:15","10:40","11:15","13:30","14:35","15:25","16:25"];
         $listeHorraireFin = ["9:15","10:15","11:00","12:15","14:25","15:20","16:30","17:30"];
