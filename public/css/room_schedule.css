@@ -11,6 +11,7 @@
 
 @keyframes validationAnimation {
     0% {
+        visibility: visible;
         height: 0;
     }
     30% {
@@ -25,29 +26,6 @@
     }
 }
 
-@keyframes checkAnimation {
-    0%{
-    }
-    70%{
-        transform: scale(0.7);
-    }
-    90%{
-        transform: scale(1.2);
-        opacity: 1;
-    }
-    100%{
-        opacity: 0;
-    }
-}
-
-@keyframes disapear {
-    0%{
-
-    }
-    100%{
-        display: none !important;
-    }
-}
 
 
 #room-schedule-side-infos{
@@ -232,33 +210,35 @@ input[type=number] {
     align-items: center;
     justify-content: center;
     gap: 20px;
-    animation: disapear 0.5s forwards;
+    overflow-y: hidden;
+    background-color: #e2e2e2;
+    visibility: hidden;
 }
 
-#validationScreen:before{
+.validation-animation{
     animation: validationAnimation 1.75s forwards ease-in;
-    content: ' ';
-    width: 100%;
-    left: 0;
-    top: 0;
-    position: absolute;
-    background-color: #ececec;
-    z-index: 2;
-    border: 10px;
 }
+
 
 #check-gif{
-    left: 50%;
-    top: 30%;
+    left: 235px;
+    top: 300px;
     width: 100px;
     z-index: 2;
     animation: checkAnimation 2s forwards ease-in;
+    position: absolute;
+    transform: translate(-50%, -50%);
 }
 
 #validationScreen p {
+    left: 235px;
+    top: 400px;
     color: #6CD088;
     font-size: 26px;
     font-family: 'Inter', serif;
     z-index: 2;
     font-weight: bold;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    width: 80%;
 }

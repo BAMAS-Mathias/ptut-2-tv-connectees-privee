@@ -33,6 +33,7 @@ function enterModication(){
         elem.style.pointerEvents = 'auto'
         elem.classList.add("editable")
     })
+    validationScreen.classList.remove("validation-animation")
     modifyButton.style.display = "none";
     modifyButton.style.opacity = "0";
     reservButton.style.display = "none";
@@ -46,6 +47,7 @@ function enterModication(){
 function quitModification(){
     modificationInputList.forEach((elem) => {
         elem.classList.remove("editable")
+        elem.style.pointerEvents = 'none'
     })
     modifyButton.style.display = "block";
     modifyButton.style.opacity = "1";
@@ -76,7 +78,7 @@ function modifyRoom(roomName, pcCount, projector, chairCount, connection){
     })
         .then(function(response) {
             let validationScreen = document.querySelector("#validationScreen")
-            validationScreen.style.display = "block"
+            validationScreen.classList.add("validation-animation")
 
             return response.json().then(function (O_json) {
                 console.log(O_json)
