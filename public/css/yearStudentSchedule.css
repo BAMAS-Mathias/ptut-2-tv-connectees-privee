@@ -3,7 +3,7 @@
 #schedule-container{
     width: 100vw;
     height: fit-content;
-    margin: 2rem 0;
+    margin: 1rem 0 2rem 0;
     display: grid;
     grid-template-columns: repeat(9,0.1fr);
     grid-column-gap: 20px;
@@ -188,14 +188,19 @@ main{
     background-color: #7ed7f7;
     display: flex;
     justify-content: center;
-    width: 50vw;
+    width: 40vw;
     margin: 0.5rem auto;
     align-items: center;
     border-radius: 10px;
-    color: #ffffff;
-    font-size: 24px;
-    font-weight: bold;
+    color: #313131;
     padding: 10px 0;
+}
+
+.day-of-week h2{
+    font-weight: bolder;
+    font-size: 36px;
+    margin: 0;
+    text-transform: uppercase;
 }
 
 .duration_1 .text-prof{

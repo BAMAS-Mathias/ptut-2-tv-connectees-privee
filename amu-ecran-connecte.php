@@ -87,10 +87,12 @@ function updateTeacherRoomDB(){
             foreach ($dailySchedule->getCourseList() as $course){
                 if($course == null) continue;
                 $teacherName = preg_split('/\n/', $course->getTeacher())[1];
+                $roomName = preg_replace('/(TD)|(TP)|(Laboratoire de langue)|(Mobile)/','',$course->getLocation());
+                $roomName = trim(str_replace('/', '',$roomName));
 
-                if(!$roomModel->exist($course->getLocation())){
-                    if(strlen($course->getLocation()) < 10 && !preg_match('/Amphi/i', $course->getLocation())){
-                        $roomModel->add($course->getLocation());
+                if(!$roomModel->exist($roomName) && !empty($roomName)){
+                    if(strlen($course->getLocation()) < 10 && !preg_match('/Amphi/i', $roomName)){
+                        $roomModel->add($roomName);
                     }
                 }
 

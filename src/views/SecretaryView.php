@@ -254,7 +254,7 @@ class SecretaryView extends UserView
             else{ // La salle est disponible
                 $view .= '<form class="room available" method="post" action="' . home_url("/secretary/lock-room") . '">
                         <input type="hidden" name="roomName" value="' . $room->getName() . '">
-                        <input type="submit" style="position:absolute; opacity: 0; width: 100%; height: 100%">';
+                        <input type="submit" style="position:absolute; opacity: 0; width: 100%; height: 100%; z-index: 2">';
             }
             $view .= '
                         <img class="lock-open" src="'. TV_PLUG_PATH . 'public/img/lock-open.png' .'">
@@ -489,9 +489,10 @@ class SecretaryView extends UserView
 
     /** Affiche l'emploi du temps d'une salle
      * @param $dailySchedule L'emploi du temps de la salle
+     * @param Room $room
      * @return string
      */
-    public function displayRoomSchedule($dailySchedule){
+    public function displayRoomSchedule($dailySchedule, $room){
             $view =
                 '<div class="container-body">       
                 <div class="container-horaire"><p id="text-horaire">8h15 - 10h15</p></div>
@@ -542,13 +543,25 @@ class SecretaryView extends UserView
                         <div id="cable-type-container" class="room-info">
                             <img alt="cable-icon" src="' . TV_PLUG_PATH . 'public/img/icons/cable-icon.png' . '">
                             <input type="text"></input>
+                        </div> 
+                        <div id="room-type-container" class="room-info">
+                            <img alt="room-icon" src="' . TV_PLUG_PATH . 'public/img/icons/room-type-icon.png' . '">
+                            <select>
+                                <option hidden value="" selected>' . $room->getRoomType() . '</option>
+                                <option>TD</option>
+                                <option>TP</option>
+                                <option>Mobile</option>
+                            </select>
                         </div>          
                         <div id="room-status-container"> 
                              <p>STATUS</p>
                         </div>
                         <button id="modif-button">MODIFIER</button>     
-                        <button id="confirm-button">CONFIRMER</button>                                         
-                        <button id="reserv-button">RESERVER</button>
+                        <button id="confirm-button">CONFIRMER</button>    
+                        <form id="reserv-room-form" class="room available" method="post" action="' . home_url("/secretary/lock-room") . '">
+                               <button type="submit" id="reserv-button">RESERVER</button>
+                               <input id="hiddenRoomName" type="hidden" name="roomName" value="">                             
+                        </form>                                     
                         <button id="cancel-button">ANNULER</button>
                         <button id="open-close-button">←</button>   
                         <div id="validationScreen">

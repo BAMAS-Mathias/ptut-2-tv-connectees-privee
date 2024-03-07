@@ -152,6 +152,7 @@ class SecretaryController extends UserController
         $view = $this->displayRoomsSelection();
         if(!isset($_POST['roomName'])) return $view;
         $roomName = $_POST['roomName'];
+        $room = (new RoomRepository())->getRoom($roomName);
         $dailyScheduleRoom = new DailySchedule(date('Ymd'));
         $codeAde = (new CodeAde())->getAllAdeCode();
         foreach ($codeAde as $code){
@@ -165,7 +166,7 @@ class SecretaryController extends UserController
                 }
             }
         }
-        return $view . $this->view->displayRoomSchedule($dailyScheduleRoom);
+        return $view . $this->view->displayRoomSchedule($dailyScheduleRoom, $room);
     }
 
     /**

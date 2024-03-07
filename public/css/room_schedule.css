@@ -110,7 +110,8 @@
     justify-content: center;
 }
 
-.room-info input{
+.room-info input,
+.room-info select{
     width: 100%;
     margin: 0;
     height: 25%;
@@ -266,6 +267,13 @@ input[type=number] {
     box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }
 
+#reserv-room-form{
+    width: 100%;
+    grid-column: span 3;
+    display: flex;
+    justify-self: center;
+    justify-content: center;
+}
 .room-locked{
     color: #9b5f04;
     background-color: rgb(251, 223, 105);

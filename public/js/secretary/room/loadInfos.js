@@ -6,6 +6,7 @@ let placeNb = document.querySelector("#place-nb-container input");
 let hasVideoProjector = document.querySelector("#has-projector-container input")
 let cableList = document.querySelector("#cable-type-container input");
 let roomDisponibility = document.querySelector("#room-status-container p")
+let hiddenRoomName = document.getElementById("hiddenRoomName")
 
 window.onload = () => {
     loadInfos(selector.value)};
@@ -19,6 +20,7 @@ hasVideoProjector.onclick = () => {
 
 function loadInfos(roomName){
 
+    hiddenRoomName.value = roomName;
     roomName = roomName.replace(' ','+')
     let url = "https://" + window.location.host + "/wp-json/amu-ecran-connectee/v1/room?id=" + roomName;
     fetch(url).then(function(response){

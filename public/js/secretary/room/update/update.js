@@ -1,9 +1,10 @@
 let modifyButton = document.getElementById("modif-button");
 let confirmButton = document.getElementById("confirm-button")
-let reservButton = document.getElementById("reserv-button");
+let reservButton = document.getElementById("reserv-room-form");
 let cancelButton = document.getElementById("cancel-button")
 
 let modificationInputList = document.querySelectorAll("#room-schedule-side-infos input")
+let roomTypeSelection = document.querySelector("#room-type-container select")
 
 modifyButton.onclick = () => {
     enterModication()
@@ -25,7 +26,7 @@ confirmButton.onclick = () => {
 
     if(hasComputer.value === '✓') hasComputerBool = true;
     else{hasComputerBool = false}
-    modifyRoom(roomName, pcCount, pcBrokenCount, hasComputerBool, chairCount, cableTypes);
+    modifyRoom(roomName, pcCount, pcBrokenCount, hasComputerBool, chairCount, cableTypes, roomTypeSelection.value);
     quitModification();
 }
 
@@ -34,6 +35,8 @@ function enterModication(){
         elem.style.pointerEvents = 'auto'
         elem.classList.add("editable")
     })
+    roomTypeSelection.style.pointerEvents = 'auto'
+    roomTypeSelection.classList.add("editable");
     validationScreen.classList.remove("validation-animation")
     modifyButton.style.display = "none";
     modifyButton.style.opacity = "0";
@@ -50,9 +53,12 @@ function quitModification(){
         elem.classList.remove("editable")
         elem.style.pointerEvents = 'none'
     })
+    roomTypeSelection.style.pointerEvents = 'none'
+    roomTypeSelection.classList.remove("editable");
+
     modifyButton.style.display = "block";
     modifyButton.style.opacity = "1";
-    reservButton.style.display = "block";
+    reservButton.style.display = "flex";
     reservButton.style.opacity = "1";
     confirmButton.style.display = "none";
     confirmButton.style.opacity = "0";
@@ -60,7 +66,7 @@ function quitModification(){
     cancelButton.style.opacity = "0";
 }
 
-function modifyRoom(roomName, pcCount, brokenComputer, projector, chairCount, connection){
+function modifyRoom(roomName, pcCount, brokenComputer, projector, chairCount, connection, roomType){
 
     let url = "https://" + window.location.host + "/wp-json/amu-ecran-connectee/v1/room?id=" + roomName;
     let data = {
@@ -68,7 +74,8 @@ function modifyRoom(roomName, pcCount, brokenComputer, projector, chairCount, co
         projector: projector,
         chairCount: chairCount,
         connection: connection,
-        brokenComputer: brokenComputer
+        brokenComputer: brokenComputer,
+        roomType: roomType
     };
 
     fetch(url, {

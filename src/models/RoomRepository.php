@@ -32,7 +32,7 @@ class RoomRepository extends Model{
 
         while($row = $stmt->fetch()){
             $roomList[] = new Room($row['name'], $row['isComputerRoom'], $row['pc_available'], $row['broken_computer'], $row['place_available'],
-                $row['has_video_projector'],$row['cable_types']);
+                $row['has_video_projector'],$row['cable_types'], $row['room_type']);
         }
         return $roomList;
     }
@@ -45,7 +45,7 @@ class RoomRepository extends Model{
 
         while($row = $stmt->fetch()){
             $roomList[] = new Room($row['name'], $row['isComputerRoom'], $row['pc_available'], $row['broken_computer'], $row['place_available'],
-                $row['has_video_projector'],$row['cable_types']);
+                $row['has_video_projector'],$row['cable_types'], $row['room_type']);
         }
         return $roomList;
     }
@@ -84,7 +84,7 @@ class RoomRepository extends Model{
         $stmt->execute([$roomName]);
         if($row = $stmt->fetch()){
             return new Room($row['name'], $row['isComputerRoom'], $row['pc_available'], $row['broken_computer'], $row['place_available'],
-                $row['has_video_projector'],$row['cable_types']);
+                $row['has_video_projector'],$row['cable_types'], $row['room_type']);
         }
         return null;
     }
@@ -106,10 +106,10 @@ class RoomRepository extends Model{
         $stmt->execute([$value,$roomName]);
     }
 
-    public function updateRoom($roomName, $pcCount, $brokenPc, $projector, $chairCount, $connection){
-        $sql = "UPDATE ecran_rooms SET pc_available=?,broken_computer=?,has_video_projector=?,place_available=?,cable_types=? WHERE name=?";
+    public function updateRoom($roomName, $pcCount, $brokenPc, $projector, $chairCount, $roomType, $connection){
+        $sql = "UPDATE ecran_rooms SET pc_available=?,broken_computer=?,has_video_projector=?,place_available=?,cable_types=?,room_type=? WHERE name=?";
         $stmt = self::getConnection()->prepare($sql);
-        $stmt->execute([$pcCount,$brokenPc, $projector, $chairCount, $connection, $roomName]);
+        $stmt->execute([$pcCount,$brokenPc, $projector, $chairCount, $connection,$roomType, $roomName]);
         return $this->getRoom($roomName);
     }
 

@@ -45,6 +45,10 @@ class RoomRestController extends \WP_REST_Controller {
                             'type' => 'string',
                             'description' => __('Connection type available'),
                         ),
+                        'roomType' => array(
+                            'type' => 'string',
+                            'description' => __('The type of room'),
+                        ),
                     ),
                 ),
                 'schema' => array($this, 'get_public_item_schema'),
@@ -91,7 +95,7 @@ class RoomRestController extends \WP_REST_Controller {
      */
     public function update_room($request){
         $roomRepo = new RoomRepository();
-        $room = $roomRepo->updateRoom($request['id'], $request['pcCount'], $request['brokenComputer'],$request['projector'], $request['chairCount'], $request['connection']);
+        $room = $roomRepo->updateRoom($request['id'], $request['pcCount'], $request['brokenComputer'],$request['projector'], $request['chairCount'], $request['roomType'], $request['connection']);
         return new \WP_REST_Response(array($room), 200);
     }
 
