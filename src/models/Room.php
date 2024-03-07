@@ -12,6 +12,7 @@ class Room extends Model implements \JsonSerializable {
     private int $placeAvailable;
     private bool $hasVideoProjector;
     private string $cablesTypes;
+    private string $status;
 
     /**
      * @param string $name
@@ -113,4 +114,14 @@ class Room extends Model implements \JsonSerializable {
     {
         return get_object_vars($this);
     }
+
+    /**
+     * @param string $status
+     */
+    public function setStatus(string $status): void
+    {
+        $this->status = $status;
+    }
+
+
 }

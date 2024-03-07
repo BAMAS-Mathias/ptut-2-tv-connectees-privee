@@ -35,7 +35,7 @@
     margin-top: 20px;
     right: 0;
     display: grid;
-    grid-template-rows: 100px 133px 133px 200px 50px;
+    grid-template-rows: 100px 133px 133px 150px 50px 50px;
     grid-template-columns: repeat(3, 1fr);
     row-gap: 10px;
     padding: 0 10px 10px 0px;
@@ -241,4 +241,41 @@ input[type=number] {
     position: absolute;
     transform: translate(-50%, -50%);
     width: 80%;
+}
+
+#room-status-container{
+    grid-column: span 3;
+    text-align: center;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 50px;
+
+}
+
+#room-status-container p {
+    font-family: Inter, serif;
+    font-size: 18px;
+    font-weight: bold;
+    width: fit-content;
+    height: fit-content;
+    padding: 0.2rem 5rem;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+
+.room-locked{
+    color: #9b5f04;
+    background-color: rgb(251, 223, 105);
+}
+
+.room-occupied{
+    color: #6a0104;
+    background-color: rgb(246, 93, 93);
+}
+
+.room-open{
+    color: #134124;
+    background-color: rgba(113, 248, 79, 1);
 }

@@ -61,10 +61,22 @@ class RoomRestController extends \WP_REST_Controller {
      * @return \WP_Error|\WP_REST_Response
      */
     public function get_room($request){
+        $roomRepo = new RoomRepository();
         $room = (new RoomRepository())->getRoom($request['id']);
+        $status = "";
 
         if(!$room){
             return new \WP_REST_Response(array('message' => 'Information not found'), 404);
+        }
+
+        if($roomRepo->isRoomLocked($request['id'])){
+            $room->setStatus("locked");
+        }
+        else if(!$roomRepo->getRoom($request['id'])->isAvailable()){
+            $room->setStatus("occupied");
+        }
+        else{
+            $room->setStatus("available");
         }
 
         return new \WP_REST_Response(array($room), 200);

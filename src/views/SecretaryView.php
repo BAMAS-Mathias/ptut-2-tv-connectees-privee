@@ -542,6 +542,9 @@ class SecretaryView extends UserView
                             <img alt="cable-icon" src="' . TV_PLUG_PATH . 'public/img/icons/cable-icon.png' . '">
                             <input type="text"></input>
                         </div>          
+                        <div id="room-status-container"> 
+                             <p>STATUS</p>
+                        </div>
                         <button id="modif-button">MODIFIER</button>     
                         <button id="confirm-button">CONFIRMER</button>                                         
                         <button id="reserv-button">RESERVER</button>
