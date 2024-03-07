@@ -245,7 +245,7 @@ class SecretaryView extends UserView
             }
             else if($room->isLocked()){ // La salle est verrouillée
                 $view .= '<div class="room locked">
-                        <div class="lock-reasons">        
+                        <div class="lock-reasons" style="z-index: 2">        
                             <p>' . $room->getMotifLock() . '</p>' .
                     '<p>' . date("d/m/Y \à h\hm",strtotime($room->getEndLockDate())) . '</p>' .
                     '<form action="' . home_url("/secretary/room/unlock") . '" method="post"><input type="hidden" name="roomName" value="' . $room->getName() . '"><input type="submit" value="Déverrouiller"></form>' .
@@ -260,7 +260,7 @@ class SecretaryView extends UserView
                         <img class="lock-open" src="'. TV_PLUG_PATH . 'public/img/lock-open.png' .'">
                         <img class="lock-close" src="'. TV_PLUG_PATH . 'public/img/lock-close.png' .'">
                         <img class="computer-icon" src="'. TV_PLUG_PATH . 'public/img/computer-icon.png' .'">
-                        <h1 class="label-salle">' . $room->getName() . '</h1>';
+                        <h1 class="label-salle">' . $room->getRoomType() . ' '. $room->getName() . '</h1>';
 
             if(!$room->isLocked() && $room->isAvailable()){
                 $view .= '</form>';
