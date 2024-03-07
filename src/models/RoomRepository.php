@@ -31,8 +31,8 @@ class RoomRepository extends Model{
         $roomList = [];
 
         while($row = $stmt->fetch()){
-            $roomList[] = new Room($row['name'], $row['isComputerRoom'], $row['pc_available'], $row['place_available'],
-                                   $row['has_video_projector'],$row['cable_types']);
+            $roomList[] = new Room($row['name'], $row['isComputerRoom'], $row['pc_available'], $row['broken_computer'], $row['place_available'],
+                $row['has_video_projector'],$row['cable_types']);
         }
         return $roomList;
     }
@@ -44,8 +44,8 @@ class RoomRepository extends Model{
         $roomList = [];
 
         while($row = $stmt->fetch()){
-            $roomList[] = new Room($row['name'], $row['isComputerRoom'], $row['pc_available'], $row['place_available'],
-                                   $row['has_video_projector'],$row['cable_types']);
+            $roomList[] = new Room($row['name'], $row['isComputerRoom'], $row['pc_available'], $row['broken_computer'], $row['place_available'],
+                $row['has_video_projector'],$row['cable_types']);
         }
         return $roomList;
     }
@@ -83,7 +83,7 @@ class RoomRepository extends Model{
         $stmt = self::getConnection()->prepare($sql);
         $stmt->execute([$roomName]);
         if($row = $stmt->fetch()){
-            return new Room($row['name'], $row['isComputerRoom'], $row['pc_available'], $row['place_available'],
+            return new Room($row['name'], $row['isComputerRoom'], $row['pc_available'], $row['broken_computer'], $row['place_available'],
                 $row['has_video_projector'],$row['cable_types']);
         }
         return null;
@@ -106,10 +106,10 @@ class RoomRepository extends Model{
         $stmt->execute([$value,$roomName]);
     }
 
-    public function updateRoom($roomName, $pcCount, $projector, $chairCount, $connection){
-        $sql = "UPDATE ecran_rooms SET pc_available=?,has_video_projector=?,place_available=?,cable_types=? WHERE name=?";
+    public function updateRoom($roomName, $pcCount, $brokenPc, $projector, $chairCount, $connection){
+        $sql = "UPDATE ecran_rooms SET pc_available=?,broken_computer=?,has_video_projector=?,place_available=?,cable_types=? WHERE name=?";
         $stmt = self::getConnection()->prepare($sql);
-        $stmt->execute([$pcCount, $projector, $chairCount, $connection, $roomName]);
+        $stmt->execute([$pcCount,$brokenPc, $projector, $chairCount, $connection, $roomName]);
         return $this->getRoom($roomName);
     }
 

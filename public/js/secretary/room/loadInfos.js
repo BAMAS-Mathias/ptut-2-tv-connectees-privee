@@ -1,6 +1,7 @@
 let selector = document.querySelector("#room-choice-form select");
 let roomName = document.querySelector("#room-info-name")
 let pcNb = document.querySelector("#pc-nb-count-container input")
+let brokenPcNb = document.querySelector("#broken-pc-count-container input")
 let placeNb = document.querySelector("#place-nb-container input");
 let hasVideoProjector = document.querySelector("#has-projector-container input")
 let cableList = document.querySelector("#cable-type-container input");
@@ -34,6 +35,7 @@ function displayInfos(O_Json){
     pcNb.value = O_Json['pcAvailable']
     placeNb.value = O_Json['placeAvailable']
     cableList.value = O_Json['cablesTypes']
+    brokenPcNb.value = O_Json['brokenComputer']
 
     if(O_Json['hasVideoProjector']){
         hasVideoProjector.value = '✓'

@@ -507,7 +507,7 @@ class SecretaryView extends UserView
 
             foreach ($courseList as $course) {
                 if ($course != null) { // Cours null = pas de cours a cet horraire
-                    $view .= '<div class="container-matiere green duration_' . $course->getDuration() . '" style="grid-column: span ' . $course->getDuration() . '">
+                    $view .= '<div class="container-matiere duration_' . $course->getDuration() . '" style="grid-column: span ' . $course->getDuration() . ';background-color: ' . $course->getColor() . '">
                             <p class="text-matiere">' . $course->getSubject() . '</p>
                             <p class="text-prof">' . $course->getTeacher() . '</p>
                             <p class="text-salle">' . $course->getLocation() . '</p>
@@ -525,15 +525,19 @@ class SecretaryView extends UserView
                         <div id="pc-nb-count-container" class="room-info">
                             <img alt="pc-icon" src="' . TV_PLUG_PATH . 'public/img/icons/pc-icon.png' . '">
                             <input type="number" min="0"></input>
-                        </div>                               
-                        <div id="has-projector-container" class="room-info">
-                            <img alt="projector-icon" src="' . TV_PLUG_PATH . 'public/img/icons/projector-icon.png' . '">
-                            <input type="text" readonly></input>
-                        </div>                               
+                        </div> 
+                        <div id="broken-pc-count-container" class="room-info">
+                            <img alt="pc-icon" src="' . TV_PLUG_PATH . 'public/img/icons/broken-computer-icon.png' . '">
+                            <input type="number" min="0"></input>
+                        </div>                                                                                 
                         <div id="place-nb-container" class="room-info">
                             <img alt="chair-icon" src="' . TV_PLUG_PATH . 'public/img/icons/chair-icon.png' . '">
                             <input type="number"></input>
-                        </div>                               
+                        </div>   
+                        <div id="has-projector-container" class="room-info">
+                            <img alt="projector-icon" src="' . TV_PLUG_PATH . 'public/img/icons/projector-icon.png' . '">
+                            <input type="text" readonly></input>
+                        </div>                            
                         <div id="cable-type-container" class="room-info">
                             <img alt="cable-icon" src="' . TV_PLUG_PATH . 'public/img/icons/cable-icon.png' . '">
                             <input type="text"></input>
@@ -579,7 +583,7 @@ class SecretaryView extends UserView
 
     /** Affiche le formulaire pour fermer une salle
      * @param string $room
-     * @return void
+     * @return string
      */
     public function displayRoomLock($roomName){
         $view = '<div class="lock-room-form-container">

@@ -8,6 +8,7 @@ class Room extends Model implements \JsonSerializable {
     private string $endLockDate;
     private bool $isSalleMachine;
     private int $pcAvailable;
+    private int $brokenComputer;
     private int $placeAvailable;
     private bool $hasVideoProjector;
     private string $cablesTypes;
@@ -15,7 +16,7 @@ class Room extends Model implements \JsonSerializable {
     /**
      * @param string $name
      */
-    public function __construct(string $name, $isSalleMachine, $pcAvailable, $placeAvailable, $hasVideoProjector, $cablesTypes)
+    public function __construct(string $name, $isSalleMachine, $pcAvailable, $brokenComputer, $placeAvailable, $hasVideoProjector, $cablesTypes)
     {
         $this->name = $name;
         $this->isSalleMachine = $isSalleMachine;
@@ -23,6 +24,7 @@ class Room extends Model implements \JsonSerializable {
         $this->placeAvailable = $placeAvailable;
         $this->hasVideoProjector = $hasVideoProjector;
         $this->cablesTypes = $cablesTypes;
+        $this->brokenComputer = $brokenComputer;
     }
 
     public function getName(): string

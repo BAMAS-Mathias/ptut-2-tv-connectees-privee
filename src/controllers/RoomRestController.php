@@ -29,6 +29,10 @@ class RoomRestController extends \WP_REST_Controller {
                             'type' => 'number',
                             'description' => __('Number of pc available'),
                         ),
+                        'brokenComputer' => array(
+                            'type' => 'number',
+                            'description' => __('Number of pc broken'),
+                        ),
                         'projector' => array(
                             'type' => 'boolean',
                             'description' => __('Is there a projector'),
@@ -75,7 +79,7 @@ class RoomRestController extends \WP_REST_Controller {
      */
     public function update_room($request){
         $roomRepo = new RoomRepository();
-        $room = $roomRepo->updateRoom($request['id'], $request['pcCount'], $request['projector'], $request['chairCount'], $request['connection']);
+        $room = $roomRepo->updateRoom($request['id'], $request['pcCount'], $request['brokenComputer'],$request['projector'], $request['chairCount'], $request['connection']);
         return new \WP_REST_Response(array($room), 200);
     }
 

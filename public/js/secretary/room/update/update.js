@@ -17,6 +17,7 @@ confirmButton.onclick = () => {
     let roomName = document.querySelector("#room-info-name").innerText;
     roomName = roomName.replace(' ','+')
     let pcCount = document.querySelector("#pc-nb-count-container input[type=number]").value
+    let pcBrokenCount = document.querySelector("#broken-pc-count-container input[type=number]").value
     let chairCount = document.querySelector("#place-nb-container input").value
     let cableTypes = document.querySelector("#cable-type-container input").value;
     let hasComputerBool;
@@ -24,7 +25,7 @@ confirmButton.onclick = () => {
 
     if(hasComputer.value === '✓') hasComputerBool = true;
     else{hasComputerBool = false}
-    modifyRoom(roomName, pcCount, hasComputerBool, chairCount, cableTypes);
+    modifyRoom(roomName, pcCount, pcBrokenCount, hasComputerBool, chairCount, cableTypes);
     quitModification();
 }
 
@@ -59,14 +60,15 @@ function quitModification(){
     cancelButton.style.opacity = "0";
 }
 
-function modifyRoom(roomName, pcCount, projector, chairCount, connection){
+function modifyRoom(roomName, pcCount, brokenComputer, projector, chairCount, connection){
 
     let url = "https://" + window.location.host + "/wp-json/amu-ecran-connectee/v1/room?id=" + roomName;
     let data = {
         pcCount: pcCount,
         projector: projector,
         chairCount: chairCount,
-        connection: connection
+        connection: connection,
+        brokenComputer: brokenComputer
     };
 
     fetch(url, {
