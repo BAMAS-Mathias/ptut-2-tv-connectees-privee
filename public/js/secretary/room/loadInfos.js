@@ -5,7 +5,7 @@ let brokenPcNb = document.querySelector("#broken-pc-count-container input")
 let placeNb = document.querySelector("#place-nb-container input");
 let hasVideoProjector = document.querySelector("#has-projector-container input")
 let cableList = document.querySelector("#cable-type-container input");
-
+let roomDisponibility = document.querySelector("#room-status-container p")
 
 window.onload = () => {
     loadInfos(selector.value)};
@@ -36,6 +36,18 @@ function displayInfos(O_Json){
     placeNb.value = O_Json['placeAvailable']
     cableList.value = O_Json['cablesTypes']
     brokenPcNb.value = O_Json['brokenComputer']
+
+    console.log(O_Json)
+    if(O_Json['status'] === 'available'){
+        roomDisponibility.className = "room-open"
+        roomDisponibility.innerText = "Disponible"
+    }else if(O_Json['status'] === 'locked'){
+        roomDisponibility.className = "room-locked";
+        roomDisponibility.innerText = "Verrouiller"
+    }else{
+        roomDisponibility.className = "room-occupied"
+        roomDisponibility.innerText = "Indisponible"
+    }
 
     if(O_Json['hasVideoProjector']){
         hasVideoProjector.value = '✓'
