@@ -458,7 +458,7 @@ class SecretaryView extends UserView
                     <select style="width: 400px; height: 60px; font-size: 20px; text-align: center" name="roomName">';
 
         foreach($roomList as $room){
-            $view .= '<option>'. $room->getName() . '</option>';
+            $view .= '<option>'. $room->getRoomType() . ' ' . $room->getName() . '</option>';
         }
         $view .='<input style="width: 400px; border:none; font-size: 25px; background-color: #F0AB02; height: 50px" type="submit" value="Afficher"></form>';
 
@@ -588,7 +588,7 @@ class SecretaryView extends UserView
         }
 
         foreach ($roomList as $room){
-            $view .= '<option>' . htmlspecialchars($room->getName(), ENT_QUOTES, 'UTF-8') . '</option>';
+            $view .= '<option>' . $room->getRoomType() . ' ' . htmlspecialchars($room->getName(), ENT_QUOTES, 'UTF-8') . '</option>';
         }
 
         $view .= '</select>

@@ -285,9 +285,11 @@ function installDatabaseEcran()
           name varchar(20) NOT NULL,
           isComputerRoom tinyint(1) NOT NULL DEFAULT 0,
           pc_available int(11) NOT NULL DEFAULT 0,
+          broken_computer int(11) NOT NULL DEFAULT 0,
           place_available int(11) DEFAULT 0,
           has_video_projector tinyint(1) NOT NULL DEFAULT 0,
-          cable_types varchar(100) NOT NULL DEFAULT ''
+          cable_types varchar(100) NOT NULL DEFAULT '',
+          room_type varchar(30) NOT NULL DEFAULT 'TD'
         )";
 
     dbDelta($sql);

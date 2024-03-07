@@ -79,7 +79,7 @@ class RoomRepository extends Model{
     }
 
     public function getRoom($roomName){
-        $sql = "SELECT * FROM ecran_rooms WHERE name = ?";
+        $sql = "SELECT * FROM ecran_rooms WHERE CONCAT(room_type, ' ', name) = '$roomName'";
         $stmt = self::getConnection()->prepare($sql);
         $stmt->execute([$roomName]);
         if($row = $stmt->fetch()){
