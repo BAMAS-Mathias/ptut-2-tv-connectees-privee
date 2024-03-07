@@ -525,15 +525,16 @@ class SecretaryView extends UserView
                         <div id="pc-nb-count-container" class="room-info">
                             <img alt="pc-icon" src="' . TV_PLUG_PATH . 'public/img/icons/pc-icon.png' . '">
                             <input type="number" min="0"></input>
-                        </div> 
+                        </div>      
                         <div id="broken-pc-count-container" class="room-info">
-                            <img alt="pc-icon" src="' . TV_PLUG_PATH . 'public/img/icons/broken-computer-icon.png' . '">
+                            <img alt="broken-pc-icon" src="' . TV_PLUG_PATH . 'public/img/icons/broken-computer-icon.png' . '">
                             <input type="number" min="0"></input>
-                        </div>                                                                                 
+                        </div>                                                                                                
                         <div id="place-nb-container" class="room-info">
                             <img alt="chair-icon" src="' . TV_PLUG_PATH . 'public/img/icons/chair-icon.png' . '">
                             <input type="number"></input>
-                        </div>   
+                        </div>  
+                         
                         <div id="has-projector-container" class="room-info">
                             <img alt="projector-icon" src="' . TV_PLUG_PATH . 'public/img/icons/projector-icon.png' . '">
                             <input type="text" readonly></input>
