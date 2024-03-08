@@ -15,11 +15,18 @@ class RoomRepository extends Model{
         return false;
     }
 
-    public function add($name) : void {
-        $sql = "INSERT INTO ecran_rooms(name) VALUES (?)";
+    public function add($name, $type='TD') : void {
+        $sql = "INSERT INTO ecran_rooms(name, room_type) VALUES (?,?)";
+        $stmt = self::getConnection()->prepare($sql);
+        $stmt->execute([$name, $type]);
+    }
+
+    public function delete($name) : void{
+        $sql = "DELETE FROM ecran_rooms WHERE name=?";
         $stmt = self::getConnection()->prepare($sql);
         $stmt->execute([$name]);
     }
+
 
     /**
      * @return Room[]
@@ -79,7 +86,8 @@ class RoomRepository extends Model{
     }
 
     public function getRoom($roomName){
-        $sql = "SELECT * FROM ecran_rooms WHERE CONCAT(room_type, ' ', name) = '$roomName'";
+        $roomName = trim(preg_replace('/(TD)|(TP)|(Mobile)/','',$roomName));
+        $sql = "SELECT * FROM ecran_rooms WHERE name= '$roomName'";
         $stmt = self::getConnection()->prepare($sql);
         $stmt->execute([$roomName]);
         if($row = $stmt->fetch()){

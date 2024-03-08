@@ -122,6 +122,9 @@ function loadScriptsEcran()
     }
     if (is_page('config-computer-room')) {
         wp_enqueue_style('secretary-room-config', TV_PLUG_PATH . 'public/css/computerRoomConfig.css', array(), VERSION);
+        wp_enqueue_script('room_creation', TV_PLUG_PATH . 'public/js/secretary/room/create/create.js', array(), VERSION, true);
+        wp_enqueue_script('room_delete', TV_PLUG_PATH . 'public/js/secretary/room/delete/delete.js', array(), VERSION, true);
+
     }
 
     if(is_page('config-schedule')){

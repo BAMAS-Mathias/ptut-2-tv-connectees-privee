@@ -547,7 +547,7 @@ class SecretaryView extends UserView
                         <div id="room-type-container" class="room-info">
                             <img alt="room-icon" src="' . TV_PLUG_PATH . 'public/img/icons/room-type-icon.png' . '">
                             <select>
-                                <option hidden value="" selected>' . $room->getRoomType() . '</option>
+                                <option hidden value="' . $room->getRoomType() . '" selected>' . $room->getRoomType() . '</option>
                                 <option>TD</option>
                                 <option>TP</option>
                                 <option>Mobile</option>
@@ -646,7 +646,7 @@ class SecretaryView extends UserView
         $view .= '<div class="codeList">
                       <h2>BUT ' . $year . '</h2>';
                       foreach ($model->getCodeOfAYear($year) as $code){
-                          $view .= '<form method="post"><p>' . $code . '</p><input type="hidden" name="code" value="' . $code . '"><input class="delete-btn" name="deleteAde" value="Supprimer" type="submit" src="https://cdn-icons-png.flaticon.com/512/860/860829.png"></form>';
+                          $view .= '<form method="post"><p>' . $code . '<strong> - (' . $model->getCodeName($code) . ')</strong></p><input type="hidden" name="code" value="' . $code . '"><input class="delete-btn" name="deleteAde" value="Supprimer" type="submit" src="https://cdn-icons-png.flaticon.com/512/860/860829.png"></form>';
                       }
         $view .= '</div>';
 

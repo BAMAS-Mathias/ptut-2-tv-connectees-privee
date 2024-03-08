@@ -14,11 +14,26 @@ class RoomRestController extends \WP_REST_Controller {
     public function register_routes(){
         register_rest_route(
             $this->namespace,
+            '/' . $this->rest_base . '/create',
+            array(array(
+                'methods' => \WP_REST_Server::CREATABLE,
+                'callback' => array($this, 'create_room'),
+                'args' => $this->get_collection_params(),
+             ),'schema' => array($this, 'get_public_item_schema'),
+            )
+        );
+        register_rest_route(
+            $this->namespace,
             '/' . $this->rest_base,
             array(
                 array(
                     'methods' => \WP_REST_Server::READABLE,
                     'callback' => array($this, 'get_room'),
+                    'args' => $this->get_collection_params(),
+                ),
+                array(
+                    'methods' => \WP_REST_Server::DELETABLE,
+                    'callback' => array($this, 'delete_room'),
                     'args' => $this->get_collection_params(),
                 ),
                 array(
@@ -98,5 +113,32 @@ class RoomRestController extends \WP_REST_Controller {
         $room = $roomRepo->updateRoom($request['id'], $request['pcCount'], $request['brokenComputer'],$request['projector'], $request['chairCount'], $request['roomType'], $request['connection']);
         return new \WP_REST_Response(array($room), 200);
     }
+
+    /**
+     * Create a room
+     *
+     * @param \WP_REST_Request $request Full data about the request.
+     * @return \WP_Error|\WP_REST_Response
+     */
+    public function create_room($request){
+        $roomRepo = new RoomRepository();
+        $roomRepo->add($request['name'], $request['type']);
+        return new \WP_REST_Response(array('OK'), 200);
+    }
+
+    /**
+     * Delete a room
+     *
+     * @param \WP_REST_Request $request Full data about the request.
+     * @return \WP_Error|\WP_REST_Response
+     */
+    public function delete_room($request){
+        $roomRepo = new RoomRepository();
+        $roomRepo->delete($request['name']);
+        return new \WP_REST_Response(array('OK'), 200);
+    }
+
+
+
 
 }

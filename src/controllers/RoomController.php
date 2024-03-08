@@ -104,6 +104,7 @@ class RoomController extends UserController {
     }
 
     public function displayComputerRoomConfig(){
+
         if(isset($_POST['check'])){
             $this->updateComputerRooms();
         }

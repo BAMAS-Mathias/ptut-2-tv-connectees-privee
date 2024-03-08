@@ -144,7 +144,16 @@ class TeacherView extends UserView
     }
 
     public function displaySalleMachineConfig($roomList) : string{
-        $view = '<form class=all-room-container method="post">';
+        $view = '<div id="roomCreationInfos">
+                    <input type="text">
+                    <select>
+                        <option>TD</option>
+                        <option>TP</option>
+                        <option>Mobile</option>
+                    </select>
+                    <button onclick="createRoom()">Valider</button>
+                </div>';
+        $view .= '<form class=all-room-container method="post">';
         $index = 0;
         foreach ($roomList as $room){
             $view .= '<div class="room-container">
@@ -155,7 +164,9 @@ class TeacherView extends UserView
                 $view .= 'checked';
             }
             $view .= '      
-                    ></div>';
+                    >
+                    <button type="button" style="background: #fd4f4f; border: none; z-index: 2" onclick="deleteRoom(this)">Supprimer</button>
+                    </div>';
             ++$index;
         }
         return $view . '<input type="submit"></form>';

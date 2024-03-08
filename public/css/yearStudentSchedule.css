@@ -188,12 +188,12 @@ main{
     background-color: #7ed7f7;
     display: flex;
     justify-content: center;
-    width: 40vw;
+    width: fit-content;
     margin: 0.5rem auto;
     align-items: center;
     border-radius: 10px;
     color: #313131;
-    padding: 10px 0;
+    padding: 10px 1rem;
 }
 
 .day-of-week h2{
